@@ -56,9 +56,8 @@ all:
 	for i in $(EXECUTABLES); do (make $$i) ; done
 
 
-# put the specific executable rules here
-ppmtest: $(ODIR)/ppmmain.o
-	$(CC) -o $(BINDIR)/$@ $^ $(LFLAGS) $(LIBS)
+lab1: $(ODIR)/lab1.o $(CC) -o $(BINDIR)/$@ $^ $(LFLAGS) $(LIBS)
+
 
 .PHONY: clean
 
