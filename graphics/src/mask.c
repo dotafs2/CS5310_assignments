@@ -35,23 +35,20 @@ int main(int argc, char *argv[]) {
     imagesize = (long)rows * (long)cols;
 
     /* mess with the image here  */
-    for(i=0;i<imagesize;i++) {
+    for(i = 0; i < imagesize; i++) {
+        // green or not
+        if ((image[i].g > image[i].r && image[i].g > image[i].b && image[i].g > 80 && !(image[i].r > 150 && image[i].g>  150 && image[i].b> 150)   ) ||(image[i].g > 250) ) {
+            image[i].r = 0;
+            image[i].g = 0;
+            image[i].b = 0;
+        } else {
+            image[i].r = 255;
+            image[i].g = 255;
+            image[i].b = 255;
+        }
 
-        // this little piece of code thresholds out very red pixels
-        // the resulting image will be very red where there is red stuff
-        // and greyscale elsewhere
-        j = (int)image[i].g - ((int)image[i].r + (int)image[i].b) / 2;
-        min = image[i].r < image[i].b ? image[i].r : image[i].b;
-        min = image[i].g < min ? image[i].g : min;
-        min = min < 128 ? min : min/2;
-        if(j > 10) {
-            image[i].g = image[i].g < 128 ? image[i].g*2 : image[i].g;
-        }
-        else {
-            image[i].g = min;
-        }
-        image[i].r = image[i].b = min;
     }
+
     /* write out the resulting image */
     writePPM(image, rows, cols, colors /* s/b 255 */, argv[2]);
 

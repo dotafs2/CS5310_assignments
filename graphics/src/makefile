@@ -35,7 +35,7 @@ DEPS = $(patsubst %,$(INCDIR)/%,$(_DEPS))
 EXECUTABLES = ppmtest
 
 # put a list of all the object files here for all executables (with .o endings)
-_OBJ = tiffmain.o ppmmain.o
+_OBJ = tiffmain.o lab1.o mask.o combine.o
 
 # convert them to point to the right place
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
@@ -56,8 +56,17 @@ all:
 	for i in $(EXECUTABLES); do (make $$i) ; done
 
 
-lab1: $(ODIR)/lab1.o $(CC) -o $(BINDIR)/$@ $^ $(LFLAGS) $(LIBS)
+# put the specific executable rules here
+ppmtest: $(ODIR)/ppmtest.o
+	$(CC) -o $(BINDIR)/$@ $^ $(LFLAGS) $(LIBS)
+lab1: $(ODIR)/lab1.o
+	$(CC) -o $(BINDIR)/$@ $^ $(LFLAGS) $(LIBS)
 
+mask: $(ODIR)/mask.o
+	$(CC) -o $(BINDIR)/$@ $^ $(LFLAGS) $(LIBS)
+
+combine: $(ODIR)/combine.o
+	$(CC) -o $(BINDIR)/$@ $^ $(LFLAGS) $(LIBS)
 
 .PHONY: clean
 
