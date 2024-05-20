@@ -5,6 +5,7 @@
   Test of the image library functions
 */
 #include <math.h>
+#include <printf.h>
 #include "image.h"
 
 int main(int argc, char *argv[]) {
@@ -16,7 +17,6 @@ int main(int argc, char *argv[]) {
 
   // initialize an image
   src = image_create(rows, cols);
-
   // fill it with colors
   for(i=0;i<rows;i++) {
     for(j=0;j<cols;j++) {
@@ -25,9 +25,8 @@ int main(int argc, char *argv[]) {
       image_setc( src, i, j, 2, ((float)(i+j)) / (rows + cols) );
     }
   }
-
   // write it out
-  image_write( src, "colors.ppm");
+  image_write(src, "colors.ppm");
 
   // free it
   image_free( src );
@@ -47,7 +46,6 @@ int main(int argc, char *argv[]) {
       image_setf( src, i, j, p );
     }
   }
-
   image_write( src, "skyblue.ppm" );
   
   image_dealloc(src);
