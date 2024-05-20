@@ -10,7 +10,8 @@
 
 
 Image* image_create(int rows, int cols){
-    if( rows == 0 || cols == 0) return NULL;
+    // command it bec image test: black.ppm
+    // if( rows == 0 || cols == 0) return NULL;
     Image* img = (Image*) malloc(sizeof(Image));
     if(img == NULL) return NULL;
     img -> rows = rows;
@@ -55,11 +56,17 @@ void image_init(Image *src){
 
 int image_alloc(Image *src, int rows, int cols){
     if (src == NULL) return 1;
+    if (rows == 0 || cols == 0) {
+        image_dealloc(src);
+        return 1;
+    }
+
     if (src->rows != rows || src->cols != cols) {
         free(src->data);
         free(src->depth);
         free(src->alpha);
 
+        // Allocate new memory for data, depth, and alpha
         src->data = (FPixel*) malloc(rows * cols * sizeof(FPixel));
         if (src->data == NULL) return 1;
 
@@ -75,10 +82,10 @@ int image_alloc(Image *src, int rows, int cols){
             free(src->depth);
             return 1;
         }
-
-        src->rows = rows;
-        src->cols = cols;
     }
+
+    src->rows = rows;
+    src->cols = cols;
 
     for (int i = 0; i < rows * cols; i++) {
         src->data[i].rgb[0] = 0.f;
@@ -87,21 +94,50 @@ int image_alloc(Image *src, int rows, int cols){
         src->depth[i] = 1.f;
         src->alpha[i] = 1.f;
     }
-
+    src->max_val = 255;
     return 0;
 }
 
-
-void image_dealloc(Image *src){
+void image_dealloc(Image *src) {
     if (src == NULL) return;
-    free(src->data);
-    free(src->depth);
-    free(src->alpha);
-    free(src->filename);
-    image_init(src);
+    if (src->data != NULL) {
+        free(src->data);
+        src->data = NULL;
+    }
+    if (src->depth != NULL) {
+        free(src->depth);
+        src->depth = NULL;
+    }
+    if (src->alpha != NULL) {
+        free(src->alpha);
+        src->alpha = NULL;
+    }
+    src->rows = 0;
+    src->cols = 0;
+    src->max_val = 0;
+    memset(src->filename, 0, sizeof(src->filename));
 }
 
-Image* image_read(char *filename){
+int image_write(Image* src, char *filename) {
+    if (src == NULL || filename == NULL) {
+        return 0;
+    }
+    FILE *file = fopen(filename, "wb");
+    if (!file) return 1;
+
+    fprintf(file, "P6\n%d %d\n%d\n", src->cols, src->rows, src->max_val);
+    for (int i = 0; i < src->rows * src->cols; i++) {
+        fputc((unsigned char)(src->data[i].rgb[0] * 255), file);
+        fputc((unsigned char)(src->data[i].rgb[1] * 255), file);
+        fputc((unsigned char)(src->data[i].rgb[2] * 255), file);
+    }
+
+    fclose(file);
+    strncpy(src->filename, filename, sizeof(src->filename) - 1);
+    return 0;
+}
+
+Image* image_read(char *filename) {
     FILE *file = fopen(filename, "rb");
     if (!file) return NULL;
 
@@ -112,7 +148,7 @@ Image* image_read(char *filename){
         fclose(file);
         return NULL;
     }
-    // ignore the commands
+    // ignore the comments
     char ch = (char)fgetc(file);
     while (ch == '#') {
         while (fgetc(file) != '\n');
@@ -120,6 +156,7 @@ Image* image_read(char *filename){
     }
     ungetc(ch, file);
 
+    // its unsafe but I am too lazy to change it
     fscanf(file, "%d %d\n", &cols, &rows);
     fscanf(file, "%d\n", &max_val);
 
@@ -129,36 +166,23 @@ Image* image_read(char *filename){
         return NULL;
     }
     img->max_val = max_val;
-    fread(img->data, sizeof(FPixel), rows * cols, file);
     for (int i = 0; i < rows * cols; i++) {
-        img->depth[i] = 1.0f; // Initialize depth to 1.0
-        img->alpha[i] = 1.0f; // Initialize alpha to 1.0
+        img->data[i].rgb[0] = (float) (fgetc(file) / 255.0);
+        img->data[i].rgb[1] = (float) (fgetc(file) / 255.0);
+        img->data[i].rgb[2] = (float) (fgetc(file) / 255.0);
+        img->depth[i] = 1.0f;
+        img->alpha[i] = 1.0f;
     }
 
     fclose(file);
     strncpy(img->filename, filename, sizeof(img->filename) - 1);
     return img;
-
 }
-int image_write(Image* src, char *filename){
-    printf(filename);
-    if (src == NULL ) {
-        return 0;
-    }
-    FILE *file = fopen(filename, "wb");
-    if (!file) return 1;
 
-    fprintf(file, "P6\n%d %d\n%d\n", src->cols, src->rows, src->max_val);
-    fwrite(src->data, sizeof(FPixel), src->rows * src->cols, file);
-
-    fclose(file);
-    strncpy(src->filename, filename, sizeof(src->filename) - 1);
-    return 0;
-}
 
 FPixel image_getf(Image *src, int r, int c) {
     if (!src || r < 0 || r >= src->rows || c < 0 || c >= src->cols) {
-        FPixel empty = { {0.0, 0.0, 0.0}, 0.0, 0.0 };
+        FPixel empty = { {0.f, 0.f, 0.f}, 0.f, 0.f };
         return empty;
     }
     return src->data[r * src->cols + c];
@@ -166,21 +190,21 @@ FPixel image_getf(Image *src, int r, int c) {
 
 float image_getc(Image *src, int r, int c, int b) {
     if (!src || r < 0 || r >= src->rows || c < 0 || c >= src->cols || b < 0 || b > 2) {
-        return 0.0;
+        return 0.f;
     }
     return src->data[r * src->cols + c].rgb[b];
 }
 
 float image_geta(Image *src, int r, int c) {
     if (!src    || r < 0 || r >= src->rows || c < 0 || c >= src->cols) {
-        return 0.0;
+        return 0.f;
     }
     return src->alpha[r * src->cols + c];
 }
 
 float image_getz(Image *src, int r, int c) {
     if (!src || r < 0 || r >= src->rows || c < 0 || c >= src->cols) {
-        return 0.0;
+        return 0.f;
     }
     return src->depth[r * src->cols + c];
 }
@@ -216,13 +240,16 @@ void image_setz(Image *src, int r, int c, float val) {
 void image_reset(Image *src) {
     if (!src) return;
     for (int i = 0; i < src->rows * src->cols; i++) {
-        src->data[i].rgb[0] = 0.0f;
-        src->data[i].rgb[1] = 0.0f;
-        src->data[i].rgb[2] = 0.0f;
-        src->alpha[i] = 1.0f;
-        src->depth[i] = 1.0f;
+        src->data[i].rgb[0] = 0.f;
+        src->data[i].rgb[1] = 0.f;
+        src->data[i].rgb[2] = 0.f;
+        src->depth[i] = 1.f;
+        src->alpha[i] = 1.f;
     }
+    src->max_val = 255;
+    memset(src->filename, 0, sizeof(src->filename));
 }
+
 
 void image_fill(Image *src, FPixel val) {
     if (!src) return;
@@ -278,7 +305,7 @@ void image_setColor(Image *src, int r, int c, Color val) {
 }
 
 Color image_getColor(Image *src, int r, int c) {
-    Color col = { {0.0, 0.0, 0.0} }; // Default color is black
+    Color col = { {0.f, 0.f, 0.f} }; // Default color is black
     if (!src || r < 0 || r >= src->rows || c < 0 || c >= src->cols) {
         return col;
     }

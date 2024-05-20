@@ -14,7 +14,6 @@ int main(int argc, char *argv[]) {
   int rows = 300;
   int cols = 400;
   int i, j;
-
   // initialize an image
   src = image_create(rows, cols);
   // fill it with colors
@@ -27,17 +26,13 @@ int main(int argc, char *argv[]) {
   }
   // write it out
   image_write(src, "colors.ppm");
-
   // free it
-  image_free( src );
-
+  image_free(src);
   src = image_create(0, 0);
   rows = 400;
   cols = 600;
-
-  image_alloc( src, rows, cols );
-
-	image_reset( src );
+  image_alloc(src, rows, cols);
+  image_reset( src );
 
   image_write( src, "black.ppm");
 
@@ -46,8 +41,8 @@ int main(int argc, char *argv[]) {
       image_setf( src, i, j, p );
     }
   }
-  image_write( src, "skyblue.ppm" );
-  
+  image_write( src, "skyblue.ppm");
+
   image_dealloc(src);
 
   image_free( src );
