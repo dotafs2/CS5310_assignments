@@ -49,16 +49,23 @@ cmake_ninja_workdir = /Users/dotafs/Desktop/CS5310_assignments/assignment2/cmake
 
 build cmake_object_order_depends_target_assignment2: phony || CMakeFiles/assignment2.dir
 
-build CMakeFiles/assignment2.dir/imagetest.c.o: C_COMPILER__assignment2_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment2/imagetest.c || cmake_object_order_depends_target_assignment2
-  DEP_FILE = CMakeFiles/assignment2.dir/imagetest.c.o.d
-  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+build CMakeFiles/assignment2.dir/Image.c.o: C_COMPILER__assignment2_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment2/Image.c || cmake_object_order_depends_target_assignment2
+  DEP_FILE = CMakeFiles/assignment2.dir/Image.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment2/.
   OBJECT_DIR = CMakeFiles/assignment2.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment2.dir
 
-build CMakeFiles/assignment2.dir/Image.c.o: C_COMPILER__assignment2_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment2/Image.c || cmake_object_order_depends_target_assignment2
-  DEP_FILE = CMakeFiles/assignment2.dir/Image.c.o.d
-  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+build CMakeFiles/assignment2.dir/fractals.cpp.o: CXX_COMPILER__assignment2_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment2/fractals.cpp || cmake_object_order_depends_target_assignment2
+  DEP_FILE = CMakeFiles/assignment2.dir/fractals.cpp.o.d
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment2/.
+  OBJECT_DIR = CMakeFiles/assignment2.dir
+  OBJECT_FILE_DIR = CMakeFiles/assignment2.dir
+
+build CMakeFiles/assignment2.dir/mandeltest.cpp.o: CXX_COMPILER__assignment2_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment2/mandeltest.cpp || cmake_object_order_depends_target_assignment2
+  DEP_FILE = CMakeFiles/assignment2.dir/mandeltest.cpp.o.d
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment2/.
   OBJECT_DIR = CMakeFiles/assignment2.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment2.dir
@@ -71,7 +78,7 @@ build CMakeFiles/assignment2.dir/Image.c.o: C_COMPILER__assignment2_unscanned_De
 #############################################
 # Link the executable assignment2
 
-build assignment2: C_EXECUTABLE_LINKER__assignment2_Debug CMakeFiles/assignment2.dir/imagetest.c.o CMakeFiles/assignment2.dir/Image.c.o
+build assignment2: CXX_EXECUTABLE_LINKER__assignment2_Debug CMakeFiles/assignment2.dir/Image.c.o CMakeFiles/assignment2.dir/fractals.cpp.o CMakeFiles/assignment2.dir/mandeltest.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk
   OBJECT_DIR = CMakeFiles/assignment2.dir
   POST_BUILD = :

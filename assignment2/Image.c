@@ -209,7 +209,7 @@ float image_getz(Image *src, int r, int c) {
     return src->depth[r * src->cols + c];
 }
 
-void image_setf(Image *src, int r, int c, FPixel val) {
+void image_setf(Image *src, int r, int c, FPixel val){
     if (!src || r < 0 || r >= src->rows || c < 0 || c >= src->cols) {
         return;
     }

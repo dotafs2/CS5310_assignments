@@ -1,11 +1,19 @@
 cmake_minimum_required(VERSION 3.27)
 project(assignment2)
 
+set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
 add_executable(assignment2
-        imagetest.c
+        Image.h
         Image.c
-        Image.h)
+        fractals.h
+        fractals.cpp
+        mandeltest.cpp)
+#
+#add_executable(assignment2
+#        Image.h
+#        Image.c
+#        imagetest.c)
