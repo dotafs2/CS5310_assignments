@@ -11,6 +11,9 @@ IDE: CLion
 
 I used to set the max_value as float [0,1] I found the reason why this doesnot work and cause a crash. At last I found that PPM (P6) set max_value as int [0,255] not as I except.
 
+
+https://www.shadertoy.com/view/lsf3WH
+
 https://github.com/Reputeless/PerlinNoise
 
 https://solarianprogrammer.com/2012/07/18/perlin-noise-cpp-11/

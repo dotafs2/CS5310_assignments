@@ -6,21 +6,20 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall")
 include_directories(.)
 
-#add_executable(assignment2
-#        Image.h
-#        Image.c
-#        fractals.h
-#        fractals.cpp
-#        mandeltest.cpp
-#        )
-#
-#add_executable(assignment2
-#        Image.h
-#        Image.c
-#        imagetest.c)
+add_executable(mandeltest
+        Image.h
+        Image.c
+        fractals.h
+        fractals.cpp
+        mandeltest.cpp
+)
 
+add_executable(imagetest
+        Image.h
+        Image.c
+        imagetest.c)
 
-add_executable(assignment2
+add_executable(main
         Image.h
         Image.c
         fractals.h

@@ -1,3 +1,5 @@
-/Users/dotafs/Desktop/CS5310_assignments/assignment2/cmake-build-debug/CMakeFiles/assignment2.dir
+/Users/dotafs/Desktop/CS5310_assignments/assignment2/cmake-build-debug/CMakeFiles/mandeltest.dir
+/Users/dotafs/Desktop/CS5310_assignments/assignment2/cmake-build-debug/CMakeFiles/imagetest.dir
+/Users/dotafs/Desktop/CS5310_assignments/assignment2/cmake-build-debug/CMakeFiles/main.dir
 /Users/dotafs/Desktop/CS5310_assignments/assignment2/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/dotafs/Desktop/CS5310_assignments/assignment2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
