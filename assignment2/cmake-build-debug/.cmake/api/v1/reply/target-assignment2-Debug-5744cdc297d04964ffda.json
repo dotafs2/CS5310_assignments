@@ -25,7 +25,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 9,
+				"line" : 23,
 				"parent" : 0
 			},
 			{
@@ -70,7 +70,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics"
+					"fragment" : " -g -Wall -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics"
 				}
 			],
 			"includes" : 
@@ -92,7 +92,8 @@
 			"sourceIndexes" : 
 			[
 				3,
-				4
+				4,
+				6
 			]
 		}
 	],
@@ -102,7 +103,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-g",
+				"fragment" : "-g -Wall -g",
 				"role" : "flags"
 			},
 			{
@@ -126,7 +127,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				2
+				2,
+				5
 			]
 		},
 		{
@@ -135,7 +137,8 @@
 			[
 				1,
 				3,
-				4
+				4,
+				6
 			]
 		}
 	],
@@ -166,7 +169,18 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
-			"path" : "mandeltest.cpp",
+			"path" : "perlinNoise.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "perlinNoise.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "main.cpp",
 			"sourceGroupIndex" : 1
 		}
 	],

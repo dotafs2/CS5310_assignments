@@ -58,14 +58,21 @@ build CMakeFiles/assignment2.dir/Image.c.o: C_COMPILER__assignment2_unscanned_De
 
 build CMakeFiles/assignment2.dir/fractals.cpp.o: CXX_COMPILER__assignment2_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment2/fractals.cpp || cmake_object_order_depends_target_assignment2
   DEP_FILE = CMakeFiles/assignment2.dir/fractals.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+  FLAGS = -g -Wall -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment2/.
   OBJECT_DIR = CMakeFiles/assignment2.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment2.dir
 
-build CMakeFiles/assignment2.dir/mandeltest.cpp.o: CXX_COMPILER__assignment2_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment2/mandeltest.cpp || cmake_object_order_depends_target_assignment2
-  DEP_FILE = CMakeFiles/assignment2.dir/mandeltest.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+build CMakeFiles/assignment2.dir/perlinNoise.cpp.o: CXX_COMPILER__assignment2_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment2/perlinNoise.cpp || cmake_object_order_depends_target_assignment2
+  DEP_FILE = CMakeFiles/assignment2.dir/perlinNoise.cpp.o.d
+  FLAGS = -g -Wall -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment2/.
+  OBJECT_DIR = CMakeFiles/assignment2.dir
+  OBJECT_FILE_DIR = CMakeFiles/assignment2.dir
+
+build CMakeFiles/assignment2.dir/main.cpp.o: CXX_COMPILER__assignment2_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment2/main.cpp || cmake_object_order_depends_target_assignment2
+  DEP_FILE = CMakeFiles/assignment2.dir/main.cpp.o.d
+  FLAGS = -g -Wall -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment2/.
   OBJECT_DIR = CMakeFiles/assignment2.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment2.dir
@@ -78,8 +85,8 @@ build CMakeFiles/assignment2.dir/mandeltest.cpp.o: CXX_COMPILER__assignment2_uns
 #############################################
 # Link the executable assignment2
 
-build assignment2: CXX_EXECUTABLE_LINKER__assignment2_Debug CMakeFiles/assignment2.dir/Image.c.o CMakeFiles/assignment2.dir/fractals.cpp.o CMakeFiles/assignment2.dir/mandeltest.cpp.o
-  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk
+build assignment2: CXX_EXECUTABLE_LINKER__assignment2_Debug CMakeFiles/assignment2.dir/Image.c.o CMakeFiles/assignment2.dir/fractals.cpp.o CMakeFiles/assignment2.dir/perlinNoise.cpp.o CMakeFiles/assignment2.dir/main.cpp.o
+  FLAGS = -g -Wall -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk
   OBJECT_DIR = CMakeFiles/assignment2.dir
   POST_BUILD = :
   PRE_LINK = :

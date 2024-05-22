@@ -1,27 +1,67 @@
-//
-// Created by 曲辰熙 on 2024/5/21.
-//
 #include <iostream>
+#include <cstdlib>
+#include <sys/stat.h>
+#include <cstring>
+#include <cerrno>
+
 extern "C" {
 #include "Image.h"
 }
 #include "fractals.h"
 
+static const int numOfFrames = 40;
+
+bool folder_exists(const char* folder) {
+    struct stat info;
+    if (stat(folder, &info) != 0) {
+        std::cerr << "Cannot access " << folder << ": " << strerror(errno) << std::endl;
+        return false;
+    } else if (!(info.st_mode & S_IFDIR)) {
+        std::cerr << folder << " is not a directory" << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool execute_command(const char* command) {
+    int result = system(command);
+    if (result != 0) {
+        std::cerr << "Command failed: " << command << std::endl;
+        return false;
+    }
+    return true;
+}
+
 int main(int argc, char *argv[]) {
-    Image *src = image_create(750, 1000);
+    const char* folder = "../master";
 
-    mandelbrot(src, -1.5, -1.5, 4);
-   image_write(src, "mandelbrot-full.ppm");
-    Image *sre = image_create(750, 1000);
-    mandelbrot(sre, 1.755, -0.02, 0.02);
-    image_write(sre, "mandelbrot.ppm");
+    // Check if the folder exists
+    if (!folder_exists(folder)) {
+        return 1;
+    }
 
-    Image *srd = image_create(750, 1000);
-    julia(srd, -1.8, -1.8 * 0.75, 3.6);
-   image_write(srd, "julia.ppm");
+    for (int i = 0; i < numOfFrames; ++i) {
+        Image *srd = image_create(750, 1000);
+        float x0 = -1.8;
+        float y0 = -1.8 * 0.75;
+        float dx = 3.6;
+        float offset = -0.001;
+       // julia(srd, x0, y0, dx);
+        myJulia(srd,x0,y0,dx,i * offset);
+        char filename[256];
+        snprintf(filename, sizeof(filename), "%s/julia_%02d.ppm", folder, i);
+        image_write(srd, filename);
+        image_free(srd);
+    }
+    // Use ImageMagick to combine the PPM files into a GIF
+    char command[512];
+    snprintf(command, sizeof(command), "convert -delay 20 -loop 0 %s/julia_*.ppm julia_animation.gif", folder);
+    if (!execute_command(command)) {
+        return 1;
+    }
 
-    image_free(src);
-    image_free(sre);
-    image_free(srd);
+    std::cout << "GIF created successfully: julia_animation.gif" << std::endl;
+
+
     return 0;
 }

@@ -8,6 +8,11 @@
 #include "Image.h"
 
 void mandelbrot(Image *src, float x0, float y0, float dx);
-void julia(Image *src, float x0, float y0, float dx);
 
+/*
+ * src: the pointer of image
+ * x0:
+ */
+void julia(Image *src, float x0, float y0, float dx);
+void myJulia(Image *src, float x0, float y0, float dx, float offset);
 #endif // FRACTALS_H

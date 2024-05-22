@@ -5,7 +5,6 @@
   Test of the image library functions
 */
 #include <math.h>
-#include <printf.h>
 #include "image.h"
 
 int main(int argc, char *argv[]) {
