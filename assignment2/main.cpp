@@ -151,9 +151,9 @@ void generateCloudsPerlin4(Image *src, float baseScale, float basePersistence, p
                 red = green = blue = 0.8f;
             } else {
                 // sky
-                red = 0.6f + 0.2f * noise; // 淡红色
-                green = 0.7f + 0.1f * noise; // 淡绿色
-                blue = 0.9f + 0.1f * noise; // 浅蓝色
+                red = 0.6f + 0.2f * noise;
+                green = 0.7f + 0.1f * noise;
+                blue = 0.9f + 0.1f * noise;
             }
 
             FPixel pixel = { { red, green, blue }, 1.0f, 1.0f };
@@ -171,7 +171,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    perlinNoise perlin(42); // 固定种子
+    perlinNoise perlin(42); // seed
     for (int i = 0; i < numOfFrames; ++i) {
         Image *srd = image_create(750, 1000);
         //generateCloudsPerlin2(srd, 5.0f, 1.0f);
