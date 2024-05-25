@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <sys/timeb.h>
 #include <math.h>
-#include "ppmIO.h"
 
 /* put your include file here */
-#include "line.h"
-#include "image.h"
+#include "Line.h"
+#include "Image.h"
 
 #define NUMLINES 200
 #define TIMING 5

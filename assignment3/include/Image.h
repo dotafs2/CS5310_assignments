@@ -69,6 +69,13 @@ void color_set(Color *to, float r, float g, float b);
 void image_setColor(Image *src, int r, int c, Color val);
 Color image_getColor(Image *src, int r, int c);
 
+
+
+
+
+
+
+
 #ifdef __cplusplus
 }
 #endif
