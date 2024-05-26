@@ -4,8 +4,8 @@
 #include <math.h>
 
 /* put your include file here */
-#include "Line.h"
-#include "Image.h"
+#include "include/Line.h"
+#include "include/Image.h"
 
 #define NUMLINES 200
 #define TIMING 5

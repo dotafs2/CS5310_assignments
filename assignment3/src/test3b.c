@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Line.h"
-#include "Image.h"
+#include "include/Image.h"
 
 typedef struct {
   Line l;

@@ -6,6 +6,14 @@
 
 #include "Line.h"
 #define ROUND(a) ((int)(a + 0.5))
+
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 void point_set2D(Point *p, double x, double y) {
     if (!p) return;
     p->val[0] = x;
@@ -316,7 +324,6 @@ void ellipsePlotPoints(int xCenter, int yCenter, int x, int y, Image *src, Color
     }
 }
 
-// Draws the ellipse into the image using the specified color
 void ellipse_draw(Ellipse *e, Image *src, Color p) {
     if (!e || !src) return;
 
@@ -328,7 +335,6 @@ void ellipse_draw(Ellipse *e, Image *src, Color p) {
     ellipseMidpoint(xCenter, yCenter, ra, rb, src, p, 0);
 }
 
-// Draws a filled ellipse into the image using the specified color
 void ellipse_drawFill(Ellipse *e, Image *src, Color p) {
     if (!e || !src) return;
 
@@ -339,3 +345,98 @@ void ellipse_drawFill(Ellipse *e, Image *src, Color p) {
 
     ellipseMidpoint(xCenter, yCenter, ra, rb, src, p, 1);
 }
+
+Polyline* polyline_create() {
+    Polyline *p = (Polyline *)malloc(sizeof(Polyline));
+    if (!p) return NULL;
+    p->numVertex = 0;
+    p->vertex = NULL;
+    p->zBuffer = 1;
+    return p;
+}
+
+Polyline* polyline_createp(int numV, Point *vlist) {
+    Polyline *p = polyline_create();
+    if (!p) return NULL;
+    polyline_set(p, numV, vlist);
+    return p;
+}
+
+void polyline_free(Polyline *p) {
+    if (!p) return;
+    free(p->vertex);
+    free(p);
+}
+
+void polyline_init(Polyline *p) {
+    if (!p) return;
+    p->numVertex = 0;
+    p->vertex = NULL;
+    p->zBuffer = 1;
+}
+
+void polyline_set(Polyline *p, int numV, Point *vlist) {
+    if (!p) return;
+    if (p->vertex) {
+        free(p->vertex);
+    }
+    p->vertex = (Point *)malloc(numV * sizeof(Point));
+    if (!p->vertex) {
+        p->numVertex = 0;
+        return;
+    }
+    p->numVertex = numV;
+    for (int i = 0; i < numV; i++) {
+        p->vertex[i] = vlist[i];
+    }
+}
+
+void polyline_clear(Polyline *p) {
+    if (!p) return;
+    if (p->vertex) {
+        free(p->vertex);
+        p->vertex = NULL;
+    }
+    p->numVertex = 0;
+}
+
+void polyline_zBuffer(Polyline *p, int flag) {
+    if (!p) return;
+    p->zBuffer = flag;
+}
+
+void polyline_copy(Polyline *to, Polyline *from) {
+    if (!to || !from) return;
+    polyline_clear(to);
+    polyline_set(to, from->numVertex, from->vertex);
+    to->zBuffer = from->zBuffer;
+}
+
+void polyline_print(Polyline *p, FILE *fp) {
+    if (!p || !fp) return;
+    fprintf(fp, "Polyline with %d vertices:\n", p->numVertex);
+    for (int i = 0; i < p->numVertex; i++) {
+        fprintf(fp, "  Vertex %d: (%f, %f, %f, %f)\n", i, p->vertex[i].val[0], p->vertex[i].val[1], p->vertex[i].val[2], p->vertex[i].val[3]);
+    }
+}
+
+void polyline_normalize(Polyline *p) {
+    if (!p) return;
+    for (int i = 0; i < p->numVertex; i++) {
+        point_normalize(&p->vertex[i]);
+    }
+}
+
+void polyline_draw(Polyline *p, Image *src, Color c) {
+    if (!p || !src) return;
+    for (int i = 0; i < p->numVertex - 1; i++) {
+        Line l;
+        line_set(&l, p->vertex[i], p->vertex[i+1]);
+        line_zBuffer(&l, p->zBuffer);
+        line_draw(&l, src, c);
+    }
+}
+
+#ifdef __cplusplus
+}
+#endif

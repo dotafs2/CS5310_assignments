@@ -255,7 +255,96 @@ void ellipse_draw(Ellipse *e, Image *src, Color p);
  * @param p The color to use for drawing the filled ellipse.
  */
 void ellipse_drawFill(Ellipse *e, Image *src, Color p);
+// Polyline functions
 
+/**
+ * @brief Creates and returns an allocated Polyline pointer initialized to an empty Polyline.
+ *
+ * @return Polyline* A pointer to the allocated Polyline.
+ */
+Polyline* polyline_create();
 
+/**
+ * @brief Creates and returns an allocated Polyline pointer with the vertex list initialized to the points in vlist.
+ *
+ * @param numV Number of vertices.
+ * @param vlist Pointer to the list of vertices.
+ * @return Polyline* A pointer to the allocated Polyline.
+ */
+Polyline* polyline_createp(int numV, Point *vlist);
+
+/**
+ * @brief Frees the internal data and the Polyline pointer.
+ *
+ * @param p Pointer to the Polyline to be freed.
+ */
+void polyline_free(Polyline *p);
+
+/**
+ * @brief Initializes a pre-existing Polyline to an empty Polyline.
+ *
+ * @param p Pointer to the Polyline to be initialized.
+ */
+void polyline_init(Polyline *p);
+
+/**
+ * @brief Initializes the vertex list to the points in vlist.
+ *
+ * @param p Pointer to the Polyline to be initialized.
+ * @param numV Number of vertices.
+ * @param vlist Pointer to the list of vertices.
+ */
+void polyline_set(Polyline *p, int numV, Point *vlist);
+
+/**
+ * @brief Frees the internal data for a Polyline, if necessary, and sets numVertex to 0 and vertex to NULL.
+ *
+ * @param p Pointer to the Polyline to be cleared.
+ */
+void polyline_clear(Polyline *p);
+
+/**
+ * @brief Sets the z-buffer flag to the given value.
+ *
+ * @param p Pointer to the Polyline.
+ * @param flag Value of the z-buffer flag.
+ */
+void polyline_zBuffer(Polyline *p, int flag);
+
+/**
+ * @brief Copies the vertex data from the source Polyline (from) to the destination (to).
+ *
+ * @param to Pointer to the destination Polyline.
+ * @param from Pointer to the source Polyline.
+ */
+void polyline_copy(Polyline *to, Polyline *from);
+
+/**
+ * @brief Prints Polyline data to the stream designated by the FILE pointer.
+ *
+ * @param p Pointer to the Polyline.
+ * @param fp Pointer to the FILE stream.
+ */
+void polyline_print(Polyline *p, FILE *fp);
+
+/**
+ * @brief Normalizes the x and y values of each vertex by the homogeneous coordinate.
+ *
+ * @param p Pointer to the Polyline to be normalized.
+ */
+void polyline_normalize(Polyline *p);
+
+/**
+ * @brief Draws the Polyline using color c and the z-buffer, if appropriate.
+ *
+ * @param p Pointer to the Polyline to be drawn.
+ * @param src Pointer to the Image.
+ * @param c Color to be used for drawing.
+ */
+void polyline_draw(Polyline *p, Image *src, Color c);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // LINE_H

@@ -1,20 +1,25 @@
 cmake_minimum_required(VERSION 3.27)
-project(assignment3 C)
+project(assignment3 C CXX)
 
 set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall")
 
 include_directories(include)
 
 add_executable(assignment3
         include/Image.h
-#        src/circleMidpoint.c
-#        src/ellipseMidpoint.c
         src/Image.c
-        # src/testbench.c
-        src/Line.c
         include/Line.h
-        src/test3a.c)
+        src/Line.c
+        include/anti-alias.h
+        src/anti-alias.cpp
+        src/mytest.cpp
+)
 
-
-        #src/test3b.c
-       # src/test3d.c)
+set_source_files_properties(
+        src/anti-alias.cpp
+        src/mytest.cpp
+        PROPERTIES
+        LANGUAGE CXX
+)

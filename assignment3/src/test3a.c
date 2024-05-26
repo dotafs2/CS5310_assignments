@@ -8,7 +8,7 @@
 
 // edit the include files as necessary
 #include "Line.h"
-#include "Image.h"
+#include "../include/Image.h"
 
 // draw a box
 static int box( Image *src, Color color, int x, int y, int dx, int dy );
@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
   Color White;
   Color Red;
   Point p;
+  Point p2;
   Circle circ;
   Line line;
   Ellipse e;
@@ -53,10 +54,11 @@ int main(int argc, char *argv[]) {
   box( src, White, 160, 180, 10, 20 );
 
   point_set2D( &p, 260, 160 );
+  point_set2D( &p2, 460, 160 );
   circle_set( &circ, p, 60 );
   circle_draw( &circ, src, White );
 
-  ellipse_set(&e, p, 150, 100);
+  ellipse_set(&e, p2, 150, 100);
   ellipse_draw(&e, src, White);
   // ellipse_drawFill(&e, src, White);
 

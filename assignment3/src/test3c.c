@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "Line.h"
 #include "Image.h"
+#include "anti-alias.h"
 
 // draw some random lines, then two boxes
 int main(int argc, char *argv[]) {
@@ -74,7 +75,7 @@ int main(int argc, char *argv[]) {
   printf("Clockwise box\n");
   polyline_set( thing2, 5, &(p[500]) );
   polyline_draw( thing2, src, Green );
-
+  SSAA(src,4);
   image_write( src, "test3c.ppm");
 
   printf("Cleanup\n");
@@ -84,3 +85,5 @@ int main(int argc, char *argv[]) {
 
   return(0);
 }
+
+

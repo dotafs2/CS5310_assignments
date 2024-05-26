@@ -25,13 +25,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 8,
+				"line" : 10,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 6,
+				"line" : 8,
 				"parent" : 0
 			}
 		]
@@ -64,8 +64,36 @@
 			"sourceIndexes" : 
 			[
 				1,
-				2,
-				4
+				3
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -g -Wall -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/Users/dotafs/Desktop/CS5310_assignments/assignment3/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "14"
+			},
+			"sourceIndexes" : 
+			[
+				5,
+				6
 			]
 		}
 	],
@@ -75,7 +103,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-g",
+				"fragment" : "-g -Wall -g",
 				"role" : "flags"
 			},
 			{
@@ -83,7 +111,7 @@
 				"role" : "flags"
 			}
 		],
-		"language" : "C"
+		"language" : "CXX"
 	},
 	"name" : "assignment3",
 	"nameOnDisk" : "assignment3",
@@ -99,7 +127,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				3
+				2,
+				4
 			]
 		},
 		{
@@ -107,8 +136,9 @@
 			"sourceIndexes" : 
 			[
 				1,
-				2,
-				4
+				3,
+				5,
+				6
 			]
 		}
 	],
@@ -127,19 +157,30 @@
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/Line.c",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
 			"path" : "include/Line.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/test3a.c",
+			"path" : "src/Line.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "include/anti-alias.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "src/anti-alias.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "src/mytest.cpp",
 			"sourceGroupIndex" : 1
 		}
 	],
