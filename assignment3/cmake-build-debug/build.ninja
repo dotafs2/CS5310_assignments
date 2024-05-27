@@ -77,6 +77,13 @@ build CMakeFiles/assignment3.dir/src/mytest.cpp.o: CXX_COMPILER__assignment3_uns
   OBJECT_DIR = CMakeFiles/assignment3.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment3.dir/src
 
+build CMakeFiles/assignment3.dir/src/ball.cpp.o: CXX_COMPILER__assignment3_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment3/src/ball.cpp || cmake_object_order_depends_target_assignment3
+  DEP_FILE = CMakeFiles/assignment3.dir/src/ball.cpp.o.d
+  FLAGS = -x c++  -g -Wall -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment3/include
+  OBJECT_DIR = CMakeFiles/assignment3.dir
+  OBJECT_FILE_DIR = CMakeFiles/assignment3.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target assignment3
@@ -85,7 +92,7 @@ build CMakeFiles/assignment3.dir/src/mytest.cpp.o: CXX_COMPILER__assignment3_uns
 #############################################
 # Link the executable assignment3
 
-build assignment3: CXX_EXECUTABLE_LINKER__assignment3_Debug CMakeFiles/assignment3.dir/src/Image.c.o CMakeFiles/assignment3.dir/src/Line.c.o CMakeFiles/assignment3.dir/src/anti-alias.cpp.o CMakeFiles/assignment3.dir/src/mytest.cpp.o
+build assignment3: CXX_EXECUTABLE_LINKER__assignment3_Debug CMakeFiles/assignment3.dir/src/Image.c.o CMakeFiles/assignment3.dir/src/Line.c.o CMakeFiles/assignment3.dir/src/anti-alias.cpp.o CMakeFiles/assignment3.dir/src/mytest.cpp.o CMakeFiles/assignment3.dir/src/ball.cpp.o
   FLAGS = -g -Wall -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk
   OBJECT_DIR = CMakeFiles/assignment3.dir
   POST_BUILD = :

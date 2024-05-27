@@ -93,7 +93,8 @@
 			"sourceIndexes" : 
 			[
 				5,
-				6
+				6,
+				7
 			]
 		}
 	],
@@ -128,7 +129,8 @@
 			[
 				0,
 				2,
-				4
+				4,
+				8
 			]
 		},
 		{
@@ -138,7 +140,8 @@
 				1,
 				3,
 				5,
-				6
+				6,
+				7
 			]
 		}
 	],
@@ -182,6 +185,17 @@
 			"compileGroupIndex" : 1,
 			"path" : "src/mytest.cpp",
 			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "src/ball.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "include/ball.h",
+			"sourceGroupIndex" : 0
 		}
 	],
 	"type" : "EXECUTABLE"
