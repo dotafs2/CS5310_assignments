@@ -1,0 +1,4 @@
+-I/Users/dotafs/Desktop/CS5310_assignments/assignment4/include
+-o
+/Users/dotafs/Desktop/CS5310_assignments/assignment4/cmake-build-debug/include/moc_mainwindow.cpp
+/Users/dotafs/Desktop/CS5310_assignments/assignment4/include/mainwindow.h

@@ -41,3 +41,8 @@ void SSAA(Image* src, int sample_rate){
         }
     }
 }
+
+
+void MMSA(Image* src, int sample_rate){
+
+}

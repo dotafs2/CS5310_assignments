@@ -21,4 +21,5 @@
  */
 void SSAA(Image* src, int sample_rate);
 
+void MMSA(Image* src, int sample_rate);
 #endif //ASSIGNMENT3_ANTI_ALIAS_H

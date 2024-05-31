@@ -182,6 +182,24 @@ Image* image_read(char *filename) {
     return img;
 }
 
+void image_copy(Image *dest, const Image *src) {
+    if (dest == NULL || src == NULL) return;
+    if (dest->rows != src->rows || dest->cols != src->cols) {
+        free(dest->data);
+        free(dest->depth);
+        free(dest->alpha);
+        dest->data = (FPixel*)malloc(src->rows * src->cols * sizeof(FPixel));
+        dest->depth = (float*)malloc(src->rows * src->cols * sizeof(float));
+        dest->alpha = (float*)malloc(src->rows * src->cols * sizeof(float));
+        dest->rows = src->rows;
+        dest->cols = src->cols;
+    }
+    memcpy(dest->data, src->data, src->rows * src->cols * sizeof(FPixel));
+    memcpy(dest->depth, src->depth, src->rows * src->cols * sizeof(float));
+    memcpy(dest->alpha, src->alpha, src->rows * src->cols * sizeof(float));
+    dest->max_val = src->max_val;
+    strcpy(dest->filename, src->filename);
+}
 
 FPixel image_getf(Image *src, int r, int c) {
     if (!src || r < 0 || r >= src->rows || c < 0 || c >= src->cols) {

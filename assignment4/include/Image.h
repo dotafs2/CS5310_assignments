@@ -55,6 +55,7 @@ void image_setf(Image *src, int r, int c, FPixel val);
 void image_setc(Image *src, int r, int c, int b, float val);
 void image_seta(Image *src, int r, int c, float val);
 void image_setz(Image *src, int r, int c, float val);
+void image_copy(Image *dest, const Image *src);
 
 // Image manipulation functions
 void image_reset(Image *src);

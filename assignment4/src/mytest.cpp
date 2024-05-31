@@ -4,8 +4,6 @@
 
   A program to test the polyline function
 */
-#include <stdio.h>
-#include <stdlib.h>
 #include "Line.h"
 #include "Image.h"
 #include "anti-alias.h"
