@@ -47,7 +47,7 @@ cmake_ninja_workdir = /Users/dotafs/Desktop/CS5310_assignments/assignment4/cmake
 #############################################
 # Order-only phony target for assignment4
 
-build cmake_object_order_depends_target_assignment4: phony || include/moc_mainwindow.cpp
+build cmake_object_order_depends_target_assignment4: phony || CMakeFiles/assignment4.dir
 
 build CMakeFiles/assignment4.dir/src/Image.c.o: C_COMPILER__assignment4_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment4/src/Image.c || cmake_object_order_depends_target_assignment4
   DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
@@ -89,29 +89,13 @@ build CMakeFiles/assignment4.dir/src/Polygon.c.o: C_COMPILER__assignment4_unscan
   OBJECT_DIR = CMakeFiles/assignment4.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment4.dir/src
 
-build CMakeFiles/assignment4.dir/src/main.cpp.o: CXX_COMPILER__assignment4_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment4/src/main.cpp || cmake_object_order_depends_target_assignment4
+build CMakeFiles/assignment4.dir/test/polyspeed.c.o: C_COMPILER__assignment4_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment4/test/polyspeed.c || cmake_object_order_depends_target_assignment4
   DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles/assignment4.dir/src/main.cpp.o.d
-  FLAGS = -x c++  -g -Wall -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+  DEP_FILE = CMakeFiles/assignment4.dir/test/polyspeed.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment4/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
   OBJECT_DIR = CMakeFiles/assignment4.dir
-  OBJECT_FILE_DIR = CMakeFiles/assignment4.dir/src
-
-build CMakeFiles/assignment4.dir/src/mainwindow.cpp.o: CXX_COMPILER__assignment4_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment4/src/mainwindow.cpp || cmake_object_order_depends_target_assignment4
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles/assignment4.dir/src/mainwindow.cpp.o.d
-  FLAGS = -x c++  -g -Wall -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment4/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
-  OBJECT_DIR = CMakeFiles/assignment4.dir
-  OBJECT_FILE_DIR = CMakeFiles/assignment4.dir/src
-
-build CMakeFiles/assignment4.dir/include/moc_mainwindow.cpp.o: CXX_COMPILER__assignment4_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment4/cmake-build-debug/include/moc_mainwindow.cpp || cmake_object_order_depends_target_assignment4
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles/assignment4.dir/include/moc_mainwindow.cpp.o.d
-  FLAGS = -g -Wall -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment4/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
-  OBJECT_DIR = CMakeFiles/assignment4.dir
-  OBJECT_FILE_DIR = CMakeFiles/assignment4.dir/include
+  OBJECT_FILE_DIR = CMakeFiles/assignment4.dir/test
 
 
 # =============================================================================
@@ -121,7 +105,7 @@ build CMakeFiles/assignment4.dir/include/moc_mainwindow.cpp.o: CXX_COMPILER__ass
 #############################################
 # Link the executable assignment4
 
-build assignment4: CXX_EXECUTABLE_LINKER__assignment4_Debug CMakeFiles/assignment4.dir/src/Image.c.o CMakeFiles/assignment4.dir/src/Line.c.o CMakeFiles/assignment4.dir/src/anti-alias.cpp.o CMakeFiles/assignment4.dir/src/ball.cpp.o CMakeFiles/assignment4.dir/src/Polygon.c.o CMakeFiles/assignment4.dir/src/main.cpp.o CMakeFiles/assignment4.dir/src/mainwindow.cpp.o CMakeFiles/assignment4.dir/include/moc_mainwindow.cpp.o | /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore
+build assignment4: CXX_EXECUTABLE_LINKER__assignment4_Debug CMakeFiles/assignment4.dir/src/Image.c.o CMakeFiles/assignment4.dir/src/Line.c.o CMakeFiles/assignment4.dir/src/anti-alias.cpp.o CMakeFiles/assignment4.dir/src/ball.cpp.o CMakeFiles/assignment4.dir/src/Polygon.c.o CMakeFiles/assignment4.dir/test/polyspeed.c.o | /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore
   FLAGS = -g -Wall -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets  /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui  /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore  -framework IOKit  -framework DiskArbitration  -Xlinker -framework -Xlinker OpenGL  -Xlinker -framework -Xlinker AGL  -framework AppKit  -framework ImageIO  -framework Metal
   LINK_PATH = -iframework /opt/homebrew/lib
@@ -153,15 +137,6 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   restat = 1
 
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
-
-
-#############################################
-# Custom command for include/moc_mainwindow.cpp
-
-build include/moc_mainwindow.cpp | ${cmake_ninja_workdir}include/moc_mainwindow.cpp: CUSTOM_COMMAND /Users/dotafs/Desktop/CS5310_assignments/assignment4/include/mainwindow.h
-  COMMAND = cd /Users/dotafs/Desktop/CS5310_assignments/assignment4/cmake-build-debug/include && /opt/homebrew/share/qt/libexec/moc @/Users/dotafs/Desktop/CS5310_assignments/assignment4/cmake-build-debug/include/moc_mainwindow.cpp_parameters
-  DESC = Generating include/moc_mainwindow.cpp
-  restat = 1
 
 # =============================================================================
 # Target aliases.

@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
    draw_ball(src,20,20,center,scale,White,fill);
    //circle_set( &circ, p, 80 );
    // circle_draw( &circ, src, White );
-   //SSAA(src,8);
+   SSAA(src,8);
     image_write( src, "mytest2.ppm" );
 
     image_free( src);
