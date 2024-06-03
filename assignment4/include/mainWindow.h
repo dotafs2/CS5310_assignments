@@ -19,6 +19,9 @@ private slots:
     void toggleMMSA();
 
 private:
+    void drawBall();
+    void drawCircle();
+    void drawPolygon();
     void updateImage(Image* src);
 
     QLabel *label;

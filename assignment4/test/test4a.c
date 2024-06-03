@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "Graphic.h"
+#include "Polygon.h"
 #include "Image.h"
 #include "Line.h"
 /*
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
 
   for(i=0;i<50;i++) {
     float dr = rand() % 15;
-    point_set2D(&(pt[i]), 
+    point_set2D(&(pt[i]),
     200 + cos((float)i * M_PI * 2.0 / 50.0)*(50 + dr),
     150 + sin((float)i * M_PI * 2.0 / 50.0)*(50 + dr));
   }
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 
   for(i=0;i<50;i++) {
     float dr = rand() % 10;
-    point_set2D(&(pt[i]), 
+    point_set2D(&(pt[i]),
     200 + cos((float)i * M_PI * 2.0 / 50.0)*(30 + dr),
     150 + sin((float)i * M_PI * 2.0 / 50.0)*(30 + dr));
   }

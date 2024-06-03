@@ -8,6 +8,7 @@
 #include <Line.h>
 #include <ball.h>
 #include "anti-alias.h"
+#include "Polygon.h"
 
 QImage imageToQImage(Image *img) {
     QImage qImg(img->cols, img->rows, QImage::Format_RGB32);
@@ -55,6 +56,20 @@ void MainWindow::updateImage(Image* src) {
 }
 
 void MainWindow::draw() {
+    drawBall();
+
+    if (ssaaEnabled) {
+        SSAA(src, 8);
+    }
+
+    if (mmsaEnabled) {
+        MMSA(src, 8);
+    }
+
+    updateImage(src);
+}
+
+void MainWindow::drawCircle(){
     Color White;
     Point p;
     Circle circ;
@@ -77,17 +92,83 @@ void MainWindow::draw() {
     color_set(&white, 1.0, 1.0, 1.0);
     circle_set(&circ, p, 80);
     circle_draw(&circ, src, White);
-
-    if (ssaaEnabled) {
-        SSAA(src, 8);
-    }
-
-    if (mmsaEnabled) {
-        MMSA(src, 8);
-    }
-
-    updateImage(src);
 }
+
+
+void MainWindow::drawPolygon(){
+    const int rows = 300;
+    const int cols = 400;
+    Polygon *p = polygon_create();  // Ensure p is properly allocated
+    Color Red, Orange, White, Blue;
+    Point pt[100];
+    int i;
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<float> distribution(-10,10);
+    uniform_real_distribution<float> distribution2(-5,5);
+    uniform_real_distribution<float> distribution3(-1,1);
+    color_set(&Red, 0.9, 0.2, 0.1);
+    color_set(&Orange, 0.95, 0.7, 0.3);
+    color_set(&White, 1.0, 1.0, 1.0);
+    color_set(&Blue, 0.2, 0.1, 0.95);
+
+    image_reset(src);
+
+    // something more interesting
+    for (i = 0; i < 50; i++) {
+        float dr = distribution(gen);
+        point_set2D(&(pt[i]),
+                    200 + cos((float)i * M_PI * 2.0 / 50.0) * (70 + dr),
+                    150 + sin((float)i * M_PI * 2.0 / 50.0) * (70 + dr));
+    }
+    polygon_set(p, 50, pt);
+    polygon_drawFill(p, src, Red);
+
+    for (i = 0; i < 50; i++) {
+        float dr = distribution2(gen);
+        point_set2D(&(pt[i]),
+                    200 + cos((float)i * M_PI * 2.0 / 50.0) * (50 + dr),
+                    150 + sin((float)i * M_PI * 2.0 / 50.0) * (50 + dr));
+    }
+    polygon_set(p, 50, pt);
+    polygon_drawFill(p, src, Orange);
+
+    for (i = 0; i < 50; i++) {
+        float dr = distribution3(gen);
+        point_set2D(&(pt[i]),
+                    200 + cos((float)i * M_PI * 2.0 / 50.0) * (30 + dr),
+                    150 + sin((float)i * M_PI * 2.0 / 50.0) * (30 + dr));
+    }
+    polygon_set(p, 50, pt);
+    polygon_drawFill(p, src, White);
+
+    image_write(src, "test4a.ppm");
+
+    polygon_free(p);  // Ensure p is properly freed
+}
+
+void MainWindow::drawBall(){
+
+    Color White;
+    Point p;
+    Circle circ;
+    color_set( &White, 1.0, 1.0, 1.0 );
+
+    float scale = 200.0f;
+    Color red = { 1.0, 0.0, 0.0 };
+
+    point_set2D( &p, 200, 200);
+    Point center;
+    center.val[0] = 400;
+    center.val[1] = 400;
+    center.val[2] = 0;
+    center.val[3] = 1;
+    bool fill = false;
+    draw_ball(src,20,20,center,scale,White,fill);
+}
+
+
 
 void MainWindow::toggleSSAA() {
     ssaaEnabled = !ssaaEnabled;

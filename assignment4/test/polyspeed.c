@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/timeb.h>
-#include "../include/Graphic.h"
+#include "graphics.h"
 
 int main(int argc, char *argv[])  {
   const int NPoints = 1002;

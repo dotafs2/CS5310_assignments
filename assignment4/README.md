@@ -1,4 +1,10 @@
-# assignment 3
+# assignment 4
+
+## output
+
+<p align="center">
+  <a href="https://github.com/dotafs2/CS5310_assignments"><img src="cmake-build-debug/1.gif" alt="Banner" width="300"></a>
+</p>
 
 
 ## environment
@@ -16,7 +22,7 @@ make
 ``
 
 ``
-./assignment3``
+./assignment4``
 
 
 cmakelist:
