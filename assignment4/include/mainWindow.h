@@ -3,25 +3,29 @@
 
 #include <QMainWindow>
 #include <QLabel>
-#include <QListWidget>
+#include <QTimer>
 #include "Image.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void draw();
+    void toggleSSAA();
+    void toggleMMSA();
+
 private:
-    Image *src;
-    QLabel *label;
-    QListWidget *listWidget;
     void updateImage(Image* src);
 
-private slots:
-    void applySSAA();
-    void applyMMSA();
+    QLabel *label;
+    QTimer *timer;
+    Image *src;
+    bool ssaaEnabled;
+    bool mmsaEnabled;
 };
 
 #endif // MAINWINDOW_H

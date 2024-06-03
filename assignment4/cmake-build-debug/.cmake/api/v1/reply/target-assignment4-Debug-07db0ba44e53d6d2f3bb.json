@@ -42,13 +42,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 22,
+				"line" : 26,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 37,
+				"line" : 41,
 				"parent" : 0
 			},
 			{
@@ -176,7 +176,7 @@
 			{
 				"command" : 8,
 				"file" : 0,
-				"line" : 35,
+				"line" : 39,
 				"parent" : 0
 			}
 		]
@@ -267,7 +267,9 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1
+				1,
+				4,
+				6
 			]
 		},
 		{
@@ -355,8 +357,6 @@
 			[
 				2,
 				3,
-				4,
-				5,
 				7
 			]
 		}
@@ -451,7 +451,7 @@
 				2,
 				3,
 				4,
-				5,
+				6,
 				7
 			]
 		},
@@ -459,7 +459,7 @@
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				6
+				5
 			]
 		},
 		{
@@ -498,20 +498,20 @@
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/main.cpp",
+			"compileGroupIndex" : 0,
+			"path" : "src/Graphic.c",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/mainwindow.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/mainwindow.h",
+			"path" : "include/Graphic.h",
 			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/test4a.c",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 26,

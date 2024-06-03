@@ -14,9 +14,13 @@ set(SOURCE_FILES
         src/Line.c
         src/anti-alias.cpp
         src/ball.cpp
-        src/main.cpp
-        src/mainwindow.cpp
-        include/mainwindow.h
+        # src/main.cpp
+        # src/mainwindow.cpp
+        # include/mainwindow.h
+        src/Graphic.c
+        include/Graphic.h
+        include/Graphic.h
+        test/test4a.c
 )
 
 add_executable(assignment4 ${SOURCE_FILES})
