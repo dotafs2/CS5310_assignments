@@ -7,7 +7,7 @@
 
 
 
-vector<vector<Point>> init_vertex(int sliceX, int sliceY, Point center, float scale) {
+vector<vector<Point>> init_vertex(int sliceX, int sliceY, Point center, float scale, float time) {
     vector<vector<Point>> vertex_set;
     for (int y = 0; y <= sliceY; y++) {
         vector<Point> sub_vertex_set;
@@ -15,8 +15,8 @@ vector<vector<Point>> init_vertex(int sliceX, int sliceY, Point center, float sc
             Point sb;
             float xSegment = (float)x / (float)sliceX;
             float ySegment = (float)y / (float)sliceY;
-            float xPos = cos(xSegment * 2.0f * M_PI) * sin(ySegment * M_PI);
-            float yPos = cos(ySegment * M_PI);
+            float xPos = cos(time + xSegment * 2.0f * M_PI) * sin(ySegment * M_PI);
+            float yPos = cos(time + ySegment * M_PI);
             float zPos = sin(xSegment * 2.0f * M_PI) * sin(ySegment * M_PI);
             sb.val[0] = xPos * scale + center.val[0];
             sb.val[1] = yPos * scale + center.val[1];
@@ -49,10 +49,9 @@ vector<Triangle> init_triangles(vector<vector<Point>> vertex_set) {
     return triangle_set;
 }
 
-void draw_ball(Image* src, int sliceX, int sliceY, Point center, float scale, Color c, bool fill) {
-    vector<vector<Point>> vertex_set = init_vertex(sliceX, sliceY, center, scale);
+void draw_ball(Image* src, int sliceX, int sliceY, Point center, float scale, Color c, bool fill, float time) {
+    vector<vector<Point>> vertex_set = init_vertex(sliceX, sliceY, center, scale, time);
     vector<Triangle> triangle_set = init_triangles(vertex_set);
-
     for (Triangle& t : triangle_set) {
         fill ? triangle_fill(&t, src, c) : triangle_draw(&t, src, c);
     }

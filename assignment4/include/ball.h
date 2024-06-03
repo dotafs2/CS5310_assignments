@@ -14,8 +14,8 @@
 using namespace std;
 
 
-vector<vector<Point>> init_vertex(int sliceX, int sliceY, Point center, float scale);
+vector<vector<Point>> init_vertex(int sliceX, int sliceY, Point center, float scale, float time);
 vector<Triangle> init_triangles(vector<vector<Point>> vertex_set) ;
-void draw_ball(Image* src, int sliceX, int sliceY, Point center, float scale, Color c, bool fill);
+void draw_ball(Image* src, int sliceX, int sliceY, Point center, float scale, Color c, bool fill, float time);
 #endif //ASSIGNMENT3_BALL_H
 

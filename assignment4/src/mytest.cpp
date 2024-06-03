@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
     center.val[2] = 0;
     center.val[3] = 1;
     bool fill = false;
-   draw_ball(src,20,20,center,scale,White,fill);
+   draw_ball(src,20,20,center,scale,White,fill, time);
    //circle_set( &circ, p, 80 );
    // circle_draw( &circ, src, White );
    SSAA(src,8);

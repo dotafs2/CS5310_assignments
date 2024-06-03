@@ -150,10 +150,20 @@ void MainWindow::drawPolygon(){
 
 void MainWindow::drawBall(){
 
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<float> distribution(0,1);
+    uniform_real_distribution<float> distribution2(0,1);
+    uniform_real_distribution<float> distribution3(0,1);
+
+    image_reset(src);
     Color White;
     Point p;
     Circle circ;
-    color_set( &White, 1.0, 1.0, 1.0 );
+    static float time = 0;
+    time += 0.01;
+
+    color_set( &White, 1,1,1);
 
     float scale = 200.0f;
     Color red = { 1.0, 0.0, 0.0 };
@@ -165,7 +175,7 @@ void MainWindow::drawBall(){
     center.val[2] = 0;
     center.val[3] = 1;
     bool fill = false;
-    draw_ball(src,20,20,center,scale,White,fill);
+    draw_ball(src,20,20,center,scale,White,fill,time);
 }
 
 

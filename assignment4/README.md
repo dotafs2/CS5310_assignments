@@ -3,7 +3,11 @@
 ## output
 
 <p align="center">
-  <a href="https://github.com/dotafs2/CS5310_assignments"><img src="cmake-build-debug/1.gif" alt="Banner" width="300"></a>
+  <a href="https://github.com/dotafs2/CS5310_assignments"><img src="cmake-build-debug/1.gif" alt="Banner" width="700"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/dotafs2/CS5310_assignments"><img src="cmake-build-debug/2.gif" alt="Banner" width="700"></a>
 </p>
 
 
