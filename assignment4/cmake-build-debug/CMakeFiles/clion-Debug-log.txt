@@ -1,5 +1,5 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/dotafs/Desktop/CS5310_assignments/assignment4 -B /Users/dotafs/Desktop/CS5310_assignments/assignment4/cmake-build-debug
 -- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
--- Configuring done (0.2s)
+-- Configuring done (0.6s)
 -- Generating done (0.0s)
 -- Build files have been written to: /Users/dotafs/Desktop/CS5310_assignments/assignment4/cmake-build-debug
