@@ -1,14 +1,6 @@
 # ninja log v5
-18	1032	1717962337357793289	CMakeFiles/assignment4.dir/src/mainwindow.cpp.o	f8de616a9f62c6a
 6	29	1717603833535067947	/Users/dotafs/Desktop/CS5310_assignments/assignment4/cmake-build-debug/include/moc_mainwindow.cpp	dbe62465b7bf59d1
-7	338	1717188115965457073	CMakeFiles/assignment4.dir/src/Image.c.o	a320de1cee704150
-1	267	1717970098529985619	build.ninja	cb98f2598dd20696
 6	29	1717603833535067947	include/moc_mainwindow.cpp	dbe62465b7bf59d1
+1	267	1717985669973808603	build.ninja	cb98f2598dd20696
 1032	1152	1717962337481469624	assignment4	3d6f4cd50f913efb
-30	1412	1717603834904615532	CMakeFiles/assignment4.dir/include/moc_mainwindow.cpp.o	abd505ed13fa17d6
-7	490	1717445653917285372	CMakeFiles/assignment4.dir/src/ball.cpp.o	af9ca8df6cef724b
-7	352	1717440955911892377	CMakeFiles/assignment4.dir/src/Polygon.c.o	4a3a7e278f020a8b
-30	304	1717187921349121364	CMakeFiles/assignment4.dir/src/Line.c.o	56c28011aedd3234
-29	1411	1717603834904616698	CMakeFiles/assignment4.dir/src/main.cpp.o	510c6e0cdedcd903
-30	655	1717187921695295754	CMakeFiles/assignment4.dir/src/anti-alias.cpp.o	c815ef7f920293eb
 324	414	1717182803652101966	assignment3	136ef6f6f88278dc

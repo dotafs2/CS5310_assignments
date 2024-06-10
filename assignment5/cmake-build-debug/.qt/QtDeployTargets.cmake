@@ -1,1 +1,1 @@
-set(__QT_DEPLOY_TARGET_assignment4_FILE /Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/assignment4)
+set(__QT_DEPLOY_TARGET_assignment5_FILE /Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/assignment5)

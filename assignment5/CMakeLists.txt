@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27)
-project(assignment4 C CXX)
+project(assignment5 C CXX)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 14)
@@ -19,11 +19,12 @@ set(SOURCE_FILES
         src/main.cpp
         include/mainwindow.h
         src/mainwindow.cpp
-       # test/test4a.c
-       # test/polyspeed.c
+        src/fsMath.c
+        include/fsMath.h
+
 )
 
-add_executable(assignment4 ${SOURCE_FILES})
+add_executable(assignment5 ${SOURCE_FILES})
 
 set_source_files_properties(
         src/anti-alias.cpp
@@ -36,6 +37,6 @@ set_source_files_properties(
 
 qt6_wrap_cpp(MOC_SOURCES include/mainwindow.h)
 
-target_sources(assignment4 PRIVATE ${MOC_SOURCES})
+target_sources(assignment5 PRIVATE ${MOC_SOURCES})
 
 target_link_libraries(${PROJECT_NAME} Qt6::Widgets)
