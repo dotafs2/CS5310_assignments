@@ -47,79 +47,56 @@ cmake_ninja_workdir = /Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake
 #############################################
 # Order-only phony target for assignment5
 
-build cmake_object_order_depends_target_assignment5: phony || include/moc_mainwindow.cpp
+build cmake_object_order_depends_target_assignment5: phony || CMakeFiles/assignment5.dir
 
 build CMakeFiles/assignment5.dir/src/Image.c.o: C_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Image.c || cmake_object_order_depends_target_assignment5
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles/assignment5.dir/src/Image.c.o.d
   FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include
   OBJECT_DIR = CMakeFiles/assignment5.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/src
 
 build CMakeFiles/assignment5.dir/src/Line.c.o: C_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Line.c || cmake_object_order_depends_target_assignment5
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles/assignment5.dir/src/Line.c.o.d
   FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include
   OBJECT_DIR = CMakeFiles/assignment5.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/src
 
 build CMakeFiles/assignment5.dir/src/anti-alias.cpp.o: CXX_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/src/anti-alias.cpp || cmake_object_order_depends_target_assignment5
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles/assignment5.dir/src/anti-alias.cpp.o.d
-  FLAGS = -x c++  -g -Wall -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
+  FLAGS = -x c++  -g -Wall -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include
   OBJECT_DIR = CMakeFiles/assignment5.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/src
 
 build CMakeFiles/assignment5.dir/src/ball.cpp.o: CXX_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/src/ball.cpp || cmake_object_order_depends_target_assignment5
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles/assignment5.dir/src/ball.cpp.o.d
-  FLAGS = -x c++  -g -Wall -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
+  FLAGS = -x c++  -g -Wall -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include
   OBJECT_DIR = CMakeFiles/assignment5.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/src
 
 build CMakeFiles/assignment5.dir/src/Polygon.c.o: C_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Polygon.c || cmake_object_order_depends_target_assignment5
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles/assignment5.dir/src/Polygon.c.o.d
   FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
-  OBJECT_DIR = CMakeFiles/assignment5.dir
-  OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/src
-
-build CMakeFiles/assignment5.dir/src/main.cpp.o: CXX_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/src/main.cpp || cmake_object_order_depends_target_assignment5
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles/assignment5.dir/src/main.cpp.o.d
-  FLAGS = -x c++  -g -Wall -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
-  OBJECT_DIR = CMakeFiles/assignment5.dir
-  OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/src
-
-build CMakeFiles/assignment5.dir/src/mainwindow.cpp.o: CXX_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/src/mainwindow.cpp || cmake_object_order_depends_target_assignment5
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles/assignment5.dir/src/mainwindow.cpp.o.d
-  FLAGS = -x c++  -g -Wall -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include
   OBJECT_DIR = CMakeFiles/assignment5.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/src
 
 build CMakeFiles/assignment5.dir/src/fsMath.c.o: C_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/src/fsMath.c || cmake_object_order_depends_target_assignment5
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles/assignment5.dir/src/fsMath.c.o.d
   FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include
   OBJECT_DIR = CMakeFiles/assignment5.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/src
 
-build CMakeFiles/assignment5.dir/include/moc_mainwindow.cpp.o: CXX_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/include/moc_mainwindow.cpp || cmake_object_order_depends_target_assignment5
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles/assignment5.dir/include/moc_mainwindow.cpp.o.d
-  FLAGS = -g -Wall -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
+build CMakeFiles/assignment5.dir/test/test5/test5b.c.o: C_COMPILER__assignment5_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/assignment5/test/test5/test5b.c || cmake_object_order_depends_target_assignment5
+  DEP_FILE = CMakeFiles/assignment5.dir/test/test5/test5b.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/assignment5/include
   OBJECT_DIR = CMakeFiles/assignment5.dir
-  OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/include
+  OBJECT_FILE_DIR = CMakeFiles/assignment5.dir/test/test5
 
 
 # =============================================================================
@@ -129,11 +106,9 @@ build CMakeFiles/assignment5.dir/include/moc_mainwindow.cpp.o: CXX_COMPILER__ass
 #############################################
 # Link the executable assignment5
 
-build assignment5: CXX_EXECUTABLE_LINKER__assignment5_Debug CMakeFiles/assignment5.dir/src/Image.c.o CMakeFiles/assignment5.dir/src/Line.c.o CMakeFiles/assignment5.dir/src/anti-alias.cpp.o CMakeFiles/assignment5.dir/src/ball.cpp.o CMakeFiles/assignment5.dir/src/Polygon.c.o CMakeFiles/assignment5.dir/src/main.cpp.o CMakeFiles/assignment5.dir/src/mainwindow.cpp.o CMakeFiles/assignment5.dir/src/fsMath.c.o CMakeFiles/assignment5.dir/include/moc_mainwindow.cpp.o | /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore
+build assignment5: CXX_EXECUTABLE_LINKER__assignment5_Debug CMakeFiles/assignment5.dir/src/Image.c.o CMakeFiles/assignment5.dir/src/Line.c.o CMakeFiles/assignment5.dir/src/anti-alias.cpp.o CMakeFiles/assignment5.dir/src/ball.cpp.o CMakeFiles/assignment5.dir/src/Polygon.c.o CMakeFiles/assignment5.dir/src/fsMath.c.o CMakeFiles/assignment5.dir/test/test5/test5b.c.o
   FLAGS = -g -Wall -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk
   LINK_FLAGS = -L/opt/homebrew/opt/qt/lib
-  LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets  /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui  /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore  -framework IOKit  -framework DiskArbitration  -Xlinker -framework -Xlinker OpenGL  -Xlinker -framework -Xlinker AGL  -framework AppKit  -framework ImageIO  -framework Metal
-  LINK_PATH = -iframework /opt/homebrew/lib
   OBJECT_DIR = CMakeFiles/assignment5.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -162,15 +137,6 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   restat = 1
 
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
-
-
-#############################################
-# Custom command for include/moc_mainwindow.cpp
-
-build include/moc_mainwindow.cpp | ${cmake_ninja_workdir}include/moc_mainwindow.cpp: CUSTOM_COMMAND /Users/dotafs/Desktop/CS5310_assignments/assignment5/include/mainwindow.h
-  COMMAND = cd /Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/include && /opt/homebrew/opt/qt/share/qt/libexec/moc @/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/include/moc_mainwindow.cpp_parameters
-  DESC = Generating include/moc_mainwindow.cpp
-  restat = 1
 
 # =============================================================================
 # Target aliases.

@@ -8,7 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "graphics.h"
+#include "fsMath.h"
+#include "Polygon.h"
 
 
 int main(int argc, char *argv[]) {

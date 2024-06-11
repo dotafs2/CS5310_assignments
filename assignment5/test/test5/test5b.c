@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "graphics.h"
+#include "fsMath.h"
 
 void setWhite( Image *src );
 void setWhite( Image *src ) {

@@ -14,9 +14,10 @@
 extern "C" {
 #endif
 
-// Vector structure
+
+
 typedef struct {
-    float val[3];  // three element vector of floats
+    double val[4];
 } Vector;
 
 // Polygon structure

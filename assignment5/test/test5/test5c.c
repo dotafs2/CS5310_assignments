@@ -7,8 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "graphics.h"
-
+#include "fsMath.h"
+#include "Polygon.h"
+#include "Line.h"
 
 int main(int argc, char *argv[]) {
   const int rows = 180;
@@ -123,7 +124,7 @@ int main(int argc, char *argv[]) {
     // normalize by homogeneous coordinate before drawing
     polygon_normalize( &tpoly );
 
-    polygon_drawFrame( &tpoly, src, color[i] );
+  //  polygon_drawFrame( &tpoly, src, color[i] );
     polygon_print( &tpoly, stdout );
   }
 

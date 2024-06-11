@@ -16,11 +16,12 @@ set(SOURCE_FILES
         src/ball.cpp
         src/Polygon.c
         include/Polygon.h
-        src/main.cpp
-        include/mainwindow.h
-        src/mainwindow.cpp
+  #      src/main.cpp
+#        include/mainwindow.h
+#        src/mainwindow.cpp
         src/fsMath.c
         include/fsMath.h
+        test/test5/test5b.c
 
 )
 
@@ -29,14 +30,14 @@ add_executable(assignment5 ${SOURCE_FILES})
 set_source_files_properties(
         src/anti-alias.cpp
         src/ball.cpp
-        src/main.cpp
-       src/mainwindow.cpp
+       # src/main.cpp
+      # src/mainwindow.cpp
         PROPERTIES
         LANGUAGE CXX
 )
 
-qt6_wrap_cpp(MOC_SOURCES include/mainwindow.h)
+# qt6_wrap_cpp(MOC_SOURCES include/mainwindow.h)
 
 target_sources(assignment5 PRIVATE ${MOC_SOURCES})
 
-target_link_libraries(${PROJECT_NAME} Qt6::Widgets)
+# target_link_libraries(${PROJECT_NAME} Qt6::Widgets)

@@ -7,8 +7,8 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include "graphics.h"
+#include "fsMath.h"
+#include "math.h"
 
 /*
   Program to test matrix library functionality
