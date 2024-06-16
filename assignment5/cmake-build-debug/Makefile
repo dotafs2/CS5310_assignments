@@ -312,53 +312,29 @@ src/fsMath.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/fsMath.c.s
 .PHONY : src/fsMath.c.s
 
-src/main.obj: src/main.cpp.obj
-.PHONY : src/main.obj
+test/test5/test5c.obj: test/test5/test5c.c.obj
+.PHONY : test/test5/test5c.obj
 
 # target to build an object file
-src/main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/main.cpp.obj
-.PHONY : src/main.cpp.obj
+test/test5/test5c.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/test/test5/test5c.c.obj
+.PHONY : test/test5/test5c.c.obj
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
-
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
-
-src/mainWindow.obj: src/mainWindow.cpp.obj
-.PHONY : src/mainWindow.obj
-
-# target to build an object file
-src/mainWindow.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj
-.PHONY : src/mainWindow.cpp.obj
-
-src/mainWindow.i: src/mainWindow.cpp.i
-.PHONY : src/mainWindow.i
+test/test5/test5c.i: test/test5/test5c.c.i
+.PHONY : test/test5/test5c.i
 
 # target to preprocess a source file
-src/mainWindow.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/mainWindow.cpp.i
-.PHONY : src/mainWindow.cpp.i
+test/test5/test5c.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/test/test5/test5c.c.i
+.PHONY : test/test5/test5c.c.i
 
-src/mainWindow.s: src/mainWindow.cpp.s
-.PHONY : src/mainWindow.s
+test/test5/test5c.s: test/test5/test5c.c.s
+.PHONY : test/test5/test5c.s
 
 # target to generate assembly for a file
-src/mainWindow.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/mainWindow.cpp.s
-.PHONY : src/mainWindow.cpp.s
+test/test5/test5c.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/test/test5/test5c.c.s
+.PHONY : test/test5/test5c.c.s
 
 # Help Target
 help:
@@ -391,12 +367,9 @@ help:
 	@echo ... src/fsMath.obj
 	@echo ... src/fsMath.i
 	@echo ... src/fsMath.s
-	@echo ... src/main.obj
-	@echo ... src/main.i
-	@echo ... src/main.s
-	@echo ... src/mainWindow.obj
-	@echo ... src/mainWindow.i
-	@echo ... src/mainWindow.s
+	@echo ... test/test5/test5c.obj
+	@echo ... test/test5/test5c.i
+	@echo ... test/test5/test5c.s
 .PHONY : help
 
 

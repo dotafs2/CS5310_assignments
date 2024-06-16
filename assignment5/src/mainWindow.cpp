@@ -95,7 +95,29 @@ void MainWindow::updateImage(Image* src) {
 }
 
 void MainWindow::draw() {
+    srand(0x01234ABCD);
     static int frame = 0;
+    // Generate random lines in the [0,1] square
+    for (i = 0; i < nLines; i++) {
+        line_set2D(&(line[i]), drand(), drand(), drand(), drand());
+        orient[i] = drand() * M_PI * 2;
+        freq[i] = 0.25 * drand();
+        color_set(&(color[i]), drand(), drand(), drand());
+        printf("Initial Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
+               i, line[i].a.val[0], line[i].a.val[1], line[i].b.val[0], line[i].b.val[1]);
+    }
+
+    // Set up a view centered on (1.5, 1.5) with x pointing right
+    point_set2D(&(view.vrp), 1.8, 1.8);
+    view.dx = 1.0;
+    vector_set(&(view.x), 1.0, 0.0, 0.0);
+    view.screenx = cols;
+    view.screeny = rows;
+
+    matrix_setView2D(&vtm, &view);
+    printf("vtm:\n");
+    matrix_print(&vtm, stdout);
+   // drawBall();
     test5b(frame);
     applyAntiAliasing();
     updateImage(src);
@@ -173,76 +195,41 @@ double MainWindow::drand() {
 }
 
 void MainWindow::test5b(int frame) {
-    const int nLines = 50;
-    const int rows = src->rows;
-    const int cols = src->cols;
-    View2D view;
-    Matrix vtm;
-    Matrix ltm;
-    Line line[nLines];
-    Line tline;
-    float orient[nLines];
-    float freq[nLines];
-    Color color[nLines];
-    int i;
 
-    srand(0x01234ABCD);
+    setWhite(src);
 
-    // make a bunch of random lines in the [0,1] square
-    for(i=0;i<nLines;i++) {
-        line_set2D( &(line[i]), drand(), drand(), drand(), drand() );
-        orient[i] = drand()*M_PI*2;
-        freq[i] = 0.25 * drand();
-        color_set( &(color[i]), drand(), drand(), drand() );
+    // Rotate the lines about one end
+    for (i = 0; i < nLines; i++) {
+        float angle = orient[i] + freq[i] * 2 * M_PI * frame / 50;
+        tline = line[i];
+        printf("Original Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
+               i, line[i].a.val[0], line[i].a.val[1], line[i].b.val[0], line[i].b.val[1]);
+
+        matrix_identity(&ltm);
+        matrix_translate2D(&ltm, -tline.a.val[0], -tline.a.val[1]);
+        matrix_rotateZ(&ltm, cos(angle), sin(angle));
+        matrix_translate2D(&ltm, tline.a.val[0], tline.a.val[1]);
+        printf("ltm:\n");
+        matrix_print(&ltm, stdout);
+
+        matrix_xformLine(&ltm, &tline);
+        printf("Transformed Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
+               i, tline.a.val[0], tline.a.val[1], tline.b.val[0], tline.b.val[1]);
+        matrix_xformLine(&vtm, &tline);
+        printf("View Transformed Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
+               i, tline.a.val[0], tline.a.val[1], tline.b.val[0], tline.b.val[1]);
+
+        line_draw(&tline, src, color[i]);
     }
 
-    // set up a view centered on (1.5, 1.5) with x pointing right
-    point_set2D( &(view.vrp), 1.8, 1.8 );
-    view.dx = 1.0;
-    vector_set( &(view.x), 1.0, 0.0, 0.0 );
-    view.screenx = cols;
-    view.screeny = rows;
+    printf("Writing file\n");
+    // sprintf(filename, "frame-%04d.ppm", frame);
+    // image_write(src, filename);
 
-    matrix_setView2D( &vtm, &view );
-    printf("vtm:\n");
+    // Translate the view across the scene
+    point_set2D(&(view.vrp), 1.8 - 2.4 * (frame + 1) / 50, 1.8 - 2.4 * (frame + 1) / 50);
+    matrix_setView2D(&vtm, &view);
     matrix_print(&vtm, stdout);
-
-
-        setWhite( src );
-
-        // rotate the lines about one end
-        for(i=0;i<nLines;i++) {
-            float angle = orient[i] + freq[i]*2*M_PI*frame/50;
-            tline = line[i];
-            printf("line (%.2f %.2f) (%.2f %.2f)\n", line[i].a.val[0], line[i].a.val[1],
-                   line[i].b.val[0], line[i].b.val[1] );
-
-            matrix_identity( &ltm );
-            matrix_translate2D( &ltm, -tline.a.val[0], -tline.a.val[1] );
-            matrix_rotateZ( &ltm, cos(angle), sin(angle) );
-            matrix_translate2D( &ltm, tline.a.val[0], tline.a.val[1] );
-            matrix_print(&ltm, stdout);
-
-            matrix_xformLine( &ltm, &tline );
-            printf("line (%.2f %.2f) (%.2f %.2f)\n", tline.a.val[0], tline.a.val[1],
-                   tline.b.val[0], tline.b.val[1] );
-            matrix_xformLine( &vtm, &tline );
-            printf("line (%.2f %.2f) (%.2f %.2f)\n", tline.a.val[0], tline.a.val[1],
-                   tline.b.val[0], tline.b.val[1] );
-
-            line_draw( &tline, src, color[i] );
-        }
-
-        printf("writing file\n");
-        sprintf(filename, "frame-%04d.ppm", frame );
-        image_write( src, filename );
-
-        // translate the view across the scene
-        point_set2D( &(view.vrp), 1.8 - 2.4*(frame+1)/50, 1.8 - 2.4*(frame+1)/50 );
-        matrix_setView2D( &vtm, &view );
-        matrix_print( &vtm, stdout );
-
-
 }
 
 

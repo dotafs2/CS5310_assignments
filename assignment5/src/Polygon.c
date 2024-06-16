@@ -7,6 +7,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
 // Function to create an empty Polygon
 Polygon *polygon_create() {
     Polygon *p = (Polygon *)malloc(sizeof(Polygon));
@@ -122,10 +123,32 @@ void polygon_zBuffer(Polygon *p, int flag) {
 // Function to copy one Polygon to another
 void polygon_copy(Polygon *to, Polygon *from) {
     if (!to || !from) return;
-    polygon_clear(to);
-    polygon_set(to, from->numVertex, from->vertex);
-    polygon_setColors(to, from->numVertex, from->color);
-    polygon_setNormals(to, from->numVertex, from->normal);
+
+    // Free existing memory in destination polygon
+    if (to->vertex) free(to->vertex);
+    if (to->color) free(to->color);
+    if (to->normal) free(to->normal);
+
+    // Allocate new memory and copy the data
+    to->vertex = (Point *)malloc(from->numVertex * sizeof(Point));
+    if (!to->vertex) return;
+    memcpy(to->vertex, from->vertex, from->numVertex * sizeof(Point));
+
+    to->color = (Color *)malloc(from->numVertex * sizeof(Color));
+    if (from->color && to->color) {
+        memcpy(to->color, from->color, from->numVertex * sizeof(Color));
+    } else {
+        to->color = NULL;
+    }
+
+    to->normal = (Vector *)malloc(from->numVertex * sizeof(Vector));
+    if (from->normal && to->normal) {
+        memcpy(to->normal, from->normal, from->numVertex * sizeof(Vector));
+    } else {
+        to->normal = NULL;
+    }
+
+    to->numVertex = from->numVertex;
     to->zBuffer = from->zBuffer;
     to->oneSided = from->oneSided;
 }
@@ -146,7 +169,6 @@ void polygon_normalize(Polygon *p) {
         point_normalize(&p->vertex[i]);
     }
 }
-
 
 // 辅助函数：计算两点之间的斜率
 float edge_slope(Point a, Point b) {
@@ -210,6 +232,17 @@ void polygon_drawFill(Polygon *p, Image *src, Color c) {
         for (int i = 0; i < numIntersections; i += 2) {
             draw_horizontal_line(src, y, intersections[i], intersections[i + 1], c);
         }
+    }
+}
+
+void polygon_draw(Polygon *p, Image *src, Color c) {
+    if (!p || !src || p->numVertex < 2) return;
+
+    Line line;
+    for (int i = 0; i < p->numVertex; i++) {
+        int next = (i + 1) % p->numVertex;
+        line_set(&line, p->vertex[i], p->vertex[next]);
+        line_draw(&line, src, c);
     }
 }
 

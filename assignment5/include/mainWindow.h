@@ -43,12 +43,26 @@ private:
     void applyAntiAliasing();
     void drawBall();
     void test5b(int frame);
-    void setWhite( Image *src);
+    void setWhite(Image *src);
     double drand();
 
 private slots:
     void toggleAntiAliasing();
     void onAntiAliasingMethodChanged(int index);
+
+private:
+    const int nLines = 50;
+    const int rows = 800; // Set these to appropriate values
+    const int cols = 1600; // Set these to appropriate values
+    View2D view;
+    Matrix vtm;
+    Matrix ltm;
+    Line line[50];
+    Line tline;
+    float orient[50];
+    float freq[50];
+    Color color[50];
+    int i;
 };
 
 #endif // MAINWINDOW_H

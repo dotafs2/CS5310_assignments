@@ -250,30 +250,12 @@
 			"MU",
 			"6YEA5652QU/moc_fsMath.cpp",
 			null
-		],
-		[
-			"C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment5/include/mainWindow.h",
-			"MU",
-			"6YEA5652QU/moc_mainWindow.cpp",
-			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment5/cmake-build-debug/assignment5_autogen/include",
 	"MOC_COMPILATION_FILE" : "C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment5/cmake-build-debug/assignment5_autogen/mocs_compilation.cpp",
-	"MOC_DEFINITIONS" : 
-	[
-		"MINGW_HAS_SECURE_API=1",
-		"QT_CORE_LIB",
-		"QT_GUI_LIB",
-		"QT_WIDGETS_LIB",
-		"UNICODE",
-		"WIN32",
-		"WIN64",
-		"_ENABLE_EXTENDED_ALIGNED_STORAGE",
-		"_UNICODE",
-		"_WIN64"
-	],
+	"MOC_DEFINITIONS" : [],
 	"MOC_DEPEND_FILTERS" : 
 	[
 		[
@@ -284,11 +266,6 @@
 	"MOC_INCLUDES" : 
 	[
 		"C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment5/include",
-		"C:/Qt/6.7.1/mingw_64/include/QtCore",
-		"C:/Qt/6.7.1/mingw_64/include",
-		"C:/Qt/6.7.1/mingw_64/mkspecs/win32-g++",
-		"C:/Qt/6.7.1/mingw_64/include/QtWidgets",
-		"C:/Qt/6.7.1/mingw_64/include/QtGui",
 		"C:/Program Files/JetBrains/CLion 2023.3.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++",
 		"C:/Program Files/JetBrains/CLion 2023.3.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32",
 		"C:/Program Files/JetBrains/CLion 2023.3.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward",
@@ -361,12 +338,7 @@
 			null
 		],
 		[
-			"C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment5/src/main.cpp",
-			"MU",
-			null
-		],
-		[
-			"C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment5/src/mainWindow.cpp",
+			"C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment5/test/test5/test5c.c",
 			"MU",
 			null
 		]
