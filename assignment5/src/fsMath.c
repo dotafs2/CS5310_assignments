@@ -1,6 +1,10 @@
 #include "fsMath.h"
 #include <math.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void vector_set(Vector *v, double x, double y, double z) {
     v->val[0] = x;
     v->val[1] = y;
@@ -245,27 +249,27 @@ void matrix_perspective(Matrix *m, double d) {
 
 // Function to set the VTM to the view specified by the View2D structure
 void matrix_setView2D(Matrix *vtm, View2D *view) {
-    double dv = view->du * view->R / view->C;
+    double dv = view->dx * view->screeny / view->screenx;
 
     // Step 1: Translate view center to origin
     Matrix translate;
     matrix_identity(&translate);
-    matrix_translate2D(&translate, -view->V0.val[0], -view->V0.val[1]);
+    matrix_translate2D(&translate, -view->vrp.val[0], -view->vrp.val[1]);
 
     // Step 2: Rotate view orientation to align with x-axis
     Matrix rotate;
     matrix_identity(&rotate);
-    matrix_rotateZ(&rotate, view->nx, -view->ny);
+    matrix_rotateZ(&rotate, view->x.val[0], view->x.val[1]);
 
     // Step 3: Scale view to fit into output image dimensions
     Matrix scale;
     matrix_identity(&scale);
-    matrix_scale2D(&scale, view->C / view->du, -view->R / dv);
+    matrix_scale2D(&scale, view->screenx / view->dx, -view->screeny / dv);
 
     // Step 4: Translate to center of output image
     Matrix translate2;
     matrix_identity(&translate2);
-    matrix_translate2D(&translate2, view->C / 2.0, view->R / 2.0);
+    matrix_translate2D(&translate2, view->screenx / 2.0, view->screeny / 2.0);
 
     // Multiply matrices in the correct order
     matrix_multiply(&translate2, &scale, vtm);
@@ -323,3 +327,8 @@ void matrix_setView3D(Matrix *vtm, View3D *view) {
     matrix_translate(&translate2, view->screenx / 2.0, view->screeny / 2.0, 0);
     matrix_multiply(&translate2, vtm, vtm);
 }
+
+
+#ifdef __cplusplus
+}
+#endif

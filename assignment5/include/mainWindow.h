@@ -16,6 +16,7 @@
 #include "ball.h"
 #include "anti-alias.h"
 #include "Image.h"
+#include "fsMath.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -41,6 +42,9 @@ private:
     void draw();
     void applyAntiAliasing();
     void drawBall();
+    void test5b(int frame);
+    void setWhite( Image *src);
+    double drand();
 
 private slots:
     void toggleAntiAliasing();
