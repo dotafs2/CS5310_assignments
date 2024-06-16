@@ -29,23 +29,23 @@ set(SOURCE_FILES
         include/Polygon.h
         src/fsMath.c
         include/fsMath.h
-#        src/main.cpp
-#        include/mainwindow.h
-#        src/mainwindow.cpp
-       # test/test5/test5b.c
-        test/test5/test5c.c
+        src/main.cpp
+        include/mainwindow.h
+        src/mainwindow.cpp
+#        test/test5/test5b.c
+#        test/test5/test5c.c
 )
 
 add_executable(assignment5 ${SOURCE_FILES})
 
 set_source_files_properties(
-#        src/anti-alias.cpp
-#        src/ball.cpp
-#        src/main.cpp
-#        src/mainwindow.cpp
+        src/anti-alias.cpp
+        src/ball.cpp
+        src/main.cpp
+        src/mainwindow.cpp
         PROPERTIES
         LANGUAGE CXX
 )
 
 # Link Qt6 Widgets library
-# target_link_libraries(assignment5 Qt6::Core Qt6::Widgets)
+target_link_libraries(assignment5 Qt6::Core Qt6::Widgets)

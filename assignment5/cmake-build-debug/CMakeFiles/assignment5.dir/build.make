@@ -121,30 +121,30 @@ CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj: CMakeFiles/assignment5.dir/in
 CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj: C:/Users/Chenxi\ Qu/Desktop/git/CS5310_assignments/assignment5/src/anti-alias.cpp
 CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj: CMakeFiles/assignment5.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj -MF CMakeFiles\assignment5.dir\src\anti-alias.cpp.obj.d -o CMakeFiles\assignment5.dir\src\anti-alias.cpp.obj -c "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\anti-alias.cpp"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -MD -MT CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj -MF CMakeFiles\assignment5.dir\src\anti-alias.cpp.obj.d -o CMakeFiles\assignment5.dir\src\anti-alias.cpp.obj -c "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\anti-alias.cpp"
 
 CMakeFiles/assignment5.dir/src/anti-alias.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/assignment5.dir/src/anti-alias.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\anti-alias.cpp" > CMakeFiles\assignment5.dir\src\anti-alias.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -E "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\anti-alias.cpp" > CMakeFiles\assignment5.dir\src\anti-alias.cpp.i
 
 CMakeFiles/assignment5.dir/src/anti-alias.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/assignment5.dir/src/anti-alias.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\anti-alias.cpp" -o CMakeFiles\assignment5.dir\src\anti-alias.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -S "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\anti-alias.cpp" -o CMakeFiles\assignment5.dir\src\anti-alias.cpp.s
 
 CMakeFiles/assignment5.dir/src/ball.cpp.obj: CMakeFiles/assignment5.dir/flags.make
 CMakeFiles/assignment5.dir/src/ball.cpp.obj: CMakeFiles/assignment5.dir/includes_CXX.rsp
 CMakeFiles/assignment5.dir/src/ball.cpp.obj: C:/Users/Chenxi\ Qu/Desktop/git/CS5310_assignments/assignment5/src/ball.cpp
 CMakeFiles/assignment5.dir/src/ball.cpp.obj: CMakeFiles/assignment5.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/assignment5.dir/src/ball.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/assignment5.dir/src/ball.cpp.obj -MF CMakeFiles\assignment5.dir\src\ball.cpp.obj.d -o CMakeFiles\assignment5.dir\src\ball.cpp.obj -c "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\ball.cpp"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -MD -MT CMakeFiles/assignment5.dir/src/ball.cpp.obj -MF CMakeFiles\assignment5.dir\src\ball.cpp.obj.d -o CMakeFiles\assignment5.dir\src\ball.cpp.obj -c "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\ball.cpp"
 
 CMakeFiles/assignment5.dir/src/ball.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/assignment5.dir/src/ball.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\ball.cpp" > CMakeFiles\assignment5.dir\src\ball.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -E "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\ball.cpp" > CMakeFiles\assignment5.dir\src\ball.cpp.i
 
 CMakeFiles/assignment5.dir/src/ball.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/assignment5.dir/src/ball.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\ball.cpp" -o CMakeFiles\assignment5.dir\src\ball.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -S "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\ball.cpp" -o CMakeFiles\assignment5.dir\src\ball.cpp.s
 
 CMakeFiles/assignment5.dir/src/Polygon.c.obj: CMakeFiles/assignment5.dir/flags.make
 CMakeFiles/assignment5.dir/src/Polygon.c.obj: CMakeFiles/assignment5.dir/includes_C.rsp
@@ -176,20 +176,35 @@ CMakeFiles/assignment5.dir/src/fsMath.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/assignment5.dir/src/fsMath.c.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\fsMath.c" -o CMakeFiles\assignment5.dir\src\fsMath.c.s
 
-CMakeFiles/assignment5.dir/test/test5/test5c.c.obj: CMakeFiles/assignment5.dir/flags.make
-CMakeFiles/assignment5.dir/test/test5/test5c.c.obj: CMakeFiles/assignment5.dir/includes_C.rsp
-CMakeFiles/assignment5.dir/test/test5/test5c.c.obj: C:/Users/Chenxi\ Qu/Desktop/git/CS5310_assignments/assignment5/test/test5/test5c.c
-CMakeFiles/assignment5.dir/test/test5/test5c.c.obj: CMakeFiles/assignment5.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/assignment5.dir/test/test5/test5c.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/assignment5.dir/test/test5/test5c.c.obj -MF CMakeFiles\assignment5.dir\test\test5\test5c.c.obj.d -o CMakeFiles\assignment5.dir\test\test5\test5c.c.obj -c "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\test\test5\test5c.c"
+CMakeFiles/assignment5.dir/src/main.cpp.obj: CMakeFiles/assignment5.dir/flags.make
+CMakeFiles/assignment5.dir/src/main.cpp.obj: CMakeFiles/assignment5.dir/includes_CXX.rsp
+CMakeFiles/assignment5.dir/src/main.cpp.obj: C:/Users/Chenxi\ Qu/Desktop/git/CS5310_assignments/assignment5/src/main.cpp
+CMakeFiles/assignment5.dir/src/main.cpp.obj: CMakeFiles/assignment5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/assignment5.dir/src/main.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -MD -MT CMakeFiles/assignment5.dir/src/main.cpp.obj -MF CMakeFiles\assignment5.dir\src\main.cpp.obj.d -o CMakeFiles\assignment5.dir\src\main.cpp.obj -c "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\main.cpp"
 
-CMakeFiles/assignment5.dir/test/test5/test5c.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/assignment5.dir/test/test5/test5c.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\test\test5\test5c.c" > CMakeFiles\assignment5.dir\test\test5\test5c.c.i
+CMakeFiles/assignment5.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/assignment5.dir/src/main.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -E "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\main.cpp" > CMakeFiles\assignment5.dir\src\main.cpp.i
 
-CMakeFiles/assignment5.dir/test/test5/test5c.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/assignment5.dir/test/test5/test5c.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\test\test5\test5c.c" -o CMakeFiles\assignment5.dir\test\test5\test5c.c.s
+CMakeFiles/assignment5.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/assignment5.dir/src/main.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -S "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\main.cpp" -o CMakeFiles\assignment5.dir\src\main.cpp.s
+
+CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj: CMakeFiles/assignment5.dir/flags.make
+CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj: CMakeFiles/assignment5.dir/includes_CXX.rsp
+CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj: C:/Users/Chenxi\ Qu/Desktop/git/CS5310_assignments/assignment5/src/mainWindow.cpp
+CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj: CMakeFiles/assignment5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -MD -MT CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj -MF CMakeFiles\assignment5.dir\src\mainWindow.cpp.obj.d -o CMakeFiles\assignment5.dir\src\mainWindow.cpp.obj -c "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\mainWindow.cpp"
+
+CMakeFiles/assignment5.dir/src/mainWindow.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/assignment5.dir/src/mainWindow.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -E "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\mainWindow.cpp" > CMakeFiles\assignment5.dir\src\mainWindow.cpp.i
+
+CMakeFiles/assignment5.dir/src/mainWindow.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/assignment5.dir/src/mainWindow.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -S "C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\src\mainWindow.cpp" -o CMakeFiles\assignment5.dir\src\mainWindow.cpp.s
 
 # Object files for target assignment5
 assignment5_OBJECTS = \
@@ -200,7 +215,8 @@ assignment5_OBJECTS = \
 "CMakeFiles/assignment5.dir/src/ball.cpp.obj" \
 "CMakeFiles/assignment5.dir/src/Polygon.c.obj" \
 "CMakeFiles/assignment5.dir/src/fsMath.c.obj" \
-"CMakeFiles/assignment5.dir/test/test5/test5c.c.obj"
+"CMakeFiles/assignment5.dir/src/main.cpp.obj" \
+"CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj"
 
 # External object files for target assignment5
 assignment5_EXTERNAL_OBJECTS =
@@ -212,12 +228,16 @@ assignment5.exe: CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj
 assignment5.exe: CMakeFiles/assignment5.dir/src/ball.cpp.obj
 assignment5.exe: CMakeFiles/assignment5.dir/src/Polygon.c.obj
 assignment5.exe: CMakeFiles/assignment5.dir/src/fsMath.c.obj
-assignment5.exe: CMakeFiles/assignment5.dir/test/test5/test5c.c.obj
+assignment5.exe: CMakeFiles/assignment5.dir/src/main.cpp.obj
+assignment5.exe: CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj
 assignment5.exe: CMakeFiles/assignment5.dir/build.make
+assignment5.exe: C:/Qt/6.7.1/mingw_64/lib/libQt6Widgets.a
+assignment5.exe: C:/Qt/6.7.1/mingw_64/lib/libQt6Gui.a
+assignment5.exe: C:/Qt/6.7.1/mingw_64/lib/libQt6Core.a
 assignment5.exe: CMakeFiles/assignment5.dir/linkLibs.rsp
 assignment5.exe: CMakeFiles/assignment5.dir/objects1.rsp
 assignment5.exe: CMakeFiles/assignment5.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable assignment5.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\Chenxi Qu\Desktop\git\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable assignment5.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\assignment5.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

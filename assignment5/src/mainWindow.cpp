@@ -97,28 +97,29 @@ void MainWindow::updateImage(Image* src) {
 void MainWindow::draw() {
     srand(0x01234ABCD);
     static int frame = 0;
-    // Generate random lines in the [0,1] square
-    for (i = 0; i < nLines; i++) {
-        line_set2D(&(line[i]), drand(), drand(), drand(), drand());
-        orient[i] = drand() * M_PI * 2;
-        freq[i] = 0.25 * drand();
-        color_set(&(color[i]), drand(), drand(), drand());
-        printf("Initial Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
-               i, line[i].a.val[0], line[i].a.val[1], line[i].b.val[0], line[i].b.val[1]);
-    }
-
-    // Set up a view centered on (1.5, 1.5) with x pointing right
-    point_set2D(&(view.vrp), 1.8, 1.8);
-    view.dx = 1.0;
-    vector_set(&(view.x), 1.0, 0.0, 0.0);
-    view.screenx = cols;
-    view.screeny = rows;
-
-    matrix_setView2D(&vtm, &view);
-    printf("vtm:\n");
-    matrix_print(&vtm, stdout);
-   // drawBall();
-    test5b(frame);
+//    // Generate random lines in the [0,1] square
+//    for (i = 0; i < nLines; i++) {
+//        line_set2D(&(line[i]), drand(), drand(), drand(), drand());
+//        orient[i] = drand() * M_PI * 2;
+//        freq[i] = 0.25 * drand();
+//        color_set(&(color[i]), drand(), drand(), drand());
+//        printf("Initial Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
+//               i, line[i].a.val[0], line[i].a.val[1], line[i].b.val[0], line[i].b.val[1]);
+//    }
+//
+//    // Set up a view centered on (1.5, 1.5) with x pointing right
+//    point_set2D(&(view.vrp), 1.8, 1.8);
+//    view.dx = 1.0;
+//    vector_set(&(view.x), 1.0, 0.0, 0.0);
+//    view.screenx = cols;
+//    view.screeny = rows;
+//
+//    matrix_setView2D(&vtm, &view);
+//    printf("vtm:\n");
+//    matrix_print(&vtm, stdout);
+    drawBall();
+    // open it for use test5b
+  //  test5b(frame);
     applyAntiAliasing();
     updateImage(src);
     frame++;
