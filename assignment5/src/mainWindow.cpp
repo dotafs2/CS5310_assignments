@@ -1,6 +1,7 @@
-#include "mainWindow.h"
+#include "mainwindow.h"
 #include <QGraphicsPixmapItem>
 #include <random>
+
 QImage imageToQImage(Image *img) {
     QImage qImg(img->cols, img->rows, QImage::Format_RGB32);
     for (int y = 0; y < img->rows; ++y) {
@@ -78,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 启动定时器定期更新图像
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::draw);
-    timer->start(10);  // 10ms per draw call
+    timer->start(50); // 10ms per draw call
 
     // 初始化multiplier的状态
     stackedWidget->setCurrentIndex(antiAliasingMethodComboBox->currentIndex());
@@ -97,34 +98,16 @@ void MainWindow::updateImage(Image* src) {
 void MainWindow::draw() {
     srand(0x01234ABCD);
     static int frame = 0;
-//    // Generate random lines in the [0,1] square
-//    for (i = 0; i < nLines; i++) {
-//        line_set2D(&(line[i]), drand(), drand(), drand(), drand());
-//        orient[i] = drand() * M_PI * 2;
-//        freq[i] = 0.25 * drand();
-//        color_set(&(color[i]), drand(), drand(), drand());
-//        printf("Initial Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
-//               i, line[i].a.val[0], line[i].a.val[1], line[i].b.val[0], line[i].b.val[1]);
-//    }
-//
-//    // Set up a view centered on (1.5, 1.5) with x pointing right
-//    point_set2D(&(view.vrp), 1.8, 1.8);
-//    view.dx = 1.0;
-//    vector_set(&(view.x), 1.0, 0.0, 0.0);
-//    view.screenx = cols;
-//    view.screeny = rows;
-//
-//    matrix_setView2D(&vtm, &view);
-//    printf("vtm:\n");
-//    matrix_print(&vtm, stdout);
-    drawBall();
+    test5c(frame);
+// drawBall();
     // open it for use test5b
-  //  test5b(frame);
+    //  test5b(frame);
     applyAntiAliasing();
     updateImage(src);
     frame++;
-    if(frame >=50)
-           frame = 0;
+
+    if(frame >=500)
+        frame = 0;
 }
 
 void MainWindow::applyAntiAliasing() {
@@ -179,58 +162,108 @@ void MainWindow::drawBall() {
     draw_ball(src, 20, 20, center, scale, White, fill, time);
 }
 
-void MainWindow::setWhite( Image *src ) {
-    int i, j;
-    Color White;
+void MainWindow::test5c(int frame) {
+    const int rows = src->rows;
+    const int cols = src->cols;
+    const int numFrames = 500; // Number of frames for the animation
 
-    color_set(&White, 1.0, 1.0, 1.0);
+    static View3D view;
+    static Matrix vtm;
+    static Polygon side[6];
+    static Polygon tpoly;
+    static Point v[8];
+    static Color color[6];
+    static bool initialized = false;
 
-    for(i=0;i<src->rows;i++) {
-        for(j=0;j<src->cols;j++) {
-            image_setColor( src, i, j, White );
+    if (!initialized) {
+        // set some colors
+        color_set(&color[0], 0, 0, 1);
+        color_set(&color[1], 0, 1, 0);
+        color_set(&color[2], 1, 0, 0);
+        color_set(&color[3], 1, 0, 1);
+        color_set(&color[4], 0, 1, 1);
+        color_set(&color[5], 1, 1, 0);
+
+        // initialize polygons
+        for (int i = 0; i < 6; i++) {
+            polygon_init(&side[i]);
         }
+
+        // corners of a cube, centered at (0, 0, 0)
+        point_set(&v[0], -1, -1, -1, 1);
+        point_set(&v[1], 1, -1, -1, 1);
+        point_set(&v[2], 1, 1, -1, 1);
+        point_set(&v[3], -1, 1, -1, 1);
+        point_set(&v[4], -1, -1, 1, 1);
+        point_set(&v[5], 1, -1, 1, 1);
+        point_set(&v[6], 1, 1, 1, 1);
+        point_set(&v[7], -1, 1, 1, 1);
+
+        // front side
+        polygon_set(&side[0], 4, &(v[0]));
+
+        // back side
+        polygon_set(&side[1], 4, &(v[4]));
+
+        // top side
+        Point tv[4];
+        point_copy(&tv[0], &v[2]);
+        point_copy(&tv[1], &v[3]);
+        point_copy(&tv[2], &v[7]);
+        point_copy(&tv[3], &v[6]);
+        polygon_set(&side[2], 4, tv);
+
+        // bottom side
+        point_copy(&tv[0], &v[0]);
+        point_copy(&tv[1], &v[1]);
+        point_copy(&tv[2], &v[5]);
+        point_copy(&tv[3], &v[4]);
+        polygon_set(&side[3], 4, tv);
+
+        // left side
+        point_copy(&tv[0], &v[0]);
+        point_copy(&tv[1], &v[3]);
+        point_copy(&tv[2], &v[7]);
+        point_copy(&tv[3], &v[4]);
+        polygon_set(&side[4], 4, tv);
+
+        // right side
+        point_copy(&tv[0], &v[1]);
+        point_copy(&tv[1], &v[2]);
+        point_copy(&tv[2], &v[6]);
+        point_copy(&tv[3], &v[5]);
+        polygon_set(&side[5], 4, tv);
+
+        initialized = true;
+    }
+
+    // Create image
+    image_reset(src);
+
+    // Set the viewpoint based on the current frame
+    float alpha = (float)frame / (numFrames - 1);
+    point_set(&(view.vrp), 3 * cos(alpha * 2 * M_PI), 2, 3 * sin(alpha * 2 * M_PI), 1.0);
+    vector_set(&(view.vpn), -view.vrp.val[0], -view.vrp.val[1], -view.vrp.val[2]);
+    vector_set(&(view.vup), 0, 1, 0);
+
+    view.d = 1;  // focal length
+    view.du = 2;
+    view.dv = view.du * (float)rows / cols;
+    view.f = 0; // front clip plane
+    view.b = 4; // back clip plane
+    view.screenx = cols;
+    view.screeny = rows;
+
+    matrix_setView3D(&vtm, &view);
+
+    // use a temporary polygon to transform stuff
+    polygon_init(&tpoly);
+    for (int i = 0; i < 6; i++) {
+        polygon_copy(&tpoly, &side[i]);
+        matrix_xformPolygon(&vtm, &tpoly);
+
+        // normalize by homogeneous coordinate before drawing
+        polygon_normalize(&tpoly);
+        polygon_draw(&tpoly, src, color[i]);
     }
 }
-double MainWindow::drand() {
-    return (double)rand() / RAND_MAX;
-}
-
-void MainWindow::test5b(int frame) {
-
-    setWhite(src);
-
-    // Rotate the lines about one end
-    for (i = 0; i < nLines; i++) {
-        float angle = orient[i] + freq[i] * 2 * M_PI * frame / 50;
-        tline = line[i];
-        printf("Original Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
-               i, line[i].a.val[0], line[i].a.val[1], line[i].b.val[0], line[i].b.val[1]);
-
-        matrix_identity(&ltm);
-        matrix_translate2D(&ltm, -tline.a.val[0], -tline.a.val[1]);
-        matrix_rotateZ(&ltm, cos(angle), sin(angle));
-        matrix_translate2D(&ltm, tline.a.val[0], tline.a.val[1]);
-        printf("ltm:\n");
-        matrix_print(&ltm, stdout);
-
-        matrix_xformLine(&ltm, &tline);
-        printf("Transformed Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
-               i, tline.a.val[0], tline.a.val[1], tline.b.val[0], tline.b.val[1]);
-        matrix_xformLine(&vtm, &tline);
-        printf("View Transformed Line %d: (%.2f, %.2f) to (%.2f, %.2f)\n",
-               i, tline.a.val[0], tline.a.val[1], tline.b.val[0], tline.b.val[1]);
-
-        line_draw(&tline, src, color[i]);
-    }
-
-    printf("Writing file\n");
-    // sprintf(filename, "frame-%04d.ppm", frame);
-    // image_write(src, filename);
-
-    // Translate the view across the scene
-    point_set2D(&(view.vrp), 1.8 - 2.4 * (frame + 1) / 50, 1.8 - 2.4 * (frame + 1) / 50);
-    matrix_setView2D(&vtm, &view);
-    matrix_print(&vtm, stdout);
-}
-
-

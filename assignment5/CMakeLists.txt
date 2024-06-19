@@ -9,9 +9,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall")
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Set the CMAKE_PREFIX_PATH to help CMake locate Qt
-set(CMAKE_PREFIX_PATH "C:/Qt/6.7.1/mingw_64")
+ set(CMAKE_PREFIX_PATH "C:/Qt/6.7.1/mingw_64")
 
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
+ find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -29,10 +29,10 @@ set(SOURCE_FILES
         include/Polygon.h
         src/fsMath.c
         include/fsMath.h
-        src/main.cpp
         include/mainwindow.h
         src/mainwindow.cpp
-#        test/test5/test5b.c
+        src/main.cpp
+        #  test/test5/test5b.c
 #        test/test5/test5c.c
 )
 

@@ -1,7 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/assignment5_autogen.dir/AutogenUsed.txt"
-  "CMakeFiles/assignment5_autogen.dir/ParseCache.txt"
-  "assignment5_autogen"
   "CMakeFiles/assignment5.dir/assignment5_autogen/mocs_compilation.cpp.obj"
   "CMakeFiles/assignment5.dir/assignment5_autogen/mocs_compilation.cpp.obj.d"
   "CMakeFiles/assignment5.dir/src/Image.c.obj"
@@ -20,6 +17,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/assignment5.dir/src/main.cpp.obj.d"
   "CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj"
   "CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj.d"
+  "CMakeFiles/assignment5_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/assignment5_autogen.dir/ParseCache.txt"
+  "assignment5_autogen"
   "assignment5.exe"
   "assignment5.exe.manifest"
   "assignment5.pdb"
