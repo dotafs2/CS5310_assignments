@@ -229,6 +229,30 @@ src/Line.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/Line.c.s
 .PHONY : src/Line.c.s
 
+src/Module.obj: src/Module.c.obj
+.PHONY : src/Module.obj
+
+# target to build an object file
+src/Module.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/Module.c.obj
+.PHONY : src/Module.c.obj
+
+src/Module.i: src/Module.c.i
+.PHONY : src/Module.i
+
+# target to preprocess a source file
+src/Module.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/Module.c.i
+.PHONY : src/Module.c.i
+
+src/Module.s: src/Module.c.s
+.PHONY : src/Module.s
+
+# target to generate assembly for a file
+src/Module.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment5.dir\build.make CMakeFiles/assignment5.dir/src/Module.c.s
+.PHONY : src/Module.c.s
+
 src/Polygon.obj: src/Polygon.c.obj
 .PHONY : src/Polygon.obj
 
@@ -393,6 +417,9 @@ help:
 	@echo ... src/Line.obj
 	@echo ... src/Line.i
 	@echo ... src/Line.s
+	@echo ... src/Module.obj
+	@echo ... src/Module.i
+	@echo ... src/Module.s
 	@echo ... src/Polygon.obj
 	@echo ... src/Polygon.i
 	@echo ... src/Polygon.s

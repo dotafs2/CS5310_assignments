@@ -2,6 +2,7 @@
 F:/CS5310_assignments/assignment5/src/anti-alias.cpp
 F:/CS5310_assignments/assignment5/src/main.cpp
 F:/CS5310_assignments/assignment5/include/Line.h
+F:/CS5310_assignments/assignment5/src/Object.c
 F:/CS5310_assignments/assignment5/src/Image.c
 F:/CS5310_assignments/assignment5/include/Polygon.h
 F:/CS5310_assignments/assignment5/include/mainWindow.h
@@ -755,3 +756,7 @@ F:/CS5310_assignments/assignment5/mainwindowui.h
  mdp:F:/CS5310_assignments/assignment5/mainwindowui.h
 F:/CS5310_assignments/assignment5/mainwindowui.cpp
  uic:ui_mainWindowUI.h
+F:/CS5310_assignments/assignment5/include/Object.h
+F:/CS5310_assignments/assignment5/include/Module.h
+F:/CS5310_assignments/assignment5/src/Module.c
+F:/CS5310_assignments/assignment5/test/test6/test6a.c

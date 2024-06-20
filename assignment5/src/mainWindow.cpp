@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 启动定时器定期更新图像
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::draw);
-    timer->start(50); // 10ms per draw call
+    timer->start(20); // 10ms per draw call
 
     // 初始化multiplier的状态
     stackedWidget->setCurrentIndex(antiAliasingMethodComboBox->currentIndex());

@@ -148,6 +148,9 @@
 		<Unit filename="F:/CS5310_assignments/assignment5/include/Line.h">
 			<Option target="assignment5"/>
 		</Unit>
+		<Unit filename="F:/CS5310_assignments/assignment5/include/Module.h">
+			<Option target="assignment5"/>
+		</Unit>
 		<Unit filename="F:/CS5310_assignments/assignment5/include/Polygon.h">
 			<Option target="assignment5"/>
 		</Unit>
@@ -161,6 +164,9 @@
 			<Option target="assignment5"/>
 		</Unit>
 		<Unit filename="F:/CS5310_assignments/assignment5/src/Line.c">
+			<Option target="assignment5"/>
+		</Unit>
+		<Unit filename="F:/CS5310_assignments/assignment5/src/Module.c">
 			<Option target="assignment5"/>
 		</Unit>
 		<Unit filename="F:/CS5310_assignments/assignment5/src/Polygon.c">

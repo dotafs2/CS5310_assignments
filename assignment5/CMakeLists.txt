@@ -32,8 +32,10 @@ set(SOURCE_FILES
         include/mainwindow.h
         src/mainwindow.cpp
         src/main.cpp
+        include/Module.h
+        src/Module.c
         #  test/test5/test5b.c
-#        test/test5/test5c.c
+       # test/test6/test6a.c
 )
 
 add_executable(assignment5 ${SOURCE_FILES})

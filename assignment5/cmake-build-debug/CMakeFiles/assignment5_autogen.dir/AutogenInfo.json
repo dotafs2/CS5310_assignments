@@ -240,6 +240,12 @@
 			null
 		],
 		[
+			"F:/CS5310_assignments/assignment5/include/Module.h",
+			"MU",
+			"6YEA5652QU/moc_Module.cpp",
+			null
+		],
+		[
 			"F:/CS5310_assignments/assignment5/include/Polygon.h",
 			"MU",
 			"6YEA5652QU/moc_Polygon.cpp",
@@ -332,6 +338,7 @@
 	[
 		[ "F:/CS5310_assignments/assignment5/src/Image.c", "MU", null ],
 		[ "F:/CS5310_assignments/assignment5/src/Line.c", "MU", null ],
+		[ "F:/CS5310_assignments/assignment5/src/Module.c", "MU", null ],
 		[ "F:/CS5310_assignments/assignment5/src/Polygon.c", "MU", null ],
 		[ "F:/CS5310_assignments/assignment5/src/anti-alias.cpp", "MU", null ],
 		[ "F:/CS5310_assignments/assignment5/src/ball.cpp", "MU", null ],

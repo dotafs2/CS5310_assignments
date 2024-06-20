@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "F:/CS5310_assignments/assignment5/src/Image.c" "CMakeFiles/assignment5.dir/src/Image.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/Image.c.obj.d"
   "F:/CS5310_assignments/assignment5/src/Line.c" "CMakeFiles/assignment5.dir/src/Line.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/Line.c.obj.d"
+  "F:/CS5310_assignments/assignment5/src/Module.c" "CMakeFiles/assignment5.dir/src/Module.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/Module.c.obj.d"
   "F:/CS5310_assignments/assignment5/src/Polygon.c" "CMakeFiles/assignment5.dir/src/Polygon.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/Polygon.c.obj.d"
   "F:/CS5310_assignments/assignment5/src/fsMath.c" "CMakeFiles/assignment5.dir/src/fsMath.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/fsMath.c.obj.d"
   "F:/CS5310_assignments/assignment5/cmake-build-debug/assignment5_autogen/mocs_compilation.cpp" "CMakeFiles/assignment5.dir/assignment5_autogen/mocs_compilation.cpp.obj" "gcc" "CMakeFiles/assignment5.dir/assignment5_autogen/mocs_compilation.cpp.obj.d"

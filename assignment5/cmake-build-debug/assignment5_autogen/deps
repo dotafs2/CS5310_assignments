@@ -582,6 +582,7 @@ assignment5_autogen/timestamp: \
 	F:/CS5310_assignments/assignment5/cmake-build-debug/assignment5_autogen/moc_predefs.h \
 	F:/CS5310_assignments/assignment5/include/Image.h \
 	F:/CS5310_assignments/assignment5/include/Line.h \
+	F:/CS5310_assignments/assignment5/include/Module.h \
 	F:/CS5310_assignments/assignment5/include/Polygon.h \
 	F:/CS5310_assignments/assignment5/include/anti-alias.h \
 	F:/CS5310_assignments/assignment5/include/ball.h \
@@ -589,6 +590,7 @@ assignment5_autogen/timestamp: \
 	F:/CS5310_assignments/assignment5/include/mainWindow.h \
 	F:/CS5310_assignments/assignment5/src/Image.c \
 	F:/CS5310_assignments/assignment5/src/Line.c \
+	F:/CS5310_assignments/assignment5/src/Module.c \
 	F:/CS5310_assignments/assignment5/src/Polygon.c \
 	F:/CS5310_assignments/assignment5/src/anti-alias.cpp \
 	F:/CS5310_assignments/assignment5/src/ball.cpp \

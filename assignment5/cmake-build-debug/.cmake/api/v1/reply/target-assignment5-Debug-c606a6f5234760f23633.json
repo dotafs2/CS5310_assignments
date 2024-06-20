@@ -44,13 +44,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 39,
+				"line" : 41,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 51,
+				"line" : 53,
 				"parent" : 0
 			},
 			{
@@ -379,7 +379,8 @@
 				1,
 				2,
 				6,
-				8
+				8,
+				14
 			]
 		}
 	],
@@ -479,7 +480,8 @@
 				6,
 				8,
 				11,
-				12
+				12,
+				14
 			]
 		},
 		{
@@ -489,21 +491,22 @@
 				3,
 				7,
 				9,
-				10
+				10,
+				13
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				13
+				15
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				14
+				16
 			]
 		}
 	],
@@ -582,6 +585,17 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "include/Module.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "src/Module.c",
 			"sourceGroupIndex" : 0
 		},
 		{

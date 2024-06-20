@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/assignment5.dir/src/Image.c.obj.d"
   "CMakeFiles/assignment5.dir/src/Line.c.obj"
   "CMakeFiles/assignment5.dir/src/Line.c.obj.d"
+  "CMakeFiles/assignment5.dir/src/Module.c.obj"
+  "CMakeFiles/assignment5.dir/src/Module.c.obj.d"
   "CMakeFiles/assignment5.dir/src/Polygon.c.obj"
   "CMakeFiles/assignment5.dir/src/Polygon.c.obj.d"
   "CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj"
