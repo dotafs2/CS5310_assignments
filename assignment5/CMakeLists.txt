@@ -29,13 +29,13 @@ set(SOURCE_FILES
         include/Polygon.h
         src/fsMath.c
         include/fsMath.h
-        include/mainwindow.h
-        src/mainwindow.cpp
-        src/main.cpp
+       # include/mainwindow.h
+       #  src/mainwindow.cpp
+        # src/main.cpp
         include/Module.h
         src/Module.c
         #  test/test5/test5b.c
-       # test/test6/test6a.c
+        test/test6/test6a.c
 )
 
 add_executable(assignment5 ${SOURCE_FILES})
@@ -43,8 +43,8 @@ add_executable(assignment5 ${SOURCE_FILES})
 set_source_files_properties(
         src/anti-alias.cpp
         src/ball.cpp
-        src/main.cpp
-        src/mainwindow.cpp
+      #  src/main.cpp
+      # src/mainwindow.cpp
         PROPERTIES
         LANGUAGE CXX
 )

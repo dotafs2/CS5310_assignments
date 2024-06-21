@@ -157,9 +157,6 @@
 		<Unit filename="F:/CS5310_assignments/assignment5/include/fsMath.h">
 			<Option target="assignment5"/>
 		</Unit>
-		<Unit filename="F:/CS5310_assignments/assignment5/include/mainWindow.h">
-			<Option target="assignment5"/>
-		</Unit>
 		<Unit filename="F:/CS5310_assignments/assignment5/src/Image.c">
 			<Option target="assignment5"/>
 		</Unit>
@@ -181,10 +178,7 @@
 		<Unit filename="F:/CS5310_assignments/assignment5/src/fsMath.c">
 			<Option target="assignment5"/>
 		</Unit>
-		<Unit filename="F:/CS5310_assignments/assignment5/src/main.cpp">
-			<Option target="assignment5"/>
-		</Unit>
-		<Unit filename="F:/CS5310_assignments/assignment5/src/mainWindow.cpp">
+		<Unit filename="F:/CS5310_assignments/assignment5/test/test6/test6a.c">
 			<Option target="assignment5"/>
 		</Unit>
 		<Unit filename="F:/CS5310_assignments/assignment5/CMakeLists.txt">

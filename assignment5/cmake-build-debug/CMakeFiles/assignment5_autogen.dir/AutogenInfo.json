@@ -256,12 +256,6 @@
 			"MU",
 			"6YEA5652QU/moc_fsMath.cpp",
 			null
-		],
-		[
-			"F:/CS5310_assignments/assignment5/include/mainWindow.h",
-			"MU",
-			"6YEA5652QU/moc_mainWindow.cpp",
-			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -343,8 +337,7 @@
 		[ "F:/CS5310_assignments/assignment5/src/anti-alias.cpp", "MU", null ],
 		[ "F:/CS5310_assignments/assignment5/src/ball.cpp", "MU", null ],
 		[ "F:/CS5310_assignments/assignment5/src/fsMath.c", "MU", null ],
-		[ "F:/CS5310_assignments/assignment5/src/main.cpp", "MU", null ],
-		[ "F:/CS5310_assignments/assignment5/src/mainWindow.cpp", "MU", null ]
+		[ "F:/CS5310_assignments/assignment5/test/test6/test6a.c", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

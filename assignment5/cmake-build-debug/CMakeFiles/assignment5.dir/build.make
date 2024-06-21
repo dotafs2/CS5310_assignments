@@ -176,41 +176,11 @@ CMakeFiles/assignment5.dir/src/fsMath.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/assignment5.dir/src/fsMath.c.s"
 	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S F:\CS5310_assignments\assignment5\src\fsMath.c -o CMakeFiles\assignment5.dir\src\fsMath.c.s
 
-CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj: CMakeFiles/assignment5.dir/flags.make
-CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj: CMakeFiles/assignment5.dir/includes_CXX.rsp
-CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj: F:/CS5310_assignments/assignment5/src/mainWindow.cpp
-CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj: CMakeFiles/assignment5.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=F:\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj"
-	D:\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -MD -MT CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj -MF CMakeFiles\assignment5.dir\src\mainWindow.cpp.obj.d -o CMakeFiles\assignment5.dir\src\mainWindow.cpp.obj -c F:\CS5310_assignments\assignment5\src\mainWindow.cpp
-
-CMakeFiles/assignment5.dir/src/mainWindow.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/assignment5.dir/src/mainWindow.cpp.i"
-	D:\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -E F:\CS5310_assignments\assignment5\src\mainWindow.cpp > CMakeFiles\assignment5.dir\src\mainWindow.cpp.i
-
-CMakeFiles/assignment5.dir/src/mainWindow.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/assignment5.dir/src/mainWindow.cpp.s"
-	D:\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -S F:\CS5310_assignments\assignment5\src\mainWindow.cpp -o CMakeFiles\assignment5.dir\src\mainWindow.cpp.s
-
-CMakeFiles/assignment5.dir/src/main.cpp.obj: CMakeFiles/assignment5.dir/flags.make
-CMakeFiles/assignment5.dir/src/main.cpp.obj: CMakeFiles/assignment5.dir/includes_CXX.rsp
-CMakeFiles/assignment5.dir/src/main.cpp.obj: F:/CS5310_assignments/assignment5/src/main.cpp
-CMakeFiles/assignment5.dir/src/main.cpp.obj: CMakeFiles/assignment5.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=F:\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/assignment5.dir/src/main.cpp.obj"
-	D:\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -MD -MT CMakeFiles/assignment5.dir/src/main.cpp.obj -MF CMakeFiles\assignment5.dir\src\main.cpp.obj.d -o CMakeFiles\assignment5.dir\src\main.cpp.obj -c F:\CS5310_assignments\assignment5\src\main.cpp
-
-CMakeFiles/assignment5.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/assignment5.dir/src/main.cpp.i"
-	D:\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -E F:\CS5310_assignments\assignment5\src\main.cpp > CMakeFiles\assignment5.dir\src\main.cpp.i
-
-CMakeFiles/assignment5.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/assignment5.dir/src/main.cpp.s"
-	D:\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) -x c++ $(CXX_FLAGS) -S F:\CS5310_assignments\assignment5\src\main.cpp -o CMakeFiles\assignment5.dir\src\main.cpp.s
-
 CMakeFiles/assignment5.dir/src/Module.c.obj: CMakeFiles/assignment5.dir/flags.make
 CMakeFiles/assignment5.dir/src/Module.c.obj: CMakeFiles/assignment5.dir/includes_C.rsp
 CMakeFiles/assignment5.dir/src/Module.c.obj: F:/CS5310_assignments/assignment5/src/Module.c
 CMakeFiles/assignment5.dir/src/Module.c.obj: CMakeFiles/assignment5.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=F:\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/assignment5.dir/src/Module.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=F:\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/assignment5.dir/src/Module.c.obj"
 	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/assignment5.dir/src/Module.c.obj -MF CMakeFiles\assignment5.dir\src\Module.c.obj.d -o CMakeFiles\assignment5.dir\src\Module.c.obj -c F:\CS5310_assignments\assignment5\src\Module.c
 
 CMakeFiles/assignment5.dir/src/Module.c.i: cmake_force
@@ -221,6 +191,21 @@ CMakeFiles/assignment5.dir/src/Module.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/assignment5.dir/src/Module.c.s"
 	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S F:\CS5310_assignments\assignment5\src\Module.c -o CMakeFiles\assignment5.dir\src\Module.c.s
 
+CMakeFiles/assignment5.dir/test/test6/test6a.c.obj: CMakeFiles/assignment5.dir/flags.make
+CMakeFiles/assignment5.dir/test/test6/test6a.c.obj: CMakeFiles/assignment5.dir/includes_C.rsp
+CMakeFiles/assignment5.dir/test/test6/test6a.c.obj: F:/CS5310_assignments/assignment5/test/test6/test6a.c
+CMakeFiles/assignment5.dir/test/test6/test6a.c.obj: CMakeFiles/assignment5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=F:\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/assignment5.dir/test/test6/test6a.c.obj"
+	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/assignment5.dir/test/test6/test6a.c.obj -MF CMakeFiles\assignment5.dir\test\test6\test6a.c.obj.d -o CMakeFiles\assignment5.dir\test\test6\test6a.c.obj -c F:\CS5310_assignments\assignment5\test\test6\test6a.c
+
+CMakeFiles/assignment5.dir/test/test6/test6a.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/assignment5.dir/test/test6/test6a.c.i"
+	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E F:\CS5310_assignments\assignment5\test\test6\test6a.c > CMakeFiles\assignment5.dir\test\test6\test6a.c.i
+
+CMakeFiles/assignment5.dir/test/test6/test6a.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/assignment5.dir/test/test6/test6a.c.s"
+	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S F:\CS5310_assignments\assignment5\test\test6\test6a.c -o CMakeFiles\assignment5.dir\test\test6\test6a.c.s
+
 # Object files for target assignment5
 assignment5_OBJECTS = \
 "CMakeFiles/assignment5.dir/assignment5_autogen/mocs_compilation.cpp.obj" \
@@ -230,9 +215,8 @@ assignment5_OBJECTS = \
 "CMakeFiles/assignment5.dir/src/ball.cpp.obj" \
 "CMakeFiles/assignment5.dir/src/Polygon.c.obj" \
 "CMakeFiles/assignment5.dir/src/fsMath.c.obj" \
-"CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj" \
-"CMakeFiles/assignment5.dir/src/main.cpp.obj" \
-"CMakeFiles/assignment5.dir/src/Module.c.obj"
+"CMakeFiles/assignment5.dir/src/Module.c.obj" \
+"CMakeFiles/assignment5.dir/test/test6/test6a.c.obj"
 
 # External object files for target assignment5
 assignment5_EXTERNAL_OBJECTS =
@@ -244,9 +228,8 @@ assignment5.exe: CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj
 assignment5.exe: CMakeFiles/assignment5.dir/src/ball.cpp.obj
 assignment5.exe: CMakeFiles/assignment5.dir/src/Polygon.c.obj
 assignment5.exe: CMakeFiles/assignment5.dir/src/fsMath.c.obj
-assignment5.exe: CMakeFiles/assignment5.dir/src/mainWindow.cpp.obj
-assignment5.exe: CMakeFiles/assignment5.dir/src/main.cpp.obj
 assignment5.exe: CMakeFiles/assignment5.dir/src/Module.c.obj
+assignment5.exe: CMakeFiles/assignment5.dir/test/test6/test6a.c.obj
 assignment5.exe: CMakeFiles/assignment5.dir/build.make
 assignment5.exe: C:/Qt/6.7.1/mingw_64/lib/libQt6Widgets.a
 assignment5.exe: C:/Qt/6.7.1/mingw_64/lib/libQt6Gui.a
@@ -254,7 +237,7 @@ assignment5.exe: C:/Qt/6.7.1/mingw_64/lib/libQt6Core.a
 assignment5.exe: CMakeFiles/assignment5.dir/linkLibs.rsp
 assignment5.exe: CMakeFiles/assignment5.dir/objects1.rsp
 assignment5.exe: CMakeFiles/assignment5.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=F:\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable assignment5.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=F:\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable assignment5.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\assignment5.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

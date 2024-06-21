@@ -58,16 +58,19 @@ int main(int argc, char *argv[]) {
   DrawState *ds;
   Image *src;
 
-	srand48(42);
-
+  srand(42);
   // setup gtm
   matrix_identity( &gtm );
 
   // setup vtm
-  point_set2D( &vrp, 0, 0 );
-  vector_set( &xaxis, 1, 0, 0 );
-  view2D_set( &view, &vrp, 2, &xaxis, 640, 360 );
-  matrix_setView2D( &vtm, &view );
+    point_set2D(&vrp, 0, 0);
+    vector_set(&xaxis, 1, 0, 0);
+    view.vrp = vrp;
+    view.dx = 2;
+    view.x = xaxis;
+    view.screenx = 640;
+    view.screeny = 360;
+    matrix_setView2D(&vtm, &view);
 
   // create a body
   body = module_create();
@@ -155,7 +158,7 @@ int main(int argc, char *argv[]) {
 	// draw stars into the scene
   module_identity(scene);
   for(i=0;i<30;i++) {
-    point_set2D( &(p[0]), drand48()*2 - 1, drand48()*1 - 0.5 );
+    point_set2D( &(p[0]), rand()*2 - 1, rand()*1 - 0.5 );
     module_point( scene, &(p[0]) );
   }
 
