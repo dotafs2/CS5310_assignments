@@ -110,6 +110,7 @@ void matrix_xformPoint(Matrix *m, Point *p, Point *q) {
     }
 }
 
+
 void matrix_xformVector(Matrix *m, Vector *p, Vector *q) {
     for (int i = 0; i < 4; i++) {
         q->val[i] = 0;
@@ -149,7 +150,7 @@ void matrix_scale2D(Matrix *m, double sx, double sy) {
                      {0, 0, 1, 0},
                      {0, 0, 0, 1}}};
 
-    matrix_multiply(&scale, m, m);
+    matrix_multiply(&scale,m, m);
 }
 
 void matrix_rotateZ(Matrix *m, double cth, double sth) {
@@ -249,12 +250,14 @@ void matrix_perspective(Matrix *m, double d) {
 
 // Function to set the VTM to the view specified by the View2D structure
 void matrix_setView2D(Matrix *vtm, View2D *view) {
-    double dv = view->dx * view->screeny / view->screenx;
+
+    // The height of the view rectangle in world coordinates
+    double dy = view->dx * view->screeny / view->screenx;
 
     // Step 1: Translate view center to origin
-    Matrix translate;
-    matrix_identity(&translate);
-    matrix_translate2D(&translate, -view->vrp.val[0], -view->vrp.val[1]);
+    Matrix trans;
+    matrix_identity(&trans);
+    matrix_translate2D(&trans, -view->vrp.val[0], -view->vrp.val[1]);
 
     // Step 2: Rotate view orientation to align with x-axis
     Matrix rotate;
@@ -264,17 +267,17 @@ void matrix_setView2D(Matrix *vtm, View2D *view) {
     // Step 3: Scale view to fit into output image dimensions
     Matrix scale;
     matrix_identity(&scale);
-    matrix_scale2D(&scale, view->screenx / view->dx, -view->screeny / dv);
+    matrix_scale2D(&scale, view->screenx / view->dx, -view->screeny / dy);
 
     // Step 4: Translate to center of output image
-    Matrix translate2;
-    matrix_identity(&translate2);
-    matrix_translate2D(&translate2, view->screenx / 2.0, view->screeny / 2.0);
+    Matrix trans2;
+    matrix_identity(&trans2);
+    matrix_translate2D(&trans2, view->screenx / 2.0, view->screeny / 2.0);
 
     // Multiply matrices in the correct order
-    matrix_multiply(&translate2, &scale, vtm);
+    matrix_multiply(&trans2, &scale, vtm);
     matrix_multiply(vtm, &rotate, vtm);
-    matrix_multiply(vtm, &translate, vtm);
+    matrix_multiply(vtm, &trans, vtm);
 }
 
 void matrix_setView3D(Matrix *vtm, View3D *view) {

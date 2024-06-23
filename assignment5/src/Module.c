@@ -48,12 +48,7 @@ Element *element_init(ObjectType type, void *obj) {
 
 // Delete an element and free its memory
 void element_delete(Element *e) {
-    if (e) {
-        if (e->type == ObjModule || e->type == ObjTranslate2D || e->type == ObjScale2D || e->type == ObjRotateZ || e->type == ObjShear2D) {
-            free(e->obj.module);
-        }
-        free(e);
-    }
+    if (e) free(e);
 }
 
 // Create an empty module
@@ -143,8 +138,9 @@ void module_polygon(Module *md, Polygon *p) {
 // Set the current transform to the identity
 void module_identity(Module *md) {
     if (md) {
-        Element *e = element_create();
-        e->type = ObjIdentity;
+        Matrix *m = (Matrix *)malloc(sizeof(Matrix));
+        matrix_identity(m);
+        Element *e = element_init(ObjIdentity,m);
         module_insert(md, e);
     }
 }
@@ -199,76 +195,67 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
     }
 
     Element *current = md->head;
-    Matrix LTM; // Local Transformation Matrix
     Matrix tempGTM;
+    matrix_copy(&tempGTM, GTM); // Make a copy of GTM to use for transformations
 
     while (current) {
         switch (current->type) {
             case ObjNone:
-                // Do nothing
                 break;
-            case ObjPoint:
-                // Transform the point and draw it
-            {
-                Point tempPoint;
-                matrix_xformPoint(GTM, &(current->obj.point), &tempPoint);
+            case ObjPoint: {
+                Point tempPoint = current->obj.point;
+                matrix_xformPoint(&tempGTM, &tempPoint, &tempPoint);
                 matrix_xformPoint(VTM, &tempPoint, &tempPoint);
                 point_draw(&tempPoint, src, ds->color);
             }
                 break;
-            case ObjLine:
-                // Transform the line and draw it
-            {
+            case ObjLine: {
                 Line tempLine = current->obj.line;
-                matrix_xformLine(GTM, &tempLine);
+                matrix_xformLine(&tempGTM, &tempLine);
                 matrix_xformLine(VTM, &tempLine);
                 line_draw(&tempLine, src, ds->color);
             }
                 break;
-            case ObjPolyline:
-                // Transform the polyline and draw it
-            {
+            case ObjPolyline: {
                 Polyline tempPolyline;
                 polyline_copy(&tempPolyline, &(current->obj.polyline));
-                matrix_xformPolyline(GTM, &tempPolyline);
+                matrix_xformPolyline(&tempGTM, &tempPolyline);
                 matrix_xformPolyline(VTM, &tempPolyline);
                 polyline_draw(&tempPolyline, src, ds->color);
                 polyline_free(&tempPolyline);
             }
                 break;
-            case ObjPolygon:
-                // Transform the polygon and draw it
-            {
+            case ObjPolygon: {
                 Polygon tempPolygon;
                 polygon_copy(&tempPolygon, &(current->obj.polygon));
-                matrix_xformPolygon(GTM, &tempPolygon);
+                matrix_xformPolygon(&tempGTM, &tempPolygon);
                 matrix_xformPolygon(VTM, &tempPolygon);
                 polygon_draw(&tempPolygon, src, ds->color);
                 polygon_free(&tempPolygon);
             }
                 break;
-            case ObjModule:
-                // Recursively draw the submodule
-            {
-                Matrix newGTM;
-                matrix_multiply(GTM, GTM, &newGTM);
-                module_draw(current->obj.module, VTM, &newGTM, ds, lighting, src);
+            case ObjModule: {
+                // Save the current GTM
+                Matrix saveGTM;
+                matrix_copy(&saveGTM, &tempGTM);
+                // Draw the submodule
+                module_draw(current->obj.module, VTM, &tempGTM, ds, lighting, src);
+                // Restore the GTM
+                matrix_copy(&tempGTM, &saveGTM);
             }
                 break;
             case ObjTranslate2D:
             case ObjScale2D:
             case ObjRotateZ:
-            case ObjShear2D:
-                // Apply the transformation matrix
-                matrix_multiply(GTM, (Matrix *)current->obj.matrix, &tempGTM);
-                matrix_copy(GTM, &tempGTM);
+            case ObjShear2D: {
+                Matrix newGTM;
+                matrix_multiply(&tempGTM, (Matrix *)current->obj.matrix, &newGTM);
+                matrix_copy(&tempGTM, &newGTM);
+            }
                 break;
             case ObjIdentity:
-                // Reset the GTM to identity
-                matrix_identity(GTM);
                 break;
             default:
-                // Unknown type, do nothing
                 break;
         }
         current = current->next;
@@ -356,7 +343,7 @@ void module_cube(Module *md, int solid) {
                 {1, vertices[6], vertices[7] },
                 {1, vertices[7], vertices[4] },
                 {1, vertices[0], vertices[4] },
-                {1,vertices[1], vertices[5] },\
+                {1,vertices[1], vertices[5] },
                 {1, vertices[2], vertices[6] },
                 {1,vertices[3], vertices[7] }
         };
@@ -459,7 +446,7 @@ DrawState *drawstate_create(void) {
         return NULL;
     }
     // Initialize the fields
-    ds->color = (Color){0, 0, 0}; // Default to black
+    ds->color = (Color){1, 1, 1}; // Default to white
     ds->flatColor = (Color){0, 0, 0}; // Default to black
     ds->body = (Color){0, 0, 0}; // Default to black
     ds->surface = (Color){0, 0, 0}; // Default to black

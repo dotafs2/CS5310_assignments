@@ -16,8 +16,12 @@ extern "C" {
 
 // Point structure
 typedef struct {
-    double val[4];  // four element vector of doubles
+    double val[4];  // Point3D
 } Point;
+
+typedef struct {
+     double val[2]; // Point2D
+} Point2;
 
 // Line structure
 typedef struct {

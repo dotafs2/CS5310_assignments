@@ -21,7 +21,7 @@ typedef struct {
 
 
 typedef struct {
-    Point vrp;        // Center of the void matrix_setView2D(Matrix *vtm, View2D *view) { rectangle in world coordinates
+    Point vrp;        // View Reference Point: 2-D vector indicating the origin of the view reference coordinates.
     double dx;        // Width of the view rectangle in world coordinates
     Vector x;         // Normalized orientation vector (cos(theta_v), sin(theta_v))
     int screenx;      // Number of columns in the output image

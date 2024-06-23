@@ -8,6 +8,12 @@
 #include "Line.h"
 #include "Image.h"
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 typedef enum {
     ObjNone,
     ObjPoint,
@@ -120,5 +126,6 @@ void drawstate_copy( DrawState *to, DrawState *from );
 #endif
 
 #endif // MODULE_H
+
 
 // Module.c

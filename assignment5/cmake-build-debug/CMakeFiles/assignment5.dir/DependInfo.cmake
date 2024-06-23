@@ -8,15 +8,18 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "F:/CS5310_assignments/assignment5/src/Image.c" "CMakeFiles/assignment5.dir/src/Image.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/Image.c.obj.d"
-  "F:/CS5310_assignments/assignment5/src/Line.c" "CMakeFiles/assignment5.dir/src/Line.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/Line.c.obj.d"
-  "F:/CS5310_assignments/assignment5/src/Module.c" "CMakeFiles/assignment5.dir/src/Module.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/Module.c.obj.d"
-  "F:/CS5310_assignments/assignment5/src/Polygon.c" "CMakeFiles/assignment5.dir/src/Polygon.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/Polygon.c.obj.d"
-  "F:/CS5310_assignments/assignment5/src/fsMath.c" "CMakeFiles/assignment5.dir/src/fsMath.c.obj" "gcc" "CMakeFiles/assignment5.dir/src/fsMath.c.obj.d"
-  "F:/CS5310_assignments/assignment5/test/test6/test6a.c" "CMakeFiles/assignment5.dir/test/test6/test6a.c.obj" "gcc" "CMakeFiles/assignment5.dir/test/test6/test6a.c.obj.d"
-  "F:/CS5310_assignments/assignment5/cmake-build-debug/assignment5_autogen/mocs_compilation.cpp" "CMakeFiles/assignment5.dir/assignment5_autogen/mocs_compilation.cpp.obj" "gcc" "CMakeFiles/assignment5.dir/assignment5_autogen/mocs_compilation.cpp.obj.d"
-  "F:/CS5310_assignments/assignment5/src/anti-alias.cpp" "CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj" "gcc" "CMakeFiles/assignment5.dir/src/anti-alias.cpp.obj.d"
-  "F:/CS5310_assignments/assignment5/src/ball.cpp" "CMakeFiles/assignment5.dir/src/ball.cpp.obj" "gcc" "CMakeFiles/assignment5.dir/src/ball.cpp.obj.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Image.c" "CMakeFiles/assignment5.dir/src/Image.c.o" "gcc" "CMakeFiles/assignment5.dir/src/Image.c.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Line.c" "CMakeFiles/assignment5.dir/src/Line.c.o" "gcc" "CMakeFiles/assignment5.dir/src/Line.c.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Module.c" "CMakeFiles/assignment5.dir/src/Module.c.o" "gcc" "CMakeFiles/assignment5.dir/src/Module.c.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Polygon.c" "CMakeFiles/assignment5.dir/src/Polygon.c.o" "gcc" "CMakeFiles/assignment5.dir/src/Polygon.c.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/fsMath.c" "CMakeFiles/assignment5.dir/src/fsMath.c.o" "gcc" "CMakeFiles/assignment5.dir/src/fsMath.c.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/test/test5/test5b.c" "CMakeFiles/assignment5.dir/test/test5/test5b.c.o" "gcc" "CMakeFiles/assignment5.dir/test/test5/test5b.c.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/test/test6/test6a.c" "CMakeFiles/assignment5.dir/test/test6/test6a.c.o" "gcc" "CMakeFiles/assignment5.dir/test/test6/test6a.c.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/assignment5_autogen/mocs_compilation.cpp" "CMakeFiles/assignment5.dir/assignment5_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/assignment5.dir/assignment5_autogen/mocs_compilation.cpp.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/anti-alias.cpp" "CMakeFiles/assignment5.dir/src/anti-alias.cpp.o" "gcc" "CMakeFiles/assignment5.dir/src/anti-alias.cpp.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/ball.cpp" "CMakeFiles/assignment5.dir/src/ball.cpp.o" "gcc" "CMakeFiles/assignment5.dir/src/ball.cpp.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/main.cpp" "CMakeFiles/assignment5.dir/src/main.cpp.o" "gcc" "CMakeFiles/assignment5.dir/src/main.cpp.o.d"
+  "/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/mainwindow.cpp" "CMakeFiles/assignment5.dir/src/mainwindow.cpp.o" "gcc" "CMakeFiles/assignment5.dir/src/mainwindow.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
