@@ -159,7 +159,11 @@ void matrix_rotateZ(Matrix *m, double cth, double sth) {
                       {0, 0, 1, 0},
                       {0, 0, 0, 1}}};
 
-    matrix_multiply(&rotate, m, m);
+    Matrix result;
+    matrix_multiply(&rotate, m, &result);
+
+    // Copy to make sure no bug
+    *m = result;
 }
 
 void matrix_translate2D(Matrix *m, double tx, double ty) {
@@ -168,16 +172,23 @@ void matrix_translate2D(Matrix *m, double tx, double ty) {
                          {0, 0, 1, 0},
                          {0, 0, 0, 1}}};
 
-    matrix_multiply(&translate, m, m);
-}
+    // Multiply the translation matrix on the left of the input matrix
+    Matrix result;
+    matrix_multiply(&translate, m, &result);
 
+    // Copy the result back to the input matrix
+    *m = result;
+}
 void matrix_shear2D(Matrix *m, double shx, double shy) {
     Matrix shear = {{{1, shx, 0, 0},
                      {shy, 1, 0, 0},
                      {0, 0, 1, 0},
                      {0, 0, 0, 1}}};
+    Matrix result;
+    matrix_multiply(&shear, m, &result);
 
-    matrix_multiply(&shear, m, m);
+    // Copy the result back to the input matrix
+    *m = result;
 }
 
 void matrix_translate(Matrix *m, double tx, double ty, double tz) {
@@ -225,7 +236,6 @@ void matrix_rotateXYZ(Matrix *m, Vector *u, Vector *v, Vector *w) {
     matrix_multiply(&rotate, m, m);
 }
 
-#include "fsMath.h"
 
 // Matrix Functions
 
@@ -254,27 +264,27 @@ void matrix_setView2D(Matrix *vtm, View2D *view) {
     // The height of the view rectangle in world coordinates
     double dy = view->dx * view->screeny / view->screenx;
 
-    // Step 1: Translate view center to origin
+    // Step 1: T(-V0x,-V0y)
     Matrix trans;
     matrix_identity(&trans);
     matrix_translate2D(&trans, -view->vrp.val[0], -view->vrp.val[1]);
 
-    // Step 2: Rotate view orientation to align with x-axis
+    // Step 2: R(nx,-ny)
     Matrix rotate;
     matrix_identity(&rotate);
-    matrix_rotateZ(&rotate, view->x.val[0], view->x.val[1]);
+    matrix_rotateZ(&rotate, view->x.val[0], -view->x.val[1]);
 
-    // Step 3: Scale view to fit into output image dimensions
+    // Step 3: S(C/du,-R/dv)
     Matrix scale;
     matrix_identity(&scale);
     matrix_scale2D(&scale, view->screenx / view->dx, -view->screeny / dy);
 
-    // Step 4: Translate to center of output image
+    // Step 4: T(C/2,R/2)
     Matrix trans2;
     matrix_identity(&trans2);
     matrix_translate2D(&trans2, view->screenx / 2.0, view->screeny / 2.0);
 
-    // Multiply matrices in the correct order
+    // combine
     matrix_multiply(&trans2, &scale, vtm);
     matrix_multiply(vtm, &rotate, vtm);
     matrix_multiply(vtm, &trans, vtm);

@@ -353,6 +353,8 @@ void polyline_normalize(Polyline *p);
  */
 void polyline_draw(Polyline *p, Image *src, Color c);
 
+void print_line_coordinates(Point a, Point b);
+
 // Triangle functions
 
 /**

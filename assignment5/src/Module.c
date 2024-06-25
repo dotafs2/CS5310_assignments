@@ -196,7 +196,9 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
 
     Element *current = md->head;
     Matrix tempGTM;
-    matrix_copy(&tempGTM, GTM); // Make a copy of GTM to use for transformations
+    matrix_copy(&tempGTM, GTM);
+    Matrix tempVTM;
+    matrix_copy(&tempVTM,VTM);
 
     while (current) {
         switch (current->type) {
@@ -210,9 +212,23 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
             }
                 break;
             case ObjLine: {
+                printf("obj.line: \n");
+                print_line_coordinates(current->obj.line.a, current->obj.line.b);
+
                 Line tempLine = current->obj.line;
+                // Apply GTM
                 matrix_xformLine(&tempGTM, &tempLine);
-                matrix_xformLine(VTM, &tempLine);
+                printf("After GTM transformation:\n");
+                print_line_coordinates(tempLine.a, tempLine.b);
+//                tempLine.a.val[0] = 0;
+//                tempLine.a.val[1] = 0;
+//                tempLine.b.val[0] = 2;
+//                tempLine.b.val[1] = 0.1;
+                // Apply VTM
+                matrix_xformLine(&tempVTM, &tempLine);
+                printf("After VTM transformation:\n");
+                print_line_coordinates(tempLine.a, tempLine.b);
+                // Draw the line
                 line_draw(&tempLine, src, ds->color);
             }
                 break;

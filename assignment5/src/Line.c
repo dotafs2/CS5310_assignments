@@ -126,12 +126,11 @@ void line_copy(Line *to, Line *from) {
 
 void line_draw(Line *l, Image *src, Color c) {
     if (!l || !src) return;
-
     int x0 = (int)l->a.val[0];
     int y0 = (int)l->a.val[1];
     int x1 = (int)l->b.val[0];
     int y1 = (int)l->b.val[1];
-
+    print_line_coordinates(l->a, l->b);
     // Bresenham's line algorithm
     int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
     int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
@@ -419,6 +418,10 @@ void polyline_print(Polyline *p, FILE *fp) {
     for (int i = 0; i < p->numVertex; i++) {
         fprintf(fp, "  Vertex %d: (%f, %f, %f, %f)\n", i, p->vertex[i].val[0], p->vertex[i].val[1], p->vertex[i].val[2], p->vertex[i].val[3]);
     }
+}
+
+void print_line_coordinates(Point a, Point b) {
+    printf("drawing line (%.2f %.2f) to (%.2f %.2f)\n", a.val[0], a.val[1], b.val[0], b.val[1]);
 }
 
 void polyline_normalize(Polyline *p) {

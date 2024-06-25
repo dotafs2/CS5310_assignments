@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include "Module.h"
 #include "fsMath.h"
+#include "time.h"
+
+double generate_random_double() {
+    return (double)rand() / (double)RAND_MAX;
+}
 
 int main(int argc, char *argv[]) {
     View2D view;
@@ -20,13 +25,12 @@ int main(int argc, char *argv[]) {
     Line l;
     DrawState *ds;
     Image *src;
-    srand48(42);
+    srand((unsigned int)time(NULL));
+
+   //  srand48(42);
 
     // setup gtm
     matrix_identity(&gtm);
-    printf("Initial GTM:\n");
-    matrix_print(&gtm, stdout);
-
     point_set2D(&vrp, 0, 0);
     vector_set(&xaxis, 1, 0, 0);
     view.x = xaxis;
@@ -35,15 +39,9 @@ int main(int argc, char *argv[]) {
     view.screenx = 640;
     view.screeny = 360;
     matrix_setView2D(&vtm, &view);
-
-    printf("View Matrix (VTM):\n");
+    matrix_print(&gtm, stdout);
     matrix_print(&vtm, stdout);
 
-    printf("View Reference Point (VRP):\n");
-    vector_print((Vector*)&vrp, stdout);
-
-    printf("X-axis Vector:\n");
-    vector_print(&xaxis, stdout);
 
     // create a body
     body = module_create();
@@ -54,9 +52,9 @@ int main(int argc, char *argv[]) {
     point_set2D(&p[3], 2, 0.4);
     point_set2D(&p[4], 0, .5);
 
-    for (i = 0; i < 5; i++) {
+    for(i=0;i<4;i++) {
         int a = i;
-        int b = (i + 1) % 5;
+        int b = (i+1) % 4;
 
         line_set(&l, p[a], p[b]);
         module_line(body, &l);
@@ -131,7 +129,7 @@ int main(int argc, char *argv[]) {
     // draw stars into the scene
     module_identity(scene);
     for (i = 0; i < 30; i++) {
-        point_set2D(&(p[0]), drand48() * 2 - 1, drand48() * 1 - 0.5);
+        point_set2D(&(p[0]),   generate_random_double()* 2 - 1, generate_random_double() * 1 - 0.5);
         module_point(scene, &(p[0]));
     }
 
@@ -142,12 +140,7 @@ int main(int argc, char *argv[]) {
 
     // write out the image
     image_write(src, "xwings.ppm");
-
-    // print matrices and vectors
-    printf("Final GTM:\n");
     matrix_print(&gtm, stdout);
-
-    printf("Final VTM:\n");
     matrix_print(&vtm, stdout);
 
     // free modules
