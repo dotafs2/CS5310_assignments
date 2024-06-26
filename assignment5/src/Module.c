@@ -34,10 +34,10 @@ Element *element_init(ObjectType type, void *obj) {
             case ObjModule:
                 e->obj.module = obj;
                 break;
-            case ObjTranslate2D:
-            case ObjScale2D:
-            case ObjRotateZ:
-            case ObjShear2D:
+            case ObjMatrix:
+                e->obj.matrix = obj;
+                break;
+            case ObjIdentity:
                 e->obj.matrix = obj;
                 break;
             default:
@@ -142,7 +142,7 @@ void module_identity(Module *md) {
     if (md) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
-        Element *e = element_init(ObjIdentity,m);
+        Element *e = element_init(ObjMatrix,m);
         module_insert(md, e);
     }
 }
@@ -153,7 +153,7 @@ void module_translate2D(Module *md, double tx, double ty) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
         matrix_translate2D(m, tx, ty);
-        Element *e = element_init(ObjTranslate2D, m);
+        Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
     }
 }
@@ -164,7 +164,7 @@ void module_scale2D(Module *md, double sx, double sy) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
         matrix_scale2D(m, sx, sy);
-        Element *e = element_init(ObjScale2D, m);
+        Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
     }
 }
@@ -175,7 +175,7 @@ void module_rotateZ(Module *md, double cth, double sth) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
         matrix_rotateZ(m, cth, sth);
-        Element *e = element_init(ObjRotateZ, m);
+        Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
     }
 }
@@ -186,7 +186,7 @@ void module_shear2D(Module *md, double shx, double shy) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
         matrix_shear2D(m, shx, shy);
-        Element *e = element_init(ObjShear2D, m);
+        Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
     }
 }
@@ -196,28 +196,26 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
         return;
     }
     Element *current = md->head;
-    Matrix tempGTM;
-    matrix_copy(&tempGTM, GTM);
-    Matrix tempVTM;
-    matrix_copy(&tempVTM,VTM);
     Matrix LTM;
     matrix_identity(&LTM);
-    matrix_multiply(GTM,&LTM,&tempGTM);
+
     while (current) {
         switch (current->type) {
             case ObjNone:
                 break;
             case ObjPoint: {
                 Point tempPoint = current->obj.point;
-                matrix_xformPoint(&tempGTM, &tempPoint, &tempPoint);
+          //      matrix_xformPoint(&LTM, &tempPoint, &tempPoint); // if I put this on , all the point are in a very small little square
+                matrix_xformPoint(GTM, &tempPoint, &tempPoint);
                 matrix_xformPoint(VTM, &tempPoint, &tempPoint);
                 point_draw(&tempPoint, src, ds->color);
             }
                 break;
             case ObjLine: {
                 Line tempLine = current->obj.line;
-                matrix_xformLine(&tempGTM, &tempLine);
-                matrix_xformLine(&tempVTM, &tempLine);
+                matrix_xformLine(&LTM, &tempLine);
+                matrix_xformLine(GTM, &tempLine);
+                matrix_xformLine(VTM, &tempLine);
                 line_draw(&tempLine, src, ds->color);
             }
                 break;
@@ -225,7 +223,8 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                 Polyline tempPolyline;
                 polyline_init(&tempPolyline);
                 polyline_copy(&tempPolyline, &(current->obj.polyline));
-                matrix_xformPolyline(&tempGTM, &tempPolyline);
+                matrix_xformPolyline(&LTM, &tempPolyline);
+                matrix_xformPolyline(GTM, &tempPolyline);
                 matrix_xformPolyline(VTM, &tempPolyline);
                 polyline_draw(&tempPolyline, src, ds->color);
                 polyline_clear(&tempPolyline);
@@ -236,7 +235,8 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                 Polygon tempPolygon;
                 polygon_init(&tempPolygon);
                 polygon_copy(&tempPolygon, &(current->obj.polygon));
-                matrix_xformPolygon(&tempGTM, &tempPolygon);
+                matrix_xformPolygon(&LTM, &tempPolygon);
+                matrix_xformPolygon(GTM, &tempPolygon);
                 matrix_xformPolygon(VTM, &tempPolygon);
                 polygon_draw(&tempPolygon, src, ds->color);
                 polygon_clear(&tempPolygon);
@@ -244,25 +244,18 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
             }
                 break;
             case ObjModule: {
-                // Save the current GTM
-                Matrix saveGTM;
-                matrix_copy(&saveGTM, &tempGTM);
-                // Draw the submodule
+                Matrix tempGTM;
+                matrix_multiply(GTM,&LTM,&tempGTM);
                 module_draw(current->obj.module, VTM, &tempGTM, ds, lighting, src);
-                // Restore the GTM
-                matrix_copy(&tempGTM, &saveGTM);
             }
                 break;
-            case ObjTranslate2D:
-            case ObjScale2D:
-            case ObjRotateZ:
-            case ObjShear2D: {
-                Matrix newGTM;
-                matrix_multiply(&tempGTM, (Matrix *)current->obj.matrix, &newGTM);
-                matrix_copy(&tempGTM, &newGTM);
+            case ObjMatrix: {
+                matrix_multiply( (current->obj.matrix), &LTM, &LTM );
             }
                 break;
-            case ObjIdentity:
+            case ObjIdentity: {
+                matrix_multiply( (current->obj.matrix), &LTM, &LTM );
+            }
                 break;
             default:
                 break;
@@ -277,7 +270,7 @@ void module_translate(Module *md, double tx, double ty, double tz) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
         matrix_translate(m, tx, ty, tz);
-        Element *e = element_init(ObjTranslate, m);
+        Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
     }
 }
@@ -288,7 +281,7 @@ void module_scale(Module *md, double sx, double sy, double sz) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
         matrix_scale(m, sx, sy, sz);
-        Element *e = element_init(ObjScale, m);
+        Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
     }
 }
@@ -299,7 +292,7 @@ void module_rotateX(Module *md, double cth, double sth) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
         matrix_rotateX(m, cth, sth);
-        Element *e = element_init(ObjRotateX, m);
+        Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
     }
 }
@@ -310,7 +303,7 @@ void module_rotateY(Module *md, double cth, double sth) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
         matrix_rotateY(m, cth, sth);
-        Element *e = element_init(ObjRotateY, m);
+        Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
     }
 }
@@ -321,7 +314,7 @@ void module_rotateXYZ(Module *md, Vector *u, Vector *v, Vector *w) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
         matrix_rotateXYZ(m, u, v, w);
-        Element *e = element_init(ObjRotateXYZ, m);
+        Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
     }
 }

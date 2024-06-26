@@ -14,29 +14,20 @@ extern "C" {
 #endif
 
 
-typedef enum {
-    ObjNone,
-    ObjPoint,
-    ObjLine,
-    ObjPolyline,
-    ObjPolygon,
-    ObjModule,
-    ObjTranslate2D,
-    ObjScale2D,
-    ObjRotateZ,
-    ObjShear2D,
-    ObjIdentity,
-    ObjMatrix,
-    ObjColor,
-    ObjBodyColor,
-    ObjSurfaceColor,
-    ObjSurfaceCoeff,
-    ObjLight,
-    ObjTranslate,
-    ObjScale,
-    ObjRotateX,
-    ObjRotateY,
-    ObjRotateXYZ,
+typedef enum { // example of an enumerated type
+  ObjNone,
+  ObjLine,
+  ObjPoint,
+  ObjPolyline,
+  ObjPolygon,
+  ObjIdentity,
+  ObjMatrix,
+  ObjColor,
+  ObjBodyColor,
+  ObjSurfaceColor,
+  ObjSurfaceCoeff,
+  ObjLight,
+  ObjModule
 } ObjectType;
 
 typedef enum{
