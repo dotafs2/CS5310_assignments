@@ -24,10 +24,12 @@ Element *element_init(ObjectType type, void *obj) {
                 e->obj.line = *(Line *)obj;
                 break;
             case ObjPolyline:
-                e->obj.polyline = *(Polyline *)obj;
+                polyline_init(&(e->obj.polyline));
+                polyline_copy(&(e->obj.polyline), (Polyline *)obj);
                 break;
             case ObjPolygon:
-                e->obj.polygon = *(Polygon *)obj;
+                polygon_init(&(e->obj.polygon));
+                polygon_copy(&(e->obj.polygon), (Polygon *)obj);
                 break;
             case ObjModule:
                 e->obj.module = obj;
@@ -193,13 +195,14 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
     if (!md || !VTM || !GTM || !ds || !src) {
         return;
     }
-
     Element *current = md->head;
     Matrix tempGTM;
     matrix_copy(&tempGTM, GTM);
     Matrix tempVTM;
     matrix_copy(&tempVTM,VTM);
-
+    Matrix LTM;
+    matrix_identity(&LTM);
+    matrix_multiply(GTM,&LTM,&tempGTM);
     while (current) {
         switch (current->type) {
             case ObjNone:
@@ -212,41 +215,31 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
             }
                 break;
             case ObjLine: {
-                printf("obj.line: \n");
-                print_line_coordinates(current->obj.line.a, current->obj.line.b);
-
                 Line tempLine = current->obj.line;
-                // Apply GTM
                 matrix_xformLine(&tempGTM, &tempLine);
-                printf("After GTM transformation:\n");
-                print_line_coordinates(tempLine.a, tempLine.b);
-//                tempLine.a.val[0] = 0;
-//                tempLine.a.val[1] = 0;
-//                tempLine.b.val[0] = 2;
-//                tempLine.b.val[1] = 0.1;
-                // Apply VTM
                 matrix_xformLine(&tempVTM, &tempLine);
-                printf("After VTM transformation:\n");
-                print_line_coordinates(tempLine.a, tempLine.b);
-                // Draw the line
                 line_draw(&tempLine, src, ds->color);
             }
                 break;
             case ObjPolyline: {
                 Polyline tempPolyline;
+                polyline_init(&tempPolyline);
                 polyline_copy(&tempPolyline, &(current->obj.polyline));
                 matrix_xformPolyline(&tempGTM, &tempPolyline);
                 matrix_xformPolyline(VTM, &tempPolyline);
                 polyline_draw(&tempPolyline, src, ds->color);
+                polyline_clear(&tempPolyline);
                 polyline_free(&tempPolyline);
             }
                 break;
             case ObjPolygon: {
                 Polygon tempPolygon;
+                polygon_init(&tempPolygon);
                 polygon_copy(&tempPolygon, &(current->obj.polygon));
                 matrix_xformPolygon(&tempGTM, &tempPolygon);
                 matrix_xformPolygon(VTM, &tempPolygon);
                 polygon_draw(&tempPolygon, src, ds->color);
+                polygon_clear(&tempPolygon);
                 polygon_free(&tempPolygon);
             }
                 break;

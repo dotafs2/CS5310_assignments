@@ -32,10 +32,15 @@ Polygon *polygon_createp(int numV, Point *vlist) {
 // Function to free the memory of a Polygon
 void polygon_free(Polygon *p) {
     if (!p) return;
+    if(p->vertex)
     free(p->vertex);
+    if(p->color)
     free(p->color);
+    if(p->normal)
     free(p->normal);
+    printf("1");
     free(p);
+    printf("2");
 }
 
 // Function to initialize an existing Polygon to an empty Polygon
@@ -123,26 +128,22 @@ void polygon_zBuffer(Polygon *p, int flag) {
 // Function to copy one Polygon to another
 void polygon_copy(Polygon *to, Polygon *from) {
     if (!to || !from) return;
-
-    // Free existing memory in destination polygon
-    if (to->vertex) free(to->vertex);
-    if (to->color) free(to->color);
-    if (to->normal) free(to->normal);
-
     // Allocate new memory and copy the data
     to->vertex = (Point *)malloc(from->numVertex * sizeof(Point));
     if (!to->vertex) return;
     memcpy(to->vertex, from->vertex, from->numVertex * sizeof(Point));
 
-    to->color = (Color *)malloc(from->numVertex * sizeof(Color));
-    if (from->color && to->color) {
+    if (from->color) {
+        to->color = (Color *)malloc(from->numVertex * sizeof(Color));
+        if (!to->color) return;
         memcpy(to->color, from->color, from->numVertex * sizeof(Color));
     } else {
         to->color = NULL;
     }
 
-    to->normal = (Vector *)malloc(from->numVertex * sizeof(Vector));
-    if (from->normal && to->normal) {
+    if (from->normal) {
+        to->normal = (Vector *)malloc(from->numVertex * sizeof(Vector));
+        if (!to->normal) return;
         memcpy(to->normal, from->normal, from->numVertex * sizeof(Vector));
     } else {
         to->normal = NULL;
@@ -152,7 +153,6 @@ void polygon_copy(Polygon *to, Polygon *from) {
     to->zBuffer = from->zBuffer;
     to->oneSided = from->oneSided;
 }
-
 // Function to print the data of a Polygon
 void polygon_print(Polygon *p, FILE *fp) {
     if (!p || !fp) return;
@@ -170,20 +170,17 @@ void polygon_normalize(Polygon *p) {
     }
 }
 
-// 辅助函数：计算两点之间的斜率
 float edge_slope(Point a, Point b) {
     if (a.val[1] == b.val[1]) return 0;
     return (b.val[0] - a.val[0]) / (b.val[1] - a.val[1]);
 }
 
-// 辅助函数：交换两个整数
 void swap_int(int* a, int* b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-// 辅助函数：绘制水平线
 void draw_horizontal_line(Image *src, int y, int x1, int x2, Color c) {
     if (x1 > x2) swap_int(&x1, &x2);
     for (int x = x1; x <= x2; x++) {
@@ -192,20 +189,17 @@ void draw_horizontal_line(Image *src, int y, int x1, int x2, Color c) {
     }
 }
 
-// 多边形填充算法实现
 void polygon_drawFill(Polygon *p, Image *src, Color c) {
     if (!p || !src || p->numVertex < 3) return;
 
-    // 找到多边形的最小和最大Y值
     int minY = src->rows, maxY = 0;
     for (int i = 0; i < p->numVertex; i++) {
         if (p->vertex[i].val[1] < minY) minY = (int)p->vertex[i].val[1];
         if (p->vertex[i].val[1] > maxY) maxY = (int)p->vertex[i].val[1];
     }
 
-    // 为每个扫描线存储交点
     for (int y = minY; y <= maxY; y++) {
-        int intersections[10]; // 假设多边形顶点数最多为10
+        int intersections[10];
         int numIntersections = 0;
 
         for (int i = 0; i < p->numVertex; i++) {
@@ -219,7 +213,6 @@ void polygon_drawFill(Polygon *p, Image *src, Color c) {
             }
         }
 
-        // 排序交点
         for (int i = 0; i < numIntersections - 1; i++) {
             for (int j = 0; j < numIntersections - i - 1; j++) {
                 if (intersections[j] > intersections[j + 1]) {
@@ -228,7 +221,6 @@ void polygon_drawFill(Polygon *p, Image *src, Color c) {
             }
         }
 
-        // 绘制扫描线
         for (int i = 0; i < numIntersections; i += 2) {
             draw_horizontal_line(src, y, intersections[i], intersections[i + 1], c);
         }

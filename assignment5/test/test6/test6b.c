@@ -307,6 +307,7 @@ int main(int argc, char *argv[]) {
   ds = drawstate_create();
   ds->shade = ShadeFrame;
 
+
   // draw into the scene
   module_draw( scene, &vtm, &gtm, ds, NULL, src );
 

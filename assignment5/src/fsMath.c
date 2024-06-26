@@ -102,11 +102,15 @@ void matrix_multiply(Matrix *left, Matrix *right, Matrix *m) {
 }
 
 void matrix_xformPoint(Matrix *m, Point *p, Point *q) {
+    Point temp;
     for (int i = 0; i < 4; i++) {
-        q->val[i] = 0;
+        temp.val[i] = 0;
         for (int j = 0; j < 4; j++) {
-            q->val[i] += m->m[i][j] * p->val[j];
+            temp.val[i] += m->m[i][j] * p->val[j];
         }
+    }
+    for (int i = 0; i < 4; i++) {
+        q->val[i] = temp.val[i];
     }
 }
 
@@ -122,6 +126,7 @@ void matrix_xformVector(Matrix *m, Vector *p, Vector *q) {
 
 void matrix_xformPolygon(Matrix *m, Polygon *p) {
     for (int i = 0; i < p->numVertex; i++) {
+        printf("1");
         Point newPoint;
         matrix_xformPoint(m, &p->vertex[i], &newPoint);
         point_copy(&p->vertex[i], &newPoint);

@@ -86,8 +86,8 @@ clean: CMakeFiles/test6_autogen.dir/clean
 # Target rules for target CMakeFiles/main_entry.dir
 
 # All Build rule for target.
-CMakeFiles/main_entry.dir/all: CMakeFiles/main_entry_autogen_timestamp_deps.dir/all
 CMakeFiles/main_entry.dir/all: CMakeFiles/main_entry_autogen.dir/all
+CMakeFiles/main_entry.dir/all: CMakeFiles/main_entry_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main_entry.dir\build.make CMakeFiles/main_entry.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main_entry.dir\build.make CMakeFiles/main_entry.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=F:\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target main_entry"
@@ -113,8 +113,8 @@ CMakeFiles/main_entry.dir/clean:
 # Target rules for target CMakeFiles/test6.dir
 
 # All Build rule for target.
-CMakeFiles/test6.dir/all: CMakeFiles/test6_autogen_timestamp_deps.dir/all
 CMakeFiles/test6.dir/all: CMakeFiles/test6_autogen.dir/all
+CMakeFiles/test6.dir/all: CMakeFiles/test6_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6.dir\build.make CMakeFiles/test6.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6.dir\build.make CMakeFiles/test6.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=F:\CS5310_assignments\assignment5\cmake-build-debug\CMakeFiles --progress-num=13,14,15,16,17,18,19,20,21,22 "Built target test6"
