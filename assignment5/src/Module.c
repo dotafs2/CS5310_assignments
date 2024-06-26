@@ -142,7 +142,7 @@ void module_identity(Module *md) {
     if (md) {
         Matrix *m = (Matrix *)malloc(sizeof(Matrix));
         matrix_identity(m);
-        Element *e = element_init(ObjMatrix,m);
+        Element *e = element_init(ObjIdentity,m);
         module_insert(md, e);
     }
 }
@@ -254,7 +254,8 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
             }
                 break;
             case ObjIdentity: {
-                matrix_multiply( (current->obj.matrix), &LTM, &LTM );
+                matrix_identity(&LTM);
+
             }
                 break;
             default:

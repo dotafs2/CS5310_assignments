@@ -1,6 +1,6 @@
 # assignment 5
 
-
+Use one travel day
 ## environment
 OS: macOS Sonoma 14.2.1  
 CPU: arm64 chip
