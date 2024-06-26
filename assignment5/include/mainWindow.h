@@ -43,6 +43,7 @@ private:
     void applyAntiAliasing();
     void drawBall();
     void test5c(int frame);
+    void test6a(int frame);
     void setWhite(Image *src);
     double drand();
 
