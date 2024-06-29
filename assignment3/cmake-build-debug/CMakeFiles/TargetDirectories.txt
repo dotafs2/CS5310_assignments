@@ -1,3 +1,0 @@
-C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment3/cmake-build-debug/CMakeFiles/assignment3.dir
-C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment3/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Chenxi Qu/Desktop/git/CS5310_assignments/assignment3/cmake-build-debug/CMakeFiles/rebuild_cache.dir

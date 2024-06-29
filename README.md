@@ -1,21 +1,6 @@
-# assignment 5
+# fsEngine
+fsEngine a custom game engine built from scratch, primarily using C for low-level logic, based on principles learned from Bruce A. Maxwell's computer graphics course. The interface is developed using Qt, leveraging modern features of C++17 and C++20.
 
-Use one travel day
-## environment
-OS: macOS Sonoma 14.2.1  
-CPU: arm64 chip
-IDE: CLion  
-C++: C++14    
-C: C99  
-QT6 required
+## Project Goal
 
-
-## build
-sry to use cmakelist not makefile, it is much easier to write.
-cmakelist:
-
-``
-cmake
-``
-
-note: change the qt6 path to your own qt path
+My goal is to build a complete engine, even if most of the libraries are hand-written and less efficient than existing ones. The objective is to create a modular engine with fixed APIs and formats at each level, allowing for customization and changes to any step in the pipeline for different targets. This approach will enable a fully customizable engine pipeline, where each stage can be adapted to specific needs.
