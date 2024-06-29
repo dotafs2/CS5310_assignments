@@ -1,25 +1,22 @@
 {
-	"BUILD_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/main_entry_autogen",
-	"CMAKE_BINARY_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug",
-	"CMAKE_CURRENT_BINARY_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug",
-	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5",
+	"BUILD_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments",
 	"CMAKE_EXECUTABLE" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake",
 	"CMAKE_LIST_FILES" : 
 	[
-		"/Users/dotafs/Desktop/CS5310_assignments/assignment5/CMakeLists.txt",
-		"/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/CMakeFiles/3.28.1/CMakeSystem.cmake",
+		"/Users/dotafs/Desktop/CS5310_assignments/CMakeLists.txt",
+		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/3.28.1/CMakeSystem.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/Platform/Darwin-Initialize.cmake",
-		"/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/CMakeFiles/3.28.1/CMakeCCompiler.cmake",
-		"/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/CMakeFiles/3.28.1/CMakeCXXCompiler.cmake",
+		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/3.28.1/CMakeCCompiler.cmake",
+		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/3.28.1/CMakeCXXCompiler.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/Platform/Darwin.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake",
-		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeFindCodeBlocks.cmake",
-		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake",
-		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/ProcessorCount.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeCInformation.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/Compiler/AppleClang-C.cmake",
@@ -263,45 +260,45 @@
 		"/Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6Widgets/Qt6QMacStylePluginTargets-relwithdebinfo.cmake",
 		"/Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6Widgets/Qt6QMacStylePluginAdditionalTargetInfo.cmake"
 	],
-	"CMAKE_SOURCE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5",
-	"DEP_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/main_entry_autogen/deps",
+	"CMAKE_SOURCE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments",
+	"DEP_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "main_entry_autogen/timestamp",
 	"HEADERS" : 
 	[
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/include/Line.h",
+			"/Users/dotafs/Desktop/CS5310_assignments/include/Line.h",
 			"MU",
 			"6YEA5652QU/moc_Line.cpp",
 			null
 		],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/include/Module.h",
+			"/Users/dotafs/Desktop/CS5310_assignments/include/Module.h",
 			"MU",
 			"6YEA5652QU/moc_Module.cpp",
 			null
 		],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/include/Polygon.h",
+			"/Users/dotafs/Desktop/CS5310_assignments/include/Polygon.h",
 			"MU",
 			"6YEA5652QU/moc_Polygon.cpp",
 			null
 		],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/include/fsMath.h",
+			"/Users/dotafs/Desktop/CS5310_assignments/include/fsMath.h",
 			"MU",
 			"6YEA5652QU/moc_fsMath.cpp",
 			null
 		],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/include/mainwindow.h",
+			"/Users/dotafs/Desktop/CS5310_assignments/include/mainwindow.h",
 			"MU",
 			"6YEA5652QU/moc_mainwindow.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/main_entry_autogen/include",
-	"MOC_COMPILATION_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/main_entry_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/include",
+	"MOC_COMPILATION_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_WIDGETS_LIB" ],
 	"MOC_DEPEND_FILTERS" : 
 	[
@@ -312,7 +309,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"/Users/dotafs/Desktop/CS5310_assignments/assignment5/include",
+		"/Users/dotafs/Desktop/CS5310_assignments/include",
 		"/Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Headers",
 		"/Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework",
 		"/Users/dotafs/Qt/6.7.2/macos/mkspecs/macx-clang",
@@ -321,8 +318,10 @@
 		"/Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework",
 		"/Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Headers",
 		"/Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework",
-		"/usr/include",
-		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include"
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"
 	],
 	"MOC_MACRO_NAMES" : 
 	[
@@ -344,61 +343,33 @@
 		"-c",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/main_entry_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 10,
-	"PARSE_CACHE_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/CMakeFiles/main_entry_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/main_entry_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/Users/dotafs/Qt/6.7.2/macos/./libexec/moc",
 	"QT_UIC_EXECUTABLE" : "/Users/dotafs/Qt/6.7.2/macos/./libexec/uic",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 7,
-	"SETTINGS_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/assignment5/cmake-build-debug/CMakeFiles/main_entry_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/main_entry_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Image.c", "MU", null ],
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Line.c", "MU", null ],
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Module.c", "MU", null ],
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Polygon.c", "MU", null ],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Image.c",
+			"/Users/dotafs/Desktop/CS5310_assignments/src/anti-alias.cpp",
 			"MU",
 			null
 		],
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/ball.cpp", "MU", null ],
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/fsMath.c", "MU", null ],
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/main.cpp", "MU", null ],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Line.c",
-			"MU",
-			null
-		],
-		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Module.c",
-			"MU",
-			null
-		],
-		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/Polygon.c",
-			"MU",
-			null
-		],
-		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/anti-alias.cpp",
-			"MU",
-			null
-		],
-		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/ball.cpp",
-			"MU",
-			null
-		],
-		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/fsMath.c",
-			"MU",
-			null
-		],
-		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/main.cpp",
-			"MU",
-			null
-		],
-		[
-			"/Users/dotafs/Desktop/CS5310_assignments/assignment5/src/mainwindow.cpp",
+			"/Users/dotafs/Desktop/CS5310_assignments/src/mainwindow.cpp",
 			"MU",
 			null
 		]
