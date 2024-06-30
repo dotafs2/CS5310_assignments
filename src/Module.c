@@ -23,14 +23,16 @@ Element *element_init(ObjectType type, void *obj) {
             case ObjLine:
                 e->obj.line = *(Line *)obj;
                 break;
-            case ObjPolyline:
+            case ObjPolyline: {
                 polyline_init(&(e->obj.polyline));
-                polyline_copy(&(e->obj.polyline), (Polyline *)obj);
+                e->obj.polyline = *(Polyline *)obj;
                 break;
-            case ObjPolygon:
+            }
+            case ObjPolygon: {
                 polygon_init(&(e->obj.polygon));
-                polygon_copy(&(e->obj.polygon), (Polygon *)obj);
+                e->obj.polygon = *(Polygon *)obj;
                 break;
+            }
             case ObjModule:
                 e->obj.module = obj;
                 break;
@@ -40,6 +42,11 @@ Element *element_init(ObjectType type, void *obj) {
             case ObjIdentity:
                 e->obj.matrix = obj;
                 break;
+            case ObjBezierCurve: {
+                bezierCurve_init(& (e->obj.bezierCurve));
+                e->obj.bezierCurve = *(BezierCurve *)obj;
+                break;
+            }
             default:
                 free(e);
                 return NULL;
@@ -126,6 +133,13 @@ void module_polyline(Module *md, Polyline *p) {
     if (md && p) {
         Element *e = element_init(ObjPolyline, p);
         module_insert(md, e);
+    }
+}
+
+void module_bezierCurve(Module *md, BezierCurve *b, int divisions) {
+    if( md && b) {
+        Element *e = element_init(ObjBezierCurve, b);
+        module_insert(md,e);
     }
 }
 
@@ -219,28 +233,31 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                 line_draw(&tempLine, src, ds->color);
             }
                 break;
+            case ObjBezierCurve: {
+                BezierCurve tempBCurve = current->obj.bezierCurve;
+                for (int i = 0; i < 4; ++i) {
+                    matrix_xformPoint(&LTM, &tempBCurve.p[i],&tempBCurve.p[i]);
+                    matrix_xformPoint(GTM, &tempBCurve.p[i],&tempBCurve.p[i]);
+                    matrix_xformPoint(VTM, &tempBCurve.p[i],&tempBCurve.p[i]);
+                }
+                bezierCurve_draw(&tempBCurve,src,ds->color, BezierDeCasteljau);
+            }
             case ObjPolyline: {
-                Polyline tempPolyline;
-                polyline_init(&tempPolyline);
-                polyline_copy(&tempPolyline, &(current->obj.polyline));
+                Polyline tempPolyline = current->obj.polyline;
                 matrix_xformPolyline(&LTM, &tempPolyline);
                 matrix_xformPolyline(GTM, &tempPolyline);
                 matrix_xformPolyline(VTM, &tempPolyline);
                 polyline_draw(&tempPolyline, src, ds->color);
                 polyline_clear(&tempPolyline);
-                polyline_free(&tempPolyline);
             }
                 break;
             case ObjPolygon: {
-                Polygon tempPolygon;
-                polygon_init(&tempPolygon);
-                polygon_copy(&tempPolygon, &(current->obj.polygon));
+                Polygon tempPolygon = current->obj.polygon;
                 matrix_xformPolygon(&LTM, &tempPolygon);
                 matrix_xformPolygon(GTM, &tempPolygon);
                 matrix_xformPolygon(VTM, &tempPolygon);
                 polygon_draw(&tempPolygon, src, ds->color);
                 polygon_clear(&tempPolygon);
-                polygon_free(&tempPolygon);
             }
                 break;
             case ObjModule: {
@@ -255,7 +272,6 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                 break;
             case ObjIdentity: {
                 matrix_identity(&LTM);
-
             }
                 break;
             default:

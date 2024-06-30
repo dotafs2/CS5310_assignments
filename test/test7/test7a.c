@@ -6,7 +6,7 @@
 	Test function for 2D Bezier curves in screen space
 */
 #include <stdio.h>
-#include "graphics.h"
+#include "Bezier.h"
 
 int main(int argc, char *argv[]) {
 	Color blue;
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
 	bezierCurve_set(&bc, p);
 
 	printf("Drawing bezier curve\n");
-	bezierCurve_draw( &bc, src, blue );
+	bezierCurve_draw( &bc, src, blue,BezierDeCasteljau );
 
 	// write the image and clean up
 	image_write(src, "bez2d.ppm");

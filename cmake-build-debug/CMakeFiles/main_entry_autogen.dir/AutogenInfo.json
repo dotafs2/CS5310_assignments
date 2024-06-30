@@ -266,6 +266,12 @@
 	"HEADERS" : 
 	[
 		[
+			"/Users/dotafs/Desktop/CS5310_assignments/include/Bezier.h",
+			"MU",
+			"6YEA5652QU/moc_Bezier.cpp",
+			null
+		],
+		[
 			"/Users/dotafs/Desktop/CS5310_assignments/include/Line.h",
 			"MU",
 			"6YEA5652QU/moc_Line.cpp",
@@ -356,6 +362,7 @@
 	"SETTINGS_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/main_entry_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Bezier.c", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Image.c", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Line.c", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Module.c", "MU", null ],

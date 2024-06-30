@@ -74,9 +74,6 @@ void polygon_clear(Polygon *p) {
     free(p->vertex);
     free(p->color);
     free(p->normal);
-    p->vertex = NULL;
-    p->color = NULL;
-    p->normal = NULL;
     p->numVertex = 0;
 }
 

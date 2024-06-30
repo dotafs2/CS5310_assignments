@@ -36,6 +36,8 @@ set(COMMON_SOURCE_FILES
         include/fsMath.h
         include/Module.h
         src/Module.c
+        src/Bezier.c
+        include/Bezier.h
 )
 
 # QT

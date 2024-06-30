@@ -364,7 +364,8 @@ Polyline* polyline_createp(int numV, Point *vlist) {
 
 void polyline_free(Polyline *p) {
     if (!p) return;
-    free(p->vertex);
+    if(&p->vertex != NULL)
+        free(p->vertex);
     free(p);
 }
 

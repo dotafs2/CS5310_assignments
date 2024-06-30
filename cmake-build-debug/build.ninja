@@ -113,6 +113,14 @@ build CMakeFiles/main_entry.dir/src/Module.c.o: C_COMPILER__main_entry_unscanned
   OBJECT_DIR = CMakeFiles/main_entry.dir
   OBJECT_FILE_DIR = CMakeFiles/main_entry.dir/src
 
+build CMakeFiles/main_entry.dir/src/Bezier.c.o: C_COMPILER__main_entry_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/src/Bezier.c || cmake_object_order_depends_target_main_entry
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles/main_entry.dir/src/Bezier.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -fcolor-diagnostics
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/include -isystem /Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/include -isystem /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Headers -iframework /Users/dotafs/Qt/6.7.2/macos/lib -isystem /Users/dotafs/Qt/6.7.2/macos/mkspecs/macx-clang -isystem /Users/dotafs/Qt/6.7.2/macos/include -isystem /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Headers -isystem /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Headers
+  OBJECT_DIR = CMakeFiles/main_entry.dir
+  OBJECT_FILE_DIR = CMakeFiles/main_entry.dir/src
+
 build CMakeFiles/main_entry.dir/src/mainwindow.cpp.o: CXX_COMPILER__main_entry_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/src/mainwindow.cpp || cmake_object_order_depends_target_main_entry
   DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles/main_entry.dir/src/mainwindow.cpp.o.d
@@ -137,7 +145,7 @@ build CMakeFiles/main_entry.dir/src/main.cpp.o: CXX_COMPILER__main_entry_unscann
 #############################################
 # Link the executable main_entry
 
-build main_entry: CXX_EXECUTABLE_LINKER__main_entry_Debug CMakeFiles/main_entry.dir/main_entry_autogen/mocs_compilation.cpp.o CMakeFiles/main_entry.dir/src/Image.c.o CMakeFiles/main_entry.dir/src/Line.c.o CMakeFiles/main_entry.dir/src/anti-alias.cpp.o CMakeFiles/main_entry.dir/src/ball.cpp.o CMakeFiles/main_entry.dir/src/Polygon.c.o CMakeFiles/main_entry.dir/src/fsMath.c.o CMakeFiles/main_entry.dir/src/Module.c.o CMakeFiles/main_entry.dir/src/mainwindow.cpp.o CMakeFiles/main_entry.dir/src/main.cpp.o | /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/QtGui /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore || main_entry_autogen main_entry_autogen_timestamp_deps
+build main_entry: CXX_EXECUTABLE_LINKER__main_entry_Debug CMakeFiles/main_entry.dir/main_entry_autogen/mocs_compilation.cpp.o CMakeFiles/main_entry.dir/src/Image.c.o CMakeFiles/main_entry.dir/src/Line.c.o CMakeFiles/main_entry.dir/src/anti-alias.cpp.o CMakeFiles/main_entry.dir/src/ball.cpp.o CMakeFiles/main_entry.dir/src/Polygon.c.o CMakeFiles/main_entry.dir/src/fsMath.c.o CMakeFiles/main_entry.dir/src/Module.c.o CMakeFiles/main_entry.dir/src/Bezier.c.o CMakeFiles/main_entry.dir/src/mainwindow.cpp.o CMakeFiles/main_entry.dir/src/main.cpp.o | /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/QtGui /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore || main_entry_autogen main_entry_autogen_timestamp_deps
   FLAGS = -g -Wall -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0
   LINK_LIBRARIES = -Wl,-rpath,/Users/dotafs/Qt/6.7.2/macos/lib  /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/QtGui  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore  -framework IOKit  -framework DiskArbitration  -framework OpenGL  -framework AGL  -framework AppKit  -framework ImageIO  -framework Metal
   LINK_PATH = -F/Users/dotafs/Qt/6.7.2/macos/lib
@@ -220,6 +228,14 @@ build CMakeFiles/test6.dir/src/Module.c.o: C_COMPILER__test6_unscanned_Debug /Us
   OBJECT_DIR = CMakeFiles/test6.dir
   OBJECT_FILE_DIR = CMakeFiles/test6.dir/src
 
+build CMakeFiles/test6.dir/src/Bezier.c.o: C_COMPILER__test6_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/src/Bezier.c || cmake_object_order_depends_target_test6
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles/test6.dir/src/Bezier.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -fcolor-diagnostics
+  INCLUDES = -I/Users/dotafs/Desktop/CS5310_assignments/include -isystem /Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6_autogen/include -isystem /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Headers -iframework /Users/dotafs/Qt/6.7.2/macos/lib -isystem /Users/dotafs/Qt/6.7.2/macos/mkspecs/macx-clang -isystem /Users/dotafs/Qt/6.7.2/macos/include -isystem /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Headers -isystem /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Headers
+  OBJECT_DIR = CMakeFiles/test6.dir
+  OBJECT_FILE_DIR = CMakeFiles/test6.dir/src
+
 build CMakeFiles/test6.dir/test/test6/test6b.c.o: C_COMPILER__test6_unscanned_Debug /Users/dotafs/Desktop/CS5310_assignments/test/test6/test6b.c || cmake_object_order_depends_target_test6
   DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles/test6.dir/test/test6/test6b.c.o.d
@@ -236,7 +252,7 @@ build CMakeFiles/test6.dir/test/test6/test6b.c.o: C_COMPILER__test6_unscanned_De
 #############################################
 # Link the executable test6
 
-build test6: CXX_EXECUTABLE_LINKER__test6_Debug CMakeFiles/test6.dir/test6_autogen/mocs_compilation.cpp.o CMakeFiles/test6.dir/src/Image.c.o CMakeFiles/test6.dir/src/Line.c.o CMakeFiles/test6.dir/src/anti-alias.cpp.o CMakeFiles/test6.dir/src/ball.cpp.o CMakeFiles/test6.dir/src/Polygon.c.o CMakeFiles/test6.dir/src/fsMath.c.o CMakeFiles/test6.dir/src/Module.c.o CMakeFiles/test6.dir/test/test6/test6b.c.o | /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/QtGui /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore || test6_autogen test6_autogen_timestamp_deps
+build test6: CXX_EXECUTABLE_LINKER__test6_Debug CMakeFiles/test6.dir/test6_autogen/mocs_compilation.cpp.o CMakeFiles/test6.dir/src/Image.c.o CMakeFiles/test6.dir/src/Line.c.o CMakeFiles/test6.dir/src/anti-alias.cpp.o CMakeFiles/test6.dir/src/ball.cpp.o CMakeFiles/test6.dir/src/Polygon.c.o CMakeFiles/test6.dir/src/fsMath.c.o CMakeFiles/test6.dir/src/Module.c.o CMakeFiles/test6.dir/src/Bezier.c.o CMakeFiles/test6.dir/test/test6/test6b.c.o | /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/QtGui /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore || test6_autogen test6_autogen_timestamp_deps
   FLAGS = -g -Wall -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0
   LINK_LIBRARIES = -Wl,-rpath,/Users/dotafs/Qt/6.7.2/macos/lib  /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/QtGui  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore  -framework IOKit  -framework DiskArbitration  -framework OpenGL  -framework AGL  -framework AppKit  -framework ImageIO  -framework Metal
   LINK_PATH = -F/Users/dotafs/Qt/6.7.2/macos/lib
@@ -317,7 +333,7 @@ build test6_autogen/timestamp test6_autogen/mocs_compilation.cpp | ${cmake_ninja
 #############################################
 # Phony custom command for CMakeFiles/main_entry_autogen_timestamp_deps
 
-build CMakeFiles/main_entry_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/main_entry_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/./libexec/uic /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/moc
+build CMakeFiles/main_entry_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/main_entry_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/moc /Users/dotafs/Qt/6.7.2/macos/./libexec/uic
 
 
 #############################################
@@ -329,7 +345,7 @@ build CMakeFiles/main_entry_autogen | ${cmake_ninja_workdir}CMakeFiles/main_entr
 #############################################
 # Phony custom command for CMakeFiles/test6_autogen_timestamp_deps
 
-build CMakeFiles/test6_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/test6_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/./libexec/uic /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/moc
+build CMakeFiles/test6_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/test6_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/moc /Users/dotafs/Qt/6.7.2/macos/./libexec/uic
 
 
 #############################################

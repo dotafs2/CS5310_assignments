@@ -7,7 +7,7 @@
 #include "Polygon.h"
 #include "Line.h"
 #include "Image.h"
-
+#include "Bezier.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,6 +17,7 @@ extern "C" {
 typedef enum { // example of an enumerated type
   ObjNone,
   ObjLine,
+  ObjBezierCurve,
   ObjPoint,
   ObjPolyline,
   ObjPolygon,
@@ -59,6 +60,7 @@ typedef union {
     void *matrix;
     Color color;
     float coeff;
+    BezierCurve bezierCurve;
 } Object;
 
 typedef struct Element {
@@ -89,6 +91,7 @@ void module_point(Module *md, Point *p);
 void module_line(Module *md, Line *p);
 void module_polyline(Module *md, Polyline *p);
 void module_polygon(Module *md, Polygon *p);
+void module_bezierCurve(Module *m, BezierCurve *b, int divisions);
 void module_identity(Module *md);
 void module_translate2D(Module *md, double tx, double ty);
 void module_scale2D(Module *md, double sx, double sy);
