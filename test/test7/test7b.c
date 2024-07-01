@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 
 	// grab the command line argument, if one exists
 	if(argc > 1) {
-		int tmp = atoi(argv[1]);
+		int tmp = 4;
 		if( tmp >= 0 && tmp < 10 )
 			divisions = tmp;
 	}
@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
 	matrix_print( &VTM, stdout );
 
 	// Create the animation by adjusting the GTM
-	for(frame=0;frame<1;frame++) {
+	for(frame=0;frame<10;frame++) {
 		char buffer[256];
 		
 		matrix_rotateY(&GTM, cos(M_PI/30.0), sin(M_PI/30.0) );

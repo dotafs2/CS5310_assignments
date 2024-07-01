@@ -192,7 +192,6 @@ void matrix_shear2D(Matrix *m, double shx, double shy) {
     Matrix result;
     matrix_multiply(&shear, m, &result);
 
-    // Copy the result back to the input matrix
     *m = result;
 }
 
@@ -210,8 +209,10 @@ void matrix_scale(Matrix *m, double sx, double sy, double sz) {
                      {0, sy, 0, 0},
                      {0, 0, sz, 0},
                      {0, 0, 0, 1}}};
+    Matrix result;
+    matrix_multiply(&scale, m, &result);
 
-    matrix_multiply(&scale, m, m);
+    *m = result;
 }
 
 void matrix_rotateX(Matrix *m, double cth, double sth) {

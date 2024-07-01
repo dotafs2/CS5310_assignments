@@ -31,10 +31,10 @@ if(NOT QT_DEPLOY_IGNORED_LIB_DIRS)
 endif()
 
 # These are internal implementation details. They may be removed at any time.
-set(__QT_DEPLOY_SYSTEM_NAME "Darwin")
+set(__QT_DEPLOY_SYSTEM_NAME "Windows")
 set(__QT_DEPLOY_IS_SHARED_LIBS_BUILD "ON")
-set(__QT_DEPLOY_TOOL "/Users/dotafs/Qt/6.7.2/macos/bin/macdeployqt")
-set(__QT_DEPLOY_IMPL_DIR "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/.qt")
+set(__QT_DEPLOY_TOOL "C:/Qt/6.7.1/mingw_64/bin/windeployqt.exe")
+set(__QT_DEPLOY_IMPL_DIR "F:/CS5310_assignments/cmake-build-debug/.qt")
 set(__QT_DEPLOY_VERBOSE "")
 set(__QT_CMAKE_EXPORT_NAMESPACE "Qt6")
 set(__QT_DEPLOY_GENERATOR_IS_MULTI_CONFIG "0")
@@ -42,13 +42,13 @@ set(__QT_DEPLOY_ACTIVE_CONFIG "Debug")
 set(__QT_NO_CREATE_VERSIONLESS_FUNCTIONS "")
 set(__QT_DEFAULT_MAJOR_VERSION "6")
 set(__QT_DEPLOY_QT_ADDITIONAL_PACKAGES_PREFIX_PATH "")
-set(__QT_DEPLOY_QT_INSTALL_PREFIX "/Users/dotafs/Qt/6.7.2/macos")
+set(__QT_DEPLOY_QT_INSTALL_PREFIX "C:/Qt/6.7.1/mingw_64")
 set(__QT_DEPLOY_QT_INSTALL_BINS "bin")
 set(__QT_DEPLOY_QT_INSTALL_DATA ".")
-set(__QT_DEPLOY_QT_INSTALL_LIBEXECS "./libexec")
+set(__QT_DEPLOY_QT_INSTALL_LIBEXECS "./bin")
 set(__QT_DEPLOY_QT_INSTALL_PLUGINS "./plugins")
 set(__QT_DEPLOY_QT_INSTALL_TRANSLATIONS "./translations")
-set(__QT_DEPLOY_TARGET_QT_PATHS_PATH "/Users/dotafs/Qt/6.7.2/macos/bin/qtpaths6")
+set(__QT_DEPLOY_TARGET_QT_PATHS_PATH "C:/Qt/6.7.1/mingw_64/bin/qtpaths6.exe")
 set(__QT_DEPLOY_PLUGINS "")
 set(__QT_DEPLOY_MUST_ADJUST_PLUGINS_RPATH "")
 set(__QT_DEPLOY_USE_PATCHELF "")
@@ -58,8 +58,8 @@ set(__QT_DEPLOY_QT_DEBUG_POSTFIX "")
 
 # Define the CMake commands to be made available during deployment.
 set(__qt_deploy_support_files
-    "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/.qt/QtDeployTargets.cmake"
-    "/Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6Core/Qt6CoreDeploySupport.cmake"
+    "F:/CS5310_assignments/cmake-build-debug/.qt/QtDeployTargets.cmake"
+    "C:/Qt/6.7.1/mingw_64/lib/cmake/Qt6Core/Qt6CoreDeploySupport.cmake"
 )
 foreach(__qt_deploy_support_file IN LISTS __qt_deploy_support_files)
     include("${__qt_deploy_support_file}")

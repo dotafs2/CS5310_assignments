@@ -48,10 +48,16 @@ set(MAIN_SOURCE_FILES
         src/main.cpp
 )
 
-# test
-set(TEST6_SOURCE_FILES
+# test6a
+set(TEST6A_SOURCE_FILES
         ${COMMON_SOURCE_FILES}
-        test/test6/test6b.c
+        test/test6/test6a.c
+)
+
+# test6b
+set(TEST6B_SOURCE_FILES
+        ${COMMON_SOURCE_FILES}
+        test/test7/test7b.c
 )
 
 # Create the main entry executable
@@ -69,8 +75,8 @@ set_source_files_properties(
 # Link Qt6 Widgets library for main entry
 target_link_libraries(main_entry Qt6::Core Qt6::Widgets)
 
-# Create the test6 executable
-add_executable(test6 ${TEST6_SOURCE_FILES})
+# Create the test6a executable
+add_executable(test6a ${TEST6A_SOURCE_FILES})
 
 set_source_files_properties(
         src/anti-alias.cpp
@@ -79,5 +85,18 @@ set_source_files_properties(
         LANGUAGE CXX
 )
 
-# Link Qt6 Widgets library for test6
-target_link_libraries(test6 Qt6::Core Qt6::Widgets)
+# Link Qt6 Widgets library for test6a
+target_link_libraries(test6a Qt6::Core Qt6::Widgets)
+
+# Create the test6b executable
+add_executable(test6b ${TEST6B_SOURCE_FILES})
+
+set_source_files_properties(
+        src/anti-alias.cpp
+        src/ball.cpp
+        PROPERTIES
+        LANGUAGE CXX
+)
+
+# Link Qt6 Widgets library for test6b
+target_link_libraries(test6b Qt6::Core Qt6::Widgets)

@@ -39,6 +39,8 @@ void bezierSurface_set(BezierSurface *b, Point *vlist);
 // sets the z-buffer flag to the given value.
 void bezierCurve_zBuffer(BezierCurve *p, int flag) ;
 void bezierSurface_zBuffer(BezierSurface *p, int flag);
+
+void bezierCurve_copy(BezierCurve *to, const BezierCurve *from);
 /** draws the Bezier curve, given in screen coordinates, into the image using the given color. The function should be
 adaptive so that it uses an appropriate number of line segments to draw the curve. For example, if the bounding box
 of the control points is less than 10 pixels in the largest dimension, then it is reasonable to draw the lines between

@@ -46,6 +46,15 @@ void bezierSurface_set(BezierSurface *b, Point *vlist) {
     }
 }
 
+void bezierCurve_copy(BezierCurve *to, const BezierCurve *from) {
+    for (int i = 0; i < 4; i++) {
+        to->p[i].val[0] = from->p[i].val[0];
+        to->p[i].val[1] = from->p[i].val[1];
+        to->p[i].val[2] = from->p[i].val[2];
+    }
+    to->zbufferFlag = from->zbufferFlag;
+}
+
 void bezierCurve_zBuffer(BezierCurve *b, int flag) {
     b->zbufferFlag = flag;
 }

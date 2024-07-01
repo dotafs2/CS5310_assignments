@@ -44,6 +44,7 @@ private:
     void drawBall();
     void test5c(int frame);
     void test6a(int frame);
+    void test7b();
     void setWhite(Image *src);
     double drand();
 

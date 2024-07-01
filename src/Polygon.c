@@ -136,7 +136,6 @@ void polygon_copy(Polygon *to, Polygon *from) {
     } else {
         to->color = NULL;
     }
-
     if (from->normal) {
         to->normal = (Vector *)malloc(from->numVertex * sizeof(Vector));
         if (!to->normal) return;

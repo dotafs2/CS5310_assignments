@@ -38,7 +38,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Module.h"
-
+#include <time.h>
 
 int main(int argc, char *argv[]) {
   View2D view;
@@ -58,8 +58,7 @@ int main(int argc, char *argv[]) {
   DrawState *ds;
   Image *src;
 
-	srand48(42);
-
+    srand((unsigned int)time(NULL));
   // setup gtm
   matrix_identity(&gtm);
   point_set2D(&vrp, 0, 0);
@@ -157,7 +156,7 @@ int main(int argc, char *argv[]) {
 	// draw stars into the scene
   module_identity(scene);
   for(i=0;i<30;i++) {
-    point_set2D( &(p[0]), drand48()*2 - 1, drand48()*1 - 0.5 );
+      point_set2D(&(p[0]), ((double)rand() / RAND_MAX) * 2 - 1, ((double)rand() / RAND_MAX) * 1 - 0.5);
     module_point( scene, &(p[0]) );
   }
 
