@@ -39,17 +39,15 @@ int main(int argc, char *argv[]) {
 	color_set(&Red, 250/255.0, 40/255.0, 40/255.0);
 	color_set(&Blue, 30/255.0, 20/255.0, 250/255.0);
 
-  if(argc > 1) {
-    theta = atoi(argv[1]);
-  }
+    theta = 30;
+
   printf("Drawing ship with orientation %.2f degrees\n", theta);
 
-  if(argc > 2) {
-    phaserAngle = atoi(argv[2]);
+    phaserAngle = -60;
     firePhase = 1;
 
     printf("Drawing phaser with angle %.2f degrees\n", phaserAngle);
-  }
+
 
   srand(42);
 
@@ -293,7 +291,6 @@ int main(int argc, char *argv[]) {
   polygon_print(ship[0], stdout);
 
   for(i=0;i<index;i++) {
-
     // multiply the polygon by the global transform matrix
     matrix_xformPolygon(&GTM, ship[i]);
     if(i==0) {

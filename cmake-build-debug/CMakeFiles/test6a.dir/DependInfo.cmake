@@ -14,7 +14,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "F:/CS5310_assignments/src/Module.c" "CMakeFiles/test6a.dir/src/Module.c.obj" "gcc" "CMakeFiles/test6a.dir/src/Module.c.obj.d"
   "F:/CS5310_assignments/src/Polygon.c" "CMakeFiles/test6a.dir/src/Polygon.c.obj" "gcc" "CMakeFiles/test6a.dir/src/Polygon.c.obj.d"
   "F:/CS5310_assignments/src/fsMath.c" "CMakeFiles/test6a.dir/src/fsMath.c.obj" "gcc" "CMakeFiles/test6a.dir/src/fsMath.c.obj.d"
-  "F:/CS5310_assignments/test/test6/test6a.c" "CMakeFiles/test6a.dir/test/test6/test6a.c.obj" "gcc" "CMakeFiles/test6a.dir/test/test6/test6a.c.obj.d"
+  "F:/CS5310_assignments/test/test5/test5c.c" "CMakeFiles/test6a.dir/test/test5/test5c.c.obj" "gcc" "CMakeFiles/test6a.dir/test/test5/test5c.c.obj.d"
   "F:/CS5310_assignments/src/anti-alias.cpp" "CMakeFiles/test6a.dir/src/anti-alias.cpp.obj" "gcc" "CMakeFiles/test6a.dir/src/anti-alias.cpp.obj.d"
   "F:/CS5310_assignments/src/ball.cpp" "CMakeFiles/test6a.dir/src/ball.cpp.obj" "gcc" "CMakeFiles/test6a.dir/src/ball.cpp.obj.d"
   "F:/CS5310_assignments/cmake-build-debug/test6a_autogen/mocs_compilation.cpp" "CMakeFiles/test6a.dir/test6a_autogen/mocs_compilation.cpp.obj" "gcc" "CMakeFiles/test6a.dir/test6a_autogen/mocs_compilation.cpp.obj.d"

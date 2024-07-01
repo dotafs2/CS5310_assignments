@@ -547,8 +547,8 @@ CMakeFiles/test6a.dir/src/fsMath.c.obj
  F:/CS5310_assignments/include/Polygon.h
  F:/CS5310_assignments/include/fsMath.h
 
-CMakeFiles/test6a.dir/test/test6/test6a.c.obj
- F:/CS5310_assignments/test/test6/test6a.c
+CMakeFiles/test6a.dir/test/test5/test5c.c.obj
+ F:/CS5310_assignments/test/test5/test5c.c
  D:/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/limits.h
  D:/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mm_malloc.h
  D:/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/syslimits.h
@@ -556,7 +556,6 @@ CMakeFiles/test6a.dir/test/test6/test6a.c.obj
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/_mingw_mac.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/_mingw_secapi.h
- D:/CLion/bin/mingw/x86_64-w64-mingw32/include/_timeval.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/corecrt.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/corecrt_wstdlib.h
@@ -565,23 +564,17 @@ CMakeFiles/test6a.dir/test/test6/test6a.c.obj
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/limits.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/malloc.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/math.h
- D:/CLion/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdlib_s.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h
- D:/CLion/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/stdio.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/stdlib.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/string.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl
- D:/CLion/bin/mingw/x86_64-w64-mingw32/include/sys/timeb.h
- D:/CLion/bin/mingw/x86_64-w64-mingw32/include/time.h
  D:/CLion/bin/mingw/x86_64-w64-mingw32/include/vadefs.h
- F:/CS5310_assignments/include/Bezier.h
  F:/CS5310_assignments/include/Image.h
  F:/CS5310_assignments/include/Line.h
- F:/CS5310_assignments/include/Module.h
  F:/CS5310_assignments/include/Polygon.h
  F:/CS5310_assignments/include/fsMath.h
 

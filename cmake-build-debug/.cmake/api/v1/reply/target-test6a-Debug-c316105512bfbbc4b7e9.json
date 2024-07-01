@@ -387,11 +387,11 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "test6a_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "test6a_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "test6a_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "test6a::@6890427a1f51a3e7e1df",
@@ -595,7 +595,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
-			"path" : "test/test6/test6a.c",
+			"path" : "test/test5/test5c.c",
 			"sourceGroupIndex" : 0
 		},
 		{

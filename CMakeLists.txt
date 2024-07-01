@@ -51,7 +51,7 @@ set(MAIN_SOURCE_FILES
 # test6a
 set(TEST6A_SOURCE_FILES
         ${COMMON_SOURCE_FILES}
-        test/test6/test6a.c
+        test/test5/test5c.c
 )
 
 # test6b

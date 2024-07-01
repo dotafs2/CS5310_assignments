@@ -547,29 +547,29 @@ src/mainWindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main_entry.dir\build.make CMakeFiles/main_entry.dir/src/mainWindow.cpp.s
 .PHONY : src/mainWindow.cpp.s
 
-test/test6/test6a.obj: test/test6/test6a.c.obj
-.PHONY : test/test6/test6a.obj
+test/test5/test5c.obj: test/test5/test5c.c.obj
+.PHONY : test/test5/test5c.obj
 
 # target to build an object file
-test/test6/test6a.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6a.dir\build.make CMakeFiles/test6a.dir/test/test6/test6a.c.obj
-.PHONY : test/test6/test6a.c.obj
+test/test5/test5c.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6a.dir\build.make CMakeFiles/test6a.dir/test/test5/test5c.c.obj
+.PHONY : test/test5/test5c.c.obj
 
-test/test6/test6a.i: test/test6/test6a.c.i
-.PHONY : test/test6/test6a.i
+test/test5/test5c.i: test/test5/test5c.c.i
+.PHONY : test/test5/test5c.i
 
 # target to preprocess a source file
-test/test6/test6a.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6a.dir\build.make CMakeFiles/test6a.dir/test/test6/test6a.c.i
-.PHONY : test/test6/test6a.c.i
+test/test5/test5c.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6a.dir\build.make CMakeFiles/test6a.dir/test/test5/test5c.c.i
+.PHONY : test/test5/test5c.c.i
 
-test/test6/test6a.s: test/test6/test6a.c.s
-.PHONY : test/test6/test6a.s
+test/test5/test5c.s: test/test5/test5c.c.s
+.PHONY : test/test5/test5c.s
 
 # target to generate assembly for a file
-test/test6/test6a.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6a.dir\build.make CMakeFiles/test6a.dir/test/test6/test6a.c.s
-.PHONY : test/test6/test6a.c.s
+test/test5/test5c.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6a.dir\build.make CMakeFiles/test6a.dir/test/test5/test5c.c.s
+.PHONY : test/test5/test5c.c.s
 
 test/test7/test7b.obj: test/test7/test7b.c.obj
 .PHONY : test/test7/test7b.obj
@@ -693,9 +693,9 @@ help:
 	@echo ... src/mainWindow.obj
 	@echo ... src/mainWindow.i
 	@echo ... src/mainWindow.s
-	@echo ... test/test6/test6a.obj
-	@echo ... test/test6/test6a.i
-	@echo ... test/test6/test6a.s
+	@echo ... test/test5/test5c.obj
+	@echo ... test/test5/test5c.i
+	@echo ... test/test5/test5c.s
 	@echo ... test/test7/test7b.obj
 	@echo ... test/test7/test7b.i
 	@echo ... test/test7/test7b.s

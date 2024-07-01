@@ -109,11 +109,18 @@ void matrix_xformPoint(Matrix *m, Point *p, Point *q) {
             temp.val[i] += m->m[i][j] * p->val[j];
         }
     }
-    for (int i = 0; i < 4; i++) {
-        q->val[i] = temp.val[i];
+    // Normalize the point if the fourth component is not zero
+    if (temp.val[3] != 0) {
+        for (int i = 0; i < 3; i++) {
+            q->val[i] = temp.val[i] / temp.val[3];
+        }
+        q->val[3] = 1.0;
+    } else {
+        for (int i = 0; i < 4; i++) {
+            q->val[i] = temp.val[i];
+        }
     }
 }
-
 
 void matrix_xformVector(Matrix *m, Vector *p, Vector *q) {
     for (int i = 0; i < 4; i++) {
@@ -126,13 +133,20 @@ void matrix_xformVector(Matrix *m, Vector *p, Vector *q) {
 
 void matrix_xformPolygon(Matrix *m, Polygon *p) {
     for (int i = 0; i < p->numVertex; i++) {
-        printf("1");
+        // Transform the vertex
         Point newPoint;
         matrix_xformPoint(m, &p->vertex[i], &newPoint);
         point_copy(&p->vertex[i], &newPoint);
+
+        // Transform the normal if it exists
+        if (p->normal) {
+            Vector newNormal;
+            matrix_xformVector(m, &p->normal[i], &newNormal);
+            vector_copy(&p->normal[i], &newNormal);
+        }
     }
 }
-
+// verify
 void matrix_xformPolyline(Matrix *m, Polyline *p) {
     for (int i = 0; i < p->numVertex; i++) {
         Point newPoint;
@@ -157,7 +171,7 @@ void matrix_scale2D(Matrix *m, double sx, double sy) {
 
     matrix_multiply(&scale,m, m);
 }
-
+// verify
 void matrix_rotateZ(Matrix *m, double cth, double sth) {
     Matrix rotate = {{{cth, -sth, 0, 0},
                       {sth, cth, 0, 0},
@@ -166,8 +180,6 @@ void matrix_rotateZ(Matrix *m, double cth, double sth) {
 
     Matrix result;
     matrix_multiply(&rotate, m, &result);
-
-    // Copy to make sure no bug
     *m = result;
 }
 
@@ -291,9 +303,9 @@ void matrix_setView2D(Matrix *vtm, View2D *view) {
     matrix_translate2D(&trans2, view->screenx / 2.0, view->screeny / 2.0);
 
     // combine
-    matrix_multiply(&trans2, &scale, vtm);
-    matrix_multiply(vtm, &rotate, vtm);
-    matrix_multiply(vtm, &trans, vtm);
+    matrix_multiply( &scale,&trans2, vtm);
+    matrix_multiply( &rotate,vtm, vtm);
+    matrix_multiply( &trans,vtm,vtm);
 }
 
 void matrix_setView3D(Matrix *vtm, View3D *view) {
@@ -305,33 +317,45 @@ void matrix_setView3D(Matrix *vtm, View3D *view) {
     matrix_identity(&translate);
     matrix_translate(&translate, -view->vrp.val[0], -view->vrp.val[1], -view->vrp.val[2]);
     matrix_multiply(&translate, vtm, vtm);
-
-    // Step 3: Align VPN with the z-axis
-    Vector u, v, n;
-    vector_copy(&n, &view->vpn);
-    vector_normalize(&n);
-    vector_cross(&view->vup, &n, &u);
+    printf("after VRP translation\n");
+    matrix_print(vtm,stdout);
+    // Step 3: VPN + VUP to get the rotate matrix
+    Vector u, v, w;
+    vector_copy(&w, &view->vpn);
+    vector_normalize(&w);
+    vector_cross(&view->vup, &w, &u);
     vector_normalize(&u);
-    vector_cross(&n, &u, &v);
-
-    Matrix align;
-    matrix_identity(&align);
-    align.m[0][0] = u.val[0]; align.m[0][1] = u.val[1]; align.m[0][2] = u.val[2];
-    align.m[1][0] = v.val[0]; align.m[1][1] = v.val[1]; align.m[1][2] = v.val[2];
-    align.m[2][0] = n.val[0]; align.m[2][1] = n.val[1]; align.m[2][2] = n.val[2];
-    matrix_multiply(&align, vtm, vtm);
+    vector_cross(&w, &u, &v);
+    vector_normalize(&v);
+    // form the rotate matrix
+    Matrix rotate;
+    matrix_identity(&rotate);
+    rotate.m[0][0] = u.val[0]; rotate.m[0][1] = u.val[1]; rotate.m[0][2] = u.val[2];
+    rotate.m[1][0] = v.val[0]; rotate.m[1][1] = v.val[1]; rotate.m[1][2] = v.val[2];
+    rotate.m[2][0] = w.val[0]; rotate.m[2][1] = w.val[1]; rotate.m[2][2] = w.val[2];
+    matrix_multiply(&rotate, vtm, vtm);
+    printf("View reference axes\n");
+    matrix_print(vtm,stdout);
+    Matrix translateCOP;
+    matrix_identity(&translateCOP);
+    matrix_translate(&translateCOP,0,0,view->d);
+    matrix_multiply(&translateCOP,vtm,vtm);
+    printf("after translating COP to origin\n");
+    matrix_print(vtm,stdout);
+    
 
     // Step 4: Apply perspective projection
     Matrix perspective;
     matrix_identity(&perspective);
     perspective.m[0][0] = 2.0 * view->d / view->du;
     perspective.m[1][1] = 2.0 * view->d / view->dv;
-    perspective.m[2][2] = view->b / (view->b - view->f);
-    perspective.m[2][3] = -view->b * view->f / (view->b - view->f);
-    perspective.m[3][2] = 1.0 / view->d;
+    perspective.m[2][2] = view->f / (view->f - view->b);
+    perspective.m[2][3] = -view->f * view->b / (view->f - view->b);
+    perspective.m[3][2] = 1.0;
     perspective.m[3][3] = 0.0;
     matrix_multiply(&perspective, vtm, vtm);
-
+    printf("after perspective\n");
+    matrix_print(vtm,stdout);
     // Step 5: Scale to viewport
     Matrix scale;
     matrix_identity(&scale);

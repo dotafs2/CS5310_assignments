@@ -117,8 +117,8 @@ CMakeFiles/main_entry.dir/clean:
 # Target rules for target CMakeFiles/test6a.dir
 
 # All Build rule for target.
-CMakeFiles/test6a.dir/all: CMakeFiles/test6a_autogen_timestamp_deps.dir/all
 CMakeFiles/test6a.dir/all: CMakeFiles/test6a_autogen.dir/all
+CMakeFiles/test6a.dir/all: CMakeFiles/test6a_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6a.dir\build.make CMakeFiles/test6a.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\test6a.dir\build.make CMakeFiles/test6a.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=F:\CS5310_assignments\cmake-build-debug\CMakeFiles --progress-num=14,15,16,17,18,19,20,21,22,23,24 "Built target test6a"

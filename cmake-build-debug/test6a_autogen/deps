@@ -192,5 +192,5 @@ test6a_autogen/timestamp: \
 	F:/CS5310_assignments/src/anti-alias.cpp \
 	F:/CS5310_assignments/src/ball.cpp \
 	F:/CS5310_assignments/src/fsMath.c \
-	F:/CS5310_assignments/test/test6/test6a.c \
+	F:/CS5310_assignments/test/test5/test5c.c \
 	D:/CLion/bin/cmake/win/x64/bin/cmake.exe

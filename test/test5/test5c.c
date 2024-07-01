@@ -10,13 +10,9 @@
 #include "fsMath.h"
 #include "Polygon.h"
 #include "Line.h"
-
 int main(int argc, char *argv[]) {
     const int rows = 180;
     const int cols = 320;
-    const int numFrames = 50; // Number of frames for the animation
-    char filename[50];
-
     View3D view;
     Matrix vtm;
     Polygon side[6];
@@ -25,7 +21,7 @@ int main(int argc, char *argv[]) {
     Point  v[8];
     Color  color[6];
     Image *src;
-    int i, frame;
+    int i;
 
     // set some colors
     color_set( &color[0], 0, 0, 1 );
@@ -88,48 +84,43 @@ int main(int argc, char *argv[]) {
 
     polygon_set( &side[5], 4, tv );
 
-    for(frame = 0; frame < numFrames; frame++) {
-        // Create image
-        src = image_create(rows, cols);
+    // grab command line argument to determine viewpoint
+    // and set up the view structure
+        float alpha = 0;
+        point_set( &(view.vrp), 3*alpha, 2*alpha, -2*alpha - (1.0-alpha)*3, 1.0 );
+    vector_set( &(view.vpn), -view.vrp.val[0], -view.vrp.val[1], -view.vrp.val[2] );
 
-        // Set the viewpoint based on the current frame
-        float alpha = (float)frame / (numFrames - 1);
-        point_set( &(view.vrp), 3*cos(alpha * 2 * M_PI), 2, 3*sin(alpha * 2 * M_PI), 1.0 );
-        vector_set( &(view.vpn), -view.vrp.val[0], -view.vrp.val[1], -view.vrp.val[2] );
-        vector_set( &(view.vup), 0, 1, 0 );
+    vector_set( &(view.vup), 0, 1, 0 );
+    view.d = 1;  // focal length
+    view.du = 2;
+    view.dv = view.du * (float)rows / cols;
+    view.f = 0; // front clip plane
+    view.b = 4; // back clip plane
+    view.screenx = cols;
+    view.screeny = rows;
 
-        view.d = 1;  // focal length
-        view.du = 2;
-        view.dv = view.du * (float)rows / cols;
-        view.f = 0; // front clip plane
-        view.b = 4; // back clip plane
-        view.screenx = cols;
-        view.screeny = rows;
+    matrix_setView3D( &vtm, &view );
 
-        matrix_setView3D( &vtm, &view );
+    // create image
+    src = image_create( rows, cols );
 
-        // use a temporary polygon to transform stuff
-        polygon_init( &tpoly );
+    // use a temprary polygon to transform stuff
+    polygon_init( &tpoly );
 
-        printf("Drawing Polygons for frame %d\n", frame);
-        for(i=0;i<6;i++) {
-            polygon_copy( &tpoly, &side[i] );
-            matrix_xformPolygon( &vtm, &tpoly );
+    printf("Drawing Polygons\n");
+    for(i=0;i<6;i++) {
+        polygon_copy( &tpoly, &side[i] );
+        matrix_xformPolygon( &vtm, &tpoly );
 
-            // normalize by homogeneous coordinate before drawing
-            polygon_normalize( &tpoly );
-            polygon_draw( &tpoly, src, color[i] );
-            polygon_print( &tpoly, stdout );
-        }
+        // normalize by homogeneous coordinate before drawing
+        polygon_normalize( &tpoly );
 
-        // Write the image to a file
-        snprintf(filename, sizeof(filename), "frame-%04d.ppm", frame);
-        printf("Writing image %s\n", filename);
-        image_write(src, filename);
-
-        // Free the image
-        image_free(src);
+        polygon_draw( &tpoly, src, color[i] );
+        polygon_print( &tpoly, stdout );
     }
+
+    printf("Writing image\n");
+    image_write( src, "cube.ppm" );
 
     return(0);
 }

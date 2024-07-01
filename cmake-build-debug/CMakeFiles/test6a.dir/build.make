@@ -206,20 +206,20 @@ CMakeFiles/test6a.dir/src/Bezier.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/test6a.dir/src/Bezier.c.s"
 	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S F:\CS5310_assignments\src\Bezier.c -o CMakeFiles\test6a.dir\src\Bezier.c.s
 
-CMakeFiles/test6a.dir/test/test6/test6a.c.obj: CMakeFiles/test6a.dir/flags.make
-CMakeFiles/test6a.dir/test/test6/test6a.c.obj: CMakeFiles/test6a.dir/includes_C.rsp
-CMakeFiles/test6a.dir/test/test6/test6a.c.obj: F:/CS5310_assignments/test/test6/test6a.c
-CMakeFiles/test6a.dir/test/test6/test6a.c.obj: CMakeFiles/test6a.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=F:\CS5310_assignments\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/test6a.dir/test/test6/test6a.c.obj"
-	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/test6a.dir/test/test6/test6a.c.obj -MF CMakeFiles\test6a.dir\test\test6\test6a.c.obj.d -o CMakeFiles\test6a.dir\test\test6\test6a.c.obj -c F:\CS5310_assignments\test\test6\test6a.c
+CMakeFiles/test6a.dir/test/test5/test5c.c.obj: CMakeFiles/test6a.dir/flags.make
+CMakeFiles/test6a.dir/test/test5/test5c.c.obj: CMakeFiles/test6a.dir/includes_C.rsp
+CMakeFiles/test6a.dir/test/test5/test5c.c.obj: F:/CS5310_assignments/test/test5/test5c.c
+CMakeFiles/test6a.dir/test/test5/test5c.c.obj: CMakeFiles/test6a.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=F:\CS5310_assignments\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/test6a.dir/test/test5/test5c.c.obj"
+	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/test6a.dir/test/test5/test5c.c.obj -MF CMakeFiles\test6a.dir\test\test5\test5c.c.obj.d -o CMakeFiles\test6a.dir\test\test5\test5c.c.obj -c F:\CS5310_assignments\test\test5\test5c.c
 
-CMakeFiles/test6a.dir/test/test6/test6a.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/test6a.dir/test/test6/test6a.c.i"
-	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E F:\CS5310_assignments\test\test6\test6a.c > CMakeFiles\test6a.dir\test\test6\test6a.c.i
+CMakeFiles/test6a.dir/test/test5/test5c.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/test6a.dir/test/test5/test5c.c.i"
+	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E F:\CS5310_assignments\test\test5\test5c.c > CMakeFiles\test6a.dir\test\test5\test5c.c.i
 
-CMakeFiles/test6a.dir/test/test6/test6a.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/test6a.dir/test/test6/test6a.c.s"
-	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S F:\CS5310_assignments\test\test6\test6a.c -o CMakeFiles\test6a.dir\test\test6\test6a.c.s
+CMakeFiles/test6a.dir/test/test5/test5c.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/test6a.dir/test/test5/test5c.c.s"
+	D:\CLion\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S F:\CS5310_assignments\test\test5\test5c.c -o CMakeFiles\test6a.dir\test\test5\test5c.c.s
 
 # Object files for target test6a
 test6a_OBJECTS = \
@@ -232,7 +232,7 @@ test6a_OBJECTS = \
 "CMakeFiles/test6a.dir/src/fsMath.c.obj" \
 "CMakeFiles/test6a.dir/src/Module.c.obj" \
 "CMakeFiles/test6a.dir/src/Bezier.c.obj" \
-"CMakeFiles/test6a.dir/test/test6/test6a.c.obj"
+"CMakeFiles/test6a.dir/test/test5/test5c.c.obj"
 
 # External object files for target test6a
 test6a_EXTERNAL_OBJECTS =
@@ -246,7 +246,7 @@ test6a.exe: CMakeFiles/test6a.dir/src/Polygon.c.obj
 test6a.exe: CMakeFiles/test6a.dir/src/fsMath.c.obj
 test6a.exe: CMakeFiles/test6a.dir/src/Module.c.obj
 test6a.exe: CMakeFiles/test6a.dir/src/Bezier.c.obj
-test6a.exe: CMakeFiles/test6a.dir/test/test6/test6a.c.obj
+test6a.exe: CMakeFiles/test6a.dir/test/test5/test5c.c.obj
 test6a.exe: CMakeFiles/test6a.dir/build.make
 test6a.exe: C:/Qt/6.7.1/mingw_64/lib/libQt6Widgets.a
 test6a.exe: C:/Qt/6.7.1/mingw_64/lib/libQt6Gui.a
