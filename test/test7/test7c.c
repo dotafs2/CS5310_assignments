@@ -12,7 +12,10 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#include "graphics.h"
+#include "Bezier.h"
+#include "Module.h"
+
+
 
 int main(int argc, char *argv[]) {
 	int frame;

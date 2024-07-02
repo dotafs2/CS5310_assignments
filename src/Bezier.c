@@ -3,6 +3,8 @@
 //
 #include "Bezier.h"
 
+#include "Polygon.h"
+
 
 void bezierCurve_init(BezierCurve *b) {
     for (int i = 0; i < 4; i++) {
@@ -24,6 +26,7 @@ void bezierSurface_init(BezierSurface *b) {
     }
     b->zbufferFlag = 1;
 }
+
 
 void bezierCurve_set(BezierCurve *b, Point *vlist) {
     for (int i = 0; i < 4; i++) {
@@ -162,109 +165,55 @@ void bezierCurve_draw(BezierCurve *b, Image *src, Color c, BezierMethod flag) {
 }
 
 
-
 void bezierSurface_draw(BezierSurface *b, Image *src, Color c, int divisions, int solid) {
-    int i, j, k, l;
-    int num_points = 4;
-    int new_points = num_points * (1 << divisions);
-    Point temp[new_points][new_points];
+    if (divisions < 1) {
+        divisions = 1; // Ensure we have at least one division
+    }
 
-    // Copy initial control points
-    for (i = 0; i < num_points; i++) {
-        for (j = 0; j < num_points; j++) {
-            temp[i][j] = b->p2[i][j];
+    double step = 1.0 / divisions;
+    Point grid[divisions + 1][divisions + 1];
+
+    // Compute the grid of points on the surface using de Casteljau's algorithm or explicit formula
+    for (int i = 0; i <= divisions; i++) {
+        for (int j = 0; j <= divisions; j++) {
+            double u = i * step;
+            double v = j * step;
+
+            Point p, u_curve[4], v_curve[4];
+            // Generate intermediate points for de Casteljau's algorithm in both directions
+
+            for (int k = 0; k < 4; k++) {
+                deCasteljau(b->p2[k], 4, u, &u_curve[k]);
+            }
+            deCasteljau(u_curve, 4, v, &p);
+            grid[i][j] = p;
         }
     }
 
-    // Subdivision using de Casteljau's algorithm
-    for (int d = 0; d < divisions; d++) {
-        int old_points = num_points * (1 << d);
-        int new_points = old_points * 2 - 1;
-        Point temp2[new_points][new_points];
+    // Draw the grid as filled polygons
+    Polygon poly;
+    polygon_init(&poly);
+    Point vlist[4];
 
-        // Subdivide each row
-        for (i = 0; i < old_points; i++) {
-            for (j = 0; j < old_points - 1; j++) {
-                Point mid;
-                deCasteljau(temp[i] + j, 2, 0.5, &mid);
-                temp2[i * 2][j * 2] = temp[i][j];
-                temp2[i * 2][j * 2 + 1] = mid;
-            }
-            temp2[i * 2][old_points * 2 - 2] = temp[i][old_points - 1];
-        }
+    for (int i = 0; i < divisions; i++) {
+        for (int j = 0; j < divisions; j++) {
+            // Each cell in the grid is a quadrilateral
+            vlist[0] = grid[i][j];
+            vlist[1] = grid[i+1][j];
+            vlist[2] = grid[i+1][j+1];
+            vlist[3] = grid[i][j+1];
 
-        // Subdivide each column
-        for (j = 0; j < new_points; j++) {
-            for (i = 0; i < old_points - 1; i++) {
-                Point mid;
-                deCasteljau(temp2 + i * 2 + j, 2, 0.5, &mid);
-                temp2[i * 2][j] = temp2[i * 2][j];
-                temp2[i * 2 + 1][j] = mid;
-            }
-            temp2[old_points * 2 - 2][j] = temp[old_points - 1][j];
-        }
+            polygon_set(&poly, 4, vlist);
 
-        // Copy the new points back to temp
-        for (i = 0; i < new_points; i++) {
-            for (j = 0; j < new_points; j++) {
-                temp[i][j] = temp2[i][j];
+            if (solid) {
+                polygon_drawFill(&poly, src, c);
+            } else {
+                polygon_draw(&poly, src, c);
             }
         }
     }
 
-    // Draw the surface
-    if (solid) {
-        // Draw triangles
-        for (i = 0; i < new_points - 1; i++) {
-            for (j = 0; j < new_points - 1; j++) {
-                // Triangle 1
-                Line line;
-                line.a = temp[i][j];
-                line.b = temp[i + 1][j];
-                line_draw(&line, src, c);
-
-                line.a = temp[i + 1][j];
-                line.b = temp[i + 1][j + 1];
-                line_draw(&line, src, c);
-
-                line.a = temp[i + 1][j + 1];
-                line.b = temp[i][j];
-                line_draw(&line, src, c);
-
-                // Triangle 2
-                line.a = temp[i][j];
-                line.b = temp[i][j + 1];
-                line_draw(&line, src, c);
-
-                line.a = temp[i][j + 1];
-                line.b = temp[i + 1][j + 1];
-                line_draw(&line, src, c);
-
-                line.a = temp[i + 1][j + 1];
-                line.b = temp[i][j];
-                line_draw(&line, src, c);
-            }
-        }
-    } else {
-        // Draw lines connecting control points
-        for (i = 0; i < new_points; i++) {
-            for (j = 0; j < new_points - 1; j++) {
-                Line line;
-                line.a = temp[i][j];
-                line.b = temp[i][j + 1];
-                line_draw(&line, src, c);
-            }
-        }
-
-        for (j = 0; j < new_points; j++) {
-            for (i = 0; i < new_points - 1; i++) {
-                Line line;
-                line.a = temp[i][j];
-                line.b = temp[i + 1][j];
-                line_draw(&line, src, c);
-            }
-        }
-    }
+    polygon_clear(&poly);
 }
 
 

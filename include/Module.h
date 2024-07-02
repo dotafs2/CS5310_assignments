@@ -18,6 +18,7 @@ typedef enum { // example of an enumerated type
   ObjNone,
   ObjLine,
   ObjBezierCurve,
+  ObjBezierSurface,
   ObjPoint,
   ObjPolyline,
   ObjPolygon,
@@ -61,6 +62,7 @@ typedef union {
     Color color;
     float coeff;
     BezierCurve bezierCurve;
+    BezierSurface bezierSurface;
 } Object;
 
 typedef struct Element {
@@ -92,6 +94,7 @@ void module_line(Module *md, Line *p);
 void module_polyline(Module *md, Polyline *p);
 void module_polygon(Module *md, Polygon *p);
 void module_bezierCurve(Module *m, BezierCurve *b, int divisions);
+void module_bezierSurface(Module *m, BezierSurface *b, int divisions, int solid);
 void module_identity(Module *md);
 void module_translate2D(Module *md, double tx, double ty);
 void module_scale2D(Module *md, double sx, double sy);

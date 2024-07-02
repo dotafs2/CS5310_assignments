@@ -44,6 +44,10 @@ Element *element_init(ObjectType type, void *obj) {
                 bezierCurve_init(& (e->obj.bezierCurve));
                 e->obj.bezierCurve = *(BezierCurve *)obj;
                 break;
+            case ObjBezierSurface:
+                bezierSurface_init(&(e->obj.bezierSurface));
+                e->obj.bezierSurface = *(BezierSurface *)obj;
+                break;
             default:
                 free(e);
                 return NULL;
@@ -136,6 +140,13 @@ void module_polyline(Module *md, Polyline *p) {
 void module_bezierCurve(Module *md, BezierCurve *b, int divisions) {
     if( md && b) {
         Element *e = element_init(ObjBezierCurve, b);
+        module_insert(md,e);
+    }
+}
+
+void module_bezierSurface(Module *md, BezierSurface *b, int divisions, int solid) {
+    if( md && b) {
+        Element *e = element_init(ObjBezierSurface, b);
         module_insert(md,e);
     }
 }
@@ -301,6 +312,19 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                 bezierCurve_draw(&tempBCurve3,src,ds->color, BezierDeCasteljau);
             }
                 break;
+            case ObjBezierSurface: {
+                BezierSurface tempBSurface1 = current->obj.bezierSurface;
+                BezierSurface tempBSurface2 = current->obj.bezierSurface;
+                BezierSurface tempBSurface3 = current->obj.bezierSurface;
+                for (int i = 0; i < 4; ++i) {
+                    for (int j = 0; j < 4; ++j) {
+                        matrix_xformPoint(&tempGTM, &tempBSurface1.p2[i][j],&tempBSurface2.p2[i][j]);
+                        matrix_xformPoint(VTM, &tempBSurface2.p2[i][j],&tempBSurface3.p2[i][j]);
+                    }
+                }
+                bezierSurface_draw(&tempBSurface3,src,ds->color, 4,0);
+            }
+            break;
             case ObjPolyline: {
                 Polyline tempPolyline = current->obj.polyline;
                 matrix_xformPolyline(&tempGTM, &tempPolyline);

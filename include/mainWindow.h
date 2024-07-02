@@ -17,6 +17,7 @@
 #include "anti-alias.h"
 #include "Image.h"
 #include "fsMath.h"
+#include "Module.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -44,7 +45,12 @@ private:
     void drawBall();
     void test5c(int frame);
     void test6a(int frame);
-    void test7b();
+    void test7b(int frame);
+    void test7b_init();
+    void test7b_end();
+    void test7c(int frame);
+    void test7c_init();
+    void test7c_end();
     void setWhite(Image *src);
     double drand();
 
@@ -54,8 +60,8 @@ private slots:
 
 private:
     const int nLines = 50;
-    const int rows = 800; // Set these to appropriate values
-    const int cols = 1600; // Set these to appropriate values
+    const int rows = 500; // Set these to appropriate values
+    const int cols = 500; // Set these to appropriate values
     View2D view;
     Matrix vtm;
     Matrix ltm;
@@ -65,6 +71,14 @@ private:
     float freq[50];
     Color color[50];
     int i;
+    Matrix GTM;
+    Matrix VTM;
+    Module* curves;
+    Module* curveA;
+    Module* curveB;
+    Module* curve;
+    DrawState ds;
+
 };
 
 #endif // MAINWINDOW_H

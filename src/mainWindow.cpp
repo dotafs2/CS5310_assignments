@@ -16,7 +16,7 @@ QImage imageToQImage(Image *img) {
 }
 
 MainWindow::MainWindow(QWidget *parent)
-        : QMainWindow(parent), src(image_create(1600, 800)), ssaaEnabled(false), mmsaEnabled(false) {
+        : QMainWindow(parent), src(image_create(500, 500)), ssaaEnabled(false), mmsaEnabled(false) {
     // 创建中央小部件
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     graphicsView = new QGraphicsView(this);
     scene = new QGraphicsScene(this);
     graphicsView->setScene(scene);
-    graphicsView->setFixedSize(1600, 800);
+    graphicsView->setFixedSize(1000, 500);
 
     // 创建右侧的控制面板
     QWidget *controlPanel = new QWidget(this);
@@ -76,17 +76,20 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout *mainLayout = new QHBoxLayout(centralWidget);
     mainLayout->addWidget(graphicsView);
     mainLayout->addWidget(controlPanel);
-
+    test7b_init();
     // 启动定时器定期更新图像
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::draw);
-    timer->start(20); // 10ms per draw call
+    timer->start(50); // 10ms per draw call
 
     // 初始化multiplier的状态
     stackedWidget->setCurrentIndex(antiAliasingMethodComboBox->currentIndex());
+
 }
 
 MainWindow::~MainWindow() {
+    test7b_end();
+	test7c_end();
     image_free(src);
 }
 
@@ -102,8 +105,8 @@ void MainWindow::draw() {
    // test5c(frame);
     if (frame > 100)
         frame = 0 ;
-    //test6a(frame);
-    test7b();
+    // test5c(frame);
+    test7b(frame);
 // drawBall();
     // open it for use test5b
     //  test5b(frame);
@@ -273,238 +276,189 @@ void MainWindow::test5c(int frame) {
     }
 }
 
-void MainWindow::test6a(int frame) {
-    View2D view;
-  Matrix vtm;
-  Matrix gtm;
-  Module *scene;
-  Module *wing;
-  Module *engine;
-  Module *body;
-  Module *xwing;
-  Module *formation;
-  int i;
-  Point vrp;
-  Vector xaxis;
-  Point p[8];
-  Line l;
-  DrawState *ds;
+void MainWindow::test7b_init() {
+    int i;
+    Color blue, green, purple, red, white;
+    Point p[4];
+    BezierCurve bc;
+    View3D view;
+    int divisions = 4;
+    int rows = src->rows , cols = src->cols;
 
-	srand(42);
+    // grab the command line argument, if one exists
 
-  // setup gtm
-  matrix_identity(&gtm);
-  point_set2D(&vrp, frame*0.01, 0);
-  vector_set(&xaxis, 1, 0, 0);
-  view.x = xaxis;
-  view.vrp = vrp;
-  view.dx = 2;
-  view.screenx = 640;
-  view.screeny = 360;
-  matrix_setView2D(&vtm, &view);
+    int tmp = 0;
+    if( tmp >= 0 && tmp < 10 )
+        divisions = tmp;
+    printf("Creating Bezier curves with %d subdivisions\n", divisions);
 
-  // create a body
-  body = module_create();
+    color_set(&white, 1.0, 1.0, 1.0 );
+    color_set(&blue, .1, .2, .8);
+    color_set(&green, .2, 0.7, 0.3 );
+    color_set(&purple, 0.6, 0.1, 0.7 );
+    color_set(&red, 0.75, 0.3, 0.3 );
 
-  point_set2D(&p[0], 0, 0);
-  point_set2D(&p[1], 2, .1);
-  point_set2D(&p[2], 2.2, 0.25 );
-  point_set2D(&p[3], 2, 0.4 );
-  point_set2D(&p[4], 0, .5 );
+    // set one curve
+    point_set3D(&p[0], 0.0, 0.0, 0.0);
+    point_set3D(&p[1], 1.0, 0.2, 0.0);
+    point_set3D(&p[2], 0.7, 0.5, 0.2);
+    point_set3D(&p[3], 1.0, 1.0, 1.0);
+    bezierCurve_set(&bc, p);
 
-  for(i=0;i<5;i++) {
-    int a = i;
-    int b = (i+1) % 5;
+    // put the curve into a module
+    curveA = module_create();
+    module_color(curveA, &blue);
+    module_bezierCurve(curveA, &bc, divisions);
 
-    line_set( &l, p[a], p[b] );
-    module_line( body, &l );
-  }
-  line_set2D( &l, 0.6, 0.05, 0.6, 0.45 );
-  module_line( body, &l );
-  line_set2D( &l, 1.1, 0.08, 1.1, 0.42 );
-  module_line( body, &l );
+    // set the second curve
+    point_set3D(&p[0], 0.0, 0.0, 0.0);
+    point_set3D(&p[1], 0.0, 0.2, 1.0);
+    point_set3D(&p[2], 0.2, 0.5, 0.7);
+    point_set3D(&p[3], 1.0, 1.0, 1.0);
+    bezierCurve_set(&bc, p);
 
-  // create an engine
-  engine = module_create();
+    // put the curve into a module
+    curveB = module_create();
+    module_color(curveB, &green);
+    module_bezierCurve(curveB, &bc, divisions);
 
-  point_set2D( &p[0], 0, 0 );
-  point_set2D( &p[1], .6, 0 );
-  point_set2D( &p[2], .6, .2 );
-  point_set2D( &p[3], 0, .2 );
+    // create a module with six curves
+    curves = module_create();
+    for(i=0;i<3;i++) {
+        module_module( curves, curveA );
+        module_module( curves, curveB );
+        module_rotateY( curves, cos(2.0*M_PI/3.0), sin(2.0*M_PI/3.0) );
+    }
 
-  for(i=0;i<4;i++) {
-    int a = i;
-    int b = (i+1) % 4;
+    // set up the drawstate
+    drawstate_setColor(&ds, white);
 
-    line_set( &l, p[a], p[b] );
-    module_line( engine, &l );
-  }
+    // set up the view
+    point_set3D(&(view.vrp), 0.0, 0.5, -3.0 );
+    vector_set( &(view.vpn), 0.0, 0.0, 1.0 );
+    vector_set( &(view.vup), 0.0, 1.0, 0.0 );
+    view.d = 1.0;
+    view.du = 1.0;
+    view.dv = 1.0*rows/cols;
+    view.screeny = rows;
+    view.screenx = cols;
+    view.f = 0.0;
+    view.b = 3.0;
 
-  // make a wing
-  wing = module_create();
+    matrix_setView3D( &VTM, &view );
+    matrix_identity( &GTM );
 
-  point_set2D(&p[0], 0.5, 0);
-  point_set2D(&p[1], 0.3, 1.5);
-  point_set2D(&p[2], 0.7, 1.5 );
-  point_set2D(&p[3], 0, 1.5 );
-  point_set2D(&p[4], 0, 0 );
-
-  for(i=0;i<5;i++) {
-    int a = i;
-    int b = (i+1) % 5;
-
-    line_set( &l, p[a], p[b] );
-    module_line( wing, &l );
-  }
-  module_scale2D( wing, 1.5, 1.0 );
-  module_translate2D( wing, -0.05, 0.05 );
-  module_module( wing, engine );
-
-  // make an x-wing
-  xwing = module_create();
-
-  module_module(xwing, body );
-  module_translate2D( xwing, 0, .5 );
-  module_module( xwing, wing);
-  module_identity(xwing);
-  module_scale2D( xwing, 1, -1 );
-  module_translate2D( xwing, 0, 0 );
-  module_module( xwing, wing );
-
-  // make a formation
-  formation = module_create();
-
-  module_module(formation, xwing );
-  module_translate2D(formation, -4, 3 );
-  module_module( formation, xwing );
-  module_translate2D(formation, 0, -5 );
-  module_module( formation, xwing );
-
-  // make a scene
-  scene = module_create();
-  module_scale2D( scene, 0.1, 0.1 );
-  module_translate2D( scene, 0.2, 0 );
-  module_module( scene, formation );
-
-	// draw stars into the scene
-  module_identity(scene);
-  for(i=0;i<30;i++) {
-     point_set2D( &(p[0]), rand()*2 - 1, rand()*1 - 0.5 );
-    module_point( scene, &(p[0]) );
-  }
-
-
-	// create the image and draw the module
-  src = image_create( view.screeny, view.screenx );
-  ds = drawstate_create(); // default color is white
-  module_draw( scene, &vtm, &gtm, ds, NULL, src );
-
-	// write out the image
-  image_write( src, "xwings.ppm" );
-
-	// free modules
-  module_delete( scene );
-  module_delete( formation );
-  module_delete( xwing );
-  module_delete( body );
-  module_delete( wing );
-
-	// free drawstate
-  free( ds );
-
-	}
-    void MainWindow::test7b(){
-        int i, frame;
-        Color blue, green, purple, red, white;
-        Point p[4];
-        BezierCurve bc;
-        DrawState ds;
-        Module *curveA;
-        Module *curveB;
-        Module *curves;
-        View3D view;
-        Matrix VTM, GTM;
-        int divisions = 4;
-
-        // grab the command line argument, if one exists
-        int tmp = 4;
-            if( tmp >= 0 && tmp < 10 )
-                divisions = tmp;
-        printf("Creating Bezier curves with %d subdivisions\n", divisions);
-
-        color_set(&white, 1.0, 1.0, 1.0 );
-        color_set(&blue, .1, .2, .8);
-        color_set(&green, .2, 0.7, 0.3 );
-        color_set(&purple, 0.6, 0.1, 0.7 );
-        color_set(&red, 0.75, 0.3, 0.3 );
-
-        // set one curve
-        point_set3D(&p[0], 0.0, 0.0, 0.0);
-        point_set3D(&p[1], 1.0, 0.2, 0.0);
-        point_set3D(&p[2], 0.7, 0.5, 0.2);
-        point_set3D(&p[3], 1.0, 1.0, 1.0);
-        bezierCurve_set(&bc, p);
-
-        // put the curve into a module
-        curveA = module_create();
-        module_color(curveA, &blue);
-        module_bezierCurve(curveA, &bc, divisions);
-
-        // set the second curve
-        point_set3D(&p[0], 0.0, 0.0, 0.0);
-        point_set3D(&p[1], 0.0, 0.2, 1.0);
-        point_set3D(&p[2], 0.2, 0.5, 0.7);
-        point_set3D(&p[3], 1.0, 1.0, 1.0);
-        bezierCurve_set(&bc, p);
-
-        // put the curve into a module
-        curveB = module_create();
-        module_color(curveB, &green);
-        module_bezierCurve(curveB, &bc, divisions);
-
-        // create a module with six curves
-        curves = module_create();
-        for(i=0;i<3;i++) {
-            module_module( curves, curveA );
-            module_module( curves, curveB );
-            module_rotateY( curves, cos(2.0*M_PI/3.0), sin(2.0*M_PI/3.0) );
-        }
-
-        // set up the drawstate
-        drawstate_setColor(&ds, white);
-
-        // set up the view
-        point_set3D(&(view.vrp), 0.0, 0.5, -3.0 );
-        vector_set( &(view.vpn), 0.0, 0.0, 1.0 );
-        vector_set( &(view.vup), 0.0, 1.0, 0.0 );
-        view.d = 1.0;
-        view.du = 1.0;
-        view.dv = 1.0*rows/cols;
-        view.screeny = rows;
-        view.screenx = cols;
-        view.f = 0.0;
-        view.b = 3.0;
-
-        matrix_setView3D( &VTM, &view );
-        matrix_identity( &GTM );
-
-        matrix_print( &VTM, stdout );
-
-        // Create the animation by adjusting the GTM
-        for(frame=0;frame<1;frame++) {
-            char buffer[256];
-
-            matrix_rotateY(&GTM, cos(M_PI/30.0), sin(M_PI/30.0) );
-            module_draw( curves, &VTM, &GTM, &ds, NULL, src );
-
-           // sprintf(buffer, "bez3d-frame%03d.ppm", frame);
-            image_write(src, buffer);
-            image_reset(src);
-        }
-
-
-        module_delete( curveA );
-        module_delete( curveB );
-        module_delete( curves );
+    matrix_print( &VTM, stdout );
 }
 
+void MainWindow::test7b(int frame){
+		char buffer[256];
+    image_reset(src);
+		matrix_rotateY(&GTM, cos(M_PI/30.0), sin(M_PI/30.0) );
+		module_draw( curves, &VTM, &GTM, &ds, NULL, src );
+	//	sprintf(buffer, "bez3d-frame%03d.ppm", frame);
+	//	image_write(src, buffer);
+		// image_reset(src);
+	}
+
+void MainWindow::test7b_end() {
+    module_delete( curveA );
+    module_delete( curveB );
+    module_delete( curves );
+}
+
+void MainWindow::test7c_init() {
+	Color blue, green, purple, red, white;
+	Point p[16];
+	BezierSurface bc;
+	View3D view;
+	const int divisions = 4;
+
+	color_set(&white, 1.0, 1.0, 1.0 );
+	color_set(&blue, .1, .2, .8);
+	color_set(&green, .2, 0.7, 0.3 );
+	color_set(&purple, 0.6, 0.1, 0.7 );
+	color_set(&red, 0.75, 0.3, 0.3 );
+
+	curve = module_create();
+
+	// create a flat plane
+	point_set3D(&p[0], 0.0, -0.2, 0.0); // first row, constant x, even spacing in z
+	point_set3D(&p[1], 0.0, -0.2, 0.33);
+	point_set3D(&p[2], 0.0, -0.2, 0.66);
+	point_set3D(&p[3], 0.0, -0.2, 1.0);
+	point_set3D(&p[4], 0.33, -0.2, 0.0); // second row
+	point_set3D(&p[5], 0.33, -0.2, 0.33);
+	point_set3D(&p[6], 0.33, -0.2, 0.66);
+	point_set3D(&p[7], 0.33, -0.2, 1.0);
+	point_set3D(&p[8], 0.66, -0.2, 0.0); // third row
+	point_set3D(&p[9], 0.66, -0.2, 0.33);
+	point_set3D(&p[10], 0.66, -0.2, 0.66);
+	point_set3D(&p[11], 0.66, -0.2, 1.0);
+	point_set3D(&p[12], 1.0, -0.2, 0.0); // fourth row
+	point_set3D(&p[13], 1.0, -0.2, 0.33);
+	point_set3D(&p[14], 1.0, -0.2, 0.66);
+	point_set3D(&p[15], 1.0, -0.2, 1.0);
+	bezierSurface_set(&bc, p);
+
+	// put the curve into a module
+	module_color(curve, &red);
+	module_bezierSurface(curve, &bc, divisions, 0);
+
+	// create a curved surface sitting above the plane
+	point_set3D(&p[0], 0.0, 0.0, 0.0); // first row, constant x, even spacing in z
+	point_set3D(&p[1], 0.0, 0.2, 0.33);
+	point_set3D(&p[2], 0.0, 0.5, 0.66);
+	point_set3D(&p[3], 0.0, 0.1, 1.0);
+	point_set3D(&p[4], 0.33, 0.8, 0.0); // second row
+	point_set3D(&p[5], 0.33, -0.1, 0.33);
+	point_set3D(&p[6], 0.33, 0.0, 0.66);
+	point_set3D(&p[7], 0.33, 0.3, 1.0);
+	point_set3D(&p[8], 0.66, 0.3, 0.0); // third row
+	point_set3D(&p[9], 0.66, 0.8, 0.33);
+	point_set3D(&p[10], 0.66, 0.9, 0.66);
+	point_set3D(&p[11], 0.66, 0.5, 1.0);
+	point_set3D(&p[12], 1.0, 0.4, 0.0); // fourth row
+	point_set3D(&p[13], 1.0, 0.2, 0.33);
+	point_set3D(&p[14], 1.0, 0.5, 0.66);
+	point_set3D(&p[15], 1.0, 1.0, 1.0);
+	bezierSurface_set(&bc, p);
+
+	// put the curve into a module
+	module_color(curve, &green);
+	module_bezierSurface(curve, &bc, divisions, 0);
+
+	// set up the drawstate
+	drawstate_setColor(&ds, white);
+
+	// set up the view
+	point_set3D(&(view.vrp), 0.0, 1.2, -3.0 );
+	vector_set( &(view.vpn), 0.0, -0.8, 2.5 );
+	vector_set( &(view.vup), 0.0, 1.0, 0.0 );
+	view.d = 1.5;
+	view.du = 1.0;
+	view.dv = 1.0*rows/cols;
+	view.screeny = rows;
+	view.screenx = cols;
+	view.f = 0.0;
+	view.b = 3.0;
+
+	matrix_setView3D( &VTM, &view );
+	matrix_identity( &GTM );
+}
+
+
+void MainWindow::test7c(int frame) {
+	// Create the animation by adjusting the GTM
+		char buffer[256];
+		image_reset(src);
+		matrix_rotateY(&GTM, cos(M_PI/30.0), sin(M_PI/30.0) );
+		module_draw( curve, &VTM, &GTM, &ds, NULL, src );
+
+	//	sprintf(buffer, "bezSurf-frame%03d.ppm", frame);
+		//image_write(src, buffer);
+}
+
+void MainWindow::test7c_end() {
+	module_delete( curve );
+}

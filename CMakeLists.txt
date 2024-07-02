@@ -46,12 +46,14 @@ set(MAIN_SOURCE_FILES
         include/mainwindow.h
         src/mainwindow.cpp
         src/main.cpp
+        test/test.cpp
+        test/test.h
 )
 
 # test6a
 set(TEST6A_SOURCE_FILES
         ${COMMON_SOURCE_FILES}
-        test/test5/test5c.c
+        test/test7/test7a.c
 )
 
 # test6b
