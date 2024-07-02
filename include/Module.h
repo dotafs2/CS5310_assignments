@@ -108,6 +108,7 @@ void module_color(Module *md, Color *c);
 void module_bodyColor(Module *md, Color *c);
 void module_surfaceColor(Module *md, Color *c);
 void module_surfaceCoeff(Module *md, float coeff);
+
 DrawState *drawstate_create( void );
 void drawstate_setColor( DrawState *s, Color c );
 void drawstate_setBody( DrawState *s, Color c );

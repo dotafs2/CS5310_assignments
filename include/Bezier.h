@@ -49,7 +49,7 @@ void bezierCurve_draw(BezierCurve *b, Image *src, Color c);
 */
 void bezierCurve_draw(BezierCurve *b, Image *src, Color c, BezierMethod flag);
 
-
+void bezierSurface_draw(BezierSurface *b, Image *src, Color c, int divisions, int solid);
 
 #ifdef __cplusplus
 }

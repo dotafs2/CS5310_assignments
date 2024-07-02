@@ -262,6 +262,112 @@ void module_rotateXYZ(Module *md, Vector *u, Vector *v, Vector *w) {
     }
 }
 
+void module_color(Module *md, Color *c) {
+    if (md == NULL || c == NULL) {
+        return;
+    }
+    Element *e = element_create();
+    if (e == NULL) {
+        return;
+    }
+    e->type = ObjColor;
+    e->obj.color = *c;
+    module_insert(md, e);
+}
+
+void module_bodyColor(Module *md, Color *c) {
+    if (md == NULL || c == NULL) {
+        return;
+    }
+    Element *e = element_create();
+    if (e == NULL) {
+        return;
+    }
+    e->type = ObjBodyColor;
+    e->obj.color = *c;
+    module_insert(md, e);
+}
+
+void module_surfaceColor(Module *md, Color *c) {
+    if (md == NULL || c == NULL) {
+        return;
+    }
+    Element *e = element_create();
+    if (e == NULL) {
+        return;
+    }
+    e->type = ObjSurfaceColor;
+    e->obj.color = *c;
+    module_insert(md, e);
+}
+
+void module_surfaceCoeff(Module *md, float coeff) {
+    if (md == NULL) {
+        return;
+    }
+    Element *e = element_create();
+    if (e == NULL) {
+        return;
+    }
+    e->type = ObjSurfaceCoeff;
+    e->obj.coeff = coeff;
+    module_insert(md, e);
+}
+
+
+DrawState *drawstate_create(void) {
+    DrawState *ds = (DrawState *)malloc(sizeof(DrawState));
+    if (ds) {
+        color_set(&ds->color, 1, 1, 1);
+        color_set(&ds->flatColor, 1, 1, 1);
+        color_set(&ds->body, 1, 1, 1);
+        color_set(&ds->surface, 1, 1, 1);
+        ds->surfaceCoeff = 1;
+        ds->shade = ShadeFrame;
+        ds->zBufferFlag = 0;
+        point_set3D(&ds->viewer, 0.0, 0.0, 0.0);
+    }
+    return ds;
+}
+
+void drawstate_setColor( DrawState *s, Color c ) {
+    if(s == NULL)
+        return;
+    s->color = c;
+}
+
+void drawstate_setBody( DrawState *s, Color c ) {
+    if(s == NULL)
+        return;
+    s->body = c;
+}
+void drawstate_setSurface( DrawState *s, Color c ) {
+    if(s == NULL)
+        return;
+    s->surface = c;
+}
+
+void drawstate_setSurfaceCoeff( DrawState *s, float f ) {
+    if(s == NULL)
+        return;
+    s->surfaceCoeff = f;
+}
+
+void drawstate_copy( DrawState *to, DrawState *from ) {
+    if( to == NULL || from == NULL)
+        return;
+    to->color = from->color;
+    to->flatColor = from->flatColor;
+    to->body = from->body;
+    to->surface = from->surface;
+    to->surfaceCoeff = from->surfaceCoeff;
+    to->shade = from->shade;
+    to->zBufferFlag = from->zBufferFlag;
+    to->viewer = from->viewer;
+}
+
+
+
 
 
 void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *lighting, Image *src) {
@@ -346,189 +452,3 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
     }
 }
 
-// Add a unit cube to the module
-void module_cube(Module *md, int solid) {
-    if (md) {
-        // Define the vertices of the cube
-        Point vertices[8] = {
-                { -0.5, -0.5, -0.5, 1.0 },
-                {  0.5, -0.5, -0.5, 1.0 },
-                {  0.5,  0.5, -0.5, 1.0 },
-                { -0.5,  0.5, -0.5, 1.0 },
-                { -0.5, -0.5,  0.5, 1.0 },
-                {  0.5, -0.5,  0.5, 1.0 },
-                {  0.5,  0.5,  0.5, 1.0 },
-                { -0.5,  0.5,  0.5, 1.0 }
-        };
-
-        // Define the edges of the cube
-        Line edges[12] = {
-                { 1,vertices[0], vertices[1] },
-                { 1,vertices[1], vertices[2] },
-                { 1,vertices[2], vertices[3] },
-                { 1,vertices[3], vertices[0] },
-                {1, vertices[4], vertices[5] },
-                {1, vertices[5], vertices[6] },
-                {1, vertices[6], vertices[7] },
-                {1, vertices[7], vertices[4] },
-                {1, vertices[0], vertices[4] },
-                {1,vertices[1], vertices[5] },
-                {1, vertices[2], vertices[6] },
-                {1,vertices[3], vertices[7] }
-        };
-
-        // Define the faces of the cube
-        Polygon faces[6];
-        for (int i = 0; i < 6; i++) {
-            polygon_init(&faces[i]);
-        }
-
-        // Front face
-        polygon_set(&faces[0], 4, (Point[]){ vertices[0], vertices[1], vertices[2], vertices[3] });
-        // Back face
-        polygon_set(&faces[1], 4, (Point[]){ vertices[4], vertices[5], vertices[6], vertices[7] });
-        // Left face
-        polygon_set(&faces[2], 4, (Point[]){ vertices[0], vertices[3], vertices[7], vertices[4] });
-        // Right face
-        polygon_set(&faces[3], 4, (Point[]){ vertices[1], vertices[2], vertices[6], vertices[5] });
-        // Top face
-        polygon_set(&faces[4], 4, (Point[]){ vertices[3], vertices[2], vertices[6], vertices[7] });
-        // Bottom face
-        polygon_set(&faces[5], 4, (Point[]){ vertices[0], vertices[1], vertices[5], vertices[4] });
-
-        if (solid) {
-            // Add polygons to the module
-            for (int i = 0; i < 6; i++) {
-                module_polygon(md, &faces[i]);
-            }
-        } else {
-            // Add lines to the module
-            for (int i = 0; i < 12; i++) {
-                module_line(md, &edges[i]);
-            }
-        }
-
-        // Free the polygons
-        for (int i = 0; i < 6; i++) {
-            polygon_clear(&faces[i]);
-        }
-    }
-}
-
-
-void module_color(Module *md, Color *c) {
-    if (md == NULL || c == NULL) {
-        return;
-    }
-    Element *e = element_create();
-    if (e == NULL) {
-        return;
-    }
-    e->type = ObjColor;
-    e->obj.color = *c;
-    module_insert(md, e);
-}
-
-void module_bodyColor(Module *md, Color *c) {
-    if (md == NULL || c == NULL) {
-        return;
-    }
-    Element *e = element_create();
-    if (e == NULL) {
-        return;
-    }
-    e->type = ObjBodyColor;
-    e->obj.color = *c;
-    module_insert(md, e);
-}
-
-void module_surfaceColor(Module *md, Color *c) {
-    if (md == NULL || c == NULL) {
-        return;
-    }
-    Element *e = element_create();
-    if (e == NULL) {
-        return;
-    }
-    e->type = ObjSurfaceColor;
-    e->obj.color = *c;
-    module_insert(md, e);
-}
-
-void module_surfaceCoeff(Module *md, float coeff) {
-    if (md == NULL) {
-        return;
-    }
-    Element *e = element_create();
-    if (e == NULL) {
-        return;
-    }
-    e->type = ObjSurfaceCoeff;
-    e->obj.coeff = coeff;
-    module_insert(md, e);
-}
-
-
-DrawState *drawstate_create(void) {
-    DrawState *ds = (DrawState *)malloc(sizeof(DrawState));
-    if (ds == NULL) {
-        return NULL;
-    }
-    // Initialize the fields
-    ds->color = (Color){1, 1, 1}; // Default to white
-    ds->flatColor = (Color){0, 0, 0}; // Default to black
-    ds->body = (Color){0, 0, 0}; // Default to black
-    ds->surface = (Color){0, 0, 0}; // Default to black
-    ds->surfaceCoeff = 0.0f; // Default coefficient
-    ds->shade = ShadeFrame; // Default shading method
-    ds->zBufferFlag = 0; // Default z-buffer flag
-    ds->viewer = (Point){0, 0, 0}; // Default viewer position
-    return ds;
-}
-
-// Set the color field to c
-void drawstate_setColor(DrawState *ds, Color c) {
-    if (ds == NULL) {
-        return;
-    }
-    ds->color = c;
-}
-
-// Set the body field to c
-void drawstate_setBody(DrawState *ds, Color c) {
-    if (ds == NULL) {
-        return;
-    }
-    ds->body = c;
-}
-
-// Set the surface field to c
-void drawstate_setSurface(DrawState *ds, Color c) {
-    if (ds == NULL) {
-        return;
-    }
-    ds->surface = c;
-}
-
-// Set the surfaceCoeff field to f
-void drawstate_setSurfaceCoeff(DrawState *ds, float f) {
-    if (ds == NULL) {
-        return;
-    }
-    ds->surfaceCoeff = f;
-}
-
-// Copy the DrawState data from one structure to another
-void drawstate_copy(DrawState *to, DrawState *from) {
-    if (to == NULL || from == NULL) {
-        return;
-    }
-    to->color = from->color;
-    to->flatColor = from->flatColor;
-    to->body = from->body;
-    to->surface = from->surface;
-    to->surfaceCoeff = from->surfaceCoeff;
-    to->shade = from->shade;
-    to->zBufferFlag = from->zBufferFlag;
-    to->viewer = from->viewer;
-}

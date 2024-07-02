@@ -31,10 +31,8 @@ int main(int argc, char *argv[]) {
 	Image *src = image_create(rows, cols);
 
 	// grab the command line argument, if one exists
-
 		int tmp = 0;
-		if( tmp >= 0 && tmp < 10 )
-			divisions = tmp;
+			divisions = 4;
 	printf("Creating Bezier curves with %d subdivisions\n", divisions);
 
 	color_set(&white, 1.0, 1.0, 1.0 );
@@ -96,12 +94,11 @@ int main(int argc, char *argv[]) {
 	matrix_print( &VTM, stdout );
 
 	// Create the animation by adjusting the GTM
-	for(frame=0;frame<1;frame++) {
+	for(frame=0;frame<4;frame++) {
 		char buffer[256];
-		
+
 		matrix_rotateY(&GTM, cos(M_PI/30.0), sin(M_PI/30.0) );
 		module_draw( curves, &VTM, &GTM, &ds, NULL, src );
-
 		sprintf(buffer, "bez3d-frame%03d.ppm", frame);
 		image_write(src, buffer);
 		image_reset(src);

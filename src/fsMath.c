@@ -270,7 +270,7 @@ void matrix_perspective(Matrix *m, double d) {
     Matrix perspective = {{{1, 0, 0, 0},
                            {0, 1, 0, 0},
                            {0, 0, 1, 0},
-                           {0, 0, 1/d, 1}}};
+                           {0, 0, 1/d, 0}}};
 
     matrix_multiply(&perspective, m, m);
 }
@@ -327,7 +327,7 @@ void matrix_setView3D(Matrix *vtm, View3D *view) {
     vector_normalize(&u);
     vector_cross(&w, &u, &v);
     vector_normalize(&v);
-    // form the rotate matrix
+    // step 4 : form the rotate matrix
     Matrix rotate;
     matrix_identity(&rotate);
     rotate.m[0][0] = u.val[0]; rotate.m[0][1] = u.val[1]; rotate.m[0][2] = u.val[2];
@@ -336,39 +336,36 @@ void matrix_setView3D(Matrix *vtm, View3D *view) {
     matrix_multiply(&rotate, vtm, vtm);
     printf("View reference axes\n");
     matrix_print(vtm,stdout);
+
+    // step 4.5 : translate to COP
     Matrix translateCOP;
     matrix_identity(&translateCOP);
     matrix_translate(&translateCOP,0,0,view->d);
     matrix_multiply(&translateCOP,vtm,vtm);
     printf("after translating COP to origin\n");
     matrix_print(vtm,stdout);
-    
 
-    // Step 4: Apply perspective projection
-    Matrix perspective;
-    matrix_identity(&perspective);
-    perspective.m[0][0] = 2.0 * view->d / view->du;
-    perspective.m[1][1] = 2.0 * view->d / view->dv;
-    perspective.m[2][2] = view->f / (view->f - view->b);
-    perspective.m[2][3] = -view->f * view->b / (view->f - view->b);
-    perspective.m[3][2] = 1.0;
-    perspective.m[3][3] = 0.0;
-    matrix_multiply(&perspective, vtm, vtm);
-    printf("after perspective\n");
-    matrix_print(vtm,stdout);
-    // Step 5: Scale to viewport
-    Matrix scale;
-    matrix_identity(&scale);
-    scale.m[0][0] = view->screenx / 2.0;
-    scale.m[1][1] = view->screeny / 2.0;
-    scale.m[2][2] = 1.0;
-    matrix_multiply(&scale, vtm, vtm);
+    // Step 5: Scale to CVV (I thought what is CVV mean for several hours, finally find out its just NDC...)
+    double depth = view->d + view->b;
+    matrix_scale(vtm,2.0*view->d/(view->du * depth),2.0*view->d/(view->dv * depth),1.0 / depth);
+    printf("After scaling to CVV\n");
+    matrix_print(vtm, stdout);
 
-    // Step 6: Translate to screen coordinates
-    Matrix translate2;
-    matrix_identity(&translate2);
-    matrix_translate(&translate2, view->screenx / 2.0, view->screeny / 2.0, 0);
-    matrix_multiply(&translate2, vtm, vtm);
+    // Step 6: Apply perspective projection
+    matrix_perspective(vtm, view->d/depth);
+    printf("After perspective\n");
+    matrix_print(vtm, stdout);
+
+    // step 7 Scale to image coords
+    matrix_scale(vtm, -view->screenx*0.5/(view->d / depth), -view->screeny*0.5/(view->d / depth), 1.0);
+    printf("After scale to image coords\n");
+    matrix_print(vtm, stdout);
+
+    // step 8 translate into place
+    matrix_translate2D(vtm, view->screenx*0.5, view->screeny*0.5);
+    printf("After final translation to image coords\n");
+    matrix_print(vtm, stdout);
+
 }
 
 

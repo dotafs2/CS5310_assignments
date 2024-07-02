@@ -43,7 +43,7 @@ void point_normalize(Point *p) {
     if (!p || p->val[3] == 0.0) return;
     p->val[0] /= p->val[3];
     p->val[1] /= p->val[3];
-    // p->val[2] /= p->val[3]; // don’t normalize the z-value (index 2).  You will need it for z-buffer rendering
+   // p->val[2] /= p->val[3]; // don’t normalize the z-value (index 2).  You will need it for z-buffer rendering
     p->val[3] = 1.0;
 }
 

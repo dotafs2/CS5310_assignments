@@ -25,6 +25,7 @@ void bezierSurface_init(BezierSurface *b) {
     b->zbufferFlag = 1;
 }
 
+
 void bezierCurve_set(BezierCurve *b, Point *vlist) {
     for (int i = 0; i < 4; i++) {
         b->p[i].val[0] = vlist[i].val[0];
@@ -51,6 +52,7 @@ void bezierCurve_copy(BezierCurve *to, const BezierCurve *from) {
         to->p[i].val[0] = from->p[i].val[0];
         to->p[i].val[1] = from->p[i].val[1];
         to->p[i].val[2] = from->p[i].val[2];
+        to->p[i].val[3] = from->p[i].val[3];
     }
     to->zbufferFlag = from->zbufferFlag;
 }
@@ -160,4 +162,110 @@ void bezierCurve_draw(BezierCurve *b, Image *src, Color c, BezierMethod flag) {
         }
     }
 }
+
+
+void bezierSurface_draw(BezierSurface *b, Image *src, Color c, int divisions, int solid) {
+    int i, j, k, l;
+    int num_points = 4;
+    int new_points = num_points * (1 << divisions);
+    Point temp[new_points][new_points];
+
+    // Copy initial control points
+    for (i = 0; i < num_points; i++) {
+        for (j = 0; j < num_points; j++) {
+            temp[i][j] = b->p2[i][j];
+        }
+    }
+
+    // Subdivision using de Casteljau's algorithm
+    for (int d = 0; d < divisions; d++) {
+        int old_points = num_points * (1 << d);
+        int new_points = old_points * 2 - 1;
+        Point temp2[new_points][new_points];
+
+        // Subdivide each row
+        for (i = 0; i < old_points; i++) {
+            for (j = 0; j < old_points - 1; j++) {
+                Point mid;
+                deCasteljau(temp[i] + j, 2, 0.5, &mid);
+                temp2[i * 2][j * 2] = temp[i][j];
+                temp2[i * 2][j * 2 + 1] = mid;
+            }
+            temp2[i * 2][old_points * 2 - 2] = temp[i][old_points - 1];
+        }
+
+        // Subdivide each column
+        for (j = 0; j < new_points; j++) {
+            for (i = 0; i < old_points - 1; i++) {
+                Point mid;
+                deCasteljau(temp2 + i * 2 + j, 2, 0.5, &mid);
+                temp2[i * 2][j] = temp2[i * 2][j];
+                temp2[i * 2 + 1][j] = mid;
+            }
+            temp2[old_points * 2 - 2][j] = temp[old_points - 1][j];
+        }
+
+        // Copy the new points back to temp
+        for (i = 0; i < new_points; i++) {
+            for (j = 0; j < new_points; j++) {
+                temp[i][j] = temp2[i][j];
+            }
+        }
+    }
+
+    // Draw the surface
+    if (solid) {
+        // Draw triangles
+        for (i = 0; i < new_points - 1; i++) {
+            for (j = 0; j < new_points - 1; j++) {
+                // Triangle 1
+                Line line;
+                line.a = temp[i][j];
+                line.b = temp[i + 1][j];
+                line_draw(&line, src, c);
+
+                line.a = temp[i + 1][j];
+                line.b = temp[i + 1][j + 1];
+                line_draw(&line, src, c);
+
+                line.a = temp[i + 1][j + 1];
+                line.b = temp[i][j];
+                line_draw(&line, src, c);
+
+                // Triangle 2
+                line.a = temp[i][j];
+                line.b = temp[i][j + 1];
+                line_draw(&line, src, c);
+
+                line.a = temp[i][j + 1];
+                line.b = temp[i + 1][j + 1];
+                line_draw(&line, src, c);
+
+                line.a = temp[i + 1][j + 1];
+                line.b = temp[i][j];
+                line_draw(&line, src, c);
+            }
+        }
+    } else {
+        // Draw lines connecting control points
+        for (i = 0; i < new_points; i++) {
+            for (j = 0; j < new_points - 1; j++) {
+                Line line;
+                line.a = temp[i][j];
+                line.b = temp[i][j + 1];
+                line_draw(&line, src, c);
+            }
+        }
+
+        for (j = 0; j < new_points; j++) {
+            for (i = 0; i < new_points - 1; i++) {
+                Line line;
+                line.a = temp[i][j];
+                line.b = temp[i + 1][j];
+                line_draw(&line, src, c);
+            }
+        }
+    }
+}
+
 

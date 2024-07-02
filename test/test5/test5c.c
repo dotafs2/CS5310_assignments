@@ -86,8 +86,8 @@ int main(int argc, char *argv[]) {
 
     // grab command line argument to determine viewpoint
     // and set up the view structure
-        float alpha = 0;
-        point_set( &(view.vrp), 3*alpha, 2*alpha, -2*alpha - (1.0-alpha)*3, 1.0 );
+    float alpha = 0;
+    point_set( &(view.vrp), 3*alpha, 2*alpha, -2*alpha - (1.0-alpha)*3, 1.0 );
     vector_set( &(view.vpn), -view.vrp.val[0], -view.vrp.val[1], -view.vrp.val[2] );
 
     vector_set( &(view.vup), 0, 1, 0 );
@@ -111,14 +111,11 @@ int main(int argc, char *argv[]) {
     for(i=0;i<6;i++) {
         polygon_copy( &tpoly, &side[i] );
         matrix_xformPolygon( &vtm, &tpoly );
-
         // normalize by homogeneous coordinate before drawing
         polygon_normalize( &tpoly );
-
         polygon_draw( &tpoly, src, color[i] );
         polygon_print( &tpoly, stdout );
     }
-
     printf("Writing image\n");
     image_write( src, "cube.ppm" );
 
