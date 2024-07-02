@@ -307,7 +307,6 @@ void matrix_setView2D(Matrix *vtm, View2D *view) {
     matrix_multiply( &rotate,vtm, vtm);
     matrix_multiply( &trans,vtm,vtm);
 }
-
 void matrix_setView3D(Matrix *vtm, View3D *view) {
     // Step 1: Initialize VTM to the identity matrix
     matrix_identity(vtm);
@@ -367,8 +366,6 @@ void matrix_setView3D(Matrix *vtm, View3D *view) {
     matrix_print(vtm, stdout);
 
 }
-
-
 #ifdef __cplusplus
 }
 #endif
