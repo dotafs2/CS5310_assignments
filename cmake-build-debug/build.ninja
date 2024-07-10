@@ -470,7 +470,7 @@ build test6b_autogen/timestamp test6b_autogen/mocs_compilation.cpp | ${cmake_nin
 #############################################
 # Phony custom command for CMakeFiles/main_entry_autogen_timestamp_deps
 
-build CMakeFiles/main_entry_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/main_entry_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/moc /Users/dotafs/Qt/6.7.2/macos/./libexec/uic /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets
+build CMakeFiles/main_entry_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/main_entry_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/uic /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/./libexec/moc
 
 
 #############################################
@@ -482,7 +482,7 @@ build CMakeFiles/main_entry_autogen | ${cmake_ninja_workdir}CMakeFiles/main_entr
 #############################################
 # Phony custom command for CMakeFiles/test6a_autogen_timestamp_deps
 
-build CMakeFiles/test6a_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/test6a_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/moc /Users/dotafs/Qt/6.7.2/macos/./libexec/uic /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets
+build CMakeFiles/test6a_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/test6a_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/uic /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/./libexec/moc
 
 
 #############################################
@@ -494,7 +494,7 @@ build CMakeFiles/test6a_autogen | ${cmake_ninja_workdir}CMakeFiles/test6a_autoge
 #############################################
 # Phony custom command for CMakeFiles/test6b_autogen_timestamp_deps
 
-build CMakeFiles/test6b_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/test6b_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/moc /Users/dotafs/Qt/6.7.2/macos/./libexec/uic /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets
+build CMakeFiles/test6b_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/test6b_autogen_timestamp_deps: phony /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/QtCore /Users/dotafs/Qt/6.7.2/macos/./libexec/uic /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/dotafs/Qt/6.7.2/macos/./libexec/moc
 
 
 #############################################

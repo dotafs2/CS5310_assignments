@@ -59,7 +59,7 @@ typedef struct {
 
 
 // Point functions
-
+ void swap_points(Point *a, Point *b);
 /**
  * @brief Creates a point given x, y, z coordinates and a homogeneous coordinate w.
  *

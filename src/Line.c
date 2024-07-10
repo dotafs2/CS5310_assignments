@@ -130,10 +130,26 @@ void line_draw(Line *l, Image *src, Color c) {
     int y0 = (int)l->a.val[1];
     int x1 = (int)l->b.val[0];
     int y1 = (int)l->b.val[1];
+    float z0 = (float)l->a.val[2];
+    float z1 = (float)l->b.val[2];
    // print_line_coordinates(l->a, l->b);
     // Bresenham's line algorithm
     int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
     int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+
+
+    float deltaZ;
+
+    // z-buffer check
+    if(dx > dy)
+        deltaZ = (1/z1 - 1/z0) / (float)dx;
+    else
+        deltaZ = (1/z1 - 1/z0) / (float)dy;
+
+    // start from z0's z, because z0 is the start of drawing line.
+    float z = 1/z0;
+
+
     // Increase y coordinate or not
     int err = (dx > dy ? dx : -dy) / 2, e2;
 
@@ -141,7 +157,26 @@ void line_draw(Line *l, Image *src, Color c) {
         if (x0 >= 0 && x0 < src->cols && y0 >= 0 && y0 < src->rows) {
             FPixel pixel = { {c.c[0], c.c[1], c.c[2]}, 1.0f, 1.0f };
             src->data[y0 * src->cols + x0] = pixel;
+            FPixel* targetPixel = &src->data[y0 * src->cols + x0];
+
+            // z-buffer test
+            if (l->zBuffer) {
+                if (z > targetPixel->z) {
+                    // updated global z-buffer val stored in Fpixel
+                    targetPixel->z = z;
+                    targetPixel->rgb[0] = c.c[0];
+                    targetPixel->rgb[1] = c.c[1];
+                    targetPixel->rgb[2] = c.c[2];
+                }
+            } else {
+                targetPixel->rgb[0] = c.c[0];
+                targetPixel->rgb[1] = c.c[1];
+                targetPixel->rgb[2] = c.c[2];
+            }
+
         }
+
+        z += deltaZ;
         if (x0 == x1 && y0 == y1) break;
         e2 = err;
         if (e2 > -dx) { err -= dy; x0 += sx; }

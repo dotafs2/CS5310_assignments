@@ -5,11 +5,12 @@
 
 #ifndef POLYGON_H
 #define POLYGON_H
-
+#include "math.h"
 #include <stdio.h>
 #include "Image.h"
-#include "stdlib.h"
+#include "string.h"
 #include "Line.h"
+#include "Module.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -29,6 +30,26 @@ typedef struct {
     Vector *normal;// surface normal information for each vertex
     int zBuffer;   // whether to use the z-buffer; should default to true (1)
 } Polygon;
+
+
+ // Edge linked list
+ typedef struct EdgeRec {
+  double xIntersect;
+  double zIntersect;
+  double dxPerScanline;
+  double dzPerScanline;
+  int yUpper;
+  struct EdgeRec *next;
+ } EdgeRec;
+
+ /**
+  *
+  * @param v1 Point 1
+  * @param v2 Point 2
+  * @param rec Edge linked list
+  */
+ void makeEdgeRec(Point v1, Point v2, EdgeRec *rec);
+
 
 /**
  * @brief Creates and returns an allocated Polygon pointer initialized to an empty Polygon.
