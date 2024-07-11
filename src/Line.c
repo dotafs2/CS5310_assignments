@@ -125,6 +125,7 @@ void line_copy(Line *to, Line *from) {
 }
 
 void line_draw(Line *l, Image *src, Color c) {
+    print_line_coordinates(l->a,l->b);
     if (!l || !src) return;
     int x0 = (int)l->a.val[0];
     int y0 = (int)l->a.val[1];

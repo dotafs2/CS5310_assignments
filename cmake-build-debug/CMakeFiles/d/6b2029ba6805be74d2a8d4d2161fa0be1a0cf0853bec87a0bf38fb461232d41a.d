@@ -54,7 +54,7 @@ test6b_autogen/timestamp: \
   /Users/dotafs/Desktop/CS5310_assignments/src/anti-alias.cpp \
   /Users/dotafs/Desktop/CS5310_assignments/src/ball.cpp \
   /Users/dotafs/Desktop/CS5310_assignments/src/fsMath.c \
-  /Users/dotafs/Desktop/CS5310_assignments/test/test7/test7b.c \
+  /Users/dotafs/Desktop/CS5310_assignments/test/test8/test8a.c \
   /Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6/FindWrapAtomic.cmake \
   /Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6/FindWrapOpenGL.cmake \
   /Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6/Qt6Config.cmake \

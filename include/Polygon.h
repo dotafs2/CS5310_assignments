@@ -10,7 +10,7 @@
 #include "Image.h"
 #include "string.h"
 #include "Line.h"
-#include "Module.h"
+// include "Module.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -41,6 +41,29 @@ typedef struct {
   int yUpper;
   struct EdgeRec *next;
  } EdgeRec;
+
+typedef enum{
+  ShadeFrame,
+  ShadeConstant,
+  ShadeFlat,
+  ShadeGouraud,
+  ShadePhong,
+  ShadeDepth
+} ShadeMethod;
+
+typedef struct DrawState {
+  Color color;
+  Color flatColor;
+  Color body;
+  Color surface;
+  float surfaceCoeff;
+  ShadeMethod shade;
+  int zBufferFlag;
+  Point viewer;
+ } DrawState;
+
+ typedef struct {
+ }Lighting;
 
  /**
   *

@@ -102,11 +102,10 @@ void MainWindow::updateImage(Image* src) {
 void MainWindow::draw() {
     srand(0x01234ABCD);
     static int frame = 0;
-   // test5c(frame);
     if (frame > 100)
         frame = 0 ;
-    // test5c(frame);
-    test7b(frame);
+    test5c(frame);
+ //   test7b(frame);
 // drawBall();
     // open it for use test5b
     //  test5b(frame);
@@ -355,6 +354,7 @@ void MainWindow::test7b(int frame){
 		char buffer[256];
     image_reset(src);
 		matrix_rotateY(&GTM, cos(M_PI/30.0), sin(M_PI/30.0) );
+
 		module_draw( curves, &VTM, &GTM, &ds, NULL, src );
 	//	sprintf(buffer, "bez3d-frame%03d.ppm", frame);
 	//	image_write(src, buffer);

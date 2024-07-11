@@ -53,13 +53,13 @@ set(MAIN_SOURCE_FILES
 # test6a
 set(TEST6A_SOURCE_FILES
         ${COMMON_SOURCE_FILES}
-        test/test7/test7a.c
+        test/test6/test6a.c
 )
 
 # test6b
 set(TEST6B_SOURCE_FILES
         ${COMMON_SOURCE_FILES}
-        test/test7/test7b.c
+        test/test8/test8a.c
 )
 
 # Create the main entry executable

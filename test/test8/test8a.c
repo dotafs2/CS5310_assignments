@@ -60,7 +60,6 @@ int main(int argc, char *argv[]) {
 
     matrix_identity(&GTM);
     module_draw(cube, &VTM, &GTM, ds, NULL, src);
-
     // write out the image
     image_write(src, "test8a.ppm");
 

@@ -32,24 +32,6 @@ typedef enum { // example of an enumerated type
   ObjModule
 } ObjectType;
 
-typedef enum{
-    ShadeFrame,
-    ShadeConstant,
-    ShadeFlat,
-    ShadeGouraud,
-    ShadePhong
-} ShadeMethod;
-
-typedef struct DrawState {
-    Color color;
-    Color flatColor;
-    Color body;
-    Color surface;
-    float surfaceCoeff;
-    ShadeMethod shade;
-    int zBufferFlag;
-    Point viewer;
-} DrawState;
 
 
 typedef union {
@@ -76,9 +58,6 @@ typedef struct {
     Element *tail;
 } Module;
 
-
-typedef struct {
-}Lighting;
 
 Element *element_create();
 Element *element_init(ObjectType type, void *obj);
@@ -117,7 +96,7 @@ void drawstate_setBody( DrawState *s, Color c );
 void drawstate_setSurface( DrawState *s, Color c );
 void drawstate_setSurfaceCoeff( DrawState *s, float f );
 void drawstate_copy( DrawState *to, DrawState *from );
-
+void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light);
 #ifdef __cplusplus
 }
 #endif

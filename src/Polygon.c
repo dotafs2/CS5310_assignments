@@ -48,6 +48,8 @@ void polygon_init(Polygon *p) {
     p->oneSided = 0;
 }
 
+
+
 // Function to set the vertices of a Polygon
 void polygon_set(Polygon *p, int numV, Point *vlist) {
     if (p == NULL) return;
@@ -66,9 +68,9 @@ void polygon_set(Polygon *p, int numV, Point *vlist) {
 // Function to clear the internal data of a Polygon
 void polygon_clear(Polygon *p) {
     if (p == NULL) return;
-    free(p->vertex);
-    free(p->color);
-    free(p->normal);
+    if (p->vertex != NULL)  free(p->vertex);
+    if (p->color != NULL)   free(p->color);
+    if (p->normal != NULL)  free(p->normal);
     p->numVertex = 0;
 }
 
@@ -160,6 +162,18 @@ void polygon_normalize(Polygon *p) {
     }
 }
 
+    // Create an empty EdgeRec
+EdgeRec *EdgeRec_create() {
+EdgeRec *e = (EdgeRec *)malloc(sizeof(EdgeRec));
+    e->xIntersect = 0.0;
+    e->zIntersect = 0.0;
+    e->dxPerScanline = 0.0;
+    e->dzPerScanline = 0.0;
+    e->yUpper = 0;
+    e->next = NULL;
+
+    return e;
+}
 void makeEdgeRec(Point v1, Point v2, EdgeRec *rec) {
     if (v1.val[1] > v2.val[1])
         swap_points(&v1,&v2);
@@ -172,6 +186,7 @@ void makeEdgeRec(Point v1, Point v2, EdgeRec *rec) {
 }
 
 void processEdgeList(EdgeRec *edgeTable[], int y, EdgeRec **activeList) {
+    // 更新当前活动边的交点
     EdgeRec *current = *activeList;
     while (current) {
         current->xIntersect += current->dxPerScanline;
@@ -179,6 +194,7 @@ void processEdgeList(EdgeRec *edgeTable[], int y, EdgeRec **activeList) {
         current = current->next;
     }
 
+    // 删除已经处理完的边
     EdgeRec **p = activeList;
     while (*p) {
         EdgeRec *q = *p;
@@ -190,6 +206,7 @@ void processEdgeList(EdgeRec *edgeTable[], int y, EdgeRec **activeList) {
         }
     }
 
+    // 将新的边加入活动边列表
     current = edgeTable[y];
     while (current) {
         EdgeRec *temp = current;
@@ -207,8 +224,8 @@ void fillScan(int y, EdgeRec *activeList, Image *src, Color c) {
         p2 = p1->next;
         if (p1->xIntersect > p2->xIntersect) {
             EdgeRec* temp = p1;
-            p2 = p1;
-            p1 = temp;
+            p1 = p2;
+            p2 = temp;
         }
 
         float dzPerColumn = (p2->zIntersect - p1->zIntersect) / (p2->xIntersect - p1->xIntersect);
@@ -228,22 +245,30 @@ void fillScan(int y, EdgeRec *activeList, Image *src, Color c) {
     }
 }
 
-void polygon_drawFill(Polygon *p, Image *src, Color c) {
+
+    void polygon_drawFill(Polygon *p, Image *src, Color c) {
     if (p == NULL || src == NULL || p->numVertex < 3) return;
 
     int minY = src->rows, maxY = 0;
     for (int i = 0; i < p->numVertex; i++) {
-        if (p->vertex[i].val[1] < minY) minY = (int)p->vertex[i].val[1];
-        if (p->vertex[i].val[1] > maxY) maxY = (int)p->vertex[i].val[1];
+        int y = (int)p->vertex[i].val[1];
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
     }
 
-    EdgeRec *edgeTable[maxY + 1];
-    memset(edgeTable, 0, sizeof(EdgeRec*) * (maxY + 1));
+    if (minY < 0) minY = 0;
+    if (maxY >= src->rows) maxY = src->rows - 1;
+
+    // Allocate memory for edge table
+    EdgeRec **edgeTable = (EdgeRec **)calloc(maxY + 1, sizeof(EdgeRec *));
+    if (edgeTable == NULL) return; // Check for calloc failure
 
     for (int i = 0; i < p->numVertex; i++) {
         Point v1 = p->vertex[i];
         Point v2 = p->vertex[(i + 1) % p->numVertex];
-        EdgeRec *rec = malloc(sizeof(EdgeRec));
+        if ((int)v1.val[1] == (int)v2.val[1]) continue; // Skip horizontal edges
+        EdgeRec *rec = (EdgeRec *)malloc(sizeof(EdgeRec));
+        if (rec == NULL) continue; // Check for malloc failure
         makeEdgeRec(v1, v2, rec);
         int yStart = (int)ceil(v1.val[1]);
         rec->next = edgeTable[yStart];
@@ -251,45 +276,24 @@ void polygon_drawFill(Polygon *p, Image *src, Color c) {
     }
 
     EdgeRec *activeList = NULL;
-    float *zBuffer = calloc(src->rows * src->cols, sizeof(float));
-    for (int i = 0; i < src->rows * src->cols; i++) {
-        zBuffer[i] = 0.0f; // Initialize zBuffer to 0 (infinite distance)
-    }
 
     for (int y = minY; y <= maxY; y++) {
         processEdgeList(edgeTable, y, &activeList);
         fillScan(y, activeList, src, c);
     }
 
-    free(zBuffer);
+    // Free edge table
+    for (int y = minY; y <= maxY; y++) {
+        EdgeRec *current = edgeTable[y];
+        while (current) {
+            EdgeRec *temp = current;
+            current = current->next;
+            free(temp);
+        }
+    }
+    free(edgeTable);
 }
 
-// void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
-//     if (p == NULL || src == NULL || ds == NULL || p->numVertex < 3) return;
-//     switch (ds->shade) {
-//         case ShadeFrame:
-//             // Draw only the outline of the polygon using the DrawState color field
-//                 polygon_draw(p, src, ds->color);
-//         break;
-//
-//         case ShadeConstant:
-//             // Fill the polygon with the DrawState color field
-//                 polygon_drawFill(p, src, ds->color);
-//         break;
-//
-//         case ShadeDepth:
-//             for (int i = 0; i < p->numVertex; i++) {
-//                 // Update vertex colors based on depth value
-//                 // Here is a simple approach; you might want to use more complex shading models
-//                 float depth = p->vertex[i].val[2];
-//                 float shade = 1.0f - depth; // Assuming depth is normalized to [0, 1]
-//                 Color depthColor = {shade, shade, shade}; // Greyscale based on depth
-//                 // Call a function to fill polygon with this depth-based color
-//                 polygon_drawFill(p, src, depthColor);
-//             }
-//         break;
-//     }
-// }
 
 
 void polygon_draw(Polygon *p, Image *src, Color c) {
@@ -341,32 +345,29 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
     return (*alpha >= 0.0f && *beta >= 0.0f && *gamma >= 0.0f);
 }
 
-void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
-    if (p == NULL || src == NULL || ds == NULL || p->numVertex < 3) return;
-    switch (ds->shade) {
-        case ShadeFrame:
-            // Draw only the outline of the polygon using the DrawState color field
-                polygon_draw(p, src, ds->color);
-        break;
+    void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
+        if (p == NULL || src == NULL || ds == NULL || p->numVertex < 3) return;
+        switch (ds->shade) {
+            case ShadeFrame:
+                // Draw only the outline of the polygon using the DrawState color field
+                    polygon_draw(p, src, ds->color);
+            break;
 
-        case ShadeConstant:
-            // Fill the polygon with the DrawState color field
-                polygon_drawFill(p, src, ds->color);
-        break;
+            case ShadeConstant:
+                // Fill the polygon with the DrawState color field
+                    polygon_drawFill(p, src, ds->color);
+            break;
 
-        // case ShadeDepth:
-        //     for (int i = 0; i < p->numVertex; i++) {
-        //         // Update vertex colors based on depth value
-        //         // Here is a simple approach; you might want to use more complex shading models
-        //         float depth = p->vertex[i].val[2];
-        //         float shade = 1.0f - depth; // Assuming depth is normalized to [0, 1]
-        //         Color depthColor = {shade, shade, shade}; // Greyscale based on depth
-        //         // Call a function to fill polygon with this depth-based color
-        //         polygon_drawFill(p, src, depthColor);
-        //     }
-     //   break;
+    case ShadeDepth:
+        for (int i = 0; i < p->numVertex; i++) {
+            float depth = p->vertex[i].val[2];
+            float shade = 1.0f - depth;
+            Color depthColor = {0.5, 0.5, 0.5};
+            polygon_drawFill(p, src, ds->color);
+        }
+      break;
+        }
     }
-}
 
 
 #ifdef __cplusplus
