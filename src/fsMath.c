@@ -109,16 +109,8 @@ void matrix_xformPoint(Matrix *m, Point *p, Point *q) {
             temp.val[i] += m->m[i][j] * p->val[j];
         }
     }
-    // Normalize the point if the fourth component is not zero
-    if (temp.val[3] != 0) {
-        for (int i = 0; i < 3; i++) {
-            q->val[i] = temp.val[i] / temp.val[3];
-        }
-        q->val[3] = 1.0;
-    } else {
         for (int i = 0; i < 4; i++) {
             q->val[i] = temp.val[i];
-        }
     }
 }
 
@@ -276,6 +268,7 @@ void matrix_perspective(Matrix *m, double d) {
 }
 
 
+// Function to set the VTM to the view specified by the View2D structure
 void matrix_setView2D(Matrix *vtm, View2D *view) {
 
     // The height of the view rectangle in world coordinates
@@ -300,12 +293,12 @@ void matrix_setView2D(Matrix *vtm, View2D *view) {
     Matrix trans2;
     matrix_identity(&trans2);
     matrix_translate2D(&trans2, view->screenx / 2.0, view->screeny / 2.0);
-    // combine
-    matrix_multiply(&trans2, &scale, vtm);
-    matrix_multiply(vtm, &rotate, vtm);
-    matrix_multiply(vtm, &trans, vtm);
-}
 
+    // combine
+    matrix_multiply( &scale,&trans2, vtm);
+    matrix_multiply( &rotate,vtm, vtm);
+    matrix_multiply( &trans,vtm,vtm);
+}
 void matrix_setView3D(Matrix *vtm, View3D *view) {
     // Step 1: Initialize VTM to the identity matrix
     matrix_identity(vtm);

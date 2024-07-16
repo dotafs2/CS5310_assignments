@@ -77,6 +77,7 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->addWidget(graphicsView);
     mainLayout->addWidget(controlPanel);
     test7b_init();
+	test8b_init();
     // 启动定时器定期更新图像
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::draw);
@@ -90,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow() {
     test7b_end();
 	test7c_end();
+	test8b_end();
     image_free(src);
 }
 
@@ -102,10 +104,12 @@ void MainWindow::updateImage(Image* src) {
 void MainWindow::draw() {
     srand(0x01234ABCD);
     static int frame = 0;
+   // test5c(frame);
     if (frame > 100)
         frame = 0 ;
-    test5c(frame);
- //   test7b(frame);
+    // test5c(frame);
+   // test7b(frame);
+	test8b(frame);
 // drawBall();
     // open it for use test5b
     //  test5b(frame);
@@ -354,7 +358,6 @@ void MainWindow::test7b(int frame){
 		char buffer[256];
     image_reset(src);
 		matrix_rotateY(&GTM, cos(M_PI/30.0), sin(M_PI/30.0) );
-
 		module_draw( curves, &VTM, &GTM, &ds, NULL, src );
 	//	sprintf(buffer, "bez3d-frame%03d.ppm", frame);
 	//	image_write(src, buffer);
@@ -461,4 +464,119 @@ void MainWindow::test7c(int frame) {
 
 void MainWindow::test7c_end() {
 	module_delete( curve );
+}
+
+
+void MainWindow::test8b_init() {
+  int i;
+
+  Color Grey;
+  Color Yellow;
+  Color Blue;
+
+
+	color_set( &Grey, 175/255.0, 178/255.0, 181/255.0 );
+	color_set( &Yellow, 240/255.0, 220/255.0, 80/255.0 );
+	color_set( &Blue, 50/255.0, 60/255.0, 200/255.0 );
+
+
+
+  // initialize matrices
+  matrix_identity(&GTM);
+  matrix_identity(&VTM);
+
+  // set the View parameters
+  point_set3D(&(view3.vrp), 0.0, 0.0, -40.0);
+  vector_set(&(view3.vpn), 0.0, 0.0, 1.0);
+  vector_set(&(view3.vup), 0.0, 1.0, 0.0);
+  view3.d = 2.0;
+  view3.du = 1.0;
+  view3.dv = 1.0;
+  view3.f = 0.0;
+  view3.b = 50;
+  view3.screenx = cols;
+  view3.screeny = rows;
+  matrix_setView3D(&VTM, &view3);
+
+  // print out VTM
+  printf("Final VTM: \n");
+  matrix_print(&VTM, stdout);
+
+  // make a simple cube module
+  cube = module_create();
+  module_cube(cube, 1);
+
+  // make a set of 3 cubes
+  cubes = module_create();
+
+  module_identity(cubes);
+  module_color(cubes, &Grey);
+  module_scale(cubes, 1.5, 2, 1);
+  module_translate(cubes, 1, 1, 1);
+  module_module(cubes, cube);
+
+  module_identity(cubes);
+  module_color(cubes, &Yellow);
+  module_scale(cubes, 2, 1, 3);
+  module_translate(cubes, -1, -1, -1);
+  module_module(cubes, cube);
+
+  module_identity(cubes);
+  module_color(cubes, &Blue);
+  module_scale(cubes, 2, 2, 2);
+  module_module(cubes, cube);
+
+  // make a scene with lots of cube sets
+  scenetest8 = module_create();
+	for(i=0;i<30;i++) {
+
+		// initialize LTM
+		module_identity(scenetest8);
+
+		// rotate by some random angles
+		angle = drand48() * 2*M_PI;
+		module_rotateX(scenetest8, cos(angle), sin(angle));
+		angle = drand48() * 2*M_PI;
+		module_rotateY(scenetest8, cos(angle), sin(angle));
+		angle = drand48() * 2*M_PI;
+		module_rotateZ(scenetest8, cos(angle), sin(angle));
+
+		// translate to a location
+		module_translate(scenetest8,
+				 (drand48()-0.5)*15.0,
+				 (drand48()-0.5)*15.0,
+				 (drand48()-0.5)*15.0);
+
+		// add a tri-cube
+		module_module(scenetest8, cubes);
+	}
+
+	ds = *drawstate_create();
+	ds.shade = ShadeDepth;
+
+
+}
+
+
+void MainWindow::test8b(int i) {
+
+		char buffer[256];
+
+		image_reset( src );
+
+		matrix_identity(&GTM);
+		matrix_rotateY(&GTM, cos(i*2*M_PI/36.0), sin(i*2*M_PI/36.0));
+		module_draw(scenetest8, &VTM, &GTM, &ds, NULL, src);
+
+		image_write(src, buffer);
+
+}
+
+void MainWindow::test8b_end() {
+
+	// free stuff here
+	module_delete( cube );
+	module_delete( cubes );
+	module_delete( scenetest8 );
+	image_free( src );
 }

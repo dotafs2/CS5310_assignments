@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
   Color Blue;
   Point pt[100];
   int i;
-  
+
   srand(42);
 
   color_set(&Red, 0.9, 0.2, 0.1 );
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
   // something more interesting
   for(i=0;i<50;i++) {
     float dr = rand() % 20;
-    point_set2D(&(pt[i]), 
+    point_set2D(&(pt[i]),
     200 + cos((float)i * M_PI * 2.0 / 50.0)*(70 + dr),
     150 + sin((float)i * M_PI * 2.0 / 50.0)*(70 + dr));
     point_print(&pt[i],stdout);
@@ -56,11 +56,12 @@ int main(int argc, char *argv[]) {
   polygon_set(p, 50, pt);
 
   printf("drawing first big polygon\n");
+  polygon_print(p,stdout);
   polygon_drawFill(p, src, Red);
 
   for(i=0;i<50;i++) {
     float dr = rand() % 15;
-    point_set2D(&(pt[i]), 
+    point_set2D(&(pt[i]),
     200 + cos((float)i * M_PI * 2.0 / 50.0)*(50 + dr),
     150 + sin((float)i * M_PI * 2.0 / 50.0)*(50 + dr));
   }
@@ -71,7 +72,7 @@ int main(int argc, char *argv[]) {
 
   for(i=0;i<50;i++) {
     float dr = rand() % 10;
-    point_set2D(&(pt[i]), 
+    point_set2D(&(pt[i]),
     200 + cos((float)i * M_PI * 2.0 / 50.0)*(30 + dr),
     150 + sin((float)i * M_PI * 2.0 / 50.0)*(30 + dr));
   }

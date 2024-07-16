@@ -36,6 +36,13 @@ Image* image_create(int rows, int cols){
     }
     img->max_val = 255;
     memset(img->filename, 0, sizeof(img->filename));
+    for (int i = 0; i < rows * cols; i++) {
+        img->data[i].rgb[0] = 0.f;
+        img->data[i].rgb[1] = 0.f;
+        img->data[i].rgb[2] = 0.f;
+        img->depth[i] = 1.f;
+        img->alpha[i] = 1.f;
+    }
     return img;
 }
 
@@ -203,7 +210,7 @@ void image_copy(Image *dest, const Image *src) {
 
 FPixel image_getf(Image *src, int r, int c) {
     if (!src || r < 0 || r >= src->rows || c < 0 || c >= src->cols) {
-        FPixel empty = { {0.f, 0.f, 0.f}};
+        FPixel empty = { {0.f, 0.f, 0.f}, 0.f, 0.f };
         return empty;
     }
     return src->data[r * src->cols + c];

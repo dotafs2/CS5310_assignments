@@ -117,13 +117,11 @@ test6b_autogen/timestamp: \
   CMakeFiles/3.28.1/CMakeCXXCompiler.cmake \
   CMakeFiles/3.28.1/CMakeSystem.cmake \
   /Users/dotafs/Desktop/CS5310_assignments/include/Bezier.h \
-  /Users/dotafs/Desktop/CS5310_assignments/include/DataStructure.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Line.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Module.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Polygon.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/fsMath.h \
   /Users/dotafs/Desktop/CS5310_assignments/src/Bezier.c \
-  /Users/dotafs/Desktop/CS5310_assignments/src/DataStructure.c \
   /Users/dotafs/Desktop/CS5310_assignments/src/Image.c \
   /Users/dotafs/Desktop/CS5310_assignments/src/Line.c \
   /Users/dotafs/Desktop/CS5310_assignments/src/Module.c \

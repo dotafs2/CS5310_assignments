@@ -10,7 +10,7 @@ Bruce A. Maxwell
 #include <string.h>
 #include "Bezier.h"
 #include "Module.h"
-#include "DataStructure.h"
+
 int main(int argc, char *argv[]) {
     Image *src;
     Matrix VTM;

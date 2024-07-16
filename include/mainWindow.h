@@ -51,6 +51,9 @@ private:
     void test7c(int frame);
     void test7c_init();
     void test7c_end();
+    void test8b_init();
+    void test8b(int frame);
+    void test8b_end();
     void setWhite(Image *src);
     double drand();
 
@@ -63,6 +66,8 @@ private:
     const int rows = 500; // Set these to appropriate values
     const int cols = 500; // Set these to appropriate values
     View2D view;
+    DrawState ds;
+    View3D view3;
     Matrix vtm;
     Matrix ltm;
     Line line[50];
@@ -77,7 +82,10 @@ private:
     Module* curveA;
     Module* curveB;
     Module* curve;
-    DrawState ds;
+    Module *cube;
+    Module *cubes;
+    Module *scenetest8;
+    float angle;
 
 };
 

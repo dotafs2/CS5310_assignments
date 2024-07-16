@@ -117,13 +117,11 @@ test6a_autogen/timestamp: \
   CMakeFiles/3.28.1/CMakeCXXCompiler.cmake \
   CMakeFiles/3.28.1/CMakeSystem.cmake \
   /Users/dotafs/Desktop/CS5310_assignments/include/Bezier.h \
-  /Users/dotafs/Desktop/CS5310_assignments/include/DataStructure.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Line.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Module.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Polygon.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/fsMath.h \
   /Users/dotafs/Desktop/CS5310_assignments/src/Bezier.c \
-  /Users/dotafs/Desktop/CS5310_assignments/src/DataStructure.c \
   /Users/dotafs/Desktop/CS5310_assignments/src/Image.c \
   /Users/dotafs/Desktop/CS5310_assignments/src/Line.c \
   /Users/dotafs/Desktop/CS5310_assignments/src/Module.c \
@@ -131,7 +129,7 @@ test6a_autogen/timestamp: \
   /Users/dotafs/Desktop/CS5310_assignments/src/anti-alias.cpp \
   /Users/dotafs/Desktop/CS5310_assignments/src/ball.cpp \
   /Users/dotafs/Desktop/CS5310_assignments/src/fsMath.c \
-  /Users/dotafs/Desktop/CS5310_assignments/test/test4/test4a.c \
+  /Users/dotafs/Desktop/CS5310_assignments/test/test8/test8b.c \
   /Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6/FindWrapAtomic.cmake \
   /Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6/FindWrapOpenGL.cmake \
   /Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6/Qt6Config.cmake \

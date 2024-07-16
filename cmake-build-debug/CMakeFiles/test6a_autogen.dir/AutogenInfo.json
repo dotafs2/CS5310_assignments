@@ -483,12 +483,6 @@
 			null
 		],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/include/DataStructure.h",
-			"MU",
-			"6YEA5652QU/moc_DataStructure.cpp",
-			null
-		],
-		[
 			"/Users/dotafs/Desktop/CS5310_assignments/include/Line.h",
 			"MU",
 			"6YEA5652QU/moc_Line.cpp",
@@ -577,11 +571,6 @@
 	"SOURCES" : 
 	[
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Bezier.c", "MU", null ],
-		[
-			"/Users/dotafs/Desktop/CS5310_assignments/src/DataStructure.c",
-			"MU",
-			null
-		],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Image.c", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Line.c", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Module.c", "MU", null ],
@@ -594,7 +583,7 @@
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/ball.cpp", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/fsMath.c", "MU", null ],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/test/test4/test4a.c",
+			"/Users/dotafs/Desktop/CS5310_assignments/test/test8/test8b.c",
 			"MU",
 			null
 		]

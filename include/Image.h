@@ -15,6 +15,8 @@ extern "C" {
 // Structure for a pixel with RGB color, alpha, and depth
 typedef struct {
     float rgb[3];
+    float a;
+    float z;
 } FPixel;
 
 // Structure for an image, including pixel data, dimensions, and auxiliary data
@@ -33,6 +35,9 @@ typedef struct {
     float c[3];
 } Color;
 
+static Color red = {1.0f, 0.0f, 0.0f};
+static Color green = {0.0f, 1.0f, 0.0f};
+static Color blue = {0.0f, 0.0f, 1.0f};
 // Image creation and memory management functions
 Image *image_create(int rows, int cols);
 void image_free(Image *src);

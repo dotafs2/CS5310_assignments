@@ -25,11 +25,11 @@ Element *element_init(ObjectType type, void *obj) {
                 break;
             case ObjPolyline:
                 polyline_init(&(e->obj.polyline));
-                e->obj.polyline = *(Polyline *)obj;
+                polyline_copy(&e->obj.polyline,obj);
                 break;
             case ObjPolygon:
                 polygon_init(&(e->obj.polygon));
-                e->obj.polygon = *(Polygon *)obj;
+                polygon_copy(&e->obj.polygon,obj);
                 break;
             case ObjModule:
                 e->obj.module = obj;
@@ -56,12 +56,17 @@ Element *element_init(ObjectType type, void *obj) {
     return e;
 }
 
-// Delete an element and free its memory
 void element_delete(Element *e) {
-    if (e) free(e);
+    if (e == NULL) return;
+
+    if(e->type == ObjPolyline)
+        polyline_clear(&e->obj.polyline);
+    if(e->type == ObjPolygon)
+        polygon_clear(&e->obj.polygon);
+
+    free(e);
 }
 
-// Create an empty module
 Module *module_create() {
     Module *md = (Module *)malloc(sizeof(Module));
     if (md) {
@@ -284,20 +289,22 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
         matrix_multiply(GTM,&LTM,&tempGTM);
         switch (current->type) {
             case ObjNone:
+
                 break;
             case ObjPoint: {
-                Point tempPoint1 = current->obj.point;
-                Point tempPoint2 = current->obj.point;
-                Point tempPoint3 = current->obj.point;
-                matrix_xformPoint(&tempGTM, &tempPoint1, &tempPoint2);
-                matrix_xformPoint(VTM, &tempPoint2, &tempPoint3);
-                point_draw(&tempPoint3, src, ds->color);
+                Point tempPoint = current->obj.point;
+                matrix_xformPoint(&tempGTM, &tempPoint, &tempPoint);
+                matrix_xformPoint(VTM, &tempPoint, &tempPoint);
+                //  printf("Point: %f,%f,%f ", tempPoint.val[0],tempPoint.val[1],tempPoint.val[2]);
+                point_draw(&tempPoint, src, ds->color);
             }
                 break;
+
             case ObjLine: {
                 Line tempLine = current->obj.line;
                 matrix_xformLine(&tempGTM, &tempLine);
                 matrix_xformLine(VTM, &tempLine);
+                line_normalize(&tempLine);
                 line_draw(&tempLine, src, ds->color);
             }
                 break;
@@ -324,39 +331,47 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                 }
                 bezierSurface_draw(&tempBSurface3,src,ds->color, 4,0);
             }
-            break;
+                break;
             case ObjPolyline: {
-                Polyline tempPolyline = current->obj.polyline;
+                Polyline tempPolyline;
+                polyline_init(&tempPolyline);
+                polyline_copy(&tempPolyline,&current->obj.polyline);
                 matrix_xformPolyline(&tempGTM, &tempPolyline);
                 matrix_xformPolyline(VTM, &tempPolyline);
+                polyline_normalize(&tempPolyline);
                 polyline_draw(&tempPolyline, src, ds->color);
                 polyline_clear(&tempPolyline);
             }
                 break;
             case ObjPolygon: {
-                Polygon tempPolygon = current->obj.polygon;
+                Polygon tempPolygon;
+                polygon_init(&tempPolygon);
+                polygon_copy( &tempPolygon, &current->obj.polygon);
                 matrix_xformPolygon(&tempGTM, &tempPolygon);
                 matrix_xformPolygon(VTM, &tempPolygon);
                 polygon_normalize(&tempPolygon);
-                switch (ds->shade) {
+               //  polygon_print(&tempPolygon,stdout);
+                switch(ds->shade) {
                     case ShadeConstant:
-                        polygon_drawFill( &tempPolygon, src, ds->color);
+                        polygon_drawFill(&tempPolygon,src,ds->color);
                         break;
                     case ShadeDepth:
-                        polygon_drawShade( &tempPolygon, src, ds,lighting);
+                        polygon_drawShade(&tempPolygon,src,ds,lighting);
                         break;
-                    case ShadeFlat:
-                        polygon_drawShade( &tempPolygon, src, ds,lighting);
-                    break;
+                    case ShadeGouraud:
+
+                        break;
                     default:
                         break;
+                        // polygon_drawFill(&tempPolygon,src,ds->color);
                 }
-                polygon_drawShade(&tempPolygon,src,ds,lighting);
                 polygon_clear(&tempPolygon);
             }
                 break;
             case ObjModule: {
-                module_draw(current->obj.module, VTM, &tempGTM, ds, lighting, src);
+                DrawState tempDrawState;
+                drawstate_copy(&tempDrawState,ds);
+                module_draw(current->obj.module, VTM, &tempGTM, &tempDrawState, lighting, src);
             }
                 break;
             case ObjMatrix: {
@@ -412,32 +427,38 @@ void module_cube(Module *md, int solid) {
                 {1,vertices[3], vertices[7] }
         };
 
-        // Define the faces of the cube
-        Polygon *faces[6];
-        faces[0] = polygon_createp(4, (Point[]){ vertices[0], vertices[1], vertices[2], vertices[3] }); // Front face
-        faces[1] = polygon_createp(4, (Point[]){ vertices[4], vertices[5], vertices[6], vertices[7] }); // Back face
-        faces[2] = polygon_createp(4, (Point[]){ vertices[0], vertices[3], vertices[7], vertices[4] }); // Left face
-        faces[3] = polygon_createp(4, (Point[]){ vertices[1], vertices[2], vertices[6], vertices[5] }); // Right face
-        faces[4] = polygon_createp(4, (Point[]){ vertices[3], vertices[2], vertices[6], vertices[7] }); // Top face
-        faces[5] = polygon_createp(4, (Point[]){ vertices[0], vertices[1], vertices[5], vertices[4] }); // Bottom face
-
         if (solid) {
-            // Add polygons to the module
-            for (int i = 0; i < 6; i++) {
-                module_polygon(md, faces[i]);
+            // Define the faces of the cube
+            Polygon faces[6];
+            Point front[4] = { vertices[0], vertices[1], vertices[2], vertices[3] };
+            Point back[4] = { vertices[4], vertices[5], vertices[6], vertices[7] };
+            Point left[4] = { vertices[0], vertices[3], vertices[7], vertices[4] };
+            Point right[4] = { vertices[1], vertices[2], vertices[6], vertices[5] };
+            Point top[4] = { vertices[3], vertices[2], vertices[6], vertices[7] };
+            Point bottom[4] = { vertices[0], vertices[1], vertices[5], vertices[4] };
+            for (int i = 0; i < 6; ++i) {
+                polygon_init(&faces[i]);
             }
+            polygon_set(&faces[0], 4, front);
+            polygon_set(&faces[1], 4, back);
+            polygon_set(&faces[2], 4, left);
+            polygon_set(&faces[3], 4, right);
+            polygon_set(&faces[4], 4, top);
+            polygon_set(&faces[5], 4, bottom);
+
+
+            for (int i = 0; i < 6; i++) {
+                module_polygon(md, &faces[i]);
+            }
+            // else is not solid
         } else {
             // Add lines to the module
             for (int i = 0; i < 12; i++) {
                 module_line(md, &edges[i]);
             }
         }
-
-        // Free the polygons
-        for (int i = 0; i < 6; i++) {
-            polygon_free(faces[i]);
-        }
     }
+
 }
 
 

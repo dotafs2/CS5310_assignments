@@ -7,8 +7,23 @@
 
 #include "Line.h"
 #define ROUND(a) ((int)(a + 0.5))
+#define PRINT_LINE_INFO 0
 
+#define DEBUG_INPUT_CHECK 0
 
+#if DEBUG_INPUT_CHECK
+    #define DEBUG_PRINT(...) printf(__VA_ARGS__)
+    #define INPUT_CHECK(cond, msg) \
+    do { \
+    if (!(cond)) { \
+    fprintf(stderr, "Input check failed: %s, at %s:%d\n", msg, __FILE__, __LINE__); \
+    return; \
+    } \
+    } while (0)
+#else
+    #define DEBUG_PRINT(...)
+    #define INPUT_CHECK(cond, msg)
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,7 +34,7 @@ void point_set2D(Point *p, double x, double y) {
     if (!p) return;
     p->val[0] = x;
     p->val[1] = y;
-    p->val[2] = 0.0;
+    p->val[2] = 1.0;
     p->val[3] = 1.0;
 }
 
@@ -123,22 +138,32 @@ void line_copy(Line *to, Line *from) {
     to->b = from->b;
     to->zBuffer = from->zBuffer;
 }
-
+// after mvp and ndc, our viewpoint is the origin point of the axis, x y is the position of the screen, and z is the
+// depth , bec of ndc, z is between 0 and 1 , we use 1/z to check the depth , that means larger z is closer to our eyes.
 void line_draw(Line *l, Image *src, Color c) {
-    print_line_coordinates(l->a,l->b);
-    if (!l || !src) return;
+
+    INPUT_CHECK(l == NULL, "line_draw Line* l is NULL");
+    INPUT_CHECK(src == NULL, "line_draw Image *src is NULL");
+
+
+    // print_line_coordinates(l->a, l->b);
+
+    // start and end point of line's coord
     int x0 = (int)l->a.val[0];
     int y0 = (int)l->a.val[1];
     int x1 = (int)l->b.val[0];
     int y1 = (int)l->b.val[1];
+    // depth of z0 and z1 in ndc
     float z0 = (float)l->a.val[2];
     float z1 = (float)l->b.val[2];
-   // print_line_coordinates(l->a, l->b);
+
     // Bresenham's line algorithm
     int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
     int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
 
 
+    // starting z, because we need to change z in every pixels of each line, each point in line have different z value,
+    // so thats why dynamic z.
     float deltaZ;
 
     // z-buffer check
@@ -147,17 +172,20 @@ void line_draw(Line *l, Image *src, Color c) {
     else
         deltaZ = (1/z1 - 1/z0) / (float)dy;
 
-    // start from z0's z, because z0 is the start of drawing line.
+    // start from z0's z, because z0 is the start of drawing line. and change it to 1/z0 right now , which means if z
+    // is larger, closer to our eyes.
     float z = 1/z0;
 
-
-    // Increase y coordinate or not
+    // bresenham's line algorithm, should render the next pixel in the same y or go up or down.
+    // Increase y coordinate or not.
     int err = (dx > dy ? dx : -dy) / 2, e2;
 
+    // while all the pixel has been draw in one single line, otherwise do not stop loop.
     while(1) {
-        if (x0 >= 0 && x0 < src->cols && y0 >= 0 && y0 < src->rows) {
-            FPixel pixel = { {c.c[0], c.c[1], c.c[2]}};
-            src->data[y0 * src->cols + x0] = pixel;
+
+        INPUT_CHECK(!(x0 >= 0 && x0 < src->cols && y0 >= 0 && y0 < src->rows), "line_draw starting point x0,y0 is out of "
+                                                                               "range of src->rows and src->cols");
+
             FPixel* targetPixel = &src->data[y0 * src->cols + x0];
             int targetIndex = y0 * src->cols + x0;
             // z-buffer test
@@ -174,8 +202,8 @@ void line_draw(Line *l, Image *src, Color c) {
                 targetPixel->rgb[1] = c.c[1];
                 targetPixel->rgb[2] = c.c[2];
             }
+          //  print_line_coordinates(l->a,l->b);
 
-        }
 
         z += deltaZ;
         if (x0 == x1 && y0 == y1) break;

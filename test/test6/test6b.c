@@ -305,7 +305,7 @@ int main(int argc, char *argv[]) {
   // create the image and drawstate
   src = image_create( 360, 640 );
   ds = drawstate_create();
-  ds->shade = ShadeFrame;
+ // ds->shade = ShadeFrame;
 
 
   // draw into the scene

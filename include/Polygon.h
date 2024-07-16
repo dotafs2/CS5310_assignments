@@ -5,13 +5,11 @@
 
 #ifndef POLYGON_H
 #define POLYGON_H
-#include "math.h"
+
 #include <stdio.h>
 #include "Image.h"
-#include "string.h"
+#include "stdlib.h"
 #include "Line.h"
-// include "Module.h"
-# include "DataStructure.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -32,18 +30,28 @@ typedef struct {
     int zBuffer;   // whether to use the z-buffer; should default to true (1)
 } Polygon;
 
+ typedef struct {
+ }Lighting;
 
+ typedef enum{
+  ShadeFrame,
+  ShadeConstant,
+  ShadeFlat,
+  ShadeGouraud,
+  ShadePhong,
+  ShadeDepth
+} ShadeMethod;
 
- /**
-  *
-  * @param v1 Point 1
-  * @param v2 Point 2
-  * @param rec Edge linked list
-  */
- static EdgeRec *makeEdgeRec( Point start, Point end,
-                  Color c1, Color c2,
-                  Image *src, DrawState *ds);
-
+ typedef struct DrawState {
+  Color color;
+  Color flatColor;
+  Color body;
+  Color surface;
+  float surfaceCoeff;
+  ShadeMethod shade;
+  int zBufferFlag;
+  Point viewer;
+ } DrawState;
 
 /**
  * @brief Creates and returns an allocated Polygon pointer initialized to an empty Polygon.
@@ -201,8 +209,7 @@ void polygon_drawFillB(Polygon *p, Image *src, Color c);
  * @return int 1 if the point is inside the triangle, 0 otherwise.
  */
 int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *gamma);
-
-
+ void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light);
 #ifdef __cplusplus
 }
 #endif

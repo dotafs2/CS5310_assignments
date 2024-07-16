@@ -31,8 +31,6 @@ set(COMMON_SOURCE_FILES
         src/anti-alias.cpp
         src/ball.cpp
         src/Polygon.c
-        include/DataStructure.h
-        src/DataStructure.c
         include/Polygon.h
         src/fsMath.c
         include/fsMath.h
@@ -55,7 +53,7 @@ set(MAIN_SOURCE_FILES
 # test6a
 set(TEST6A_SOURCE_FILES
         ${COMMON_SOURCE_FILES}
-        test/test4/test4a.c
+        test/test8/test8b.c
 )
 
 # test6b
