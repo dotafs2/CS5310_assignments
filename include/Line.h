@@ -57,9 +57,31 @@ typedef struct {
     int zBuffer;
 } Triangle;
 
+ typedef enum{
+  ShadeFrame,
+  ShadeConstant,
+  ShadeFlat,
+  ShadeGouraud,
+  ShadePhong,
+  ShadeDepth
+} ShadeMethod;
+
+ typedef struct DrawState {
+  Color color;
+  Color flatColor;
+  Color body;
+  Color surface;
+  float surfaceCoeff;
+  ShadeMethod shade;
+  int zBufferFlag;
+  Point viewer;
+ } DrawState;
+
+ typedef struct {
+ }Lighting;
 
 // Point functions
-
+ void swap_points(Point *a, Point *b);
 /**
  * @brief Creates a point given x, y, z coordinates and a homogeneous coordinate w.
  *

@@ -337,7 +337,21 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                 Polygon tempPolygon = current->obj.polygon;
                 matrix_xformPolygon(&tempGTM, &tempPolygon);
                 matrix_xformPolygon(VTM, &tempPolygon);
-                polygon_draw(&tempPolygon, src, ds->color);
+                polygon_normalize(&tempPolygon);
+                switch (ds->shade) {
+                    case ShadeConstant:
+                        polygon_drawFill( &tempPolygon, src, ds->color);
+                        break;
+                    case ShadeDepth:
+                        polygon_drawShade( &tempPolygon, src, ds,lighting);
+                        break;
+                    case ShadeFlat:
+                        polygon_drawShade( &tempPolygon, src, ds,lighting);
+                    break;
+                    default:
+                        break;
+                }
+                polygon_drawShade(&tempPolygon,src,ds,lighting);
                 polygon_clear(&tempPolygon);
             }
                 break;
@@ -399,28 +413,18 @@ void module_cube(Module *md, int solid) {
         };
 
         // Define the faces of the cube
-        Polygon faces[6];
-        for (int i = 0; i < 6; i++) {
-            polygon_init(&faces[i]);
-        }
-
-        // Front face
-        polygon_set(&faces[0], 4, (Point[]){ vertices[0], vertices[1], vertices[2], vertices[3] });
-        // Back face
-        polygon_set(&faces[1], 4, (Point[]){ vertices[4], vertices[5], vertices[6], vertices[7] });
-        // Left face
-        polygon_set(&faces[2], 4, (Point[]){ vertices[0], vertices[3], vertices[7], vertices[4] });
-        // Right face
-        polygon_set(&faces[3], 4, (Point[]){ vertices[1], vertices[2], vertices[6], vertices[5] });
-        // Top face
-        polygon_set(&faces[4], 4, (Point[]){ vertices[3], vertices[2], vertices[6], vertices[7] });
-        // Bottom face
-        polygon_set(&faces[5], 4, (Point[]){ vertices[0], vertices[1], vertices[5], vertices[4] });
+        Polygon *faces[6];
+        faces[0] = polygon_createp(4, (Point[]){ vertices[0], vertices[1], vertices[2], vertices[3] }); // Front face
+        faces[1] = polygon_createp(4, (Point[]){ vertices[4], vertices[5], vertices[6], vertices[7] }); // Back face
+        faces[2] = polygon_createp(4, (Point[]){ vertices[0], vertices[3], vertices[7], vertices[4] }); // Left face
+        faces[3] = polygon_createp(4, (Point[]){ vertices[1], vertices[2], vertices[6], vertices[5] }); // Right face
+        faces[4] = polygon_createp(4, (Point[]){ vertices[3], vertices[2], vertices[6], vertices[7] }); // Top face
+        faces[5] = polygon_createp(4, (Point[]){ vertices[0], vertices[1], vertices[5], vertices[4] }); // Bottom face
 
         if (solid) {
             // Add polygons to the module
             for (int i = 0; i < 6; i++) {
-                module_polygon(md, &faces[i]);
+                module_polygon(md, faces[i]);
             }
         } else {
             // Add lines to the module
@@ -431,7 +435,7 @@ void module_cube(Module *md, int solid) {
 
         // Free the polygons
         for (int i = 0; i < 6; i++) {
-            polygon_clear(&faces[i]);
+            polygon_free(faces[i]);
         }
     }
 }
@@ -553,3 +557,4 @@ void drawstate_copy(DrawState *to, DrawState *from) {
     to->zBufferFlag = from->zBufferFlag;
     to->viewer = from->viewer;
 }
+

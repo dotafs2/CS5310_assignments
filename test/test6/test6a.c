@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
   DrawState *ds;
   Image *src;
 
-    srand((unsigned int)time(NULL));
+  srand((unsigned int)time(NULL));
   // setup gtm
   matrix_identity(&gtm);
   point_set2D(&vrp, 0, 0);
@@ -69,7 +69,6 @@ int main(int argc, char *argv[]) {
   view.screenx = 640;
   view.screeny = 360;
   matrix_setView2D(&vtm, &view);
-
   // create a body
   body = module_create();
 

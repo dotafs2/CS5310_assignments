@@ -5,11 +5,13 @@
 
 #ifndef POLYGON_H
 #define POLYGON_H
-
+#include "math.h"
 #include <stdio.h>
 #include "Image.h"
-#include "stdlib.h"
+#include "string.h"
 #include "Line.h"
+// include "Module.h"
+# include "DataStructure.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -29,6 +31,19 @@ typedef struct {
     Vector *normal;// surface normal information for each vertex
     int zBuffer;   // whether to use the z-buffer; should default to true (1)
 } Polygon;
+
+
+
+ /**
+  *
+  * @param v1 Point 1
+  * @param v2 Point 2
+  * @param rec Edge linked list
+  */
+ static EdgeRec *makeEdgeRec( Point start, Point end,
+                  Color c1, Color c2,
+                  Image *src, DrawState *ds);
+
 
 /**
  * @brief Creates and returns an allocated Polygon pointer initialized to an empty Polygon.
@@ -186,6 +201,7 @@ void polygon_drawFillB(Polygon *p, Image *src, Color c);
  * @return int 1 if the point is inside the triangle, 0 otherwise.
  */
 int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *gamma);
+
 
 #ifdef __cplusplus
 }
