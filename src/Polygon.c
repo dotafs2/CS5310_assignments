@@ -271,7 +271,7 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
             }
         }
 
-        // Update the current z value
+        // Update the current z value222
         invZ += deltaInvZ;
     }
 }

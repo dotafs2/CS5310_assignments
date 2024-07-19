@@ -35,6 +35,10 @@ typedef struct {
     float c[3];
 } Color;
 
+typedef struct {
+    double val[4];
+} Vector;
+
 static Color red = {1.0f, 0.0f, 0.0f};
 static Color green = {0.0f, 1.0f, 0.0f};
 static Color blue = {0.0f, 0.0f, 1.0f};

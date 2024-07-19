@@ -38,6 +38,8 @@ set(COMMON_SOURCE_FILES
         src/Module.c
         src/Bezier.c
         include/Bezier.h
+        src/Light.c
+        include/Light.h
 )
 
 # QT

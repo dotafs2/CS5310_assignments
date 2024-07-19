@@ -16,10 +16,6 @@ extern "C" {
 
 
 
-typedef struct {
-    double val[4];
-} Vector;
-
 // Polygon structure
 typedef struct {
     int oneSided;  // whether to consider the polygon one-sided (1) or two-sided (0) for shading
@@ -29,9 +25,6 @@ typedef struct {
     Vector *normal;// surface normal information for each vertex
     int zBuffer;   // whether to use the z-buffer; should default to true (1)
 } Polygon;
-
- typedef struct {
- }Lighting;
 
  typedef enum{
   ShadeFrame,
