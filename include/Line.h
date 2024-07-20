@@ -7,55 +7,13 @@
 #ifndef LINE_H
 #define LINE_H
 
-#include <stdio.h>
+
 #include "Image.h"
-#include "stdlib.h"
+#include "Definition.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// Point structure
-typedef struct {
-    double val[4];  // Point3D
-} Point;
-
-typedef struct {
-     double val[2]; // Point2D
-} Point2;
-
-// Line structure
-typedef struct {
-    int zBuffer;  // whether to use the z-buffer, should default to true (1)
-    Point a;      // starting point
-    Point b;      // ending point
-} Line;
-
-// Circle structure
-typedef struct {
-    double r;  // radius
-    Point c;   // center
-} Circle;
-
-// Ellipse structure
-typedef struct {
-    double ra;  // major axis radius
-    double rb;  // minor axis radius
-    Point c;    // center
-    double a;   // angle of major axis relative to the X-axis (optional)
-} Ellipse;
-
-// Polyline structure
-typedef struct {
-    int zBuffer;   // whether to use the z-buffer, should default to true (1)
-    int numVertex; // number of vertices
-    Point *vertex; // vertex information
-} Polyline;
-
-// Triangle functions
-typedef struct {
-    Point a, b, c;
-    int zBuffer;
-} Triangle;
 
 
 // Point functions

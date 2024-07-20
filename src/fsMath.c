@@ -44,6 +44,29 @@ void vector_cross(Vector *a, Vector *b, Vector *c) {
     c->val[3] = 0.0;
 }
 
+void vector_add(Vector *a, Vector *b, Vector *result) {
+    result->val[0] = a->val[0] + b->val[0];
+    result->val[1] = a->val[1] + b->val[1];
+    result->val[2] = a->val[2] + b->val[2];
+    result->val[3] = 0.0;
+}
+void vector_divide_num(Vector *a, float b) {
+    a->val[0]/=b;
+    a->val[1]/=b;
+    a->val[2]/=b;
+}
+
+void vector_subtract(Vector *a, Vector *b, Vector *result) {
+    result->val[0] = a->val[0] - b->val[0];
+    result->val[1] = a->val[1] - b->val[1];
+    result->val[2] = a->val[2] - b->val[2];
+    result->val[3] = 0.0;
+}
+void vector_negate(Vector *a) {
+    a->val[0]*=-1;
+    a->val[1]*=-1;
+    a->val[2]*=-1;
+}
 void matrix_print(Matrix *m, FILE *fp) {
     for (int i = 0; i < 4; i++) {
         fprintf(fp, "[ ");
@@ -54,6 +77,7 @@ void matrix_print(Matrix *m, FILE *fp) {
     }
     fprintf(fp, "\n");
 }
+
 
 void matrix_clear(Matrix *m) {
     memset(m->m, 0, 16 * sizeof(double));

@@ -37,6 +37,7 @@
 #define __ARM_FEATURE_LDREX 0xF
 #define __ARM_FEATURE_NUMERIC_MAXMIN 1
 #define __ARM_FEATURE_QRDMX 1
+#define __ARM_FEATURE_RCPC 1
 #define __ARM_FEATURE_SHA2 1
 #define __ARM_FEATURE_SHA3 1
 #define __ARM_FEATURE_SHA512 1
@@ -94,8 +95,8 @@
 #define __DECIMAL_DIG__ __LDBL_DECIMAL_DIG__
 #define __DEPRECATED 1
 #define __DYNAMIC__ 1
-#define __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ 130000
-#define __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ 130000
+#define __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ 140000
+#define __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ 140000
 #define __EXCEPTIONS 1
 #define __FINITE_MATH_ONLY__ 0
 #define __FLT16_DECIMAL_DIG__ 5
@@ -127,6 +128,8 @@
 #define __FLT_MIN_EXP__ (-125)
 #define __FLT_MIN__ 1.17549435e-38F
 #define __FLT_RADIX__ 2
+#define __FP_FAST_FMA 1
+#define __FP_FAST_FMAF 1
 #define __GCC_ATOMIC_BOOL_LOCK_FREE 2
 #define __GCC_ATOMIC_CHAR16_T_LOCK_FREE 2
 #define __GCC_ATOMIC_CHAR32_T_LOCK_FREE 2
@@ -393,7 +396,7 @@
 #define __UINT_LEAST8_MAX__ 255
 #define __UINT_LEAST8_TYPE__ unsigned char
 #define __USER_LABEL_PREFIX__ _
-#define __VERSION__ "Apple LLVM 14.0.3 (clang-1403.0.22.14.1)"
+#define __VERSION__ "Apple LLVM 15.0.0 (clang-1500.3.9.4)"
 #define __WCHAR_MAX__ 2147483647
 #define __WCHAR_TYPE__ int
 #define __WCHAR_WIDTH__ 32
@@ -401,16 +404,16 @@
 #define __WINT_TYPE__ int
 #define __WINT_WIDTH__ 32
 #define __aarch64__ 1
-#define __apple_build_version__ 14030022
+#define __apple_build_version__ 15000309
 #define __arm64 1
 #define __arm64__ 1
 #define __block __attribute__((__blocks__(byref)))
 #define __clang__ 1
 #define __clang_literal_encoding__ "UTF-8"
-#define __clang_major__ 14
+#define __clang_major__ 15
 #define __clang_minor__ 0
-#define __clang_patchlevel__ 3
-#define __clang_version__ "14.0.3 (clang-1403.0.22.14.1)"
+#define __clang_patchlevel__ 0
+#define __clang_version__ "15.0.0 (clang-1500.3.9.4)"
 #define __clang_wide_literal_encoding__ "UTF-32"
 #define __cplusplus 201402L
 #define __cpp_aggregate_nsdmi 201304L
@@ -430,6 +433,7 @@
 #define __cpp_init_captures 201304L
 #define __cpp_initializer_lists 200806L
 #define __cpp_lambdas 200907L
+#define __cpp_named_character_escapes 202207L
 #define __cpp_nsdmi 200809L
 #define __cpp_range_based_for 200907
 #define __cpp_raw_strings 200710L
@@ -438,6 +442,7 @@
 #define __cpp_rtti 199711L
 #define __cpp_rvalue_references 200610L
 #define __cpp_static_assert 200410
+#define __cpp_static_call_operator 202207L
 #define __cpp_threadsafe_static_init 200806L
 #define __cpp_unicode_characters 200704L
 #define __cpp_unicode_literals 200710L

@@ -9,30 +9,7 @@ extern "C" {
 #include "Image.h"
 #include "Polygon.h"
 #include "Line.h"
-
-#define MAX_LIGHTS 64
-
-typedef enum {
-    LightNone,
-    LightAmbient,
-    LightDirect,
-    LightPoint,
-    LightSpot,
-} LightType;
-
-typedef struct {
-    LightType type;
-    Color color;
-    Vector direction;
-    Point position;
-    float cutoff; // stores the cosine of the cutoff angle of a spotlight
-    float sharpness; // coefficient of the falloff function (power for cosine)
-} Light;
-
-typedef struct {
-    int nLights;
-    Light light[MAX_LIGHTS];
-} Lighting;
+#include "Definition.h"
 
 
 void light_init( Light *light ); // initialize the light to default values.

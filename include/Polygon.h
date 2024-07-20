@@ -10,6 +10,7 @@
 #include "Image.h"
 #include "stdlib.h"
 #include "Line.h"
+#include "Definition.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

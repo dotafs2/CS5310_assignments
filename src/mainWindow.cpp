@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "mainWindow.h"
 #include <QGraphicsPixmapItem>
 #include <random>
 #include "Module.h"
@@ -154,14 +154,13 @@ void MainWindow::drawBall() {
     image_reset(src);
     Color White;
     Point p;
-    Circle circ;
+  //  Circle circ;
     static float time = 0;
     time += 0.01;
 
     color_set(&White, 1, 1, 1);
 
     float scale = 200.0f;
-    Color red = { 1.0, 0.0, 0.0 };
 
     point_set2D(&p, 200, 200);
     Point center;
@@ -355,7 +354,7 @@ void MainWindow::test7b_init() {
 }
 
 void MainWindow::test7b(int frame){
-		char buffer[256];
+		// char buffer[256];
     image_reset(src);
 		matrix_rotateY(&GTM, cos(M_PI/30.0), sin(M_PI/30.0) );
 		module_draw( curves, &VTM, &GTM, &ds, NULL, src );
@@ -453,7 +452,7 @@ void MainWindow::test7c_init() {
 
 void MainWindow::test7c(int frame) {
 	// Create the animation by adjusting the GTM
-		char buffer[256];
+		// char buffer[256];
 		image_reset(src);
 		matrix_rotateY(&GTM, cos(M_PI/30.0), sin(M_PI/30.0) );
 		module_draw( curve, &VTM, &GTM, &ds, NULL, src );

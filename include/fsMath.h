@@ -14,7 +14,6 @@
 extern "C" {
 #endif
 
-
 typedef struct {
     double m[4][4];
 } Matrix;
@@ -54,9 +53,13 @@ double vector_length(Vector *v);
 void vector_normalize(Vector *v);
 
 double vector_dot(Vector *a, Vector *b);
-
+// c is result
 void vector_cross(Vector *a, Vector *b, Vector *c);
 
+void vector_add(Vector *a, Vector *b, Vector *result);
+void vector_subtract(Vector *a, Vector *b, Vector *result);
+void vector_divide_num(Vector *a, float b);
+void vector_negate(Vector *v);
 void matrix_print(Matrix *m, FILE *fp);
 
 void matrix_clear(Matrix *m);

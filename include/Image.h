@@ -12,36 +12,9 @@
 extern "C" {
 #endif
 
-// Structure for a pixel with RGB color, alpha, and depth
-typedef struct {
-    float rgb[3];
-    float a;
-    float z;
-} FPixel;
+#include "Definition.h"
 
-// Structure for an image, including pixel data, dimensions, and auxiliary data
-typedef struct {
-    FPixel *data;
-    int rows;
-    int cols;
-    float *depth;
-    float *alpha;
-    int max_val;
-    char filename[256]; // Filename for saving/loading image
-} Image;
 
-// Structure for a color with RGB components
-typedef struct {
-    float c[3];
-} Color;
-
-typedef struct {
-    double val[4];
-} Vector;
-
-static Color red = {1.0f, 0.0f, 0.0f};
-static Color green = {0.0f, 1.0f, 0.0f};
-static Color blue = {0.0f, 0.0f, 1.0f};
 // Image creation and memory management functions
 Image *image_create(int rows, int cols);
 void image_free(Image *src);

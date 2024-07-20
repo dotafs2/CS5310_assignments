@@ -324,9 +324,9 @@
 		"/Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework",
 		"/Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Headers",
 		"/Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework",
-		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1",
-		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include",
-		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include",
 		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"
 	],
 	"MOC_MACRO_NAMES" : 
@@ -342,7 +342,7 @@
 	"MOC_PATH_PREFIX" : false,
 	"MOC_PREDEFS_CMD" : 
 	[
-		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++",
+		"/usr/bin/c++",
 		"-std=gnu++14",
 		"-dM",
 		"-E",
@@ -380,7 +380,7 @@
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/ball.cpp", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/fsMath.c", "MU", null ],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/test/test8/test8a.c",
+			"/Users/dotafs/Desktop/CS5310_assignments/test/test9/test9d.c",
 			"MU",
 			null
 		]
