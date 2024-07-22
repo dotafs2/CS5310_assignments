@@ -11,6 +11,7 @@
 #include "stdlib.h"
 #include "Line.h"
 #include "Definition.h"
+#include "Light.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -132,7 +133,6 @@ void polygon_setNormals(Polygon *p, int numV, Vector *nlist);
  * @param oneSided Value of the oneSided flag.
  */
 void polygon_setAll(Polygon *p, int numV, Point *vlist, Color *clist, Vector *nlist, int zBuffer, int oneSided);
-
 /**
  * @brief Sets the z-buffer flag to the given value.
  *
@@ -190,7 +190,7 @@ void polygon_drawFill(Polygon *p, Image *src, Color c);
  * @param c Color to be used for drawing.
  */
 void polygon_drawFillB(Polygon *p, Image *src, Color c);
-
+ void polygon_shade( Polygon *p, Lighting *l, DrawState *ds );
 /**
  * @brief Helper function to compute Barycentric coordinates.
  *

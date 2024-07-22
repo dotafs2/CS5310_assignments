@@ -5,6 +5,15 @@
 extern "C" {
 #endif
 
+#define PRINT_MVP 0
+
+void vector_init(Vector *v) {
+        if (v == NULL) return;
+        v->val[0] = 0;
+        v->val[1] = 0;
+        v->val[2] = 0;
+        v->val[3] = 0;
+}
 void vector_set(Vector *v, double x, double y, double z) {
     v->val[0] = x;
     v->val[1] = y;
@@ -16,7 +25,11 @@ void vector_print(Vector *v, FILE *fp) {
     fprintf(fp, "Vector: (%f, %f, %f, %f)\n", v->val[0], v->val[1], v->val[2], v->val[3]);
 }
 
-void vector_copy(Vector *dest, Vector *src) {
+    void vector_copy(Vector *dest,Vector *src) {
+    if (dest == NULL || src == NULL) {
+        fprintf(stderr, "Error: Null pointer passed to vector_copy.\n");
+        return;
+    }
     memcpy(dest->val, src->val, 4 * sizeof(double));
 }
 
@@ -67,6 +80,44 @@ void vector_negate(Vector *a) {
     a->val[1]*=-1;
     a->val[2]*=-1;
 }
+void normal_calculation(Point *p1, Point *p2, Point *p3, Vector *normal) {
+    Vector u, v;
+    // printf("\np1:");
+    // point_print(p1,stdout);
+    // printf("\np2:");
+    // point_print(p2,stdout);
+    // printf("\np3:");
+    // point_print(p3,stdout);
+    // Calculate vectors u and v
+    u.val[0] = p2->val[0] - p1->val[0];
+    u.val[1] = p2->val[1] - p1->val[1];
+    u.val[2] = p2->val[2] - p1->val[2];
+
+    v.val[0] = p3->val[0] - p1->val[0];
+    v.val[1] = p3->val[1] - p1->val[1];
+    v.val[2] = p3->val[2] - p1->val[2];
+    // printf("\nu:");
+    // vector_print(&u,stdout);
+    // printf("\nv:");
+    // vector_print(&v,stdout);
+    // Calculate the cross product u x v
+    vector_cross(&v,&u,normal);
+    // printf("\n normal :");
+    // vector_print(normal,stdout);
+
+    // Normalize the normal vector
+    double length = sqrt(normal->val[0] * normal->val[0] +
+                         normal->val[1] * normal->val[1] +
+                         normal->val[2] * normal->val[2]);
+    // printf("\n length : %lf", length);
+    if (length > 0.0) {
+        normal->val[0] /= length;
+        normal->val[1] /= length;
+        normal->val[2] /= length;
+    }
+}
+
+
 void matrix_print(Matrix *m, FILE *fp) {
     for (int i = 0; i < 4; i++) {
         fprintf(fp, "[ ");
@@ -139,15 +190,46 @@ void matrix_xformPoint(Matrix *m, Point *p, Point *q) {
 }
 
 void matrix_xformVector(Matrix *m, Vector *p, Vector *q) {
+    Vector temp;
     for (int i = 0; i < 4; i++) {
-        q->val[i] = 0;
+        temp.val[i] = 0;
         for (int j = 0; j < 4; j++) {
-            q->val[i] += m->m[i][j] * p->val[j];
+            temp.val[i] += m->m[i][j] * p->val[j];
+        }
+    }
+    for (int i = 0; i < 4; i++) {
+        q->val[i] = temp.val[i];
+    }
+
+}
+
+
+    void matrix_xformNormal(Matrix *m, Vector *p, Vector *q) {
+    Vector temp;
+    // Compute the normal transformation using the transpose of the upper-left 3x3 part of m
+    for (int i = 0; i < 3; i++) {
+        temp.val[i] = 0;
+        for (int j = 0; j < 3; j++) {
+            temp.val[i] += m->m[i][j] * p->val[j];
+        }
+    }
+    // Copy the result back to q
+    for (int i = 0; i < 3; i++) {
+        q->val[i] = temp.val[i];
+    }
+    q->val[3] = 0;  // Ensure the fourth component is 0 for normal vectors
+
+    // Normalize the resulting vector to ensure it's a unit vector
+    float length = sqrt(q->val[0] * q->val[0] + q->val[1] * q->val[1] + q->val[2] * q->val[2]);
+    if (length > 0) {
+        for (int i = 0; i < 3; i++) {
+            q->val[i] /= length;
         }
     }
 }
 
-void matrix_xformPolygon(Matrix *m, Polygon *p) {
+
+    void matrix_xformPolygon(Matrix *m, Polygon *p) {
     for (int i = 0; i < p->numVertex; i++) {
         // Transform the vertex
         Point newPoint;
@@ -157,7 +239,7 @@ void matrix_xformPolygon(Matrix *m, Polygon *p) {
         // Transform the normal if it exists
         if (p->normal) {
             Vector newNormal;
-            matrix_xformVector(m, &p->normal[i], &newNormal);
+            matrix_xformNormal(m, &p->normal[i], &newNormal);
             vector_copy(&p->normal[i], &newNormal);
         }
     }
@@ -332,8 +414,10 @@ void matrix_setView3D(Matrix *vtm, View3D *view) {
     matrix_identity(&translate);
     matrix_translate(&translate, -view->vrp.val[0], -view->vrp.val[1], -view->vrp.val[2]);
     matrix_multiply(&translate, vtm, vtm);
+#if PRINT_MVP
     printf("after VRP translation\n");
     matrix_print(vtm,stdout);
+#endif
     // Step 3: VPN + VUP to get the rotate matrix
     Vector u, v, w;
     vector_copy(&w, &view->vpn);
@@ -349,38 +433,44 @@ void matrix_setView3D(Matrix *vtm, View3D *view) {
     rotate.m[1][0] = v.val[0]; rotate.m[1][1] = v.val[1]; rotate.m[1][2] = v.val[2];
     rotate.m[2][0] = w.val[0]; rotate.m[2][1] = w.val[1]; rotate.m[2][2] = w.val[2];
     matrix_multiply(&rotate, vtm, vtm);
+#if PRINT_MVP
     printf("View reference axes\n");
     matrix_print(vtm,stdout);
-
+#endif
     // step 4.5 : translate to COP
     Matrix translateCOP;
     matrix_identity(&translateCOP);
     matrix_translate(&translateCOP,0,0,view->d);
     matrix_multiply(&translateCOP,vtm,vtm);
+#if PRINT_MVP
     printf("after translating COP to origin\n");
     matrix_print(vtm,stdout);
-
+#endif
     // Step 5: Scale to CVV (I thought what is CVV mean for several hours, finally find out its just NDC...)
     double depth = view->d + view->b;
     matrix_scale(vtm,2.0*view->d/(view->du * depth),2.0*view->d/(view->dv * depth),1.0 / depth);
+#if PRINT_MVP
     printf("After scaling to CVV\n");
     matrix_print(vtm, stdout);
-
+#endif
     // Step 6: Apply perspective projection
     matrix_perspective(vtm, view->d/depth);
+#if PRINT_MVP
     printf("After perspective\n");
     matrix_print(vtm, stdout);
-
+#endif
     // step 7 Scale to image coords
     matrix_scale(vtm, -view->screenx*0.5/(view->d / depth), -view->screeny*0.5/(view->d / depth), 1.0);
+#if PRINT_MVP
     printf("After scale to image coords\n");
     matrix_print(vtm, stdout);
-
+#endif
     // step 8 translate into place
     matrix_translate2D(vtm, view->screenx*0.5, view->screeny*0.5);
+#if PRINT_MVP
     printf("After final translation to image coords\n");
     matrix_print(vtm, stdout);
-
+#endif
 }
 #ifdef __cplusplus
 }

@@ -63,7 +63,7 @@ void point_normalize(Point *p) {
 }
 
 void point_copy(Point *to, Point *from) {
-    if (!to || !from) return;
+    if ((to == NULL) || (from == NULL)) return;
     to->val[0] = from->val[0];
     to->val[1] = from->val[1];
     to->val[2] = from->val[2];

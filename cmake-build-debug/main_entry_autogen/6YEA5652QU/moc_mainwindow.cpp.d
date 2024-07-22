@@ -882,6 +882,7 @@
   /Users/dotafs/Desktop/CS5310_assignments/include/Bezier.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Definition.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Image.h \
+  /Users/dotafs/Desktop/CS5310_assignments/include/Light.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Line.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Module.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Polygon.h \

@@ -3,23 +3,17 @@
 #include <stdio.h>
 #include "Image.h"
 #include "Polygon.h"
-
+#include "fsMath.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 // Function to create an empty Polygon
-Polygon *polygon_create() {
-    Polygon *p = (Polygon *)malloc(sizeof(Polygon));
-    if (!p) return NULL;
-    p->numVertex = 0;
-    p->vertex = NULL;
-    p->color = NULL;
-    p->normal = NULL;
-    p->zBuffer = 1;
-    p->oneSided = 0;
-    return p;
-}
+    Polygon *polygon_create() {
+        Polygon *p = malloc( sizeof(Polygon ) );
+        polygon_init( p );
+        return(p);
+    }
 
 // Function to create a Polygon with a given number of vertices
 Polygon *polygon_createp(int numV, Point *vlist) {
@@ -85,86 +79,83 @@ void polygon_setSided(Polygon *p, int oneSided) {
     p->oneSided = oneSided;
 }
 
-// Function to set the colors of a Polygon
-void polygon_setColors(Polygon *p, int numV, Color *clist) {
-    if (!p) return;
-    if (p->color) free(p->color);
-    p->color = (Color *)malloc(numV * sizeof(Color));
-    if (!p->color) return;
-    for (int i = 0; i < numV; i++) {
-        p->color[i] = clist[i];
+    void polygon_setColors(Polygon *p, int numV, Color *clist){
+    if( numV == p->numVertex ) {
+        if( p->color == NULL ) {
+            p->color = malloc(sizeof(Color) * numV );
+        }
+        memcpy( p->color, clist, sizeof(Color) * numV );
     }
 }
 
-// Function to set the normals of a Polygon
-void polygon_setNormals(Polygon *p, int numV, Vector *nlist) {
-    if (!p) return;
+    void polygon_setNormals(Polygon *p, int numV, Vector *nlist) {
+    if (p == NULL) return;
     if (p->normal) free(p->normal);
     p->normal = (Vector *)malloc(numV * sizeof(Vector));
     if (!p->normal) return;
     for (int i = 0; i < numV; i++) {
-        p->normal[i] = nlist[i];
+        memcpy(&(p->normal[i]), &(nlist[i]), sizeof(Vector));
     }
 }
 
-// Function to set all properties of a Polygon
-void polygon_setAll(Polygon *p, int numV, Point *vlist, Color *clist, Vector *nlist, int zBuffer, int oneSided) {
-    if (!p) return;
-    polygon_set(p, numV, vlist);
-    polygon_setColors(p, numV, clist);
-    polygon_setNormals(p, numV, nlist);
-    p->zBuffer = zBuffer;
-    p->oneSided = oneSided;
-}
 
+void polygon_setAll(Polygon *p, int numV, Point *vlist, Color *clist, Vector *nlist, int zBuffer, int oneSided){
+    if(p != NULL) {
+        polygon_clear(p);
+        if( numV > 0 ) {
+            p->vertex = malloc(sizeof(Point) * numV );
+            memcpy( p->vertex, vlist, sizeof(Point) * numV );
+            if( clist != NULL ) {
+                p->color = malloc(sizeof(Color) * numV );
+                memcpy( p->color, clist, sizeof(Color) * numV );
+            }
+
+            if( nlist != NULL ) {
+                p->normal = malloc(sizeof(Vector) * numV );
+                memcpy( p->normal, nlist, sizeof(Vector) * numV );
+            }
+
+        }
+        p->numVertex = numV;
+        p->zBuffer = zBuffer;
+        p->oneSided = oneSided;
+    }
+}
 // Function to set the z-buffer flag of a Polygon
 void polygon_zBuffer(Polygon *p, int flag) {
-    if (!p) return;
+    if (p==NULL) return;
     p->zBuffer = flag;
 }
 
-// Function to copy one Polygon to another
-void polygon_copy(Polygon *to, Polygon *from) {
-    if ((to == NULL) || (from == NULL)) return;
-    if(from->vertex) {
-        to->vertex = (Point *)malloc(from->numVertex * sizeof(Point));
-        if (to->vertex == NULL) return;
-        memcpy(to->vertex, from->vertex, from->numVertex * sizeof(Point));
-    }  else {
-        to->vertex = NULL;
-    }
-
-    if (from->color) {
-        to->color = (Color *)malloc(from->numVertex * sizeof(Color));
-        if (to->color == NULL) return;
-        memcpy(to->color, from->color, from->numVertex * sizeof(Color));
-    } else {
-        to->color = NULL;
-    }
-    if (from->normal) {
-        to->normal = (Vector *)malloc(from->numVertex * sizeof(Vector));
-        if (to->normal == NULL) return;
-        memcpy(to->normal, from->normal, from->numVertex * sizeof(Vector));
-    } else {
-        to->normal = NULL;
-    }
-
-    to->numVertex = from->numVertex;
-    to->zBuffer = from->zBuffer;
-    to->oneSided = from->oneSided;
+void polygon_copy( Polygon *to, Polygon *from ) {
+    polygon_setAll( to, from->numVertex, from->vertex, from->color, from->normal, from->zBuffer, from->oneSided );
 }
+
 // Function to print the data of a Polygon
-void polygon_print(Polygon *p, FILE *fp) {
-    if (!p || !fp) return;
+    void polygon_print(Polygon *p, FILE *fp) {
+    if ((p == NULL) || (fp == NULL)) return;
     fprintf(fp, "Polygon with %d vertices:\n", p->numVertex);
+    fprintf(fp, "  oneSided: %d\n", p->oneSided);
+    fprintf(fp, "  zBuffer: %d\n", p->zBuffer);
+
     for (int i = 0; i < p->numVertex; i++) {
         fprintf(fp, "  Vertex %d: (%f, %f, %f, %f)\n", i, p->vertex[i].val[0], p->vertex[i].val[1], p->vertex[i].val[2], p->vertex[i].val[3]);
+         if (p->color) {
+             fprintf(fp, "    Color: (%f, %f, %f)\n", p->color[i].c[0], p->color[i].c[1], p->color[i].c[2]);
+         } else {
+             fprintf(fp, "    Color: None\n");
+        }
+        if (p->normal) {
+            fprintf(fp, "    Normal: (%f, %f, %f, %f)\n", p->normal[i].val[0], p->normal[i].val[1], p->normal[i].val[2], p->normal[i].val[3]);
+        } else {
+            fprintf(fp, "    Normal: None\n");
+        }
     }
 }
 
 // Function to normalize the vertices of a Polygon
 void polygon_normalize(Polygon *p) {
-    if (!p) return;
+    if (p == NULL) return;
     for (int i = 0; i < p->numVertex; i++) {
         point_normalize(&p->vertex[i]);
     }
@@ -205,6 +196,26 @@ void polygon_draw(Polygon *p, Image *src, Color c) {
     }
 }
 
+void polygon_shade( Polygon *p, Lighting *l, DrawState *ds ) {
+    if(ds == NULL || l == NULL || p == NULL) return;
+        if( p->color == NULL ) p->color = malloc( sizeof(Color) * p->numVertex );
+
+    switch(ds->shade) {
+        case ShadeGouraud:
+            for(int i=0; i<p->numVertex; i++) {
+                Vector V;
+                V.val[0] = ds->viewer.val[0] - p->vertex[i].val[0];
+                V.val[1] = ds->viewer.val[1] - p->vertex[i].val[1];
+                V.val[2] = ds->viewer.val[2] - p->vertex[i].val[2];
+                lighting_shading( l, &(p->normal[i]), &V, &(p->vertex[i]), &(ds->body), &(ds->surface), ds->surfaceCoeff, p->oneSided, &(p->color[i]) );
+            }
+
+        break;
+        default:
+            break;
+    }
+}
+
 // Helper function to compute Barycentric coordinates
 int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *gamma) {
     float denom = (vlist[1].val[1] - vlist[2].val[1]) * (vlist[0].val[0] - vlist[2].val[0]) +
@@ -219,7 +230,7 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
     return (*alpha >= 0.0f && *beta >= 0.0f && *gamma >= 0.0f);
 }
 
-    void fillScanLine(Point p0, Point p1, Image *src, DrawState *ds) {
+    void fillScanLine(Point p0, Point p1, Color c0, Color c1, Image *src, DrawState *ds) {
     // Start and end points of the line's coordinates
     int x0 = (int)p0.val[0];
     int y0 = (int)p0.val[1];
@@ -244,9 +255,13 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
     float invZ0 = 1.0f / z0;
     float invZ1 = 1.0f / z1;
     float deltaInvZ = (invZ1 - invZ0) / (float)(x1 - x0);
-
-    // Start from invZ0
+    Color deltaColor;
+    for (int i = 0; i < 3; i++) {
+        deltaColor.c[i] = (c1.c[i] - c0.c[i]) / (float)(x1 - x0);
+    }
+    // Start from invZ0 and c1
     float invZ = invZ0;
+    Color currentColor = c0;
     for (int x = x0; x <= x1; x++) {
         int targetIndex = y0 * src->cols + x;
         FPixel* targetPixel = &src->data[targetIndex];
@@ -259,9 +274,14 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
             // Set the color based on the shading mode
             switch(ds->shade) {
                 case ShadeDepth:
-                    targetPixel->rgb[0] = ds->color.c[0] * (1.0f - 1/invZ);
+                targetPixel->rgb[0] = ds->color.c[0] * (1.0f - 1/invZ);
                 targetPixel->rgb[1] = ds->color.c[1] * (1.0f - 1/invZ);
                 targetPixel->rgb[2] = ds->color.c[2] * (1.0f - 1/invZ);
+                break;
+                case ShadeGouraud:
+                targetPixel->rgb[0] = currentColor.c[0];
+                targetPixel->rgb[1] = currentColor.c[1];
+                targetPixel->rgb[2] = currentColor.c[2];
                 break;
                 default:
                     targetPixel->rgb[0] = ds->color.c[0];
@@ -271,35 +291,56 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
             }
         }
 
-        // Update the current z value222
+        // Update the current z value
         invZ += deltaInvZ;
+    // Update the current color
+         for (int i = 0; i < 3; i++) {
+        currentColor.c[i] += deltaColor.c[i];
+    }
     }
 }
 
 void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
     // Find the minimum and maximum y values in the polygon to determine the range of y.
+    Vector view = {0.0,0.0,0.0};
     int minY = src->rows, maxY = 0;
+    Color vertexColors[p->numVertex];
+
     for (int i = 0; i < p->numVertex; i++) {
+        // calculate vertex color
+        vertexColors[i] = p->color ? p->color[i] : ds->color;
         if (p->vertex[i].val[1] < minY) minY = (int)p->vertex[i].val[1];
         if (p->vertex[i].val[1] > maxY) maxY = (int)p->vertex[i].val[1];
     }
+
 
     // Loop through each y from minY to maxY to process scanlines.
     for (int y = minY; y <= maxY; y++) {
         int intersections[10]; // Array to store intersection points for the current scanline.
         double intersectionsZ[10];
+        Color intersectionsC[10];
         int numIntersections = 0; // Counter for the number of intersections.
+
 
         // Find intersections of the scanline y with all polygon edges.
         for (int i = 0; i < p->numVertex; i++) {
             Point v1 = p->vertex[i];
             Point v2 = p->vertex[(i + 1) % p->numVertex];
+            Color c1 = vertexColors[i];
+            Color c2 = vertexColors[(i + 1) % p->numVertex];
             if ((v1.val[1] <= y && v2.val[1] > y) || (v1.val[1] > y && v2.val[1] <= y)) {
                 double t = (y - v1.val[1]) / (v2.val[1] - v1.val[1]);
                 int x = (int)(v1.val[0] + t * (v2.val[0] - v1.val[0]));
                 double z = v1.val[2] + t * (v2.val[2] - v1.val[2]);
+
+                Color c;
+                for (int j = 0; j < 3; j++) {
+                    c.c[j] = c1.c[j] + (float)t * (c2.c[j] - c1.c[j]);
+                }
+
                 intersections[numIntersections] = x;
                 intersectionsZ[numIntersections] = z;
+                intersectionsC[numIntersections] = c;
                 numIntersections++;
             }
         }
@@ -310,6 +351,7 @@ void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
                 if (intersections[j] > intersections[j + 1]) {
                     swap_int(&intersections[j], &intersections[j + 1]);
                     swap_double(&intersectionsZ[j], &intersectionsZ[j + 1]);
+                    swap_color(&intersectionsC[j], &intersectionsC[j + 1]);
                 }
             }
         }
@@ -318,7 +360,7 @@ void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
         for (int i = 0; i < numIntersections; i += 2) {
             Point start = {{(float)intersections[i], (float)y, (float)intersectionsZ[i]}};
             Point end = {{(float)intersections[i + 1], (float)y, (float)intersectionsZ[i + 1]}};
-            fillScanLine(start, end, src, ds);
+            fillScanLine(start, end, intersectionsC[i], intersectionsC[i + 1], src, ds);
         }
     }
 }

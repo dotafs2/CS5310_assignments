@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 
   // add an ambient light and a point light, slightly below and to the right of the viewer
   l = lighting_create();
-  lighting_add( l, LightAmbient, &BlueGrey, NULL, NULL, 0.0, 0.0 );
+ // lighting_add( l, LightAmbient, &BlueGrey, NULL, NULL, 0.0, 0.0 );
   lighting_add( l, LightPoint, &Sun, NULL, &lp, 0.0, 0.0 );
 
   // for each pixel in the image

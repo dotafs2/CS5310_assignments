@@ -14,6 +14,8 @@ extern "C" {
 
 void light_init( Light *light ); // initialize the light to default values.
 void light_copy( Light *to, Light *from ); // copy the light information.
+void light_print(Light *light); // print a light.
+void lighting_print(Lighting *lighting); // print a lighting, set of light.
 Lighting *lighting_create( void ); // allocate and return a new lighting structure set to default values.
 void lighting_delete( Lighting *lights ); // delete the Lighting struct.
 void lighting_init( Lighting *l ); // initialize the lighting structure to default values.

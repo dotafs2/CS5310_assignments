@@ -309,6 +309,14 @@ void image_fillz(Image *src, float z) {
     }
 }
 
+void color_init(Color *c) {
+    if (c == NULL) return;
+    c->c[0] = 0;
+    c->c[1] = 0;
+    c->c[2] = 0;
+}
+
+
 void color_copy(Color *to, Color *from) {
     if (!to || !from) return;
     to->c[0] = from->c[0];
@@ -343,3 +351,9 @@ Color image_getColor(Image *src, int r, int c) {
     return col;
 }
 
+void swap_color(Color *c1, Color *c2) {
+    if (c1 == NULL || c2 == NULL) return;
+    Color temp = *c1;
+    *c1 = *c2;
+    *c2 = temp;
+}

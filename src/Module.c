@@ -48,6 +48,20 @@ Element *element_init(ObjectType type, void *obj) {
                 bezierSurface_init(&(e->obj.bezierSurface));
                 e->obj.bezierSurface = *(BezierSurface *)obj;
                 break;
+            case ObjColor:
+                color_init(&(e->obj.color));
+                color_copy(&e->obj.color,obj);
+            case ObjBodyColor:
+                color_init(&(e->obj.color));
+                color_copy(&e->obj.color,obj);
+            break;
+            case ObjSurfaceColor:
+                color_init(&(e->obj.color));
+                color_copy(&e->obj.color,obj);
+            break;
+            case ObjSurfaceCoeff:
+                e->obj.coeff = *(float *)obj;
+            break;
             default:
                 free(e);
                 return NULL;
@@ -344,12 +358,22 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
             }
                 break;
             case ObjPolygon: {
-                Polygon tempPolygon;
-                polygon_init(&tempPolygon);
+                Polygon tempPolygon = *polygon_create();
                 polygon_copy( &tempPolygon, &current->obj.polygon);
                 matrix_xformPolygon(&tempGTM, &tempPolygon);
+                switch(ds->shade) {
+                    case ShadeGouraud:
+                        //  Call polygon_shade to calculate the color at each vertex using P
+                            polygon_shade(&tempPolygon,lighting,ds);
+
+                    break;
+                    default:
+                        break;
+                }
+
                 matrix_xformPolygon(VTM, &tempPolygon);
                 polygon_normalize(&tempPolygon);
+
                //  polygon_print(&tempPolygon,stdout);
                 switch(ds->shade) {
                     case ShadeConstant:
@@ -359,11 +383,12 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                         polygon_drawShade(&tempPolygon,src,ds,lighting);
                         break;
                     case ShadeGouraud:
-
+                        // Call polygon_drawShade with P, the draw state and the lighting
+                        polygon_drawShade(&tempPolygon,src,ds,lighting);
                         break;
                     default:
-                        break;
                         // polygon_drawFill(&tempPolygon,src,ds->color);
+                            break;
                 }
                 polygon_clear(&tempPolygon);
             }
@@ -389,6 +414,18 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                 ds->color = current->obj.color;
             }
                 break;
+            case ObjBodyColor:
+                drawstate_setBody( ds, current->obj.color );
+            break;
+
+            case ObjSurfaceColor:
+                drawstate_setSurface( ds, current->obj.color );
+            break;
+
+            case ObjSurfaceCoeff:
+                drawstate_setSurfaceCoeff( ds, current->obj.coeff );
+            break;
+
             default:
                 break;
         }
@@ -426,39 +463,84 @@ void module_cube(Module *md, int solid) {
                 {1, vertices[2], vertices[6] },
                 {1,vertices[3], vertices[7] }
         };
-
         if (solid) {
             // Define the faces of the cube
             Polygon faces[6];
+            // Front face
             Point front[4] = { vertices[0], vertices[1], vertices[2], vertices[3] };
-            Point back[4] = { vertices[4], vertices[5], vertices[6], vertices[7] };
+            // Back face
+            Point back[4] = { vertices[5], vertices[4], vertices[7], vertices[6] };
+            // Left face
             Point left[4] = { vertices[0], vertices[3], vertices[7], vertices[4] };
-            Point right[4] = { vertices[1], vertices[2], vertices[6], vertices[5] };
+            // Right face
+            Point right[4] = { vertices[1], vertices[5], vertices[6], vertices[2] };
+            // Top face
             Point top[4] = { vertices[3], vertices[2], vertices[6], vertices[7] };
-            Point bottom[4] = { vertices[0], vertices[1], vertices[5], vertices[4] };
-            for (int i = 0; i < 6; ++i) {
-                polygon_init(&faces[i]);
-            }
-            polygon_set(&faces[0], 4, front);
-            polygon_set(&faces[1], 4, back);
-            polygon_set(&faces[2], 4, left);
-            polygon_set(&faces[3], 4, right);
-            polygon_set(&faces[4], 4, top);
-            polygon_set(&faces[5], 4, bottom);
+            // Bottom face
+            Point bottom[4] = { vertices[0], vertices[4], vertices[5], vertices[1] };
 
+Vector normal;
+Vector nlist[4];
+Color color ={1,1,1};
+// Initialize polygons
+for (int i = 0; i < 6; ++i) {
+    polygon_init(&faces[i]);
+}
 
-            for (int i = 0; i < 6; i++) {
-                module_polygon(md, &faces[i]);
-            }
-            // else is not solid
-        } else {
+// Calculate normals and set faces
+normal_calculation(&front[0], &front[1], &front[2], &normal);
+for (int i = 0; i < 4; ++i) nlist[i] = normal;
+polygon_set(&faces[0], 4, front);
+polygon_setNormals(&faces[0], 4, nlist);
+polygon_setSided(&faces[0], 1);
+polygon_setColors(&faces[0], 4, &color);
+normal_calculation(&back[0], &back[1], &back[2], &normal);
+for (int i = 0; i < 4; ++i) nlist[i] = normal;
+polygon_set(&faces[1], 4, back);
+polygon_setNormals(&faces[1], 4, nlist);
+polygon_setSided(&faces[1], 1);
+polygon_setColors(&faces[1], 4, &color);
+
+normal_calculation(&left[0], &left[1], &left[2], &normal);
+for (int i = 0; i < 4; ++i) nlist[i] = normal;
+polygon_set(&faces[2], 4, left);
+polygon_setNormals(&faces[2], 4, nlist);
+polygon_setSided(&faces[2], 1);
+polygon_setColors(&faces[2], 4, &color);
+
+normal_calculation(&right[0], &right[1], &right[2], &normal);
+for (int i = 0; i < 4; ++i) nlist[i] = normal;
+polygon_set(&faces[3], 4, right);
+polygon_setNormals(&faces[3], 4, nlist);
+polygon_setSided(&faces[3], 1);
+polygon_setColors(&faces[3], 4, &color);
+
+normal_calculation(&top[0], &top[1], &top[2], &normal);
+for (int i = 0; i < 4; ++i) nlist[i] = normal;
+polygon_set(&faces[4], 4, top);
+polygon_setNormals(&faces[4], 4, nlist);
+polygon_setSided(&faces[4], 1);
+polygon_setColors(&faces[4], 4, &color);
+
+normal_calculation(&bottom[0], &bottom[1], &bottom[2], &normal);
+for (int i = 0; i < 4; ++i) nlist[i] = normal;
+polygon_set(&faces[5], 4, bottom);
+polygon_setNormals(&faces[5], 4, nlist);
+polygon_setSided(&faces[5], 1);
+polygon_setColors(&faces[5], 4, &color);
+
+for (int i = 0; i < 6; i++) {
+    module_polygon(md, &faces[i]);
+   // polygon_print(&faces[i],stdout);
+}
+
+        }else {
             // Add lines to the module
             for (int i = 0; i < 12; i++) {
                 module_line(md, &edges[i]);
             }
         }
     }
-
 }
 
 

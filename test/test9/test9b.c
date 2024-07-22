@@ -51,7 +51,6 @@ void cylinder( Module *mod, int sides ) {
     point_copy( &pt[0], &xbot );
     point_set3D( &pt[1], x1, 0.0, z1 );
     point_set3D( &pt[2], x2, 0.0, z2 );
-
     polygon_set( &p, 3, pt );
     for(j=0;j<3;j++)
 	    vector_set( &(n[j]), 0, -1, 0 );

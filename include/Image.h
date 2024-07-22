@@ -45,11 +45,12 @@ void image_filla(Image *src, float a);
 void image_fillz(Image *src, float a);
 
 // Color functions
+void color_init(Color *c);
 void color_copy(Color *to, Color *from);
 void color_set(Color *to, float r, float g, float b);
 void image_setColor(Image *src, int r, int c, Color val);
 Color image_getColor(Image *src, int r, int c);
-
+void swap_color(Color *c1, Color *c2);
 
 
 

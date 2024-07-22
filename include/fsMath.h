@@ -55,11 +55,12 @@ void vector_normalize(Vector *v);
 double vector_dot(Vector *a, Vector *b);
 // c is result
 void vector_cross(Vector *a, Vector *b, Vector *c);
-
+void vector_init(Vector *v);
 void vector_add(Vector *a, Vector *b, Vector *result);
 void vector_subtract(Vector *a, Vector *b, Vector *result);
 void vector_divide_num(Vector *a, float b);
 void vector_negate(Vector *v);
+void normal_calculation(Point *p1, Point *p2, Point *p3, Vector *normal);
 void matrix_print(Matrix *m, FILE *fp);
 
 void matrix_clear(Matrix *m);

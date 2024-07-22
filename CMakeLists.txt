@@ -55,13 +55,13 @@ set(MAIN_SOURCE_FILES
 # test6a
 set(TEST6A_SOURCE_FILES
         ${COMMON_SOURCE_FILES}
-        test/test9/testLighting_shading.c
+        test/test9/test9b.c
 )
 
 # test6b
 set(TEST6B_SOURCE_FILES
         ${COMMON_SOURCE_FILES}
-        test/test9/test9d.c
+        test/test9/test9a.c
 )
 
 # Create the main entry executable
