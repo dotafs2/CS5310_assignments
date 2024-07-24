@@ -40,6 +40,8 @@ set(COMMON_SOURCE_FILES
         include/Bezier.h
         src/Light.c
         include/Light.h
+        src/plyRead.c
+        include/plyRead.h
 )
 
 # QT
@@ -61,7 +63,7 @@ set(TEST6A_SOURCE_FILES
 # test6b
 set(TEST6B_SOURCE_FILES
         ${COMMON_SOURCE_FILES}
-        test/test9/test9a.c
+        test/test0/test0a.c
 )
 
 # Create the main entry executable

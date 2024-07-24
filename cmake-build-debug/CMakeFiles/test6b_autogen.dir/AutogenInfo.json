@@ -300,6 +300,12 @@
 			"MU",
 			"6YEA5652QU/moc_fsMath.cpp",
 			null
+		],
+		[
+			"/Users/dotafs/Desktop/CS5310_assignments/include/plyRead.h",
+			"MU",
+			"6YEA5652QU/moc_plyRead.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -379,8 +385,9 @@
 		],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/ball.cpp", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/fsMath.c", "MU", null ],
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/plyRead.c", "MU", null ],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/test/test9/test9a.c",
+			"/Users/dotafs/Desktop/CS5310_assignments/test/test0/test0a.c",
 			"MU",
 			null
 		]

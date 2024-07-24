@@ -12,28 +12,14 @@
   Blender can export to PLY files (but doesn't seem to save colors)
 
 */
+#include "plyRead.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "graphics.h"
 
-typedef enum {
-	type_float32,
-	type_uint8,
-	type_int32,
-	type_list,
-	type_none
-} ply_type;
 
-typedef struct {
-	ply_type type;
-	ply_type listCardType;
-	ply_type listDataType;
-	char name[32];
-	void *next;
-} ply_property;
 
-ply_type plyType(char *buffer);
+
 ply_type plyType(char *buffer) {
 	if(!strcmp(buffer, "float32"))
 		return(type_float32);
@@ -50,7 +36,6 @@ ply_type plyType(char *buffer) {
 	return(type_none);
 }
 
-#define MaxVertices (10)
 
 int readPLY(char filename[], int *nPolygons, Polygon **plist, Color **clist, int estNormals) {
 	char buffer[256];
@@ -238,14 +223,14 @@ int readPLY(char filename[], int *nPolygons, Polygon **plist, Color **clist, int
 			// assign the polygon vertices and surface normals
 			// not setting vertexWorld right now, because no Phong shading
 
-			p[i].nVertex = nv;
+			p[i].numVertex = nv;
 //			p[i].zBufferFlag = 1;
 			p[i].normal = malloc(sizeof(Vector)*nv);
 			p[i].vertex = malloc(sizeof(Point)*nv);
 			tcolor.c[0] = tcolor.c[1] = tcolor.c[2] = 0.0;
 			//      printf("%d: ", nv);
 			for(j=0;j<nv;j++) {
-				//	printf("%d  ", vid[j]);
+					// printf("%d  ", vid[j]);
 				p[i].vertex[j] = vertex[vid[j]];
 				if(!estNormals) {
 					p[i].normal[j] = normal[vid[j]];

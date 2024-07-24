@@ -389,7 +389,7 @@ int main(int argc, char *argv[]) {
 
   light = lighting_create();
 	lighting_add(light, LightPoint, &White, NULL, &(view.vrp), 0.0, 0.0);
-
+	module_parseLighting(scene, &gtm, light);
   // draw into the scene
   module_draw( scene, &vtm, &gtm, ds, light, src );
 

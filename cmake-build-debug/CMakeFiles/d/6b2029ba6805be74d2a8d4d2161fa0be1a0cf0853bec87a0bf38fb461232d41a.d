@@ -47,6 +47,7 @@ test6b_autogen/timestamp: \
   /Users/dotafs/Desktop/CS5310_assignments/include/Module.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/Polygon.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/fsMath.h \
+  /Users/dotafs/Desktop/CS5310_assignments/include/plyRead.h \
   /Users/dotafs/Desktop/CS5310_assignments/src/Bezier.c \
   /Users/dotafs/Desktop/CS5310_assignments/src/Image.c \
   /Users/dotafs/Desktop/CS5310_assignments/src/Light.c \
@@ -56,7 +57,8 @@ test6b_autogen/timestamp: \
   /Users/dotafs/Desktop/CS5310_assignments/src/anti-alias.cpp \
   /Users/dotafs/Desktop/CS5310_assignments/src/ball.cpp \
   /Users/dotafs/Desktop/CS5310_assignments/src/fsMath.c \
-  /Users/dotafs/Desktop/CS5310_assignments/test/test9/test9a.c \
+  /Users/dotafs/Desktop/CS5310_assignments/src/plyRead.c \
+  /Users/dotafs/Desktop/CS5310_assignments/test/test0/test0a.c \
   /Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6/FindWrapAtomic.cmake \
   /Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6/FindWrapOpenGL.cmake \
   /Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6/Qt6Config.cmake \

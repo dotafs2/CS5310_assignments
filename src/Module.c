@@ -31,6 +31,10 @@ Element *element_init(ObjectType type, void *obj) {
                 polygon_init(&(e->obj.polygon));
                 polygon_copy(&e->obj.polygon,obj);
                 break;
+            case ObjLight:
+                light_init(&(e->obj.light));
+                light_copy(&e->obj.light,obj);
+                break;
             case ObjModule:
                 e->obj.module = obj;
                 break;
@@ -130,6 +134,14 @@ void module_module(Module *md, Module *sub) {
         Element *e = element_init(ObjModule, sub);
         module_insert(md, e);
     }
+}
+
+void module_addLight( Module *md, Light *light ) {
+    if(md == NULL || light == NULL) {
+        return;
+    }
+    Element *e = element_init(ObjLight,md);
+    module_insert(md,e);
 }
 
 // Add a point to the module
@@ -286,6 +298,49 @@ void module_rotateXYZ(Module *md, Vector *u, Vector *v, Vector *w) {
         matrix_rotateXYZ(m, u, v, w);
         Element *e = element_init(ObjMatrix, m);
         module_insert(md, e);
+    }
+}
+void module_parseLighting(Module *md, Matrix *GTM, Lighting *lighting) {
+    if ( (md == NULL) || (GTM == NULL) || (lighting == NULL)) {
+        return;
+    }
+    Element *current = md->head;
+    Matrix LTM, tempGTM;
+    matrix_identity(&LTM);
+    while (current) {
+        matrix_identity(&tempGTM);
+        matrix_multiply(GTM,&LTM,&tempGTM);
+        switch (current->type) {
+            case ObjLight: {
+
+                Light transformedLight;
+                light_copy(&transformedLight, &current->obj.light);
+                matrix_xformPoint(&LTM, &transformedLight.position, &transformedLight.position);
+                matrix_xformVector(&LTM, &transformedLight.direction, &transformedLight.direction);
+                matrix_xformPoint(GTM, &transformedLight.position, &transformedLight.position);
+                matrix_xformVector(GTM, &transformedLight.direction, &transformedLight.direction);
+                lighting_add(lighting, transformedLight.type, &transformedLight.color, &transformedLight.direction, &transformedLight.position, transformedLight.cutoff, transformedLight.sharpness);
+                break;
+            }
+            case ObjMatrix: {
+                Matrix tempLTM;
+                matrix_identity(&tempLTM);
+                matrix_copy(&tempLTM,&LTM);
+                matrix_multiply((current->obj.matrix), &tempLTM, &LTM);
+            }
+            break;
+            case ObjIdentity: {
+                matrix_identity(&LTM);
+                break;
+            }
+            case ObjModule: {
+                module_parseLighting(current->obj.module,&tempGTM, lighting);
+            }
+            break;
+            default:
+                    break;
+        }
+        current = current->next;
     }
 }
 
@@ -543,6 +598,37 @@ for (int i = 0; i < 6; i++) {
     }
 }
 
+void module_plane(Module *md, Point **points) {
+    if (md) {
+        Color color = {0, 0.50, 1.0};
+
+        for (int i = 0; i < WIDTH - 1; ++i) {
+            for (int j = 0; j < HEIGHT - 1; ++j) {
+                Polygon quad;
+                Point quad_points[4] = {
+                    points[i][j],
+                    points[i + 1][j],
+                    points[i + 1][j + 1],
+                    points[i][j + 1]
+                };
+
+                Vector normal;
+                Vector nlist[4];
+                polygon_init(&quad);
+                polygon_set(&quad, 4, quad_points);
+                normal_calculation(&quad_points[0], &quad_points[1], &quad_points[2], &normal);
+                for (int k = 0; k < 4; ++k) nlist[k] = normal;
+                polygon_setNormals(&quad, 4, nlist);
+                polygon_setSided(&quad, 1);
+                polygon_setColors(&quad, 4, &color);
+
+                module_polygon(md, &quad);
+            }
+        }
+    }
+}
+
+
 
 void module_color(Module *md, Color *c) {
     if (md == NULL || c == NULL) {
@@ -595,6 +681,7 @@ void module_surfaceCoeff(Module *md, float coeff) {
     e->obj.coeff = coeff;
     module_insert(md, e);
 }
+
 
 
 DrawState *drawstate_create(void) {

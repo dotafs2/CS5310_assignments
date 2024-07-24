@@ -308,6 +308,12 @@
 			null
 		],
 		[
+			"/Users/dotafs/Desktop/CS5310_assignments/include/plyRead.h",
+			"MU",
+			"6YEA5652QU/moc_plyRead.cpp",
+			null
+		],
+		[
 			"/Users/dotafs/Desktop/CS5310_assignments/test/test.h",
 			"MU",
 			"7HEK2XT3N7/moc_test.cpp",
@@ -393,6 +399,7 @@
 			"MU",
 			null
 		],
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/plyRead.c", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/test/test.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
