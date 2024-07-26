@@ -50,6 +50,8 @@ set(MAIN_SOURCE_FILES
         include/mainwindow.h
         src/mainwindow.cpp
         src/main.cpp
+        include/WaterSimulation.h
+        src/WaterSimulation.cpp
         test/test.cpp
         test/test.h
 )
@@ -74,6 +76,7 @@ set_source_files_properties(
         src/ball.cpp
         src/main.cpp
         src/mainwindow.cpp
+        src/WaterSimulation.cpp
         PROPERTIES
         LANGUAGE CXX
 )
@@ -87,6 +90,7 @@ add_executable(test6a ${TEST6A_SOURCE_FILES})
 set_source_files_properties(
         src/anti-alias.cpp
         src/ball.cpp
+        src/WaterSimulation.cpp
         PROPERTIES
         LANGUAGE CXX
 )
@@ -100,6 +104,7 @@ add_executable(test6b ${TEST6B_SOURCE_FILES})
 set_source_files_properties(
         src/anti-alias.cpp
         src/ball.cpp
+        src/WaterSimulation.cpp
         PROPERTIES
         LANGUAGE CXX
 )

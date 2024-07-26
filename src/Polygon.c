@@ -302,7 +302,6 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
 
 void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
     // Find the minimum and maximum y values in the polygon to determine the range of y.
-    Vector view = {0.0,0.0,0.0};
     int minY = src->rows, maxY = 0;
     Color vertexColors[p->numVertex];
 

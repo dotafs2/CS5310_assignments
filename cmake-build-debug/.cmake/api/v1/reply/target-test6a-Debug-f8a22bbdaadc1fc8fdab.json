@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "test6b"
+			"path" : "test6a"
 		}
 	],
 	"backtrace" : 1,
@@ -44,13 +44,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 98,
+				"line" : 88,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 108,
+				"line" : 99,
 				"parent" : 0
 			},
 			{
@@ -260,7 +260,7 @@
 				{
 					"backtrace" : 0,
 					"isSystem" : true,
-					"path" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6b_autogen/include"
+					"path" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/include"
 				},
 				{
 					"backtrace" : 2,
@@ -353,7 +353,7 @@
 				{
 					"backtrace" : 0,
 					"isSystem" : true,
-					"path" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6b_autogen/include"
+					"path" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/include"
 				},
 				{
 					"backtrace" : 2,
@@ -407,14 +407,14 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "test6b_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+			"id" : "test6a_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
-			"id" : "test6b_autogen::@6890427a1f51a3e7e1df"
+			"id" : "test6a_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "test6b::@6890427a1f51a3e7e1df",
+	"id" : "test6a::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -487,8 +487,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "test6b",
-	"nameOnDisk" : "test6b",
+	"name" : "test6a",
+	"nameOnDisk" : "test6a",
 	"paths" : 
 	{
 		"build" : ".",
@@ -548,7 +548,7 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/test6b_autogen/mocs_compilation.cpp",
+			"path" : "cmake-build-debug/test6a_autogen/mocs_compilation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -649,19 +649,19 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
-			"path" : "test/test0/test0a.c",
+			"path" : "test/test9/test9b.c",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/test6b_autogen/timestamp",
+			"path" : "cmake-build-debug/test6a_autogen/timestamp",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/test6b_autogen/timestamp.rule",
+			"path" : "cmake-build-debug/test6a_autogen/timestamp.rule",
 			"sourceGroupIndex" : 3
 		}
 	],

@@ -3,6 +3,7 @@
 #include <random>
 #include "Module.h"
 
+
 QImage imageToQImage(Image *img) {
     QImage qImg(img->cols, img->rows, QImage::Format_RGB32);
     for (int y = 0; y < img->rows; ++y) {
@@ -16,7 +17,7 @@ QImage imageToQImage(Image *img) {
 }
 
 MainWindow::MainWindow(QWidget *parent)
-        : QMainWindow(parent), src(image_create(500, 500)), ssaaEnabled(false), mmsaEnabled(false) {
+        : QMainWindow(parent), src(image_create(1280, 720)), ssaaEnabled(false), mmsaEnabled(false) {
     // 创建中央小部件
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -25,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     graphicsView = new QGraphicsView(this);
     scene = new QGraphicsScene(this);
     graphicsView->setScene(scene);
-    graphicsView->setFixedSize(1000, 500);
+    graphicsView->setFixedSize(1480, 920);
 
     // 创建右侧的控制面板
     QWidget *controlPanel = new QWidget(this);
@@ -76,8 +77,10 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout *mainLayout = new QHBoxLayout(centralWidget);
     mainLayout->addWidget(graphicsView);
     mainLayout->addWidget(controlPanel);
-    test7b_init();
-	test8b_init();
+    //test7b_init();
+	//test8b_init();
+	water = WaterSimulation();
+	water.SinusoidsWaveInit();
     // 启动定时器定期更新图像
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::draw);
@@ -105,20 +108,19 @@ void MainWindow::draw() {
     srand(0x01234ABCD);
     static int frame = 0;
    // test5c(frame);
-    if (frame > 100)
+    if (frame > 10000)
         frame = 0 ;
     // test5c(frame);
    // test7b(frame);
-	test8b(frame);
+	//test8b(frame);
 // drawBall();
     // open it for use test5b
     //  test5b(frame);
+	src = water.SinusoidsWave(frame);
     applyAntiAliasing();
     updateImage(src);
+	image_reset(src);
     frame++;
-
-    if(frame >=500)
-        frame = 0;
 }
 
 void MainWindow::applyAntiAliasing() {

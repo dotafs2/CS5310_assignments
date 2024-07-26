@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "test6a"
+			"path" : "main_entry"
 		}
 	],
 	"backtrace" : 1,
@@ -44,13 +44,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 85,
+				"line" : 72,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 95,
+				"line" : 85,
 				"parent" : 0
 			},
 			{
@@ -260,7 +260,7 @@
 				{
 					"backtrace" : 0,
 					"isSystem" : true,
-					"path" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/include"
+					"path" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/include"
 				},
 				{
 					"backtrace" : 2,
@@ -301,7 +301,11 @@
 			[
 				0,
 				4,
-				5
+				5,
+				19,
+				20,
+				22,
+				23
 			]
 		},
 		{
@@ -353,7 +357,7 @@
 				{
 					"backtrace" : 0,
 					"isSystem" : true,
-					"path" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/include"
+					"path" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/include"
 				},
 				{
 					"backtrace" : 2,
@@ -399,22 +403,21 @@
 				11,
 				12,
 				14,
-				16,
-				18
+				16
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"id" : "test6a_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+			"backtrace" : 0,
+			"id" : "main_entry_autogen::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 0,
-			"id" : "test6a_autogen::@6890427a1f51a3e7e1df"
+			"id" : "main_entry_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "test6a::@6890427a1f51a3e7e1df",
+	"id" : "main_entry::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -487,8 +490,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "test6a",
-	"nameOnDisk" : "test6a",
+	"name" : "main_entry",
+	"nameOnDisk" : "main_entry",
 	"paths" : 
 	{
 		"build" : ".",
@@ -511,7 +514,10 @@
 				12,
 				14,
 				16,
-				18
+				19,
+				20,
+				22,
+				23
 			]
 		},
 		{
@@ -524,21 +530,24 @@
 				10,
 				13,
 				15,
-				17
+				17,
+				18,
+				21,
+				24
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				19
+				25
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				20
+				26
 			]
 		}
 	],
@@ -548,7 +557,7 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/test6a_autogen/mocs_compilation.cpp",
+			"path" : "cmake-build-debug/main_entry_autogen/mocs_compilation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -648,20 +657,53 @@
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "test/test9/test9b.c",
+			"path" : "include/mainwindow.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/mainwindow.cpp",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "include/WaterSimulation.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/WaterSimulation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/test.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/test.h",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/test6a_autogen/timestamp",
+			"path" : "cmake-build-debug/main_entry_autogen/timestamp",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/test6a_autogen/timestamp.rule",
+			"path" : "cmake-build-debug/main_entry_autogen/timestamp.rule",
 			"sourceGroupIndex" : 3
 		}
 	],

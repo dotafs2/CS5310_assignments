@@ -319,6 +319,7 @@ void module_parseLighting(Module *md, Matrix *GTM, Lighting *lighting) {
                 matrix_xformVector(&LTM, &transformedLight.direction, &transformedLight.direction);
                 matrix_xformPoint(GTM, &transformedLight.position, &transformedLight.position);
                 matrix_xformVector(GTM, &transformedLight.direction, &transformedLight.direction);
+                light_print(&transformedLight);
                 lighting_add(lighting, transformedLight.type, &transformedLight.color, &transformedLight.direction, &transformedLight.position, transformedLight.cutoff, transformedLight.sharpness);
                 break;
             }

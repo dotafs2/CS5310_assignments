@@ -18,6 +18,7 @@
 #include "Image.h"
 #include "fsMath.h"
 #include "Module.h"
+#include "WaterSimulation.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -62,9 +63,10 @@ private slots:
     void onAntiAliasingMethodChanged(int index);
 
 private:
+    WaterSimulation water;
     const int nLines = 50;
-    const int rows = 500; // Set these to appropriate values
-    const int cols = 500; // Set these to appropriate values
+    const int rows = 720; // Set these to appropriate values
+    const int cols = 1280; // Set these to appropriate values
     View2D view;
     DrawState ds;
     View3D view3;
