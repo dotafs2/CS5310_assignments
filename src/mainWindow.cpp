@@ -17,7 +17,7 @@ QImage imageToQImage(Image *img) {
 }
 
 MainWindow::MainWindow(QWidget *parent)
-        : QMainWindow(parent), src(image_create(1280, 720)), ssaaEnabled(false), mmsaEnabled(false) {
+        : QMainWindow(parent), src(image_create(500, 500)), ssaaEnabled(false), mmsaEnabled(false) {
     // 创建中央小部件
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     graphicsView = new QGraphicsView(this);
     scene = new QGraphicsScene(this);
     graphicsView->setScene(scene);
-    graphicsView->setFixedSize(1480, 920);
+    graphicsView->setFixedSize(1000, 500);
 
     // 创建右侧的控制面板
     QWidget *controlPanel = new QWidget(this);
@@ -108,8 +108,9 @@ void MainWindow::draw() {
     srand(0x01234ABCD);
     static int frame = 0;
    // test5c(frame);
-    if (frame > 10000)
+    if (frame > 1000)
         frame = 0 ;
+	std::cout << "Frame: " << frame << std::endl;
     // test5c(frame);
    // test7b(frame);
 	//test8b(frame);
@@ -119,7 +120,6 @@ void MainWindow::draw() {
 	src = water.SinusoidsWave(frame);
     applyAntiAliasing();
     updateImage(src);
-	image_reset(src);
     frame++;
 }
 

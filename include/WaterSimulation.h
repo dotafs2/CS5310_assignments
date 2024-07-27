@@ -26,8 +26,8 @@ private:
     Matrix VTM;
     Matrix GTM;
     Module *cube;
-    int rows = 720;
-    int cols = 1280;
+    int rows = 360;
+    int cols = 640;
 
     Color White;
     Color Grey;
@@ -41,11 +41,11 @@ private:
 
     // sinusoildsWave header
     double y0 = 0;  // 初始高度偏移量
-    int Nw = 4;  // 波的数量
-    double A[4] = {1.0, 0.5, 0.25, 0.5};  // 每个波的振幅
-    double kx[4] = {1.0, 2.0, 3.0, 1};  // 每个波在 x 方向上的波数
-    double kz[4] = {3, 2, 1, 1};  // 每个波在 z 方向上的波数
-    double omega[4] = {0.1, 0.2, 0.3,0.4}; // 每个波的角频率
+    int Nw = 3;  // 波的数量
+    double A[3] = {1.0, 0.5, 0.25};  // 每个波的振幅
+    double kx[3] = {1.0, 2.0, 3.0};  // 每个波在 x 方向上的波数
+    double kz[3] = {3, 2, 1};  // 每个波在 z 方向上的波数
+    double omega[3] = {0.1, 0.2, 0.3}; // 每个波的角频率
 
     Point **points;
 };

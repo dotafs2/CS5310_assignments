@@ -54,20 +54,17 @@ void WaterSimulation::SinusoidsWaveInit(){
                 points[i][j].val[3] = 1.0;
             }
         }
-
-
-
+    // create drawstate and module
+    ds = drawstate_create();
+    cube = module_create();
 }
 
-
 Image* WaterSimulation::SinusoidsWave(float t) {
+    // reset image pixels and module
+    image_reset(src);
+    module_clear(cube);
 
-    cube = module_create();
-    module_color( cube, &Blue );
-    module_translate(cube,-3,0,-1);
-    module_bodyColor( cube, &Blue );
-    module_surfaceColor( cube, &Blue );
-
+    // update height of all waves
     for (int i = 0; i < HEIGHT; ++i) {
         for (int j = 0; j < WIDTH; ++j) {
             double x = points[i][j].val[0];
@@ -76,19 +73,19 @@ Image* WaterSimulation::SinusoidsWave(float t) {
             points[i][j].val[1] = y / 5; // Adjust this divisor as needed
         }
     }
+
+    module_color( cube, &Blue );
+    module_translate(cube,-3,0,-1);
+    module_bodyColor( cube, &Blue );
+    module_surfaceColor( cube, &Blue );
     module_plane( cube, points);
     light = lighting_create();
     lighting_add( light, LightPoint, &White, NULL, &(view.vrp), 0, 0 );
-    ds = drawstate_create();
-
     point_copy(&(ds->viewer), &(view.vrp));
     ds->shade = ShadeDepth;
     //ds->shade = ShadeConstant;
-
     matrix_identity(&GTM);
     // module_parseLighting(cube,&GTM,light);
     module_draw(cube, &VTM, &GTM, ds, light, src);
-
-    module_clear(cube);
     return src;
 }
