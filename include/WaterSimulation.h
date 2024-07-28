@@ -11,8 +11,8 @@ class WaterSimulation {
 public:
     WaterSimulation();
     void SinusoidsWaveInit();
-    Image* SinusoidsWave(float t);
-
+    Image* SinusoidsWave(int t);
+    void update_viewPosition(float x, float z);
 
 
 
@@ -26,8 +26,8 @@ private:
     Matrix VTM;
     Matrix GTM;
     Module *cube;
-    int rows = 360;
-    int cols = 640;
+    int rows = 720;
+    int cols = 1280;
 
     Color White;
     Color Grey;
@@ -44,8 +44,8 @@ private:
     int Nw = 3;  // 波的数量
     double A[3] = {1.0, 0.5, 0.25};  // 每个波的振幅
     double kx[3] = {1.0, 2.0, 3.0};  // 每个波在 x 方向上的波数
-    double kz[3] = {3, 2, 1};  // 每个波在 z 方向上的波数
-    double omega[3] = {0.1, 0.2, 0.3}; // 每个波的角频率
+    double kz[3] = {1, 2, 3};  // 每个波在 z 方向上的波数
+    double omega[3] = {0.8, 0.8, 0.8}; // 每个波的角频率
 
     Point **points;
 };

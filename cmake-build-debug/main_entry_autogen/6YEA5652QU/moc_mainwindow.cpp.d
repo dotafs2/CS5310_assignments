@@ -890,6 +890,11 @@
   /Users/dotafs/Desktop/CS5310_assignments/include/anti-alias.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/ball.h \
   /Users/dotafs/Desktop/CS5310_assignments/include/fsMath.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/QList \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/QObject \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/QRect \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/QSize \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/QSizeF \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/QTimer \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/q20functional.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/q20memory.h \
@@ -922,10 +927,16 @@
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qcontainerinfo.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qcontainertools_impl.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qcontiguouscache.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qcoreapplication.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qcoreapplication_platform.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qcoreevent.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qdarwinhelpers.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qdatastream.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qdeadlinetimer.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qdebug.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qelapsedtimer.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qendian.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qeventloop.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qexceptionhandling.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qflags.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qfloat16.h \
@@ -954,6 +965,7 @@
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qmetatype.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qminmax.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qnamespace.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qnativeinterface.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qnumeric.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qobject.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qobject_impl.h \
@@ -1016,17 +1028,25 @@
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qxptype_traits.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtCore.framework/Versions/A/Headers/qyieldcpu.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/QImage \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/QKeyEvent \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/QPixmap \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/QTransform \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qaction.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qbitmap.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qbrush.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qcolor.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qcursor.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qevent.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qeventpoint.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qfont.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qfontinfo.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qfontmetrics.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qguiapplication.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qguiapplication_platform.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qicon.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qimage.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qinputdevice.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qinputmethod.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qkeysequence.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qpaintdevice.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qpainter.h \
@@ -1035,10 +1055,13 @@
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qpicture.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qpixelformat.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qpixmap.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qpointingdevice.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qpolygon.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qregion.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qrgb.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qrgba64.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qscreen.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qscreen_platform.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qtextdocument.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qtextoption.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qtgui-config.h \
@@ -1046,6 +1069,8 @@
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qtguiglobal.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qtransform.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qvalidator.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qvector2d.h \
+  /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qvectornd.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtGui.framework/Versions/A/Headers/qwindowdefs.h \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/Headers/QComboBox \
   /Users/dotafs/Qt/6.7.2/macos/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsScene \

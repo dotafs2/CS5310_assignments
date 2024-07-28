@@ -19,6 +19,7 @@
 #include "fsMath.h"
 #include "Module.h"
 #include "WaterSimulation.h"
+#include <QKeyEvent>
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -27,6 +28,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void keyReleaseEvent(QKeyEvent *event);
 private:
     QGraphicsView *graphicsView;
     QGraphicsScene *scene;
@@ -57,16 +59,19 @@ private:
     void test8b_end();
     void setWhite(Image *src);
     double drand();
-
+    void keyPressEvent(QKeyEvent *event) override;
+    QMap<int, QTimer*> keyTimers;
 private slots:
     void toggleAntiAliasing();
     void onAntiAliasingMethodChanged(int index);
+    void startKeyTimer(int key);
+    void stopKeyTimer(int key);
 
 private:
     WaterSimulation water;
     const int nLines = 50;
-    const int rows = 360; // Set these to appropriate values
-    const int cols = 640; // Set these to appropriate values
+    const int rows = 720; // Set these to appropriate values
+    const int cols = 1280; // Set these to appropriate values
     View2D view;
     DrawState ds;
     View3D view3;
@@ -88,6 +93,11 @@ private:
     Module *cubes;
     Module *scenetest8;
     float angle;
+    float ZPlus;
+    float XSub;
+    float ZSub;
+    float XPlus;
+
 
 };
 

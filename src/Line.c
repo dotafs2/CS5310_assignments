@@ -490,11 +490,15 @@ void print_line_coordinates(Point a, Point b) {
 }
 
 void polyline_normalize(Polyline *p) {
-    if (!p) return;
-    for (int i = 0; i < p->numVertex; i++) {
-        point_normalize(&p->vertex[i]);
+    if (p == NULL) return;
+    for(int i=0;i<p->numVertex;i++) {
+        p->vertex[i].val[0] /= p->vertex[i].val[3];
+        p->vertex[i].val[1] /= p->vertex[i].val[3];
+        p->vertex[i].val[3] = 1.0;
     }
 }
+
+
 
 void polyline_draw(Polyline *p, Image *src, Color c) {
     if (!p || !src) return;

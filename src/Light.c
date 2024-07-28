@@ -164,7 +164,7 @@ void lighting_shading( Lighting *l, Vector *N, Vector *V, Point *p, Color *Cb, C
     printf("input View Vector V : %.2f %.2f %.2f\n", V->val[0], V->val[1], V->val[2]);
     printf("input oneSide: %d\n", oneSided);
 #endif
-    printf("input Normal N : %.2f %.2f %.2f\n", N->val[0], N->val[1], N->val[2]);
+  //  printf("input Normal N : %.2f %.2f %.2f\n", N->val[0], N->val[1], N->val[2]);
 
     for (int i = 0; i < l->nLights; ++i) {
         Light *light = &l->light[i];

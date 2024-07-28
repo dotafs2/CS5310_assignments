@@ -429,7 +429,10 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
 
                 matrix_xformPolygon(VTM, &tempPolygon);
                 polygon_normalize(&tempPolygon);
-
+                for (int i = 0; i <  tempPolygon.numVertex; ++i) {
+                    if(tempPolygon.vertex->val[1] < 0 )
+                        printf("%f\n",tempPolygon.vertex->val[1]);
+                }
                //  polygon_print(&tempPolygon,stdout);
                 switch(ds->shade) {
                     case ShadeConstant:
@@ -622,7 +625,6 @@ void module_plane(Module *md, Point **points) {
                 polygon_setNormals(&quad, 4, nlist);
                 polygon_setSided(&quad, 1);
                 polygon_setColors(&quad, 4, &color);
-
                 module_polygon(md, &quad);
             }
         }

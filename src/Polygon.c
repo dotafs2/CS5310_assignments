@@ -156,9 +156,11 @@ void polygon_copy( Polygon *to, Polygon *from ) {
 // Function to normalize the vertices of a Polygon
 void polygon_normalize(Polygon *p) {
     if (p == NULL) return;
-    for (int i = 0; i < p->numVertex; i++) {
-        point_normalize(&p->vertex[i]);
-    }
+        for(int i=0;i<p->numVertex;i++) {
+            p->vertex[i].val[0] /= p->vertex[i].val[3];
+            p->vertex[i].val[1] /= p->vertex[i].val[3];
+            p->vertex[i].val[3] = 1.0;
+        }
 }
 
 float edge_slope(Point a, Point b) {
@@ -313,6 +315,7 @@ void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
     }
 
 
+
     // Loop through each y from minY to maxY to process scanlines.
     for (int y = minY; y <= maxY; y++) {
         int intersections[10]; // Array to store intersection points for the current scanline.
@@ -354,7 +357,6 @@ void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
                 }
             }
         }
-
         // Fill the scanline by drawing lines between pairs of intersection points.
         for (int i = 0; i < numIntersections; i += 2) {
             Point start = {{(float)intersections[i], (float)y, (float)intersectionsZ[i]}};

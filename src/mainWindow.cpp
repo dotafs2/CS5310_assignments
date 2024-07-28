@@ -3,7 +3,6 @@
 #include <random>
 #include "Module.h"
 
-
 QImage imageToQImage(Image *img) {
     QImage qImg(img->cols, img->rows, QImage::Format_RGB32);
     for (int y = 0; y < img->rows; ++y) {
@@ -17,7 +16,7 @@ QImage imageToQImage(Image *img) {
 }
 
 MainWindow::MainWindow(QWidget *parent)
-        : QMainWindow(parent), src(image_create(500, 500)), ssaaEnabled(false), mmsaEnabled(false) {
+        : QMainWindow(parent), src(image_create(720, 1280)), ssaaEnabled(false), mmsaEnabled(false) {
     // 创建中央小部件
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -26,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     graphicsView = new QGraphicsView(this);
     scene = new QGraphicsScene(this);
     graphicsView->setScene(scene);
-    graphicsView->setFixedSize(1000, 500);
+    graphicsView->setFixedSize(1480, 940);
 
     // 创建右侧的控制面板
     QWidget *controlPanel = new QWidget(this);
@@ -77,10 +76,21 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout *mainLayout = new QHBoxLayout(centralWidget);
     mainLayout->addWidget(graphicsView);
     mainLayout->addWidget(controlPanel);
-    //test7b_init();
-	//test8b_init();
-	water = WaterSimulation();
-	water.SinusoidsWaveInit();
+
+    // 初始化 water simulation
+    water = WaterSimulation();
+    water.SinusoidsWaveInit();
+
+	// key and key timer
+	keyTimers[Qt::Key_W] = nullptr;
+	keyTimers[Qt::Key_A] = nullptr;
+	keyTimers[Qt::Key_S] = nullptr;
+	keyTimers[Qt::Key_D] = nullptr;
+	ZPlus = 0;
+	XSub = 0;
+	ZSub = 0;
+	XPlus = 0;
+
     // 启动定时器定期更新图像
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::draw);
@@ -88,13 +98,18 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 初始化multiplier的状态
     stackedWidget->setCurrentIndex(antiAliasingMethodComboBox->currentIndex());
-
 }
 
 MainWindow::~MainWindow() {
-    test7b_end();
-	test7c_end();
-	test8b_end();
+	for (auto timer : keyTimers) {
+		if (timer) {
+			timer->stop();
+			delete timer;
+		}
+	}
+   // test7b_end();
+	//test7c_end();
+	//test8b_end();
     image_free(src);
 }
 
@@ -108,15 +123,10 @@ void MainWindow::draw() {
     srand(0x01234ABCD);
     static int frame = 0;
    // test5c(frame);
-    if (frame > 1000)
+    if (frame > 10000)
         frame = 0 ;
 	std::cout << "Frame: " << frame << std::endl;
-    // test5c(frame);
-   // test7b(frame);
-	//test8b(frame);
-// drawBall();
-    // open it for use test5b
-    //  test5b(frame);
+	water.update_viewPosition((XPlus - XSub), (ZPlus - ZSub));
 	src = water.SinusoidsWave(frame);
     applyAntiAliasing();
     updateImage(src);
@@ -145,6 +155,75 @@ void MainWindow::onAntiAliasingMethodChanged(int index) {
         antiAliasingMultiplierSpinBox->setEnabled(false);
     }
 }
+
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+	int key = event->key();
+	if (keyTimers.contains(key) && !keyTimers[key]) {
+		switch (key) {
+			case Qt::Key_W:
+				ZPlus += 0.1f;
+			break;
+			case Qt::Key_A:
+				XSub += 0.1f;
+			break;
+			case Qt::Key_S:
+				ZSub += 0.1f;
+			break;
+			case Qt::Key_D:
+				XPlus += 0.1f;
+			break;
+			default:
+				QMainWindow::keyPressEvent(event);
+			return;
+		}
+		startKeyTimer(key);
+	} else {
+		QMainWindow::keyPressEvent(event);
+	}
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event) {
+	int key = event->key();
+	if (keyTimers.contains(key)) {
+		stopKeyTimer(key);
+	} else {
+		QMainWindow::keyReleaseEvent(event);
+	}
+}
+
+void MainWindow::startKeyTimer(int key) {
+	if (!keyTimers[key]) {
+		QTimer *timer = new QTimer(this);
+		connect(timer, &QTimer::timeout, this, [this, key]() {
+			switch (key) {
+				case Qt::Key_W:
+					ZPlus += 0.1f;
+					break;
+				case Qt::Key_A:
+					XSub += 0.1f;
+					break;
+				case Qt::Key_S:
+					ZSub += 0.1f;
+					break;
+				case Qt::Key_D:
+					XPlus += 0.1f;
+					break;
+			}
+		});
+		timer->start(100);
+		keyTimers[key] = timer;
+	}
+}
+
+void MainWindow::stopKeyTimer(int key) {
+	if (keyTimers[key]) {
+		keyTimers[key]->stop();
+		delete keyTimers[key];
+		keyTimers[key] = nullptr;
+	}
+}
+
+
 
 void MainWindow::drawBall() {
     std::random_device rd;

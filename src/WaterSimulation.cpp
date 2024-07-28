@@ -3,7 +3,6 @@
 //
 
 #include "WaterSimulation.h"
-
 WaterSimulation::WaterSimulation() {
     points = (Point **)malloc(HEIGHT * sizeof(Point *));
     for (int i = 0; i < HEIGHT; ++i) {
@@ -59,7 +58,7 @@ void WaterSimulation::SinusoidsWaveInit(){
     cube = module_create();
 }
 
-Image* WaterSimulation::SinusoidsWave(float t) {
+Image* WaterSimulation::SinusoidsWave(int t) {
     // reset image pixels and module
     image_reset(src);
     module_clear(cube);
@@ -70,6 +69,8 @@ Image* WaterSimulation::SinusoidsWave(float t) {
             double x = points[i][j].val[0];
             double z = points[i][j].val[2];
             double y = calculate_wave_height_SW(x * 5, z * 5, t, y0, Nw, A, kx, kz, omega);
+            if(y > 2) y = 2;
+          if ( y < -1.5) y = -1.5;
             points[i][j].val[1] = y / 5; // Adjust this divisor as needed
         }
     }
@@ -79,6 +80,7 @@ Image* WaterSimulation::SinusoidsWave(float t) {
     module_bodyColor( cube, &Blue );
     module_surfaceColor( cube, &Blue );
     module_plane( cube, points);
+   // module_rotateZ(cube,0.0,1.0);
     light = lighting_create();
     lighting_add( light, LightPoint, &White, NULL, &(view.vrp), 0, 0 );
     point_copy(&(ds->viewer), &(view.vrp));
@@ -87,5 +89,17 @@ Image* WaterSimulation::SinusoidsWave(float t) {
     matrix_identity(&GTM);
     // module_parseLighting(cube,&GTM,light);
     module_draw(cube, &VTM, &GTM, ds, light, src);
+
+    //char filename[50];
+   // snprintf(filename, sizeof(filename), "water_%d.ppm", t);
+   // image_write(src, filename);
+    //std::this_thread::sleep_for(std::chrono::milliseconds(200));
     return src;
+}
+
+
+void WaterSimulation::update_viewPosition(float x, float z) {
+    view.vrp.val[0] += x;
+    view.vrp.val[2] += z;
+    matrix_setView3D(&VTM, &view);
 }
