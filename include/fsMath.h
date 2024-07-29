@@ -113,6 +113,7 @@ void matrix_setView2D(Matrix *vtm, View2D *view);
 
 void matrix_setView3D(Matrix *vtm, View3D *view);
 
+void printCharArray(char *c, int size);
 #ifdef __cplusplus
 }
 #endif

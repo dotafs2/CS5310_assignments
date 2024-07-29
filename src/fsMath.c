@@ -472,6 +472,17 @@ void matrix_setView3D(Matrix *vtm, View3D *view) {
     matrix_print(vtm, stdout);
 #endif
 }
+
+
+void printCharArray(char *c, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%c", c[i]);
+    }
+}
+
+
 #ifdef __cplusplus
 }
 #endif
+
+

@@ -57,6 +57,7 @@ typedef struct Element {
 typedef struct {
     Element *head;
     Element *tail;
+    char name[10];
 } Module;
 
 Element *element_create();

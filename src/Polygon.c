@@ -63,7 +63,7 @@ void polygon_set(Polygon *p, int numV, Point *vlist) {
 
 // Function to clear the internal data of a Polygon
 void polygon_clear(Polygon *p) {
-    if (!p) return;
+    if (p == NULL) return;
     free(p->vertex);
     p->vertex = NULL;
     free(p->color);
@@ -75,7 +75,7 @@ void polygon_clear(Polygon *p) {
 
 // Function to set the oneSided field of a Polygon
 void polygon_setSided(Polygon *p, int oneSided) {
-    if (!p) return;
+    if (p == NULL) return;
     p->oneSided = oneSided;
 }
 
@@ -188,7 +188,7 @@ void polygon_drawFill(Polygon *p, Image *src, Color c) {
 }
 
 void polygon_draw(Polygon *p, Image *src, Color c) {
-    if (!p || !src || p->numVertex < 2) return;
+    if ((p == NULL)|| (src == NULL) || p->numVertex < 2) return;
 
     Line line;
     for (int i = 0; i < p->numVertex; i++) {
@@ -220,7 +220,7 @@ void polygon_shade( Polygon *p, Lighting *l, DrawState *ds ) {
 
 // Helper function to compute Barycentric coordinates
 int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *gamma) {
-    float denom = (vlist[1].val[1] - vlist[2].val[1]) * (vlist[0].val[0] - vlist[2].val[0]) +
+    double denom = (vlist[1].val[1] - vlist[2].val[1]) * (vlist[0].val[0] - vlist[2].val[0]) +
                   (vlist[2].val[0] - vlist[1].val[0]) * (vlist[0].val[1] - vlist[2].val[1]);
 
     *alpha = ((vlist[1].val[1] - vlist[2].val[1]) * (px - vlist[2].val[0]) +
@@ -232,7 +232,7 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
     return (*alpha >= 0.0f && *beta >= 0.0f && *gamma >= 0.0f);
 }
 
-    void fillScanLine(Point p0, Point p1, Color c0, Color c1, Image *src, DrawState *ds) {
+    void fillScanLine(Point p0, Point p1, Color c0, Color c1, Image *src, DrawState *ds, int zbuffer) {
     // Start and end points of the line's coordinates
     int x0 = (int)p0.val[0];
     int y0 = (int)p0.val[1];
@@ -241,7 +241,6 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
     // Depth of z0 and z1 in NDC
     float z0 = (float)p0.val[2];
     float z1 = (float)p1.val[2];
-
 
     // Ensure x0 is less than x1 for simplicity
     if (x0 > x1) {
@@ -264,32 +263,41 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
     // Start from invZ0 and c1
     float invZ = invZ0;
     Color currentColor = c0;
+
     for (int x = x0; x <= x1; x++) {
         int targetIndex = y0 * src->cols + x;
         FPixel* targetPixel = &src->data[targetIndex];
-        // Z-buffer test
-        if (invZ > src->depth[targetIndex]) {
+        // if do not add z-buffer test
+        if(!zbuffer) {
+            targetPixel->rgb[0] = currentColor.c[0];
+            targetPixel->rgb[1] = currentColor.c[1];
+            targetPixel->rgb[2] = currentColor.c[2];
+            printf("color%f,%f,%f\n",targetPixel->rgb[0],targetPixel->rgb[1],targetPixel->rgb[2]);
+        }else {
+            // Z-buffer test
+            if (invZ > src->depth[targetIndex]) {
 
-            // Update the z-buffer value
-            src->depth[targetIndex] = invZ;
+                // Update the z-buffer value
+                src->depth[targetIndex] = invZ;
 
-            // Set the color based on the shading mode
-            switch(ds->shade) {
-                case ShadeDepth:
-                targetPixel->rgb[0] = ds->color.c[0] * (1.0f - 1/invZ);
-                targetPixel->rgb[1] = ds->color.c[1] * (1.0f - 1/invZ);
-                targetPixel->rgb[2] = ds->color.c[2] * (1.0f - 1/invZ);
-                break;
-                case ShadeGouraud:
-                targetPixel->rgb[0] = currentColor.c[0];
-                targetPixel->rgb[1] = currentColor.c[1];
-                targetPixel->rgb[2] = currentColor.c[2];
-                break;
-                default:
-                    targetPixel->rgb[0] = ds->color.c[0];
-                    targetPixel->rgb[1] = ds->color.c[1];
-                    targetPixel->rgb[2] = ds->color.c[2];
-                break;
+                // Set the color based on the shading mode
+                switch(ds->shade) {
+                    case ShadeDepth:
+                        targetPixel->rgb[0] = ds->color.c[0] * (1.0f - 1/invZ);
+                        targetPixel->rgb[1] = ds->color.c[1] * (1.0f - 1/invZ);
+                        targetPixel->rgb[2] = ds->color.c[2] * (1.0f - 1/invZ);
+                    break;
+                    case ShadeGouraud:
+                        targetPixel->rgb[0] = currentColor.c[0];
+                        targetPixel->rgb[1] = currentColor.c[1];
+                        targetPixel->rgb[2] = currentColor.c[2];
+                    break;
+                    default:
+                        targetPixel->rgb[0] = currentColor.c[0];
+                        targetPixel->rgb[1] = currentColor.c[1];
+                        targetPixel->rgb[2] = currentColor.c[2];
+                    break;
+                }
             }
         }
 
@@ -315,14 +323,12 @@ void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
     }
 
 
-
     // Loop through each y from minY to maxY to process scanlines.
     for (int y = minY; y <= maxY; y++) {
         int intersections[10]; // Array to store intersection points for the current scanline.
         double intersectionsZ[10];
         Color intersectionsC[10];
         int numIntersections = 0; // Counter for the number of intersections.
-
 
         // Find intersections of the scanline y with all polygon edges.
         for (int i = 0; i < p->numVertex; i++) {
@@ -361,7 +367,7 @@ void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
         for (int i = 0; i < numIntersections; i += 2) {
             Point start = {{(float)intersections[i], (float)y, (float)intersectionsZ[i]}};
             Point end = {{(float)intersections[i + 1], (float)y, (float)intersectionsZ[i + 1]}};
-            fillScanLine(start, end, intersectionsC[i], intersectionsC[i + 1], src, ds);
+            fillScanLine(start, end, intersectionsC[i], intersectionsC[i + 1], src, ds, p->zBuffer);
         }
     }
 }

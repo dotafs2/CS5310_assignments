@@ -145,7 +145,6 @@ void line_draw(Line *l, Image *src, Color c) {
     INPUT_CHECK(l == NULL, "line_draw Line* l is NULL");
     INPUT_CHECK(src == NULL, "line_draw Image *src is NULL");
 
-
     // print_line_coordinates(l->a, l->b);
 
     // start and end point of line's coord
@@ -214,7 +213,7 @@ void line_draw(Line *l, Image *src, Color c) {
 }
 
 void circle_set(Circle *c, Point tc, double tr) {
-    if (!c) return;
+    if (c == NULL) return;
     c->c = tc;
     c->r = tr;
 }

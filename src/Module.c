@@ -1,8 +1,9 @@
 #include "Module.h"
-
+#define PRINT_MODULE 0
 // Create an empty element
 Element *element_create() {
     Element *e = (Element *)malloc(sizeof(Element));
+
     if (e) {
         e->type = ObjNone;
         e->obj.module = NULL;
@@ -39,8 +40,6 @@ Element *element_init(ObjectType type, void *obj) {
                 e->obj.module = obj;
                 break;
             case ObjMatrix:
-                e->obj.matrix = obj;
-                break;
             case ObjIdentity:
                 e->obj.matrix = obj;
                 break;
@@ -53,16 +52,11 @@ Element *element_init(ObjectType type, void *obj) {
                 e->obj.bezierSurface = *(BezierSurface *)obj;
                 break;
             case ObjColor:
-                color_init(&(e->obj.color));
-                color_copy(&e->obj.color,obj);
             case ObjBodyColor:
-                color_init(&(e->obj.color));
-                color_copy(&e->obj.color,obj);
-            break;
             case ObjSurfaceColor:
                 color_init(&(e->obj.color));
                 color_copy(&e->obj.color,obj);
-            break;
+                break;
             case ObjSurfaceCoeff:
                 e->obj.coeff = *(float *)obj;
             break;
@@ -84,6 +78,7 @@ void element_delete(Element *e) {
 
     free(e);
 }
+
 
 Module *module_create() {
     Module *md = (Module *)malloc(sizeof(Module));
@@ -348,9 +343,28 @@ void module_parseLighting(Module *md, Matrix *GTM, Lighting *lighting) {
 
 
 void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *lighting, Image *src) {
-    if (!md || !VTM || !GTM || !ds || !src) {
+    if ((md == NULL) || (VTM == NULL) || (GTM == NULL || (ds == NULL) || (src == NULL))) {
         return;
     }
+    if(lighting == NULL) {
+        lighting = lighting_create();
+        if(PRINT_MODULE) {
+            printf("lighting of module_draw input of module : ");
+            printCharArray(md->name,10);
+            printf(" is NULL\n");
+        }
+    }
+    if(ds->color.c == NULL) {
+        ds->color.c[0] = 1;
+        ds->color.c[1] = 1;
+        ds->color.c[2] = 1;
+        if(PRINT_MODULE) {
+            printf("ds->color of module : ");
+            printCharArray(md->name,10);
+            printf(" is NULL\n");
+        }
+    }
+
     Element *current = md->head;
     Matrix LTM, tempGTM;
     matrix_identity(&LTM);
@@ -446,7 +460,7 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                         polygon_drawShade(&tempPolygon,src,ds,lighting);
                         break;
                     default:
-                        // polygon_drawFill(&tempPolygon,src,ds->color);
+                         polygon_drawFill(&tempPolygon,src,ds->color);
                             break;
                 }
                 polygon_clear(&tempPolygon);
@@ -604,7 +618,7 @@ for (int i = 0; i < 6; i++) {
 
 void module_plane(Module *md, Point **points) {
     if (md) {
-        Color color = {0, 0.50, 1.0};
+        Color color = {0.0f, 0.5f, 1.0f};
 
         for (int i = 0; i < WIDTH - 1; ++i) {
             for (int j = 0; j < HEIGHT - 1; ++j) {

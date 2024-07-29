@@ -16,6 +16,8 @@
 /Users/dotafs/Desktop/CS5310_assignments/src/ball.cpp
 /Users/dotafs/Desktop/CS5310_assignments/src/plyRead.c
 /Users/dotafs/Desktop/CS5310_assignments/src/anti-alias.cpp
+/Users/dotafs/Desktop/CS5310_assignments/test/test0/test0a.c
 /Users/dotafs/Desktop/CS5310_assignments/src/fsMath.c
+/Users/dotafs/Desktop/CS5310_assignments/test/test7/test7a.c
 /Users/dotafs/Desktop/CS5310_assignments/test/test9/test9b.c
 /Users/dotafs/Desktop/CS5310_assignments/test/test8/test8a.c

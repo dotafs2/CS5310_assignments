@@ -56,7 +56,6 @@ void cylinder( Module *mod, int sides ) {
     point_set3D( &pt[1], x2, 0.0, z2 );
     point_set3D( &pt[2], x2, 1.0, z2 );
     point_set3D( &pt[3], x1, 1.0, z1 );
-    
     polygon_set( &p, 4, pt );
     module_polygon( mod, &p );
   }
@@ -305,7 +304,7 @@ int main(int argc, char *argv[]) {
   // create the image and drawstate
   src = image_create( 360, 640 );
   ds = drawstate_create();
- // ds->shade = ShadeFrame;
+ // ds->shade = ShadeDepth;
 
 
   // draw into the scene

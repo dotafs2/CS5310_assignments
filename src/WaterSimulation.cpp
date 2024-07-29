@@ -74,9 +74,9 @@ Image* WaterSimulation::SinusoidsWave(int t) {
             points[i][j].val[1] = y / 5; // Adjust this divisor as needed
         }
     }
-
+    module_scale(cube,0.8,0.8,0.8);
     module_color( cube, &Blue );
-    module_translate(cube,-3,0,-1);
+    module_translate(cube,-3,-1,0);
     module_bodyColor( cube, &Blue );
     module_surfaceColor( cube, &Blue );
     module_plane( cube, points);
@@ -84,7 +84,7 @@ Image* WaterSimulation::SinusoidsWave(int t) {
     light = lighting_create();
     lighting_add( light, LightPoint, &White, NULL, &(view.vrp), 0, 0 );
     point_copy(&(ds->viewer), &(view.vrp));
-    ds->shade = ShadeDepth;
+    ds->shade = ShadeGouraud;
     //ds->shade = ShadeConstant;
     matrix_identity(&GTM);
     // module_parseLighting(cube,&GTM,light);
