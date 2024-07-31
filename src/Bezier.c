@@ -141,6 +141,7 @@ void bezierCurve_draw(BezierCurve *b, Image *src, Color c, BezierMethod flag) {
             Line line;
             line.a = prev;
             line.b = curr;
+            line.zBuffer = 0;
             line_draw(&line, src, c);
 
             prev = curr;
@@ -158,7 +159,6 @@ void bezierCurve_draw(BezierCurve *b, Image *src, Color c, BezierMethod flag) {
             line.a = prev;
             line.b = curr;
             line_draw(&line, src, c);
-
             prev = curr;
         }
     }

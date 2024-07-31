@@ -42,7 +42,7 @@ void polygon_init(Polygon *p) {
     p->vertex = NULL;
     p->color = NULL;
     p->normal = NULL;
-    p->zBuffer = 1;
+    p->zBuffer = 0;
     p->oneSided = 0;
 }
 
@@ -312,12 +312,16 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
 
 void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
     // Find the minimum and maximum y values in the polygon to determine the range of y.
+    // need to ensure that minY should > 0 ,and maxY should lower than rows.
     int minY = src->rows, maxY = 0;
     Color vertexColors[p->numVertex];
 
     for (int i = 0; i < p->numVertex; i++) {
         // calculate vertex color
         vertexColors[i] = p->color ? p->color[i] : ds->color;
+        // y out of range, which means the current point is not in the view plane
+        if(p->vertex[i].val[1] < 0 || p->vertex[i].val[1] > src->rows)
+            continue;
         if (p->vertex[i].val[1] < minY) minY = (int)p->vertex[i].val[1];
         if (p->vertex[i].val[1] > maxY) maxY = (int)p->vertex[i].val[1];
     }
@@ -332,6 +336,8 @@ void polygon_drawShade(Polygon *p, Image *src, DrawState *ds, Lighting *light) {
 
         // Find intersections of the scanline y with all polygon edges.
         for (int i = 0; i < p->numVertex; i++) {
+            if(p->vertex[i].val[1] < 0|| p->vertex[(i + 1) % p->numVertex].val[1] < 0 || p->vertex[i].val[1] > src->cols|| p->vertex[(i + 1) % p->numVertex].val[1] > src->cols )
+                continue;
             Point v1 = p->vertex[i];
             Point v2 = p->vertex[(i + 1) % p->numVertex];
             Color c1 = vertexColors[i];
