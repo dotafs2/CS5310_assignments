@@ -8,8 +8,6 @@
 #include "Line.h"
 #include "Image.h"
 #include "Bezier.h"
-#define HEIGHT 50
-#define WIDTH 50
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -97,7 +95,7 @@ void drawstate_setBody( DrawState *s, Color c );
 void drawstate_setSurface( DrawState *s, Color c );
 void drawstate_setSurfaceCoeff( DrawState *s, float f );
 void drawstate_copy( DrawState *to, DrawState *from );
-void module_plane(Module *md, Point** points);
+void module_plane(Module *md, Point** points, int HEIGHT, int WIDTH);
 void module_addLight( Module *m, Light *light );
 void module_parseLighting(Module *md, Matrix *GTM, Lighting *lighting);
 #ifdef __cplusplus

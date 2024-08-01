@@ -360,6 +360,7 @@
 	"MOC_SKIP" : 
 	[
 		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/mocs_compilation.cpp",
+		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/offline_entry_autogen/mocs_compilation.cpp",
 		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/mocs_compilation.cpp"
 	],
 	"MULTI_CONFIG" : false,
@@ -397,6 +398,7 @@
 	"UIC_SKIP" : 
 	[
 		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/mocs_compilation.cpp",
+		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/offline_entry_autogen/mocs_compilation.cpp",
 		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/mocs_compilation.cpp"
 	],
 	"UIC_UI_FILES" : [],

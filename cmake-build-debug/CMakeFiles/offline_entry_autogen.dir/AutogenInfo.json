@@ -1,5 +1,5 @@
 {
-	"BUILD_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen",
+	"BUILD_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/offline_entry_autogen",
 	"CMAKE_BINARY_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug",
 	"CMAKE_CURRENT_BINARY_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug",
 	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments",
@@ -261,8 +261,8 @@
 		"/Users/dotafs/Qt/6.7.2/macos/lib/cmake/Qt6Widgets/Qt6QMacStylePluginAdditionalTargetInfo.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments",
-	"DEP_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/deps",
-	"DEP_FILE_RULE_NAME" : "test6a_autogen/timestamp",
+	"DEP_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/offline_entry_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "offline_entry_autogen/timestamp",
 	"HEADERS" : 
 	[
 		[
@@ -296,9 +296,21 @@
 			null
 		],
 		[
+			"/Users/dotafs/Desktop/CS5310_assignments/include/WaterSimulation.h",
+			"MU",
+			"6YEA5652QU/moc_WaterSimulation.cpp",
+			null
+		],
+		[
 			"/Users/dotafs/Desktop/CS5310_assignments/include/fsMath.h",
 			"MU",
 			"6YEA5652QU/moc_fsMath.cpp",
+			null
+		],
+		[
+			"/Users/dotafs/Desktop/CS5310_assignments/include/mainWindowOffline.h",
+			"MU",
+			"6YEA5652QU/moc_mainWindowOffline.cpp",
 			null
 		],
 		[
@@ -309,8 +321,8 @@
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/include",
-	"MOC_COMPILATION_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/offline_entry_autogen/include",
+	"MOC_COMPILATION_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/offline_entry_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_WIDGETS_LIB" ],
 	"MOC_DEPEND_FILTERS" : 
 	[
@@ -355,21 +367,20 @@
 		"-c",
 		"/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/test6a_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/offline_entry_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
-		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/mocs_compilation.cpp",
-		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/offline_entry_autogen/mocs_compilation.cpp"
+		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/mocs_compilation.cpp"
 	],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 10,
-	"PARSE_CACHE_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/test6a_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/offline_entry_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/Users/dotafs/Qt/6.7.2/macos/./libexec/moc",
 	"QT_UIC_EXECUTABLE" : "/Users/dotafs/Qt/6.7.2/macos/./libexec/uic",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 7,
-	"SETTINGS_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/test6a_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/CMakeFiles/offline_entry_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Bezier.c", "MU", null ],
@@ -379,25 +390,34 @@
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Module.c", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/Polygon.c", "MU", null ],
 		[
+			"/Users/dotafs/Desktop/CS5310_assignments/src/WaterSimulation.cpp",
+			"MU",
+			null
+		],
+		[
 			"/Users/dotafs/Desktop/CS5310_assignments/src/anti-alias.cpp",
 			"MU",
 			null
 		],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/ball.cpp", "MU", null ],
 		[ "/Users/dotafs/Desktop/CS5310_assignments/src/fsMath.c", "MU", null ],
-		[ "/Users/dotafs/Desktop/CS5310_assignments/src/plyRead.c", "MU", null ],
 		[
-			"/Users/dotafs/Desktop/CS5310_assignments/test/test7/test7a.c",
+			"/Users/dotafs/Desktop/CS5310_assignments/src/mainOffline.cpp",
 			"MU",
 			null
-		]
+		],
+		[
+			"/Users/dotafs/Desktop/CS5310_assignments/src/mainWindowOffline.cpp",
+			"MU",
+			null
+		],
+		[ "/Users/dotafs/Desktop/CS5310_assignments/src/plyRead.c", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : 
 	[
-		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/mocs_compilation.cpp",
-		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/offline_entry_autogen/mocs_compilation.cpp"
+		"/Users/dotafs/Desktop/CS5310_assignments/cmake-build-debug/main_entry_autogen/mocs_compilation.cpp"
 	],
 	"UIC_UI_FILES" : [],
 	"VERBOSITY" : 0

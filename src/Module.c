@@ -460,7 +460,7 @@ void module_draw(Module *md, Matrix *VTM, Matrix *GTM, DrawState *ds, Lighting *
                         polygon_drawShade(&tempPolygon,src,ds,lighting);
                         break;
                     default:
-                         polygon_drawFill(&tempPolygon,src,ds->color);
+                        // polygon_drawFill(&tempPolygon,src,ds->color);
                             break;
                 }
                 polygon_clear(&tempPolygon);
@@ -616,7 +616,7 @@ for (int i = 0; i < 6; i++) {
     }
 }
 
-void module_plane(Module *md, Point **points) {
+void module_plane(Module *md, Point **points, int WIDTH, int HEIGHT) {
     if (md) {
         Color color = {0.0f, 0.5f, 1.0f};
 

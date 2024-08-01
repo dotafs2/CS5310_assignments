@@ -272,7 +272,7 @@ int barycentric(Point *vlist, int px, int py, float *alpha, float *beta, float *
             targetPixel->rgb[0] = currentColor.c[0];
             targetPixel->rgb[1] = currentColor.c[1];
             targetPixel->rgb[2] = currentColor.c[2];
-            printf("color%f,%f,%f\n",targetPixel->rgb[0],targetPixel->rgb[1],targetPixel->rgb[2]);
+            //printf("color%f,%f,%f\n",targetPixel->rgb[0],targetPixel->rgb[1],targetPixel->rgb[2]);
         }else {
             // Z-buffer test
             if (invZ > src->depth[targetIndex]) {
