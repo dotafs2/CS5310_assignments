@@ -901,7 +901,6 @@ void module_checkboard(Module *md) {
     }
 }
 
-// 在C代码中初始化顶点
 void init_vertex(int sliceX, int sliceY, float scaleY, Point center, float radius, Point **vertex_set, int *vertex_count) {
     *vertex_count = (sliceX + 1) * (sliceY + 1);
     *vertex_set = (Point *)malloc((*vertex_count) * sizeof(Point));

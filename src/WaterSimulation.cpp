@@ -256,36 +256,44 @@ void WaterSimulation::PBFInit() {
     ds->textureMaps[1] = *texture_read("checkboard.ppm");
     ds->textureMaps[0].alphaFlag = 0;
     cube = module_create();
+
+    for (int i = 0; i < HEIGHT; ++i) {
+        for (int j = 0; j < WIDTH; ++j) {
+            if(realtime) {
+                checkboardpoints[i][j].val[0] = i * 0.1;
+                checkboardpoints[i][j].val[1] = 0; // height
+                checkboardpoints[i][j].val[2] = j;
+                checkboardpoints[i][j].val[3] = 1.0;
+            }
+            else {
+                checkboardpoints[i][j].val[0] = i * 0.02;
+                checkboardpoints[i][j].val[1] = 0; // height
+                checkboardpoints[i][j].val[2] = j * 0.02;
+                checkboardpoints[i][j].val[3] = 1.0;
+            }
+        }
+    }
     particleCount = PARTICLECOUNT;
 
     particles = initialize_particles(XCOUNT,YCOUNT,ZCOUNT,MAX_NEIGHBOURS);
 
     grid = initialize_grid(10);
-    add_all_particles_to_bin(grid,particles,particleCount,RANGE_H,simSizeX,simSizeY,simSizeZ);
+    add_all_particles_to_bin(grid,particles,particleCount);
 }
 
 Image* WaterSimulation::PBF(float t) {
     image_reset(src);
     module_clear(cube);
     // clear all bin in grid
-    for (int i = 0; i < simSizeX; i++) {
-        for (int j = 0; j < simSizeY; j++) {
-            for (int k = 0; k < simSizeZ; k++) {
-                grid[i][j][k].size = 0;
-                // no need reset element, because size decide wheather it exist or not
-                printf("%d\n",simSizeX);
-            }
-        }
-    }
+    reset_grid(grid);
 
     // reset the bin
-    add_all_particles_to_bin(grid,particles,particleCount,RANGE_H,simSizeX,simSizeY,simSizeZ);
+    add_all_particles_to_bin(grid,particles,particleCount);
 
-    update_all_particles(particles,PARTICLECOUNT,20,TIME_STEP,grid,RANGE_H);
-
+    update_all_particles(particles,PARTICLECOUNT,10,TIME_STEP,grid,RANGE_H);
     module_scale(cube,1.2,1.2,1.2);
     module_color( cube, &White );
-    module_translate(cube,-5,-1.5,0);
+    module_translate(cube,-5,-1.5,-1);
     module_bodyColor( cube, &White );
     module_surfaceColor( cube, &White );
     //  module_plane( cube, points, HEIGHT, WIDTH);

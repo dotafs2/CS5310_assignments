@@ -24,18 +24,19 @@ void bin_init(Bin *bin, int capacity);
 void bin_add(Bin *bin, Particle *particle);
 void bin_free(Bin *bin);
 void bin_clear(Bin *bin);
+void reset_grid(Bin ***grid);
 void initialize_particle(Particle *particle, Point position, int maxNeighbours);
 Particle* initialize_particles(int xCount, int yCount, int zCount, int maxNeighbours);
 Bin*** initialize_grid(int initialBinCapacity);
 void free_particle(Particle *particle);
-void updateSpeed(Particle p, float dt);
-void updatePosition(Particle p, float dt);
-void apply_forces(Particle *particle, float deltaTime);
-void find_neighbours(Particle *particle, float h, Bin ***grid);
-void update_particle(Particle *particle, float deltaTime, Bin ***grid, int gridSize, float h);
-void update_all_particles(Particle *particles, int numParticles, int solverIterations, float deltaTime, Bin ***grid, float h);
-void add_particle_to_bin(Bin ***grid, Particle *particle, float h, int gridSizeX, int gridSizeY, int gridSizeZ);
-void add_all_particles_to_bin(Bin ***grid, Particle *particle, int particleSize, float h, int gridSizeX, int gridSizeY, int gridSizeZ);
+void updateSpeed(Particle p, double dt);
+void updatePosition(Particle p, double dt);
+void apply_forces(Particle *particle, double deltaTime);
+void find_neighbours(Particle *particle, double h, Bin ***grid);
+void update_particle(Particle *particle, double deltaTime, Bin ***grid, int gridSize, double h);
+void update_all_particles(Particle *particles, int numParticles, int solverIterations, double deltaTime, Bin ***grid, double h);
+void add_particle_to_bin(Bin ***grid, Particle *particle);
+void add_all_particles_to_bin(Bin ***grid, Particle *particle, int particleSize);
 void initialize_fog(Fog *fog, Point position);
 
 

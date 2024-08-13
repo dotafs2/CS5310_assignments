@@ -24,6 +24,7 @@
 #include "Module.h"
 #include "WaterSimulation.h"
 #include <QKeyEvent>
+#include <memory>
 
 class MainWindowOffline : public QMainWindow {
     Q_OBJECT

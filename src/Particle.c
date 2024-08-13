@@ -90,16 +90,16 @@ Particle* initialize_particles(int xCount, int yCount, int zCount, int maxNeighb
     }
 
     // 计算粒子在每个轴上的间距
-    float RANGE_X_MAX_bias = RANGE_X_MAX - 0.5f;
-    float RANGE_X_MIN_bias = RANGE_X_MIN + 0.5f;
-    float RANGE_Y_MAX_bias = RANGE_Y_MAX - 0.5f;
-    float RANGE_Y_MIN_bias = RANGE_Y_MIN + 0.5f;
-    float RANGE_Z_MAX_bias = RANGE_Z_MAX - 0.5f;
-    float RANGE_Z_MIN_bias = RANGE_Z_MIN + 0.5f;
+    double RANGE_X_MAX_bias = RANGE_X_MAX - 0.5f;
+    double RANGE_X_MIN_bias = RANGE_X_MIN + 0.5f;
+    double RANGE_Y_MAX_bias = RANGE_Y_MAX - 0.5f;
+    double RANGE_Y_MIN_bias = RANGE_Y_MIN + 0.5f;
+    double RANGE_Z_MAX_bias = RANGE_Z_MAX - 0.5f;
+    double RANGE_Z_MIN_bias = RANGE_Z_MIN + 0.5f;
 
-    float stepX = (RANGE_X_MAX_bias - RANGE_X_MIN_bias) / (float)(xCount - 1);
-    float stepY = (RANGE_Y_MAX_bias - RANGE_Y_MIN_bias) / (float)(yCount - 1);
-    float stepZ = (RANGE_Z_MAX_bias - RANGE_Z_MIN_bias) / (float)(zCount - 1);
+    double stepX = (RANGE_X_MAX_bias - RANGE_X_MIN_bias) / (double)(xCount - 1);
+    double stepY = (RANGE_Y_MAX_bias - RANGE_Y_MIN_bias) / (double)(yCount - 1);
+    double stepZ = (RANGE_Z_MAX_bias - RANGE_Z_MIN_bias) / (double)(zCount - 1);
 
     // 初始化粒子
     int index = 0;
@@ -116,6 +116,8 @@ Particle* initialize_particles(int xCount, int yCount, int zCount, int maxNeighb
                 particles[index].id = index;
 
              //   printf("Particle %d: x=%f, y=%f, z=%f\n", index, position.val[0], position.val[1], position.val[2]);
+                if(position.val[2] < RANGE_Z_MIN_bias || position.val[2] > RANGE_Z_MAX_bias)
+                    continue;
                 index++;
             }
         }
@@ -127,14 +129,15 @@ Particle* initialize_particles(int xCount, int yCount, int zCount, int maxNeighb
 
 
 Bin*** initialize_grid(int initialBinCapacity) {
-    Bin ***grid = (Bin***)malloc(simSizeX * sizeof(Bin**));
+
+    Bin ***grid = (Bin***)malloc((simSizeX) * sizeof(Bin**));
     if (grid == NULL) {
         fprintf(stderr, "Failed to allocate memory for grid\n");
         exit(EXIT_FAILURE);
     }
 
-    for (int i = 0; i < simSizeX; i++) {
-        grid[i] = (Bin**)malloc(simSizeY * sizeof(Bin*));
+    for (int i = 0; i < (simSizeX); i++) {
+        grid[i] = (Bin**)malloc((simSizeY) * sizeof(Bin*));
         if (grid[i] == NULL) {
             fprintf(stderr, "Failed to allocate memory for grid row\n");
             // 释放已经分配的内存
@@ -145,8 +148,8 @@ Bin*** initialize_grid(int initialBinCapacity) {
             exit(EXIT_FAILURE);
         }
 
-        for (int j = 0; j < simSizeY; j++) {
-            grid[i][j] = (Bin*)malloc(simSizeZ * sizeof(Bin));
+        for (int j = 0; j < (simSizeY); j++) {
+            grid[i][j] = (Bin*)malloc((simSizeZ) * sizeof(Bin));
             if (grid[i][j] == NULL) {
                 fprintf(stderr, "Failed to allocate memory for grid cell\n");
                 // 释放已经分配的内存
@@ -160,7 +163,7 @@ Bin*** initialize_grid(int initialBinCapacity) {
                 exit(EXIT_FAILURE);
             }
 
-            for (int k = 0; k < simSizeZ; k++) {
+            for (int k = 0; k < (simSizeZ); k++) {
                 bin_init(&grid[i][j][k], initialBinCapacity);
             }
         }
@@ -188,11 +191,11 @@ void reset_grid(Bin ***grid) {
 
 
 
-void add_particle_to_bin(Bin ***grid, Particle *particle, float h, int gridSizeX, int gridSizeY, int gridSizeZ) {
-    int gridX = (int)floor(particle->pred_position.val[0] / h);
-    int gridY = (int)floor(particle->pred_position.val[1] / h);
-    int gridZ = (int)floor(particle->pred_position.val[2] / h);
-    if (gridX >= 0 && gridX < gridSizeX && gridY >= 0 && gridY < gridSizeY && gridZ >= 0 && gridZ < gridSizeZ) {
+void add_particle_to_bin(Bin ***grid, Particle *particle) {
+    int gridX = (int)floor((particle->pred_position.val[0] - RANGE_X_MIN) / RANGE_H);
+    int gridY = (int)floor((particle->pred_position.val[1] - RANGE_Y_MIN) / RANGE_H);
+    int gridZ = (int)floor((particle->pred_position.val[2] - RANGE_Z_MIN) / RANGE_H);
+    if (gridX >= 0 && gridX <= simSizeX && gridY >= 0 && gridY <= simSizeY && gridZ >= 0 && gridZ <= simSizeZ) {
         Bin *bin = &grid[gridX][gridY][gridZ];
 
         if (bin->size >= bin->capacity) {
@@ -210,21 +213,17 @@ void add_particle_to_bin(Bin ***grid, Particle *particle, float h, int gridSizeX
         printf("\n adding particle to bin error.");
 }
 
-
-
-void add_all_particles_to_bin(Bin ***grid, Particle *particle, int particleSize, float h, int gridSizeX, int gridSizeY, int gridSizeZ) {
+void add_all_particles_to_bin(Bin ***grid, Particle *particle, int particleSize) {
     for (int i = 0; i < particleSize; ++i) {
-        add_particle_to_bin(grid,&particle[i],h,gridSizeX,gridSizeY,gridSizeZ);
+        add_particle_to_bin(grid,&particle[i]);
     }
 }
-
-
 
 void free_particle(Particle *particle) {
     free(&particle->neighbours);
 }
 
-Vector reflect(Vector v, Vector n, float damping) {
+Vector reflect(Vector v, Vector n, double damping) {
     double dot = vector_dot(&v, &n);
     Vector scaled_normal;
     Vector result;
@@ -236,7 +235,7 @@ Vector reflect(Vector v, Vector n, float damping) {
 }
 
 // 如果碰到边界，重新给出新的pred_position, 更新根据normal算出新的反弹方向
-void apply_boundary_constraint(Particle *particle, float damping, float dt) {
+void apply_boundary_constraint(Particle *particle, double damping, double dt) {
     if (particle->pred_position.val[0] < RANGE_X_MIN) {
         Vector normal = {1.0, 0.0, 0.0, 0.0};
         // 这里假设dt足够小，所以不用计算pre_position到碰撞点的距离，直接把pre_position移动到反弹点。
@@ -282,9 +281,14 @@ void calculate_gradient(Particle *particle1, Particle *particle2, Vector *gradie
 }
 
 // 对于每一个粒子，计算他的neighours和拉格朗日系数lambda, 计算的是违背了我们目标位置的程度
-void calculate_lambda(Particle *particle, float restDensity) {
-    float C = 0.0f;
-    float sumGradC2 = 0.0f;
+void calculate_lambda(Particle *particle, double restDensity) {
+    double C = 0.0f;
+    double sumGradC2 = 0.0f;
+
+    if(particle->neighboursSize == 0) {
+        particle->lambda = 0;
+        return;
+    }
 
     // 计算密度约束 C(p)
     for (int i = 0; i < particle->neighboursSize; i++) {
@@ -295,17 +299,17 @@ void calculate_lambda(Particle *particle, float restDensity) {
         calculate_gradient(particle, neighbour, &gradient);
 
         // 计算当前密度
-        float dist = vector_length(&gradient);
+        double dist = vector_length(&gradient);
         if (dist == 0)
             continue;
 
         // 累加约束
-        float constraint = dist - restDensity;
+        double constraint = dist - restDensity;
         C += constraint;
 
         // 计算约束的梯度 (归一化的方向)
         vector_normalize(&gradient);
-        float gradC2 = vector_dot(&gradient, &gradient);
+        double gradC2 = vector_dot(&gradient, &gradient);
 
         sumGradC2 +=  (2.0f / (neighbour->mass + 0.0001f)) * gradC2;
     }
@@ -317,12 +321,12 @@ void calculate_lambda(Particle *particle, float restDensity) {
 
 // 位置预计修成量
 void calculate_position_buffer(Particle *particle) {
-    float stiffness = STIFFNESS;
-    float lambda_i = particle->lambda;
+    double stiffness = STIFFNESS;
+    double lambda_i = particle->lambda;
     for (int i = 0; i < particle->neighboursSize ; i++) {
         // 只关注id小的作为particle，大的作为neighbour，别的全部跳过
         if(particle->id >= particle->neighbours[i]->id) continue;
-        float lambda_j = particle->neighbours[i]->lambda;
+        double lambda_j = particle->neighbours[i]->lambda;
         Particle *neighbour = particle->neighbours[i];
         Vector gradient = {0,0,0,0}; // 两个点之间的距离差
 
@@ -337,13 +341,13 @@ void calculate_position_buffer(Particle *particle) {
 
         Vector Cij = gradient;
 
-        particle->buffer_position.val[0] += -lambda_i * Cij.val[0] * stiffness;
-        particle->buffer_position.val[1] += -lambda_i * Cij.val[1] * stiffness;
-        particle->buffer_position.val[2] += -lambda_i * Cij.val[2] * stiffness;
+        particle->buffer_position.val[0] -= -lambda_i * Cij.val[0] * stiffness;
+        particle->buffer_position.val[1] -= -lambda_i * Cij.val[1] * stiffness;
+        particle->buffer_position.val[2] -= -lambda_i * Cij.val[2] * stiffness;
 
-        particle->neighbours[i]->buffer_position.val[0] += lambda_j * Cij.val[0] * stiffness;
-        particle->neighbours[i]->buffer_position.val[1] += lambda_j * Cij.val[1] * stiffness;
-        particle->neighbours[i]->buffer_position.val[2] += lambda_j * Cij.val[2] * stiffness;
+        particle->neighbours[i]->buffer_position.val[0] -= lambda_j * Cij.val[0] * stiffness;
+        particle->neighbours[i]->buffer_position.val[1] -= lambda_j * Cij.val[1] * stiffness;
+        particle->neighbours[i]->buffer_position.val[2] -= lambda_j * Cij.val[2] * stiffness;
     }
 }
 
@@ -351,7 +355,7 @@ void calculate_position_buffer(Particle *particle) {
 
 void compute_external_forces(Particle *particle) {
     particle->externalForce.val[0] = 0.0;
-    particle->externalForce.val[1] = GRAVITY * particle->mass;
+    particle->externalForce.val[1] =0.0; // GRAVITY * particle->mass;
     particle->externalForce.val[2] = 0.0;
     if(particle->oneTimeForceAlive){
         particle->oneTimeForceAlive = 0;
@@ -378,7 +382,7 @@ void update_acceleration(Particle *particle) {
 
 
 // 应用力并预测位置
-void apply_forces_and_predict_position(Particle *particle, float deltaTime) {
+void apply_forces_and_predict_position(Particle *particle, double deltaTime) {
     particle->v.val[0] += deltaTime * particle->acceleration.val[0];
     particle->v.val[1] += deltaTime * particle->acceleration.val[1];
     particle->v.val[2] += deltaTime * particle->acceleration.val[2];
@@ -390,7 +394,7 @@ void apply_forces_and_predict_position(Particle *particle, float deltaTime) {
 
 
 // 更新速度和位置
-void update_velocity_and_position(Particle *particle, float deltaTime) {
+void update_velocity_and_position(Particle *particle, double deltaTime) {
     particle->v.val[0] = (particle->pred_position.val[0] - particle->position.val[0]) / deltaTime;
     particle->v.val[1] = (particle->pred_position.val[1] - particle->position.val[1]) / deltaTime;
     particle->v.val[2] = (particle->pred_position.val[2] - particle->position.val[2]) / deltaTime;
@@ -404,10 +408,10 @@ void update_velocity_and_position(Particle *particle, float deltaTime) {
 }
 
 
-void find_neighbours(Particle *particle, float h, Bin ***grid) {
-    int gridX = (int)floor(particle->pred_position.val[0] / h);
-    int gridY = (int)floor(particle->pred_position.val[1] / h);
-    int gridZ = (int)floor(particle->pred_position.val[2] / h);
+void find_neighbours(Particle *particle, double h, Bin ***grid) {
+    int gridX = (int)floor((particle->pred_position.val[0] - RANGE_X_MIN) / RANGE_H);
+    int gridY = (int)floor((particle->pred_position.val[1] - RANGE_Y_MIN) / RANGE_H);
+    int gridZ = (int)floor((particle->pred_position.val[2] - RANGE_Z_MIN) / RANGE_H);
 
     particle->neighboursSize = 0;
 
@@ -424,7 +428,7 @@ void find_neighbours(Particle *particle, float h, Bin ***grid) {
                         double dy = particle->pred_position.val[1]- neighbour->pred_position.val[1];
                         double dz = particle->pred_position.val[2] - neighbour->pred_position.val[2];
                         double distance = sqrt(dx * dx + dy * dy + dz * dz);
-                        if (distance < h) {
+                        if (distance < RESTDISTANCE) {
                             // 检查是否需要扩容
                             if (particle->neighboursSize >= particle->neighboursCapacity) {
                                 particle->neighboursCapacity *= 2;
@@ -437,8 +441,6 @@ void find_neighbours(Particle *particle, float h, Bin ***grid) {
                             }
                             // 添加邻居
                             particle->neighbours[particle->neighboursSize++] = neighbour;
-                            if(particle->id < 10 && particle->neighboursSize > 2)
-                                printf("1");
                         }
                     }
                 }
@@ -448,33 +450,30 @@ void find_neighbours(Particle *particle, float h, Bin ***grid) {
 }
 
 
-void solve_constraints(Particle *particles, int numParticles, float restDistance, float damping, int solverIterations, float deltaTime) {
-
-
-    for (int i = 0; i < numParticles; i++) {
-        // 预估位置如果不对，施加碰撞盒子的回弹，如果回弹应该改变predict position，
-        if  (particles[i].pred_position.val[0] < RANGE_X_MIN || particles[i].pred_position.val[0] > RANGE_X_MAX ||
-         particles[i].pred_position.val[1] < RANGE_Y_MIN ||  particles[i].pred_position.val[1] > RANGE_Y_MAX ||
-         particles[i].pred_position.val[2] < RANGE_Z_MIN ||  particles[i].pred_position.val[2] > RANGE_Z_MAX) {
-            apply_boundary_constraint(&particles[i], damping, deltaTime);
-         }
-    }
+void solve_constraints(Particle *particles, int numParticles, double restDistance, double damping, int solverIterations, double deltaTime) {
 
         for (int i = 0; i < numParticles; i++) {
             calculate_lambda(&particles[i], restDistance);
         }
         for (int i = 0; i < numParticles; i++) {
             // 计算距离约束
-         //   particles[i].lambda = 10;
             calculate_position_buffer(&particles[i]);
         }
 
+        for (int i = 0; i < numParticles; i++) {
+            // 预估位置如果不对，施加碰撞盒子的回弹，如果回弹应该改变predict position，
+            if  (particles[i].pred_position.val[0] < RANGE_X_MIN || particles[i].pred_position.val[0] > RANGE_X_MAX ||
+             particles[i].pred_position.val[1] < RANGE_Y_MIN ||  particles[i].pred_position.val[1] > RANGE_Y_MAX ||
+             particles[i].pred_position.val[2] < RANGE_Z_MIN ||  particles[i].pred_position.val[2] > RANGE_Z_MAX) {
+                apply_boundary_constraint(&particles[i], damping, deltaTime);
+             }
+        }
 }
 
 
-void update_all_particles(Particle *particles, int numParticles, int solverIterations, float deltaTime, Bin ***grid, float h) {
-    float damping = 0.8f;
-    float restDistance = RESTDISTANCE;
+void update_all_particles(Particle *particles, int numParticles, int solverIterations, double deltaTime, Bin ***grid, double h) {
+    double damping = 0.8f;
+    double restDistance = RESTDISTANCE;
     for (int i = 0; i < numParticles; ++i) {
         // 应用力
         compute_external_forces(&particles[i]);
@@ -482,23 +481,26 @@ void update_all_particles(Particle *particles, int numParticles, int solverItera
         // 通过外力计算加速度
         update_acceleration(&particles[i]);
         // 通过加速度计算predict位置，在这里应该计算
-        apply_forces_and_predict_position(&particles[i], deltaTime);
+        apply_forces_and_predict_position(&particles[i], TIME_STEP);
 
         // 预估位置的地方寻找所有的neighbours
         find_neighbours(&particles[i], h, grid);
     }
-    // 判断约束
-    solve_constraints(particles, numParticles, restDistance,damping,solverIterations,deltaTime);
 
-    // 把buffer position移动到pred position里
-    for (int i = 0; i < numParticles; ++i) {
-        particles[i].pred_position.val[0] += particles[i].buffer_position.val[0];
-        particles[i].pred_position.val[1] += particles[i].buffer_position.val[1];
-        particles[i].pred_position.val[2] += particles[i].buffer_position.val[2];
-        // 清空所有的buffer
-        particles[i].buffer_position.val[0] = 0;
-        particles[i].buffer_position.val[1] = 0;
-        particles[i].buffer_position.val[2] = 0;
+    for (int iter = 0; iter < solverIterations; iter++) {
+        // 判断约束
+        solve_constraints(particles, numParticles, restDistance,damping,solverIterations,deltaTime);
+
+        // 把buffer position移动到pred position里
+        for (int i = 0; i < numParticles; ++i) {
+            particles[i].pred_position.val[0] += particles[i].buffer_position.val[0];
+            particles[i].pred_position.val[1] += particles[i].buffer_position.val[1];
+            particles[i].pred_position.val[2] += particles[i].buffer_position.val[2];
+            // 清空所有的buffer
+            particles[i].buffer_position.val[0] = 0;
+            particles[i].buffer_position.val[1] = 0;
+            particles[i].buffer_position.val[2] = 0;
+        }
     }
     for (int i = 0; i < numParticles; ++i) {
         // 更新当前速度，把预估位置变成现在的位置 --- 简而言之，移动

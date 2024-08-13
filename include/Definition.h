@@ -16,20 +16,20 @@ extern "C" {
 
 #define MAX_LIGHTS 64
 
-#define XCOUNT 2
+#define XCOUNT 10
 #define YCOUNT 10
-#define ZCOUNT 2
+#define ZCOUNT 10
 #define PARTICLECOUNT (XCOUNT * YCOUNT * ZCOUNT)
 #define GRAVITY (-9.8)
 #define MAX_NEIGHBOURS 100
 #define TIME_STEP 0.01
 #define SOLVER_ITERATIONS 10
 #define RADIUS 0.03
-#define RANGE_H  (6 * RADIUS)
-#define RESTDISTANCE (6 * RADIUS)
-#define STIFFNESS 1
+#define RANGE_H  (10 * RADIUS)
+#define RESTDISTANCE (5* RADIUS)
+#define STIFFNESS 0.01
 #define RELAXATION_EPSILON 1000
-#define DAMPING 0.98
+#define DAMPING 0.95
 #define RANGE_X_MIN 1
 #define RANGE_X_MAX 3
 #define RANGE_Y_MIN 0
@@ -197,11 +197,11 @@ typedef struct {
         Vector externalForce;
         Vector oneTimeForce; // only use one time and dead
         int oneTimeForceAlive;
-        float mass;     // Mass of the particle
+        double mass;     // Mass of the particle
         Particle **neighbours;
         int neighboursSize;
         int neighboursCapacity;
-        float lambda;
+        double lambda;
         int id;
     };
 
